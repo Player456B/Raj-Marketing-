@@ -1,0 +1,1106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Book Free Site Visit · Raj Marketing</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #1a2c2d;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+        }
+
+        .app-container {
+            max-width: 390px;
+            width: 100%;
+            background: linear-gradient(145deg, #f5faf8 0%, #e8f0ed 100%);
+            border-radius: 36px 36px 0 0;
+            margin: 8px 0 0 0;
+            overflow: hidden;
+            position: relative;
+            padding-bottom: 70px;
+        }
+
+        /* Header */
+        .page-header {
+            height: 60px;
+            background: white;
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            gap: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .back-btn {
+            width: 40px;
+            height: 40px;
+            background: #f0f5f3;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #1e4b8b;
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: 0.3s;
+        }
+
+        .back-btn:hover {
+            background: #1e4b8b;
+            color: white;
+        }
+
+        .page-header h1 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #1e4b8b;
+        }
+
+        .page-header h1 i {
+            color: #e6b422;
+            margin-right: 8px;
+        }
+
+        /* Progress Bar */
+        .progress-bar {
+            display: flex;
+            justify-content: space-between;
+            margin: 20px 16px;
+            position: relative;
+        }
+
+        .progress-bar::before {
+            content: '';
+            position: absolute;
+            top: 15px;
+            left: 40px;
+            right: 40px;
+            height: 2px;
+            background: #dee2e6;
+            z-index: 1;
+        }
+
+        .progress-step {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+
+        .step-number {
+            width: 30px;
+            height: 30px;
+            background: white;
+            border: 2px solid #dee2e6;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            margin: 0 auto 5px;
+            transition: 0.3s;
+        }
+
+        .progress-step.active .step-number {
+            background: #1e4b8b;
+            border-color: #1e4b8b;
+            color: white;
+        }
+
+        .progress-step.completed .step-number {
+            background: #28a745;
+            border-color: #28a745;
+            color: white;
+        }
+
+        .step-label {
+            font-size: 0.7rem;
+            color: #6c757d;
+        }
+
+        .progress-step.active .step-label {
+            color: #1e4b8b;
+            font-weight: 600;
+        }
+
+        /* Form Container */
+        .form-container {
+            padding: 0 16px 20px;
+        }
+
+        .form-card {
+            background: white;
+            border-radius: 25px;
+            padding: 25px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+
+        .form-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #1e4b8b, #2a6bb3);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: -45px auto 20px;
+            box-shadow: 0 10px 20px rgba(30,75,139,0.3);
+        }
+
+        .form-icon i {
+            font-size: 2.5rem;
+            color: #e6b422;
+        }
+
+        .form-card h2 {
+            text-align: center;
+            color: #1e4b8b;
+            font-size: 1.4rem;
+            margin-bottom: 5px;
+        }
+
+        .form-card p {
+            text-align: center;
+            color: #6c757d;
+            font-size: 0.85rem;
+            margin-bottom: 25px;
+        }
+
+        /* Form Groups */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #1e4b8b;
+            font-weight: 600;
+            font-size: 0.85rem;
+        }
+
+        .form-group label i {
+            color: #e6b422;
+            margin-right: 8px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e9ecef;
+            border-radius: 15px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.9rem;
+            transition: 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: #1e4b8b;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(30,75,139,0.1);
+        }
+
+        .form-group input[readonly] {
+            background: #f8f9fa;
+            color: #6c757d;
+        }
+
+        /* Form Row */
+        .form-row {
+            display: flex;
+            gap: 12px;
+        }
+
+        .form-group.half {
+            flex: 1;
+        }
+
+        /* Service Cards */
+        .service-selector {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-top: 10px;
+        }
+
+        .service-option {
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 15px;
+            padding: 15px 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .service-option.selected {
+            border-color: #e6b422;
+            background: #fff9e6;
+        }
+
+        .service-option i {
+            font-size: 2rem;
+            color: #1e4b8b;
+            margin-bottom: 8px;
+        }
+
+        .service-option span {
+            display: block;
+            font-weight: 600;
+            color: #1e4b8b;
+            font-size: 0.8rem;
+        }
+
+        .service-option small {
+            display: block;
+            color: #e6b422;
+            font-weight: 700;
+            margin-top: 5px;
+        }
+
+        /* Quantity Selector */
+        .quantity-selector {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: #f8f9fa;
+            padding: 10px;
+            border-radius: 50px;
+        }
+
+        .quantity-btn {
+            width: 40px;
+            height: 40px;
+            background: white;
+            border: none;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #1e4b8b;
+            cursor: pointer;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.05);
+        }
+
+        .quantity-input {
+            flex: 1;
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #1e4b8b;
+            background: none;
+            border: none;
+        }
+
+        /* Time Slots */
+        .time-slots {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+
+        .time-slot {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            padding: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .time-slot.selected {
+            background: #1e4b8b;
+            color: white;
+            border-color: #1e4b8b;
+        }
+
+        .time-slot span {
+            display: block;
+            font-weight: 600;
+            font-size: 0.8rem;
+        }
+
+        .time-slot small {
+            font-size: 0.65rem;
+            opacity: 0.8;
+        }
+
+        /* Price Summary */
+        .price-summary {
+            background: linear-gradient(135deg, #1e4b8b, #2a6bb3);
+            border-radius: 20px;
+            padding: 20px;
+            color: white;
+            margin: 20px 0;
+        }
+
+        .price-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 1px dashed rgba(255,255,255,0.2);
+        }
+
+        .price-total {
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.2rem;
+            font-weight: 800;
+            margin-top: 10px;
+        }
+
+        .price-total span:last-child {
+            color: #e6b422;
+        }
+
+        /* File Upload */
+        .file-upload {
+            border: 2px dashed #e9ecef;
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .file-upload:hover {
+            border-color: #1e4b8b;
+        }
+
+        .file-upload i {
+            font-size: 2rem;
+            color: #e6b422;
+            margin-bottom: 8px;
+        }
+
+        .file-upload p {
+            color: #6c757d;
+            font-size: 0.8rem;
+            margin: 0;
+        }
+
+        .file-upload small {
+            color: #1e4b8b;
+            font-weight: 600;
+        }
+
+        /* Submit Button */
+        .submit-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #e6b422, #f5c542);
+            border: none;
+            padding: 18px;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #1e4b8b;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(230,180,34,0.3);
+        }
+
+        .submit-btn i {
+            font-size: 1.2rem;
+        }
+
+        /* Terms */
+        .terms {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 20px 0;
+            font-size: 0.8rem;
+            color: #6c757d;
+        }
+
+        .terms input {
+            width: 18px;
+            height: 18px;
+        }
+
+        .terms a {
+            color: #1e4b8b;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        /* Success Modal */
+        .success-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .success-modal.active {
+            display: flex;
+        }
+
+        .success-content {
+            background: white;
+            border-radius: 30px;
+            padding: 35px;
+            max-width: 320px;
+            width: 90%;
+            text-align: center;
+        }
+
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            background: #28a745;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+        }
+
+        .success-icon i {
+            font-size: 3rem;
+            color: white;
+        }
+
+        .success-content h2 {
+            color: #1e4b8b;
+            margin-bottom: 10px;
+        }
+
+        .booking-id {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 15px;
+            margin: 20px 0;
+        }
+
+        .booking-id span {
+            display: block;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #e6b422;
+        }
+
+        .view-status-btn {
+            background: #1e4b8b;
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 30px;
+            font-weight: 700;
+            width: 100%;
+            cursor: pointer;
+            margin: 10px 0;
+        }
+
+        .close-btn {
+            background: #e9ecef;
+            color: #6c757d;
+            border: none;
+            padding: 15px;
+            border-radius: 30px;
+            font-weight: 700;
+            width: 100%;
+            cursor: pointer;
+        }
+
+        /* Bottom Navigation */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            max-width: 390px;
+            width: 100%;
+            background: white;
+            display: flex;
+            justify-content: space-around;
+            padding: 12px 10px 20px;
+            border-top: 3px solid #e6b422;
+            border-radius: 30px 30px 0 0;
+            z-index: 100;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #6c757d;
+            font-size: 0.7rem;
+            cursor: pointer;
+        }
+
+        .nav-item.active {
+            color: #1e4b8b;
+        }
+
+        .nav-item i {
+            font-size: 1.4rem;
+            margin-bottom: 3px;
+        }
+
+        /* Toast */
+        #toastMessage {
+            position: fixed;
+            bottom: 180px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #1e4b8b;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            z-index: 5000;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <div class="page-header">
+            <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i></a>
+            <h1><i class="fas fa-calendar-check"></i> Free Site Visit</h1>
+        </div>
+
+        <!-- Progress Bar -->
+        <div class="progress-bar">
+            <div class="progress-step active" id="step1">
+                <div class="step-number">1</div>
+                <div class="step-label">Details</div>
+            </div>
+            <div class="progress-step" id="step2">
+                <div class="step-number">2</div>
+                <div class="step-label">Service</div>
+            </div>
+            <div class="progress-step" id="step3">
+                <div class="step-number">3</div>
+                <div class="step-label">Confirm</div>
+            </div>
+        </div>
+
+        <!-- Form Container -->
+        <div class="form-container">
+            <!-- Step 1: Personal Details -->
+            <div class="form-card" id="step1Form">
+                <div class="form-icon">
+                    <i class="fas fa-user"></i>
+                </div>
+                <h2>Personal Details</h2>
+                <p>Enter your contact information</p>
+
+                <div class="form-group">
+                    <label><i class="fas fa-user"></i> Full Name *</label>
+                    <input type="text" id="fullName" placeholder="Enter your full name" required>
+                </div>
+
+                <div class="form-group">
+                    <label><i class="fas fa-phone"></i> Mobile Number *</label>
+                    <input type="tel" id="mobile" placeholder="10 digit mobile number" maxlength="10" required>
+                </div>
+
+                <div class="form-group">
+                    <label><i class="fas fa-envelope"></i> Email (Optional)</label>
+                    <input type="email" id="email" placeholder="Enter your email">
+                </div>
+
+                <div class="form-group">
+                    <label><i class="fas fa-map-marker-alt"></i> Area/Location *</label>
+                    <select id="area" required>
+                        <option value="">Select your area</option>
+                        <option value="Vijayanagar">Vijayanagar</option>
+                        <option value="Kuvempunagar">Kuvempunagar</option>
+                        <option value="Gokulam">Gokulam</option>
+                        <option value="Jayalakshmipuram">Jayalakshmipuram</option>
+                        <option value="Saraswathipuram">Saraswathipuram</option>
+                        <option value="Hebbal">Hebbal</option>
+                        <option value="Bogadi">Bogadi</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label><i class="fas fa-map-pin"></i> Complete Address</label>
+                    <textarea id="address" placeholder="House/Flat no, Street, Landmark" rows="2"></textarea>
+                </div>
+
+                <button class="submit-btn" onclick="nextStep(2)">
+                    Next Step <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+
+            <!-- Step 2: Service Details -->
+            <div class="form-card" id="step2Form" style="display: none;">
+                <div class="form-icon">
+                    <i class="fas fa-tools"></i>
+                </div>
+                <h2>Service Details</h2>
+                <p>Select your requirements</p>
+
+                <div class="form-group">
+                    <label><i class="fas fa-cog"></i> Select Service *</label>
+                    <div class="service-selector">
+                        <div class="service-option selected" onclick="selectService('velcro')" id="serviceVelcro">
+                            <i class="fas fa-mosquito-net"></i>
+                            <span>Velcro System</span>
+                            <small>₹60/sqft</small>
+                        </div>
+                        <div class="service-option" onclick="selectService('frame')" id="serviceFrame">
+                            <i class="fas fa-window-maximize"></i>
+                            <span>Frame System</span>
+                            <small>₹180/sqft</small>
+                        </div>
+                        <div class="service-option" onclick="selectService('pleated')" id="servicePleated">
+                            <i class="fas fa-arrows-spin"></i>
+                            <span>Pleated Nets</span>
+                            <small>₹350/sqft</small>
+                        </div>
+                        <div class="service-option" onclick="selectService('meshdoor')" id="serviceMeshdoor">
+                            <i class="fas fa-door-open"></i>
+                            <span>Mesh Door</span>
+                            <small>₹380/sqft</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group half">
+                        <label><i class="fas fa-ruler"></i> Width (ft)</label>
+                     <input type="number" id="width" placeholder="0" min="0" step="0.5" value="3">
+                    </div>
+                    <div class="form-group half">
+                        <label><i class="fas fa-ruler"></i> Height (ft)</label>
+                        <input type="number" id="height" placeholder="0" min="0" step="0.5" value="4">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label><i class="fas fa-cubes"></i> Quantity</label>
+                    <div class="quantity-selector">
+                        <button class="quantity-btn" onclick="updateQuantity(-1)">-</button>
+                        <input type="text" class="quantity-input" id="quantity" value="1" readonly>
+                        <button class="quantity-btn" onclick="updateQuantity(1)">+</button>
+                    </div>
+                </div>
+
+                <div class="price-summary">
+                    <div class="price-row">
+                        <span>Area (sqft):</span>
+                        <span id="areaSqft">12 sqft</span>
+                    </div>
+                    <div class="price-row">
+                        <span>Rate:</span>
+                        <span id="rate">₹60/sqft</span>
+                    </div>
+                    <div class="price-row">
+                        <span>Subtotal:</span>
+                        <span id="subtotal">₹720</span>
+                    </div>
+                    <div class="price-total">
+                        <span>Estimated Total:</span>
+                        <span id="total">₹720</span>
+                    </div>
+                </div>
+
+                <button class="submit-btn" onclick="nextStep(3)">
+                    Next Step <i class="fas fa-arrow-right"></i>
+                </button>
+                <button class="submit-btn" style="background: #e9ecef; color: #6c757d; margin-top: 10px;" onclick="prevStep(1)">
+                    <i class="fas fa-arrow-left"></i> Back
+                </button>
+            </div>
+
+            <!-- Step 3: Schedule & Confirm -->
+            <div class="form-card" id="step3Form" style="display: none;">
+                <div class="form-icon">
+                    <i class="fas fa-clock"></i>
+                </div>
+                <h2>Schedule Visit</h2>
+                <p>Choose your preferred date and time</p>
+
+                <div class="form-group">
+                    <label><i class="fas fa-calendar"></i> Preferred Date *</label>
+                    <input type="date" id="visitDate" min="" required>
+                </div>
+
+                <div class="form-group">
+                    <label><i class="fas fa-clock"></i> Preferred Time *</label>
+                    <div class="time-slots">
+                        <div class="time-slot selected" onclick="selectTime('9-11')">
+                            <span>9-11 AM</span>
+                            <small>Morning</small>
+                        </div>
+                        <div class="time-slot" onclick="selectTime('11-2')">
+                            <span>11-2 PM</span>
+                            <small>Afternoon</small>
+                        </div>
+                        <div class="time-slot" onclick="selectTime('2-5')">
+                            <span>2-5 PM</span>
+                            <small>Evening</small>
+                        </div>
+                        <div class="time-slot" onclick="selectTime('5-8')">
+                            <span>5-8 PM</span>
+                            <small>Late</small>
+                        </div>
+                        <div class="time-slot" onclick="selectTime('any')">
+                            <span>Anytime</span>
+                            <small>Flexible</small>
+                        </div>
+                        <div class="time-slot" onclick="selectTime('weekend')">
+                            <span>Weekend</span>
+                            <small>Sat/Sun</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label><i class="fas fa-camera"></i> Upload Photos (Optional)</label>
+                    <div class="file-upload" onclick="document.getElementById('fileInput').click()">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <p>Click to upload photos of windows/doors</p>
+                        <small>Max 5 photos</small>
+                        <input type="file" id="fileInput" multiple accept="image/*" style="display: none;">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label><i class="fas fa-comment"></i> Additional Notes</label>
+                    <textarea id="notes" placeholder="Any specific requirements..." rows="2"></textarea>
+                </div>
+
+                <div class="terms">
+                    <input type="checkbox" id="terms" checked>
+                    <label for="terms">I agree to the <a href="terms.html">Terms & Conditions</a> and <a href="privacy.html">Privacy Policy</a></label>
+                </div>
+
+                <button class="submit-btn" onclick="submitBooking()">
+                    <i class="fas fa-check-circle"></i> Confirm Booking
+                </button>
+                <button class="submit-btn" style="background: #e9ecef; color: #6c757d; margin-top: 10px;" onclick="prevStep(2)">
+                    <i class="fas fa-arrow-left"></i> Back
+                </button>
+            </div>
+        </div>
+
+        <!-- Success Modal -->
+        <div class="success-modal" id="successModal">
+            <div class="success-content">
+                <div class="success-icon">
+                    <i class="fas fa-check"></i>
+                </div>
+                <h2>Booking Confirmed!</h2>
+                <p>Your free site visit has been scheduled</p>
+                <div class="booking-id">
+                    <small>Booking ID</small>
+                    <span id="bookingId">RM2501</span>
+                </div>
+                <p style="font-size: 0.85rem; color: #6c757d;">We'll send confirmation to your mobile</p>
+                <button class="view-status-btn" onclick="viewStatus()">View Status</button>
+                <button class="close-btn" onclick="closeModal()">Close</button>
+            </div>
+        </div>
+
+        <!-- Bottom Navigation -->
+        <div class="bottom-nav">
+            <div class="nav-item" onclick="location.href='index.html'"><i class="fas fa-home"></i><span>Home</span></div>
+            <div class="nav-item" onclick="location.href='products.html'"><i class="fas fa-search"></i><span>Search</span></div>
+            <div class="nav-item active" onclick="location.href='appointment.html'"><i class="fas fa-calendar"></i><span>Book</span></div>
+            <div class="nav-item" onclick="location.href='tel:9483037385'"><i class="fas fa-phone"></i><span>Call</span></div>
+            <div class="nav-item" onclick="location.href='customer-login.html'"><i class="fas fa-user"></i><span>Account</span></div>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div id="toastMessage"></div>
+
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+
+    <script>
+        // Firebase Config
+        const firebaseConfig = {
+            apiKey: "YOUR_API_KEY",
+            authDomain: "YOUR_AUTH_DOMAIN",
+            projectId: "YOUR_PROJECT_ID",
+            storageBucket: "YOUR_STORAGE_BUCKET",
+            messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+            appId: "YOUR_APP_ID"
+        };
+
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+
+        // Variables
+        let currentStep = 1;
+        let selectedService = 'velcro';
+        let selectedTime = '9-11';
+        let quantity = 1;
+        let width = 3;
+        let height = 4;
+
+        // Set min date to today
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('visitDate').min = today;
+
+        // URL Parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const serviceParam = urlParams.get('service');
+        if (serviceParam) {
+            selectService(serviceParam);
+        }
+
+        // Navigation Functions
+        function nextStep(step) {
+            if (step === 2) {
+                // Validate step 1
+                const name = document.getElementById('fullName').value;
+                const mobile = document.getElementById('mobile').value;
+                const area = document.getElementById('area').value;
+
+                if (!name || !mobile || !area) {
+                    showToast('Please fill all required fields');
+                    return;
+                }
+                if (mobile.length !== 10) {
+                    showToast('Enter valid 10 digit mobile number');
+                    return;
+                }
+            }
+
+            document.getElementById(`step${currentStep}Form`).style.display = 'none';
+            document.getElementById(`step${step}Form`).style.display = 'block';
+            
+            document.getElementById(`step${currentStep}`).classList.remove('active');
+            document.getElementById(`step${step}`).classList.add('active');
+            
+            currentStep = step;
+        }
+
+        function prevStep(step) {
+            document.getElementById(`step${currentStep}Form`).style.display = 'none';
+            document.getElementById(`step${step}Form`).style.display = 'block';
+            
+            document.getElementById(`step${currentStep}`).classList.remove('active');
+            document.getElementById(`step${step}`).classList.add('active');
+            
+            currentStep = step;
+        }
+
+        // Service Selection
+        function selectService(service) {
+            selectedService = service;
+            
+            // Remove selected class from all
+            document.querySelectorAll('.service-option').forEach(el => {
+                el.classList.remove('selected');
+            });
+            
+            // Add selected class to chosen
+            document.getElementById(`service${service.charAt(0).toUpperCase() + service.slice(1)}`).classList.add('selected');
+            
+            // Update rate
+            const rates = {
+                'velcro': 60,
+                'frame': 180,
+                'pleated': 350,
+                'meshdoor': 380
+            };
+            
+            document.getElementById('rate').textContent = `₹${rates[service]}/sqft`;
+            calculatePrice();
+        }
+
+        // Quantity
+        function updateQuantity(delta) {
+            quantity = Math.max(1, quantity + delta);
+            document.getElementById('quantity').value = quantity;
+            calculatePrice();
+        }
+
+        // Dimensions
+        document.getElementById('width').addEventListener('input', calculatePrice);
+        document.getElementById('height').addEventListener('input', calculatePrice);
+
+        function calculatePrice() {
+            width = parseFloat(document.getElementById('width').value) || 0;
+            height = parseFloat(document.getElementById('height').value) || 0;
+            
+            const area = width * height;
+            const rates = {
+                'velcro': 60,
+                'frame': 180,
+                'pleated': 350,
+                'meshdoor': 380
+            };
+            
+            const rate = rates[selectedService] || 60;
+            const subtotal = area * rate * quantity;
+            
+            document.getElementById('areaSqft').textContent = area.toFixed(1) + ' sqft';
+            document.getElementById('subtotal').textContent = '₹' + subtotal;
+            document.getElementById('total').textContent = '₹' + subtotal;
+        }
+
+        // Time Selection
+        function selectTime(time) {
+            selectedTime = time;
+            document.querySelectorAll('.time-slot').forEach(el => {
+                el.classList.remove('selected');
+            });
+            event.target.closest('.time-slot').classList.add('selected');
+        }
+
+        // Submit Booking
+        async function submitBooking() {
+            const name = document.getElementById('fullName').value;
+            const mobile = document.getElementById('mobile').value;
+            const email = document.getElementById('email').value;
+            const area = document.getElementById('area').value;
+            const address = document.getElementById('address').value;
+            const visitDate = document.getElementById('visitDate').value;
+            const notes = document.getElementById('notes').value;
+            const terms = document.getElementById('terms').checked;
+
+            if (!terms) {
+                showToast('Please accept terms and conditions');
+                return;
+            }
+
+            if (!visitDate) {
+                showToast('Please select visit date');
+                return;
+            }
+
+            // Calculate area
+            const totalArea = width * height;
+
+            // Generate booking ID
+            const bookingId = 'RM' + Date.now().toString().slice(-6);
+
+            // Create booking object
+            const booking = {
+                bookingId: bookingId,
+                name: name,
+                mobile: mobile,
+                email: email || '',
+                area: area,
+                address: address || '',
+                service: selectedService,
+                quantity: quantity,
+                width: width,
+                height: height,
+                totalArea: totalArea,
+                visitDate: visitDate,
+                visitTime: selectedTime,
+                notes: notes || '',
+                status: 'pending',
+                date: new Date().toDateString(),
+                timestamp: firebase.firestore.FieldValue.serverTimestamp()
+            };
+
+            try {
+                // Save to Firebase
+                await db.collection('bookings').add(booking);
+                
+                // Show success modal
+                document.getElementById('bookingId').textContent = bookingId;
+                document.getElementById('successModal').classList.add('active');
+                
+                // Reset form
+                setTimeout(() => {
+                    location.reload();
+                }, 3000);
+                
+            } catch (error) {
+                console.error('Error:', error);
+                showToast('Booking saved locally');
+                
+                // Save to localStorage as backup
+                const localBookings = JSON.parse(localStorage.getItem('bookings') || '[]');
+                localBookings.push(booking);
+                localStorage.setItem('bookings', JSON.stringify(localBookings));
+                
+                document.getElementById('bookingId').textContent = bookingId;
+                document.getElementById('successModal').classList.add('active');
+            }
+        }
+
+        // Modal Functions
+        function viewStatus() {
+            location.href = 'track-order.html?mobile=' + document.getElementById('mobile').value;
+        }
+
+        function closeModal() {
+            document.getElementById('successModal').classList.remove('active');
+            location.href = 'index.html';
+        }
+
+        // File Upload
+        document.getElementById('fileInput').addEventListener('change', function(e) {
+            const files = e.target.files;
+            if (files.length > 5) {
+                showToast('Maximum 5 photos allowed');
+                return;
+            }
+            showToast(`${files.length} photo(s) selected`);
+        });
+
+        // Toast Function
+        function showToast(text) {
+            const toast = document.getElementById('toastMessage');
+            toast.style.opacity = '1';
+            toast.innerText = text;
+            setTimeout(() => toast.style.opacity = '0', 2000);
+        }
+
+        // Initialize
+        calculatePrice();
+    </script>
+</body>
+</html>
+```
