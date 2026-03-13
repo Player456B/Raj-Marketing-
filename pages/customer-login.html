@@ -1,0 +1,1401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Customer Login · Raj Marketing</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #1a2c2d;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+        }
+
+        .app-container {
+            max-width: 390px;
+            width: 100%;
+            background: linear-gradient(145deg, #f5faf8 0%, #e8f0ed 100%);
+            border-radius: 36px 36px 0 0;
+            margin: 8px 0 0 0;
+            overflow: hidden;
+            position: relative;
+            padding-bottom: 70px;
+        }
+
+        /* Header */
+        .page-header {
+            height: 60px;
+            background: white;
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            gap: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .back-btn {
+            width: 40px;
+            height: 40px;
+            background: #f0f5f3;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #1e4b8b;
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: 0.3s;
+        }
+
+        .back-btn:hover {
+            background: #1e4b8b;
+            color: white;
+        }
+
+        .page-header h1 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #1e4b8b;
+        }
+
+        .page-header h1 i {
+            color: #e6b422;
+            margin-right: 8px;
+        }
+
+        /* Login Container */
+        .login-container {
+            padding: 20px 16px;
+        }
+
+        /* Tabs */
+        .login-tabs {
+            display: flex;
+            background: white;
+            border-radius: 50px;
+            padding: 5px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 15px;
+            border: none;
+            background: none;
+            border-radius: 50px;
+            font-weight: 600;
+            color: #6c757d;
+            cursor: pointer;
+            transition: 0.3s;
+            font-size: 0.95rem;
+        }
+
+        .tab-btn.active {
+            background: #1e4b8b;
+            color: white;
+        }
+
+        .tab-btn i {
+            margin-right: 8px;
+        }
+
+        /* Login Card */
+        .login-card {
+            background: white;
+            border-radius: 25px;
+            padding: 30px 25px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .login-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #1e4b8b, #2a6bb3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: -55px auto 20px;
+            box-shadow: 0 10px 20px rgba(30,75,139,0.3);
+        }
+
+        .login-icon i {
+            font-size: 3rem;
+            color: #e6b422;
+        }
+
+        .login-card h2 {
+            text-align: center;
+            color: #1e4b8b;
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+        }
+
+        .login-card p {
+            text-align: center;
+            color: #6c757d;
+            font-size: 0.9rem;
+            margin-bottom: 25px;
+        }
+
+        /* Form Groups */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #1e4b8b;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .form-group label i {
+            color: #e6b422;
+            margin-right: 8px;
+        }
+
+        .input-group {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 16px 50px 16px 20px;
+            border: 2px solid #e9ecef;
+            border-radius: 15px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            transition: 0.3s;
+        }
+
+        .input-group input:focus {
+            border-color: #1e4b8b;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(30,75,139,0.1);
+        }
+
+        .input-icon {
+            position: absolute;
+            right: 20px;
+            color: #e6b422;
+            font-size: 1.2rem;
+        }
+
+        .country-code {
+            position: absolute;
+            left: 20px;
+            color: #1e4b8b;
+            font-weight: 700;
+        }
+
+        .input-group input[type="tel"] {
+            padding-left: 70px;
+        }
+
+        /* OTP Input */
+        .otp-container {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin: 25px 0;
+        }
+
+        .otp-box {
+            width: 55px;
+            height: 65px;
+            border: 2px solid #e9ecef;
+            border-radius: 15px;
+            font-size: 1.8rem;
+            font-weight: 700;
+            text-align: center;
+            color: #1e4b8b;
+            transition: 0.3s;
+        }
+
+        .otp-box:focus {
+            border-color: #1e4b8b;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(30,75,139,0.1);
+        }
+
+        /* Buttons */
+        .login-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #1e4b8b, #2a6bb3);
+            border: none;
+            padding: 18px;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: white;
+            cursor: pointer;
+            transition: 0.3s;
+            margin: 15px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(30,75,139,0.3);
+        }
+
+        .otp-btn {
+            width: 100%;
+            background: #e6b422;
+            border: none;
+            padding: 16px;
+            border-radius: 30px;
+            font-size: 1rem;
+            font-weight: 700;
+            color: #1e4b8b;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-bottom: 15px;
+        }
+
+        .otp-btn:hover {
+            background: #f5c542;
+        }
+
+        .resend-otp {
+            text-align: center;
+            margin: 15px 0;
+        }
+
+        .resend-otp a {
+            color: #1e4b8b;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .timer {
+            color: #e6b422;
+            font-weight: 700;
+        }
+
+        /* Social Login */
+        .social-login {
+            margin-top: 25px;
+            text-align: center;
+        }
+
+        .social-login p {
+            color: #6c757d;
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        .social-login p::before,
+        .social-login p::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 30%;
+            height: 1px;
+            background: #dee2e6;
+        }
+
+        .social-login p::before {
+            left: 0;
+        }
+
+        .social-login p::after {
+            right: 0;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .social-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        .social-icon.google { background: #DB4437; }
+        .social-icon.facebook { background: #4267B2; }
+        .social-icon.apple { background: #000000; }
+
+        .social-icon:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        /* Dashboard */
+        .dashboard-container {
+            padding: 20px 16px;
+        }
+
+        .welcome-card {
+            background: linear-gradient(135deg, #1e4b8b, #2a6bb3);
+            border-radius: 25px;
+            padding: 25px;
+            color: white;
+            margin-bottom: 25px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .welcome-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200px;
+            height: 200px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+        }
+
+        .welcome-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .welcome-header h2 {
+            font-size: 1.5rem;
+        }
+
+        .welcome-header i {
+            font-size: 2rem;
+            color: #e6b422;
+        }
+
+        .customer-info {
+            margin-top: 15px;
+        }
+
+        .customer-info p {
+            margin: 5px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .customer-info i {
+            color: #e6b422;
+            width: 20px;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            text-align: center;
+        }
+
+        .stat-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(30,75,139,0.1);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 10px;
+            color: #1e4b8b;
+            font-size: 1.5rem;
+        }
+
+        .stat-number {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #1e4b8b;
+        }
+
+        .stat-label {
+            color: #6c757d;
+            font-size: 0.8rem;
+        }
+
+        /* Orders List */
+        .section-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 20px 0 15px;
+        }
+
+        .section-title h3 {
+            color: #1e4b8b;
+            font-size: 1.1rem;
+        }
+
+        .view-all {
+            color: #e6b422;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .orders-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .order-item {
+            background: white;
+            border-radius: 18px;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .order-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .order-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(230,180,34,0.1);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #e6b422;
+            font-size: 1.5rem;
+        }
+
+        .order-details {
+            flex: 1;
+        }
+
+        .order-details h4 {
+            font-size: 1rem;
+            color: #1e4b8b;
+            margin-bottom: 5px;
+        }
+
+        .order-meta {
+            display: flex;
+            gap: 10px;
+            font-size: 0.75rem;
+            color: #6c757d;
+        }
+
+        .order-status {
+            padding: 4px 12px;
+            border-radius: 30px;
+            font-size: 0.7rem;
+            font-weight: 700;
+        }
+
+        .status-pending { background: #fff3cd; color: #856404; }
+        .status-confirmed { background: #d4edda; color: #155724; }
+        .status-completed { background: #cce5ff; color: #004085; }
+        .status-cancelled { background: #f8d7da; color: #721c24; }
+
+        /* Profile Menu */
+        .profile-menu {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            margin: 20px 0;
+        }
+
+        .menu-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 18px 20px;
+            border-bottom: 1px solid #f0f0f0;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .menu-item:last-child {
+            border-bottom: none;
+        }
+
+        .menu-item:hover {
+            background: #f8f9fa;
+        }
+
+        .menu-item i {
+            width: 25px;
+            color: #e6b422;
+            font-size: 1.2rem;
+        }
+
+        .menu-item span {
+            flex: 1;
+            color: #1e4b8b;
+            font-weight: 500;
+        }
+
+        .menu-item .badge {
+            background: #dc3545;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 30px;
+            font-size: 0.7rem;
+            font-weight: 700;
+        }
+
+        /* Address Card */
+        .address-card {
+            background: white;
+            border-radius: 18px;
+            padding: 18px;
+            margin-bottom: 12px;
+            border: 1px solid #e9ecef;
+        }
+
+        .address-type {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+
+        .address-type span {
+            background: #e6b422;
+            color: #1e4b8b;
+            padding: 3px 12px;
+            border-radius: 30px;
+            font-size: 0.7rem;
+            font-weight: 700;
+        }
+
+        .address-text {
+            color: #6c757d;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+
+        .address-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .address-actions button {
+            flex: 1;
+            padding: 8px;
+            border: none;
+            border-radius: 10px;
+            background: #f8f9fa;
+            color: #1e4b8b;
+            font-weight: 500;
+            cursor: pointer;
+        }
+
+        /* Bottom Navigation */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            max-width: 390px;
+            width: 100%;
+            background: white;
+            display: flex;
+            justify-content: space-around;
+            padding: 12px 10px 20px;
+            border-top: 3px solid #e6b422;
+            border-radius: 30px 30px 0 0;
+            z-index: 100;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #6c757d;
+            font-size: 0.7rem;
+            cursor: pointer;
+        }
+
+        .nav-item.active {
+            color: #1e4b8b;
+        }
+
+        .nav-item i {
+            font-size: 1.4rem;
+            margin-bottom: 3px;
+        }
+
+        /* Toast */
+        #toastMessage {
+            position: fixed;
+            bottom: 180px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #1e4b8b;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            z-index: 5000;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease;
+        }
+
+        /* Hidden Class */
+        .hidden {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <div class="page-header">
+            <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i></a>
+            <h1><i class="fas fa-user-circle"></i> My Account</h1>
+        </div>
+
+        <!-- Login Container (shown when not logged in) -->
+        <div class="login-container" id="loginContainer">
+            <!-- Login Tabs -->
+            <div class="login-tabs">
+                <button class="tab-btn active" id="loginTab" onclick="switchTab('login')">
+                    <i class="fas fa-sign-in-alt"></i> Login
+                </button>
+                <button class="tab-btn" id="signupTab" onclick="switchTab('signup')">
+                    <i class="fas fa-user-plus"></i> Sign Up
+                </button>
+            </div>
+
+            <!-- Login Form -->
+            <div class="login-card" id="loginForm">
+                <div class="login-icon">
+                    <i class="fas fa-user-lock"></i>
+                </div>
+                <h2>Welcome Back!</h2>
+                <p>Login to access your account</p>
+
+                <div class="form-group">
+                    <label><i class="fas fa-phone"></i> Mobile Number</label>
+                    <div class="input-group">
+                        <span class="country-code">+91</span>
+                        <input type="tel" id="loginMobile" placeholder="9876543210" maxlength="10">
+                        <i class="fas fa-check-circle input-icon" id="mobileCheck" style="display: none;"></i>
+                    </div>
+                </div>
+
+                <div class="form-group" id="passwordField" style="display: none;">
+                    <label><i class="fas fa-lock"></i> Password</label>
+                    <div class="input-group">
+                        <input type="password" id="password" placeholder="Enter password">
+                        <i class="fas fa-eye input-icon" id="togglePassword" onclick="togglePassword()"></i>
+                    </div>
+                </div>
+
+                <div id="otpSection" style="display: none;">
+                    <div class="otp-container">
+                        <input type="text" class="otp-box" maxlength="1" onkeyup="moveToNext(this, 1)">
+                        <input type="text" class="otp-box" maxlength="1" onkeyup="moveToNext(this, 2)">
+                        <input type="text" class="otp-box" maxlength="1" onkeyup="moveToNext(this, 3)">
+                        <input type="text" class="otp-box" maxlength="1" onkeyup="moveToNext(this, 4)">
+                    </div>
+                    <div class="resend-otp">
+                        <span>Resend OTP in <span class="timer" id="timer">30</span>s</span
+                       <a href="#" id="resendLink" style="display: none;" onclick="resendOTP()">Resend</a>
+                    </div>
+                </div>
+
+                <button class="otp-btn" id="getOtpBtn" onclick="getOTP()">
+                    <i class="fas fa-paper-plane"></i> Get OTP
+                </button>
+
+                <button class="login-btn" id="loginBtn" style="display: none;" onclick="login()">
+                    <i class="fas fa-sign-in-alt"></i> Login
+                </button>
+
+                <div class="social-login">
+                    <p>Or login with</p>
+                    <div class="social-icons">
+                        <div class="social-icon google" onclick="socialLogin('google')">
+                            <i class="fab fa-google"></i>
+                        </div>
+                        <div class="social-icon facebook" onclick="socialLogin('facebook')">
+                            <i class="fab fa-facebook-f"></i>
+                        </div>
+                        <div class="social-icon apple" onclick="socialLogin('apple')">
+                            <i class="fab fa-apple"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Signup Form -->
+            <div class="login-card hidden" id="signupForm">
+                <div class="login-icon">
+                    <i class="fas fa-user-plus"></i>
+                </div>
+                <h2>Create Account</h2>
+                <p>Join Raj Marketing family</p>
+
+                <div class="form-group">
+                    <label><i class="fas fa-user"></i> Full Name</label>
+                    <input type="text" id="signupName" placeholder="Enter your name">
+                </div>
+
+                <div class="form-group">
+                    <label><i class="fas fa-phone"></i> Mobile Number</label>
+                    <div class="input-group">
+                        <span class="country-code">+91</span>
+                        <input type="tel" id="signupMobile" placeholder="9876543210" maxlength="10">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label><i class="fas fa-envelope"></i> Email (Optional)</label>
+                    <input type="email" id="signupEmail" placeholder="Enter email">
+                </div>
+
+                <div class="form-group">
+                    <label><i class="fas fa-map-marker-alt"></i> Area</label>
+                    <select id="signupArea">
+                        <option value="">Select your area</option>
+                        <option value="Vijayanagar">Vijayanagar</option>
+                        <option value="Kuvempunagar">Kuvempunagar</option>
+                        <option value="Gokulam">Gokulam</option>
+                        <option value="Hebbal">Hebbal</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+
+                <button class="login-btn" onclick="signup()">
+                    <i class="fas fa-user-plus"></i> Create Account
+                </button>
+
+                <p style="text-align: center; margin-top: 15px; font-size: 0.8rem;">
+                    By signing up, you agree to our 
+                    <a href="terms.html">Terms</a> & <a href="privacy.html">Privacy</a>
+                </p>
+            </div>
+        </div>
+
+        <!-- Dashboard Container (shown when logged in) -->
+        <div class="dashboard-container hidden" id="dashboardContainer">
+            <!-- Welcome Card -->
+            <div class="welcome-card">
+                <div class="welcome-header">
+                    <h2 id="customerName">Welcome, Ramesh!</h2>
+                    <i class="fas fa-user-circle"></i>
+                </div>
+                <div class="customer-info">
+                    <p><i class="fas fa-phone"></i> <span id="customerMobile">+91 9876543210</span></p>
+                    <p><i class="fas fa-envelope"></i> <span id="customerEmail">ramesh@email.com</span></p>
+                    <p><i class="fas fa-map-marker-alt"></i> <span id="customerArea">Vijayanagar, Mysore</span></p>
+                </div>
+            </div>
+
+            <!-- Stats Grid -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-shopping-bag"></i></div>
+                    <div class="stat-number" id="totalOrders">8</div>
+                    <div class="stat-label">Total Orders</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-clock"></i></div>
+                    <div class="stat-number" id="pendingOrders">2</div>
+                    <div class="stat-label">In Progress</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-check-circle"></i></div>
+                    <div class="stat-number" id="completedOrders">5</div>
+                    <div class="stat-label">Completed</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-tag"></i></div>
+                    <div class="stat-number" id="activeOffers">3</div>
+                    <div class="stat-label">Active Offers</div>
+                </div>
+            </div>
+
+            <!-- Recent Orders -->
+            <div class="section-title">
+                <h3>📦 Recent Orders</h3>
+                <a href="track-order.html" class="view-all">View All</a>
+            </div>
+
+            <div class="orders-list" id="ordersList">
+                <!-- Dynamic orders will be inserted here -->
+            </div>
+
+            <!-- Saved Addresses -->
+            <div class="section-title">
+                <h3>📍 Saved Addresses</h3>
+                <a href="#" class="view-all" onclick="addAddress()">+ Add New</a>
+            </div>
+
+            <div id="addressesList">
+                <!-- Dynamic addresses will be inserted here -->
+            </div>
+
+            <!-- Profile Menu -->
+            <div class="profile-menu">
+                <div class="menu-item" onclick="location.href='profile.html'">
+                    <i class="fas fa-user"></i>
+                    <span>Edit Profile</span>
+                    <i class="fas fa-chevron-right" style="color: #e6b422;"></i>
+                </div>
+                <div class="menu-item" onclick="location.href='track-order.html'">
+                    <i class="fas fa-truck"></i>
+                    <span>Track Orders</span>
+                    <span class="badge" id="trackingBadge">2 Active</span>
+                </div>
+                <div class="menu-item" onclick="location.href='wishlist.html'">
+                    <i class="fas fa-heart"></i>
+                    <span>Wishlist</span>
+                    <span class="badge" id="wishlistBadge">3</span>
+                </div>
+                <div class="menu-item" onclick="location.href='offers.html'">
+                    <i class="fas fa-tags"></i>
+                    <span>Offers & Coupons</span>
+                </div>
+                <div class="menu-item" onclick="location.href='notifications.html'">
+                    <i class="fas fa-bell"></i>
+                    <span>Notifications</span>
+                    <span class="badge" id="notifBadge">2</span>
+                </div>
+                <div class="menu-item" onclick="location.href='support.html'">
+                    <i class="fas fa-headset"></i>
+                    <span>Customer Support</span>
+                </div>
+                <div class="menu-item" onclick="location.href='about.html'">
+                    <i class="fas fa-info-circle"></i>
+                    <span>About Us</span>
+                </div>
+                <div class="menu-item" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Logout</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Navigation -->
+        <div class="bottom-nav">
+            <div class="nav-item" onclick="location.href='index.html'"><i class="fas fa-home"></i><span>Home</span></div>
+            <div class="nav-item" onclick="location.href='products.html'"><i class="fas fa-search"></i><span>Search</span></div>
+            <div class="nav-item" onclick="location.href='appointment.html'"><i class="fas fa-calendar"></i><span>Book</span></div>
+            <div class="nav-item" onclick="location.href='tel:9483037385'"><i class="fas fa-phone"></i><span>Call</span></div>
+            <div class="nav-item active" onclick="location.href='customer-login.html'"><i class="fas fa-user"></i><span>Account</span></div>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div id="toastMessage"></div>
+
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+
+    <script>
+        // Firebase Config
+        const firebaseConfig = {
+            apiKey: "YOUR_API_KEY",
+            authDomain: "YOUR_AUTH_DOMAIN",
+            projectId: "YOUR_PROJECT_ID",
+            storageBucket: "YOUR_STORAGE_BUCKET",
+            messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+            appId: "YOUR_APP_ID"
+        };
+
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+
+        // State
+        let isLoggedIn = false;
+        let currentUser = null;
+        let otpTimer = null;
+        let timeLeft = 30;
+
+        // Check login status from localStorage
+        function checkLoginStatus() {
+            const savedUser = localStorage.getItem('currentUser');
+            if (savedUser) {
+                currentUser = JSON.parse(savedUser);
+                isLoggedIn = true;
+                showDashboard();
+                loadUserData();
+            }
+        }
+
+        // Tab Switching
+        function switchTab(tab) {
+            if (tab === 'login') {
+                document.getElementById('loginTab').classList.add('active');
+                document.getElementById('signupTab').classList.remove('active');
+                document.getElementById('loginForm').classList.remove('hidden');
+                document.getElementById('signupForm').classList.add('hidden');
+            } else {
+                document.getElementById('signupTab').classList.add('active');
+                document.getElementById('loginTab').classList.remove('active');
+                document.getElementById('signupForm').classList.remove('hidden');
+                document.getElementById('loginForm').classList.add('hidden');
+            }
+        }
+
+        // Mobile number validation
+        document.getElementById('loginMobile').addEventListener('input', function(e) {
+            const mobile = e.target.value;
+            const checkIcon = document.getElementById('mobileCheck');
+            
+            if (mobile.length === 10) {
+                checkIcon.style.display = 'block';
+                checkIcon.style.color = '#28a745';
+            } else {
+                checkIcon.style.display = 'none';
+            }
+        });
+
+        // Get OTP
+        function getOTP() {
+            const mobile = document.getElementById('loginMobile').value;
+            
+            if (!mobile || mobile.length !== 10) {
+                showToast('Please enter valid mobile number');
+                return;
+            }
+
+            // Check if user exists in Firebase
+            db.collection('customers').where('mobile', '==', mobile).get()
+                .then((snapshot) => {
+                    if (!snapshot.empty) {
+                        // User exists - show OTP section
+                        document.getElementById('otpSection').style.display = 'block';
+                        document.getElementById('getOtpBtn').style.display = 'none';
+                        document.getElementById('loginBtn').style.display = 'block';
+                        document.getElementById('passwordField').style.display = 'none';
+                        
+                        // Start timer
+                        startOTPTimer();
+                        showToast('OTP sent to ' + mobile);
+                        
+                        // Store mobile for login
+                        sessionStorage.setItem('loginMobile', mobile);
+                    } else {
+                        // New user - show password field for signup
+                        document.getElementById('passwordField').style.display = 'block';
+                        document.getElementById('getOtpBtn').innerHTML = '<i class="fas fa-user-plus"></i> Create Account';
+                        document.getElementById('getOtpBtn').onclick = createAccount;
+                    }
+                })
+                .catch(() => {
+                    // Fallback
+                    document.getElementById('otpSection').style.display = 'block';
+                    document.getElementById('getOtpBtn').style.display = 'none';
+                    document.getElementById('loginBtn').style.display = 'block';
+                    startOTPTimer();
+                });
+        }
+
+        // Create new account
+        function createAccount() {
+            const mobile = document.getElementById('loginMobile').value;
+            const password = document.getElementById('password').value;
+            
+            if (!password) {
+                showToast('Please enter password');
+                return;
+            }
+
+            // Save to Firebase
+            db.collection('customers').add({
+                mobile: mobile,
+                password: btoa(password), // Simple encoding (use proper encryption in production)
+                createdAt: firebase.firestore.FieldValue.serverTimestamp()
+            }).then(() => {
+                showToast('Account created! Please login');
+                location.reload();
+            }).catch(() => {
+                showToast('Error creating account');
+            });
+        }
+
+        // Login
+        function login() {
+            const otpBoxes = document.querySelectorAll('.otp-box');
+            let otp = '';
+            otpBoxes.forEach(box => otp += box.value);
+
+            if (otp.length !== 4) {
+                showToast('Please enter complete OTP');
+                return;
+            }
+
+            const mobile = sessionStorage.getItem('loginMobile');
+            
+            // For demo - accept any 4-digit OTP
+            if (otp === '1234' || otp === '0000') {
+                // Fetch user data from Firebase
+                db.collection('customers').where('mobile', '==', mobile).get()
+                    .then((snapshot) => {
+                        if (!snapshot.empty) {
+                            const userData = snapshot.docs[0].data();
+                            userData.id = snapshot.docs[0].id;
+                            currentUser = userData;
+                        } else {
+                            // Create demo user
+                            currentUser = {
+                                name: 'Ramesh Kumar',
+                                mobile: mobile,
+                                email: 'ramesh@email.com',
+                                area: 'Vijayanagar'
+                            };
+                        }
+                        
+                        // Save to localStorage
+                        localStorage.setItem('currentUser', JSON.stringify(currentUser));
+                        isLoggedIn = true;
+                        showDashboard();
+                        loadUserData();
+                    });
+            } else {
+                showToast('Invalid OTP');
+            }
+        }
+
+        // Signup
+        function signup() {
+            const name = document.getElementById('signupName').value;
+            const mobile = document.getElementById('signupMobile').value;
+            const email = document.getElementById('signupEmail').value;
+            const area = document.getElementById('signupArea').value;
+
+            if (!name || !mobile || !area) {
+                showToast('Please fill all required fields');
+                return;
+            }
+
+            if (mobile.length !== 10) {
+                showToast('Enter valid mobile number');
+                return;
+            }
+
+            // Save to Firebase
+            const userData = {
+                name: name,
+                mobile: mobile,
+                email: email,
+                area: area,
+                createdAt: firebase.firestore.FieldValue.serverTimestamp()
+            };
+
+            db.collection('customers').add(userData).then(() => {
+                localStorage.setItem('currentUser', JSON.stringify(userData));
+                currentUser = userData;
+                isLoggedIn = true;
+                showDashboard();
+                loadUserData();
+            }).catch(() => {
+                // Save locally if Firebase fails
+                localStorage.setItem('currentUser', JSON.stringify(userData));
+                currentUser = userData;
+                isLoggedIn = true;
+                showDashboard();
+                loadUserData();
+            });
+        }
+
+        // Show Dashboard
+        function showDashboard() {
+            document.getElementById('loginContainer').classList.add('hidden');
+            document.getElementById('dashboardContainer').classList.remove('hidden');
+            
+            // Update welcome message
+            if (currentUser) {
+                document.getElementById('customerName').textContent = `Welcome, ${currentUser.name || 'Customer'}!`;
+                document.getElementById('customerMobile').textContent = `+91 ${currentUser.mobile || '9876543210'}`;
+                document.getElementById('customerEmail').textContent = currentUser.email || 'Not provided';
+                document.getElementById('customerArea').textContent = currentUser.area || 'Mysore';
+            }
+        }
+
+        // Load user data from Firebase
+        function loadUserData() {
+            if (!currentUser) return;
+
+            // Load orders
+            db.collection('bookings').where('mobile', '==', currentUser.mobile).get()
+                .then((snapshot) => {
+                    const orders = snapshot.docs.map(doc => doc.data());
+                    
+                    // Update stats
+                    document.getElementById('totalOrders').textContent = orders.length;
+                    document.getElementById('pendingOrders').textContent = 
+                        orders.filter(o => o.status === 'pending' || o.status === 'confirmed').length;
+                    document.getElementById('completedOrders').textContent = 
+                        orders.filter(o => o.status === 'completed').length;
+
+                    // Display recent orders
+                    displayOrders(orders.slice(0, 3));
+                })
+                .catch(() => {
+                    // Demo data
+                    displayDemoOrders();
+                });
+        }
+
+        // Display orders
+        function displayOrders(orders) {
+            const ordersList = document.getElementById('ordersList');
+            
+            if (orders.length === 0) {
+                ordersList.innerHTML = `
+                    <div style="text-align: center; padding: 30px; color: #6c757d;">
+                        <i class="fas fa-box-open" style="font-size: 3rem; margin-bottom: 10px;"></i>
+                        <p>No orders yet</p>
+                        <a href="products.html" style="color: #1e4b8b; font-weight: 600;">Browse Products</a>
+                    </div>
+                `;
+                return;
+            }
+
+            ordersList.innerHTML = orders.map(order => `
+                <div class="order-item" onclick="viewOrder('${order.bookingId || ''}')">
+                    <div class="order-icon"><i class="fas fa-box"></i></div>
+                    <div class="order-details">
+                        <h4>${order.service || 'Service'} - ${order.quantity || 1} item(s)</h4>
+                        <div class="order-meta">
+                            <span>${order.visitDate || order.date || 'N/A'}</span>
+                            <span>₹${(order.totalArea * (order.service === 'velcro' ? 60 : 180)) || 'N/A'}</span>
+                        </div>
+                    </div>
+                    <span class="order-status status-${order.status || 'pending'}">${order.status || 'Pending'}</span>
+                </div>
+            `).join('');
+        }
+
+        function displayDemoOrders() {
+            const ordersList = document.getElementById('ordersList');
+            ordersList.innerHTML = `
+                <div class="order-item" onclick="viewOrder('RM001')">
+                    <div class="order-icon"><i class="fas fa-box"></i></div>
+                    <div class="order-details">
+                        <h4>Velcro System - 3 Windows</h4>
+                        <div class="order-meta">
+                            <span>15 Mar 2026</span>
+                            <span>₹4,500</span>
+                        </div>
+                    </div>
+                    <span class="order-status status-confirmed">Confirmed</span>
+                </div>
+                <div class="order-item" onclick="viewOrder('RM002')">
+                    <div class="order-icon"><i class="fas fa-box"></i></div>
+                    <div class="order-details">
+                        <h4>Frame System - 2 Doors</h4>
+                        <div class="order-meta">
+                            <span>10 Mar 2026</span>
+                            <span>₹7,200</span>
+                        </div>
+                    </div>
+                    <span class="order-status status-completed">Completed</span>
+                </div>
+            `;
+
+            // Update badges
+            document.getElementById('trackingBadge').textContent = '1 Active';
+            document.getElementById('wishlistBadge').textContent = '3';
+            document.getElementById('notifBadge').textContent = '2';
+        }
+
+        // View order details
+        function viewOrder(orderId) {
+            location.href = `track-order.html?id=${orderId}`;
+        }
+
+        // Add address
+        function addAddress() {
+            const address = prompt('Enter new address:');
+            if (address) {
+                const addressesList = document.getElementById('addressesList');
+                const newAddress = `
+                    <div class="address-card">
+                        <div class="address-type">
+                            <span>Home</span>
+                            <i class="fas fa-edit" style="color: #1e4b8b;" onclick="editAddress(this)"></i>
+                        </div>
+                        <div class="address-text">${address}</div>
+                        <div class="address-actions">
+                            <button>Set as Default</button>
+                            <button style="color: #dc3545;">Delete</button>
+                        </div>
+                    </div>
+                `;
+                addressesList.innerHTML += newAddress;
+            }
+        }
+
+        // OTP Functions
+        function startOTPTimer() {
+            timeLeft = 30;
+            document.getElementById('timer').textContent = timeLeft;
+            document.getElementById('resendLink').style.display = 'none';
+            
+            otpTimer = setInterval(() => {
+                timeLeft--;
+                document.getElementById('timer').textContent = timeLeft;
+                
+                if (timeLeft <= 0) {
+                    clearInterval(otpTimer);
+                    document.getElementById('timer').parentElement.style.display = 'none';
+                    document.getElementById('resendLink').style.display = 'inline';
+                }
+            }, 1000);
+        }
+
+        function resendOTP() {
+            startOTPTimer();
+            showToast('OTP resent');
+        }
+
+        function moveToNext(current, next) {
+            if (current.value.length === 1) {
+                const nextInput = document.querySelector(`.otp-box:nth-child(${next + 1})`);
+                if (nextInput) nextInput.focus();
+            }
+        }
+
+        // Toggle password visibility
+        function togglePassword() {
+            const password = document.getElementById('password');
+            const icon = document.getElementById('togglePassword');
+            
+            if (password.type === 'password') {
+                password.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                password.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        }
+
+        // Social login
+        function socialLogin(provider) {
+            showToast(`Login with ${provider} coming soon`);
+        }
+
+        // Logout
+        function logout() {
+            localStorage.removeItem('currentUser');
+            sessionStorage.clear();
+            isLoggedIn = false;
+            currentUser = null;
+            document.getElementById('dashboardContainer').classList.add('hidden');
+            document.getElementById('loginContainer').classList.remove('hidden');
+            showToast('Logged out successfully');
+        }
+
+        // Toast
+        function showToast(text) {
+            const toast = document.getElementById('toastMessage');
+            toast.style.opacity = '1';
+            toast.innerText = text;
+            setTimeout(() => toast.style.opacity = '0', 2000);
+        }
+
+        // Initialize
+        checkLoginStatus();
+
+        // Set today's date for demo
+        document.getElementById('totalOrders').textContent = '8';
+        document.getElementById('pendingOrders').textContent = '2';
+        document.getElementById('completedOrders').textContent = '5';
+        document.getElementById('activeOffers').textContent = '3';
+        
+        // Demo addresses
+        document.getElementById('addressesList').innerHTML = `
+            <div class="address-card">
+                <div class="address-type">
+                    <span>Home</span>
+                    <i class="fas fa-edit" style="color: #1e4b8b;" onclick="editAddress(this)"></i>
+                </div>
+                <div class="address-text">#123, 2nd Main, Vijayanagar, Mysore - 570017</div>
+                <div class="address-actions">
+                    <button>Default</button>
+                    <button style="color: #dc3545;">Delete</button>
+                </div>
+            </div>
+            <div class="address-card">
+                <div class="address-type">
+                    <span>Office</span>
+                    <i class="fas fa-edit" style="color: #1e4b8b;" onclick="editAddress(this)"></i>
+                </div>
+                <div class="address-text">#65, Hootghalli Industrial Area, Mysore - 570018</div>
+                <div class="address-actions">
+                    <button>Set as Default</button>
+                    <button style="color: #dc3545;">Delete</button>
+                </div>
+            </div>
+        `;
+    </script>
+</body>
+</html>
+```
+                                                                
