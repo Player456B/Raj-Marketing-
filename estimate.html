@@ -1,0 +1,1431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Price Estimate · Raj Marketing</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #1a2c2d;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+        }
+
+        .app-container {
+            max-width: 390px;
+            width: 100%;
+            background: linear-gradient(145deg, #f5faf8 0%, #e8f0ed 100%);
+            border-radius: 36px 36px 0 0;
+            margin: 8px 0 0 0;
+            overflow: hidden;
+            position: relative;
+            padding-bottom: 70px;
+        }
+
+        /* Header */
+        .page-header {
+            height: 60px;
+            background: white;
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            gap: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .back-btn {
+            width: 40px;
+            height: 40px;
+            background: #f0f5f3;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #1e4b8b;
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: 0.3s;
+        }
+
+        .back-btn:hover {
+            background: #1e4b8b;
+            color: white;
+        }
+
+        .page-header h1 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #1e4b8b;
+        }
+
+        .page-header h1 i {
+            color: #e6b422;
+            margin-right: 8px;
+        }
+
+        .save-btn {
+            margin-left: auto;
+            background: none;
+            border: none;
+            font-size: 1.3rem;
+            color: #e6b422;
+            cursor: pointer;
+        }
+
+        /* Estimate Container */
+        .estimate-container {
+            padding: 20px 16px;
+        }
+
+        /* Service Selection */
+        .service-selector {
+            background: white;
+            border-radius: 25px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+        }
+
+        .selector-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .selector-title i {
+            font-size: 1.5rem;
+            color: #e6b422;
+        }
+
+        .selector-title h3 {
+            color: #1e4b8b;
+            font-size: 1.1rem;
+        }
+
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        .service-option {
+            background: #f8f9fa;
+            border: 2px solid transparent;
+            border-radius: 18px;
+            padding: 15px 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .service-option.selected {
+            border-color: #e6b422;
+            background: #fff9e6;
+        }
+
+        .service-option i {
+            font-size: 2rem;
+            color: #1e4b8b;
+            margin-bottom: 8px;
+        }
+
+        .service-option span {
+            display: block;
+            font-weight: 600;
+            color: #1e4b8b;
+            font-size: 0.9rem;
+        }
+
+        .service-option small {
+            display: block;
+            color: #e6b422;
+            font-weight: 700;
+            margin-top: 5px;
+        }
+
+        /* Measurement Card */
+        .measurement-card {
+            background: white;
+            border-radius: 25px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+        }
+
+        .measurement-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .measurement-header i {
+            font-size: 1.5rem;
+            color: #e6b422;
+        }
+
+        .measurement-header h3 {
+            color: #1e4b8b;
+            font-size: 1.1rem;
+        }
+
+        .dimension-inputs {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .input-group {
+            flex: 1;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #1e4b8b;
+            font-weight: 600;
+            font-size: 0.85rem;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e9ecef;
+            border-radius: 15px;
+            font-size: 1rem;
+            transition: 0.3s;
+        }
+
+        .input-group input:focus {
+            border-color: #1e4b8b;
+            outline: none;
+        }
+
+        .unit-toggle {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        .unit-btn {
+            padding: 8px 20px;
+            border: 2px solid #e9ecef;
+            border-radius: 25px;
+            background: white;
+            color: #6c757d;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .unit-btn.active {
+            background: #1e4b8b;
+            color: white;
+            border-color: #1e4b8b;
+        }
+
+        /* Quantity Selector */
+        .quantity-card {
+            background: white;
+            border-radius: 25px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+        }
+
+        .quantity-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .quantity-header i {
+            font-size: 1.5rem;
+            color: #e6b422;
+        }
+
+        .quantity-header h3 {
+            color: #1e4b8b;
+            font-size: 1.1rem;
+        }
+
+        .quantity-control {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 50px;
+        }
+
+        .qty-btn {
+            width: 50px;
+            height: 50px;
+            background: white;
+            border: none;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1e4b8b;
+            cursor: pointer;
+            box-shadow: 0 5px 10px rgba(0,0,0,0.05);
+            transition: 0.3s;
+        }
+
+        .qty-btn:hover {
+            background: #1e4b8b;
+            color: white;
+        }
+
+        .qty-value {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #1e4b8b;
+            min-width: 60px;
+            text-align: center;
+        }
+
+        /* Options Card */
+        .options-card {
+            background: white;
+            border-radius: 25px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+        }
+
+        .options-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .options-header i {
+            font-size: 1.5rem;
+            color: #e6b422;
+        }
+
+        .options-header h3 {
+            color: #1e4b8b;
+            font-size: 1.1rem;
+        }
+
+        .option-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .option-row:last-child {
+            border-bottom: none;
+        }
+
+        .option-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .option-info i {
+            color: #e6b422;
+            width: 24px;
+        }
+
+        .option-info span {
+            color: #1e4b8b;
+            font-weight: 500;
+        }
+
+        .toggle-switch {
+            position: relative;
+            width: 50px;
+            height: 24px;
+            background: #e9ecef;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .toggle-switch.active {
+            background: #28a745;
+        }
+
+        .toggle-switch::after {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 20px;
+            height: 20px;
+            background: white;
+            border-radius: 50%;
+            transition: 0.3s;
+        }
+
+        .toggle-switch.active::after {
+            left: 28px;
+        }
+
+        /* Price Breakdown */
+        .price-breakdown {
+            background: linear-gradient(135deg, #1e4b8b, #2a6bb3);
+            border-radius: 25px;
+            padding: 25px;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .price-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .price-header i {
+            font-size: 1.8rem;
+            color: #e6b422;
+        }
+
+        .price-header h3 {
+            font-size: 1.2rem;
+        }
+
+        .price-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 1px dashed rgba(255,255,255,0.2);
+        }
+
+        .price-row.total {
+            border-bottom: none;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 2px solid rgba(255,255,255,0.3);
+            font-size: 1.2rem;
+            font-weight: 800;
+        }
+
+        .price-row.total span:last-child {
+            color: #e6b422;
+            font-size: 1.5rem;
+        }
+
+        .price-note {
+            font-size: 0.8rem;
+            opacity: 0.8;
+            margin-top: 15px;
+            text-align: center;
+        }
+
+        /* Action Buttons */
+        .action-buttons {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .primary-btn {
+            flex: 1;
+            background: linear-gradient(135deg, #e6b422, #f5c542);
+            border: none;
+            padding: 16px;
+            border-radius: 30px;
+            font-weight: 700;
+            color: #1e4b8b;
+            cursor: pointer;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .primary-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(230,180,34,0.3);
+        }
+
+        .secondary-btn {
+            flex: 1;
+            background: white;
+            border: 2px solid #1e4b8b;
+            padding: 16px;
+            border-radius: 30px;
+            font-weight: 700;
+            color: #1e4b8b;
+            cursor: pointer;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .secondary-btn:hover {
+            background: #1e4b8b;
+            color: white;
+        }
+
+        /* Saved Estimates */
+        .saved-estimates {
+            background: white;
+            border-radius: 25px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .saved-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+
+        .saved-header h3 {
+            color: #1e4b8b;
+            font-size: 1rem;
+        }
+
+        .saved-header a {
+            color: #e6b422;
+            text-decoration: none;
+            font-size: 0.85rem;
+        }
+
+        .estimate-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 12px;
+            background: #f8f9fa;
+            border-radius: 18px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .estimate-item:hover {
+            transform: translateX(5px);
+            background: #fff9e6;
+        }
+
+        .estimate-icon {
+            width: 45px;
+            height: 45px;
+            background: #e6b422;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.3rem;
+        }
+
+        .estimate-details {
+            flex: 1;
+        }
+
+        .estimate-name {
+            font-weight: 700;
+            color: #1e4b8b;
+            margin-bottom: 3px;
+        }
+
+        .estimate-meta {
+            display: flex;
+            gap: 10px;
+            font-size: 0.7rem;
+            color: #6c757d;
+        }
+
+        .estimate-price {
+            font-weight: 800;
+            color: #e6b422;
+        }
+
+        .delete-estimate {
+            color: #dc3545;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        /* Material Quality */
+        .quality-selector {
+            display: flex;
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        .quality-option {
+            flex: 1;
+            text-align: center;
+            padding: 12px;
+            border: 2px solid #e9ecef;
+            border-radius: 18px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .quality-option.selected {
+            border-color: #e6b422;
+            background: #fff9e6;
+        }
+
+        .quality-option i {
+            font-size: 1.5rem;
+            color: #1e4b8b;
+            margin-bottom: 5px;
+        }
+
+        .quality-option span {
+            display: block;
+            font-weight: 600;
+            color: #1e4b8b;
+        }
+
+        .quality-option small {
+            font-size: 0.65rem;
+            color: #6c757d;
+        }
+
+        /* Installation Type */
+        .install-selector {
+            display: flex;
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        .install-option {
+            flex: 1;
+            text-align: center;
+            padding: 15px;
+            border: 2px solid #e9ecef;
+            border-radius: 18px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .install-option.selected {
+            border-color: #e6b422;
+            background: #fff9e6;
+        }
+
+        .install-option i {
+            font-size: 1.5rem;
+            color: #1e4b8b;
+            margin-bottom: 5px;
+        }
+
+        .install-option span {
+            display: block;
+            font-weight: 600;
+            color: #1e4b8b;
+        }
+
+        /* Bottom Navigation */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            max-width: 390px;
+            width: 100%;
+            background: white;
+            display: flex;
+            justify-content: space-around;
+            padding: 12px 10px 20px;
+            border-top: 3px solid #e6b422;
+            border-radius: 30px 30px 0 0;
+            z-index: 100;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #6c757d;
+            font-size: 0.7rem;
+            cursor: pointer;
+        }
+
+        .nav-item.active {
+            color: #1e4b8b;
+        }
+
+        .nav-item i {
+            font-size: 1.4rem;
+            margin-bottom: 3px;
+        }
+
+        /* Toast */
+        #toastMessage {
+            position: fixed;
+            bottom: 180px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #1e4b8b;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            z-index: 5000;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 30px;
+            max-width: 320px;
+            width: 90%;
+            padding: 25px;
+            text-align: center;
+        }
+
+        .modal-icon {
+            width: 70px;
+            height: 70px;
+            background: #28a745;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+        }
+
+        .modal-icon i {
+            font-size: 2.5rem;
+            color: white;
+        }
+
+        .modal h3 {
+            color: #1e4b8b;
+            margin-bottom: 10px;
+        }
+
+        .modal p {
+            color: #6c757d;
+            margin-bottom: 20px;
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .modal-btn {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .modal-btn.primary {
+            background: #1e4b8b;
+            color: white;
+        }
+
+        .modal-btn.secondary {
+            background: #e9ecef;
+            color: #6c757d;
+        }
+
+        /* Animations */
+        @keyframes slideIn {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .animate-in {
+            animation: slideIn 0.5s ease;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <div class="page-header">
+            <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i></a>
+            <h1><i class="fas fa-calculator"></i> Price Estimate</h1>
+            <button class="save-btn" onclick="saveEstimate()"><i class="fas fa-bookmark"></i></button>
+        </div>
+
+        <!-- Main Container -->
+        <div class="estimate-container">
+            <!-- Service Selection -->
+            <div class="service-selector animate-in">
+                <div class="selector-title">
+                    <i class="fas fa-cog"></i>
+                    <h3>Select Service Type</h3>
+                </div>
+                <div class="service-grid">
+                    <div class="service-option selected" onclick="selectService('velcro')" id="serviceVelcro">
+                        <i class="fas fa-mosquito-net"></i>
+                        <span>Velcro System</span>
+                        <small>₹60/sqft</small>
+                    </div>
+                    <div class="service-option" onclick="selectService('frame')" id="serviceFrame">
+                        <i class="fas fa-window-maximize"></i>
+                        <span>Frame System</span>
+                        <small>₹180/sqft</small>
+                    </div>
+                    <div class="service-option" onclick="selectService('pleated')" id="servicePleated">
+                        <i class="fas fa-arrows-spin"></i>
+                        <span>Pleated Nets</span>
+                        <small>₹350/sqft</small>
+                    </div>
+                    <div class="service-option" onclick="selectService('meshdoor')" id="serviceMeshdoor">
+                        <i class="fas fa-door-open"></i>
+                        <span>Mesh Door</span>
+                        <small>₹380/sqft</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Material Quality -->
+            <div class="options-card animate-in">
+                <div class="options-header">
+                    <i class="fas fa-gem"></i>
+                    <h3>Material Quality</h3>
+                </div>
+                <div class="quality-selector">
+                    <div class="quality-option selected" onclick="selectQuality('standard')" id="qualityStandard">
+                        <i class="fas fa-star"></i>
+                        <span>Standard</span>
+                        <small>Basic</small>
+                    </div>
+                    <div class="quality-option" onclick="selectQuality('premium')" id="qualityPremium">
+                        <i class="fas fa-crown"></i>
+                        <span>Premium</span>
+                        <small>+20%</small>
+                    </div>
+                    <div class="quality-option" onclick="selectQuality('ultra')" id="qualityUltra">
+                        <i class="fas fa-gem"></i>
+                        <span>Ultra</span>
+                        <small>+40%</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Measurement Card -->
+            <div class="measurement-card animate-in">
+                <div class="measurement-header">
+                    <i class="fas fa-ruler"></i>
+                    <h3>Enter Dimensions</h3>
+                </div>
+                
+                <div class="unit-toggle">
+                    <button class="unit-btn active" onclick="setUnit('ft')" id="unitFt">Feet (ft)</button>
+                    <button class="unit-btn" onclick="setUnit('m')" id="unitM">Meters (m)</button>
+                </div>
+
+                <div class="dimension-inputs">
+                    <div class="input-group">
+                        <label>Width</label>
+                        <input type="number" id="width" value="3" min="0.5" step="0.5" oninput="calculatePrice()">
+                    </div>
+                    <div class="input-group">
+                        <label>Height</label>
+                        <input type="number" id="height" value="4" min="0.5" step="0.5" oninput="calculatePrice()">
+                    </div>
+                </div>
+
+                <div class="dimension-inputs">
+                    <div class="input-group">
+                        <label>Frame Width (mm)</label>
+                        <input type="number" id="frameWidth" value="25" min="10" step="5" oninput="calculatePrice()">
+                    </div>
+                    <div class="input-group">
+                        <label>Mesh Size (mm)</label>
+                        <select id="meshSize" onchange="calculatePrice()">
+                            <option value="1.2">1.2mm (Standard)</option>
+                            <option value="1.0">1.0mm (Fine)</option>
+                            <option value="1.5">1.5mm (Heavy)</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quantity Card -->
+            <div class="quantity-card animate-in">
+                <div class="quantity-header">
+                    <i class="fas fa-cubes"></i>
+                    <h3>Number of Units</h3>
+                </div>
+                <div class="quantity-control">
+                    <button class="qty-btn" onclick="updateQuantity(-1)">-</button>
+                    <span class="qty-value" id="quantity">1</span>
+                    <button class="qty-btn" onclick="updateQuantity(1)">+</button>
+                </div>
+            </div>
+
+            <!-- Installation Type -->
+            <div class="options-card animate-in">
+                <div class="options-header">
+                    <i class="fas fa-tools"></i>
+                    <h3>Installation</h3>
+                </div>
+                <div class="install-selector">
+                    <div class="install-option selected" onclick="selectInstall('self')" id="installSelf">
+                        <i class="fas fa-user"></i>
+                        <span>Self</span>
+                    </div>
+                    <div class="install-option" onclick="selectInstall('professional')" id="installPro">
+                        <i class="fas fa-tools"></i>
+                        <span>Professional</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Additional Options -->
+            <div class="options-card animate-in">
+                <div class="options-header">
+                    <i class="fas fa-plus-circle"></i>
+                    <h3>Additional Options</h3>
+                </div>
+                
+                <div class="option-row">
+                    <div class="option-info">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>UV Protection</span>
+                    </div>
+                    <div class="toggle-switch" onclick="toggleOption('uv')" id="uvToggle"></div>
+                </div>
+
+                <div class="option-row">
+                    <div class="option-info">
+                        <i class="fas fa-lock"></i>
+                        <span>Child Lock</span>
+                    </div>
+                    <div class="toggle-switch" onclick="toggleOption('lock')" id="lockToggle"></div>
+                </div>
+
+                <div class="option-row">
+                    <div class="option-info">
+                        <i class="fas fa-tint"></i>
+                        <span>Waterproof Coating</span>
+                    </div>
+                    <div class="toggle-switch" onclick="toggleOption('waterproof')" id="waterproofToggle"></div>
+                </div>
+
+                <div class="option-row">
+                    <div class="option-info">
+                        <i class="fas fa-paint-roller"></i>
+                        <span>Color Customization</span>
+                    </div>
+                    <div class="toggle-switch" onclick="toggleOption('color')" id="colorToggle"></div>
+                </div>
+
+                <div class="option-row">
+                    <div class="option-info">
+                        <i class="fas fa-truck"></i>
+                        <span>Express Delivery</span>
+                    </div>
+                    <div class="toggle-switch" onclick="toggleOption('express')" id="expressToggle"></div>
+                </div>
+            </div>
+
+            <!-- Price Breakdown -->
+            <div class="price-breakdown animate-in" id="priceBreakdown">
+                <div class="price-header">
+                    <i class="fas fa-file-invoice"></i>
+                    <h3>Estimated Price</h3>
+                </div>
+                
+                <div class="price-row">
+                    <span>Base Price:</span>
+                    <span id="basePrice">₹720</span>
+                </div>
+                
+                <div class="price-row">
+                    <span>Material Upgrade:</span>
+                    <span id="materialCost">₹0</span>
+                </div>
+                
+                <div class="price-row">
+                    <span>Installation:</span>
+                    <span id="installCost">₹0</span>
+                </div>
+                
+                <div class="price-row">
+                    <span>Additional Options:</span>
+                    <span id="optionsCost">₹0</span>
+                </div>
+                
+                <div class="price-row">
+                    <span>GST (18%):</span>
+                    <span id="gst">₹130</span>
+                </div>
+                
+                <div class="price-row total">
+                    <span>Total Amount:</span>
+                    <span id="totalPrice">₹850</span>
+                </div>
+                
+                <div class="price-note">
+                    <i class="fas fa-info-circle"></i> Final price may vary based on site inspection
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="action-buttons">
+                <button class="primary-btn" onclick="bookNow()">
+                    <i class="fas fa-calendar-check"></i> Book Now
+                </button>
+                <button class="secondary-btn" onclick="downloadEstimate()">
+                    <i class="fas fa-download"></i> PDF
+                </button>
+            </div>
+
+            <!-- Saved Estimates -->
+            <div class="saved-estimates">
+                <div class="saved-header">
+                    <h3><i class="fas fa-history"></i> Recent Estimates</h3>
+                    <a href="#" onclick="viewAllEstimates()">View All</a>
+                </div>
+                
+                <div id="savedEstimatesList">
+                    <!-- Dynamic via JS -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Success Modal -->
+        <div class="modal" id="successModal">
+            <div class="modal-content">
+                <div class="modal-icon">
+                    <i class="fas fa-check"></i>
+                </div>
+                <h3>Estimate Saved!</h3>
+                <p>Your estimate has been saved successfully</p>
+                <div class="modal-buttons">
+                    <button class="modal-btn primary" onclick="viewSavedEstimates()">View</button>
+                    <button class="modal-btn secondary" onclick="closeModal()">Close</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Navigation -->
+        <div class="bottom-nav">
+            <div class="nav-item" onclick="location.href='index.html'"><i class="fas fa-home"></i><span>Home</span></div>
+            <div class="nav-item" onclick="location.href='products.html'"><i class="fas fa-search"></i><span>Search</span></div>
+            <div class="nav-item active" onclick="location.href='estimate.html'"><i class="fas fa-calculator"></i><span>Estimate</span></div>
+            <div class="nav-item" onclick="location.href='tel:9483037385'"><i class="fas fa-phone"></i><span>Call</span></div>
+            <div class="nav-item" onclick="location.href='customer-login.html'"><i class="fas fa-user"></i><span>Account</span></div>
+        </div>
+      
+    <!-- Toast -->
+    <div id="toastMessage"></div>
+
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+
+    <script>
+        // Firebase Config
+        const firebaseConfig = {
+            apiKey: "YOUR_API_KEY",
+            authDomain: "YOUR_AUTH_DOMAIN",
+            projectId: "YOUR_PROJECT_ID",
+            storageBucket: "YOUR_STORAGE_BUCKET",
+            messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+            appId: "YOUR_APP_ID"
+        };
+
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+
+        // State
+        let selectedService = 'velcro';
+        let selectedQuality = 'standard';
+        let selectedInstall = 'self';
+        let quantity = 1;
+        let unit = 'ft';
+        let options = {
+            uv: false,
+            lock: false,
+            waterproof: false,
+            color: false,
+            express: false
+        };
+
+        // Price rates
+        const rates = {
+            velcro: 60,
+            frame: 180,
+            pleated: 350,
+            meshdoor: 380
+        };
+
+        const qualityMultipliers = {
+            standard: 1,
+            premium: 1.2,
+            ultra: 1.4
+        };
+
+        // URL Parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const serviceParam = urlParams.get('service');
+        if (serviceParam) {
+            selectService(serviceParam);
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            calculatePrice();
+            loadSavedEstimates();
+        });
+
+        // Service Selection
+        function selectService(service) {
+            selectedService = service;
+            
+            document.querySelectorAll('.service-option').forEach(el => {
+                el.classList.remove('selected');
+            });
+            document.getElementById(`service${service.charAt(0).toUpperCase() + service.slice(1)}`).classList.add('selected');
+            
+            calculatePrice();
+        }
+
+        // Quality Selection
+        function selectQuality(quality) {
+            selectedQuality = quality;
+            
+            document.querySelectorAll('.quality-option').forEach(el => {
+                el.classList.remove('selected');
+            });
+            document.getElementById(`quality${quality.charAt(0).toUpperCase() + quality.slice(1)}`).classList.add('selected');
+            
+            calculatePrice();
+        }
+
+        // Install Selection
+        function selectInstall(type) {
+            selectedInstall = type;
+            
+            document.querySelectorAll('.install-option').forEach(el => {
+                el.classList.remove('selected');
+            });
+            document.getElementById(`install${type.charAt(0).toUpperCase() + type.slice(1)}`).classList.add('selected');
+            
+            calculatePrice();
+        }
+
+        // Unit Selection
+        function setUnit(selectedUnit) {
+            unit = selectedUnit;
+            
+            document.getElementById('unitFt').classList.toggle('active', selectedUnit === 'ft');
+            document.getElementById('unitM').classList.toggle('active', selectedUnit === 'm');
+            
+            calculatePrice();
+        }
+
+        // Quantity Update
+        function updateQuantity(delta) {
+            quantity = Math.max(1, quantity + delta);
+            document.getElementById('quantity').textContent = quantity;
+            calculatePrice();
+        }
+
+        // Toggle Options
+        function toggleOption(option) {
+            options[option] = !options[option];
+            
+            const toggle = document.getElementById(option + 'Toggle');
+            if (options[option]) {
+                toggle.classList.add('active');
+            } else {
+                toggle.classList.remove('active');
+            }
+            
+            calculatePrice();
+        }
+
+        // Calculate Price
+        function calculatePrice() {
+            const width = parseFloat(document.getElementById('width').value) || 0;
+            const height = parseFloat(document.getElementById('height').value) || 0;
+            const frameWidth = parseFloat(document.getElementById('frameWidth').value) || 25;
+            const meshSize = parseFloat(document.getElementById('meshSize').value) || 1.2;
+            
+            // Convert meters to feet if needed
+            let area = width * height;
+            if (unit === 'm') {
+                area = area * 10.764; // Convert sq meters to sq feet
+            }
+            
+            // Base price
+            const baseRate = rates[selectedService] || 60;
+            let basePrice = area * baseRate * quantity;
+            
+            // Apply quality multiplier
+            basePrice = basePrice * qualityMultipliers[selectedQuality];
+            
+            // Material upgrade cost based on frame and mesh
+            const materialCost = (frameWidth - 25) * 5 * area + (meshSize - 1.2) * 50 * area;
+            
+            // Installation cost
+            const installCost = selectedInstall === 'professional' ? basePrice * 0.15 : 0;
+            
+            // Additional options
+            let optionsCost = 0;
+            if (options.uv) optionsCost += basePrice * 0.05;
+            if (options.lock) optionsCost += 200 * quantity;
+            if (options.waterproof) optionsCost += basePrice * 0.08;
+            if (options.color) optionsCost += 300 * quantity;
+            if (options.express) optionsCost += basePrice * 0.1;
+            
+            // Calculate subtotal
+            const subtotal = basePrice + materialCost + installCost + optionsCost;
+            
+            // GST
+            const gst = subtotal * 0.18;
+            
+            // Total
+            const total = subtotal + gst;
+            
+            // Update display
+            document.getElementById('basePrice').textContent = '₹' + Math.round(basePrice);
+            document.getElementById('materialCost').textContent = '₹' + Math.round(materialCost);
+            document.getElementById('installCost').textContent = '₹' + Math.round(installCost);
+            document.getElementById('optionsCost').textContent = '₹' + Math.round(optionsCost);
+            document.getElementById('gst').textContent = '₹' + Math.round(gst);
+            document.getElementById('totalPrice').textContent = '₹' + Math.round(total);
+        }
+
+        // Save Estimate
+        function saveEstimate() {
+            const estimate = {
+                id: Date.now(),
+                service: selectedService,
+                quality: selectedQuality,
+                quantity: quantity,
+                dimensions: {
+                    width: document.getElementById('width').value,
+                    height: document.getElementById('height').value
+                },
+                options: options,
+                total: document.getElementById('totalPrice').textContent,
+                date: new Date().toLocaleDateString(),
+                timestamp: firebase.firestore.FieldValue.serverTimestamp()
+            };
+            
+            // Save to Firebase
+            db.collection('estimates').add(estimate).then(() => {
+                showSuccessModal();
+                loadSavedEstimates();
+            }).catch(() => {
+                // Save locally
+                const saved = JSON.parse(localStorage.getItem('estimates') || '[]');
+                saved.push(estimate);
+                localStorage.setItem('estimates', JSON.stringify(saved));
+                showSuccessModal();
+                loadSavedEstimates();
+            });
+        }
+
+        // Load Saved Estimates
+        function loadSavedEstimates() {
+            const list = document.getElementById('savedEstimatesList');
+            
+            db.collection('estimates').orderBy('timestamp', 'desc').limit(3).get()
+                .then(snapshot => {
+                    if (snapshot.empty) {
+                        loadLocalEstimates();
+                        return;
+                    }
+                    
+                    let html = '';
+                    snapshot.forEach(doc => {
+                        const data = doc.data();
+                        html += `
+                            <div class="estimate-item" onclick="loadEstimate('${doc.id}')">
+                                <div class="estimate-icon">
+                                    <i class="fas fa-file-invoice"></i>
+                                </div>
+                                <div class="estimate-details">
+                                    <div class="estimate-name">${data.service} - ${data.quantity} unit(s)</div>
+                                    <div class="estimate-meta">
+                                        <span>${data.date}</span>
+                                        <span class="estimate-price">${data.total}</span>
+                                    </div>
+                                </div>
+                                <div class="delete-estimate" onclick="deleteEstimate('${doc.id}', event)">
+                                    <i class="fas fa-trash"></i>
+                                </div>
+                            </div>
+                        `;
+                    });
+                    list.innerHTML = html;
+                })
+                .catch(() => {
+                    loadLocalEstimates();
+                });
+        }
+
+        function loadLocalEstimates() {
+            const saved = JSON.parse(localStorage.getItem('estimates') || '[]');
+            const list = document.getElementById('savedEstimatesList');
+            
+            if (saved.length === 0) {
+                list.innerHTML = `
+                    <div style="text-align: center; padding: 20px; color: #6c757d;">
+                        <i class="fas fa-calculator" style="font-size: 2rem; margin-bottom: 10px;"></i>
+                        <p>No saved estimates yet</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            list.innerHTML = saved.slice(0, 3).map(est => `
+                <div class="estimate-item" onclick="loadEstimate('${est.id}')">
+                    <div class="estimate-icon">
+                        <i class="fas fa-file-invoice"></i>
+                    </div>
+                    <div class="estimate-details">
+                        <div class="estimate-name">${est.service} - ${est.quantity} unit(s)</div>
+                        <div class="estimate-meta">
+                            <span>${est.date}</span>
+                            <span class="estimate-price">${est.total}</span>
+                        </div>
+                    </div>
+                    <div class="delete-estimate" onclick="deleteEstimate(${est.id}, event)">
+                        <i class="fas fa-trash"></i>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Load Estimate
+        function loadEstimate(id) {
+            // Implement loading saved estimate
+            showToast('Loading estimate...');
+        }
+
+        // Delete Estimate
+        function deleteEstimate(id, event) {
+            event.stopPropagation();
+            
+            if (confirm('Are you sure you want to delete this estimate?')) {
+                db.collection('estimates').doc(id).delete().then(() => {
+                    loadSavedEstimates();
+                    showToast('Estimate deleted');
+                }).catch(() => {
+                    // Delete from local
+                    const saved = JSON.parse(localStorage.getItem('estimates') || '[]');
+                    const filtered = saved.filter(e => e.id != id);
+                    localStorage.setItem('estimates', JSON.stringify(filtered));
+                    loadSavedEstimates();
+                    showToast('Estimate deleted');
+                });
+            }
+        }
+
+        // Book Now
+        function bookNow() {
+            const total = document.getElementById('totalPrice').textContent;
+            if (confirm(`Proceed with booking for ${total}?`)) {
+                window.location.href = `appointment.html?estimate=${total}`;
+            }
+        }
+
+        // Download PDF
+        function downloadEstimate() {
+            showToast('Generating PDF...');
+            // Implement PDF generation
+        }
+
+        // View All Estimates
+        function viewAllEstimates() {
+            showToast('Viewing all estimates');
+        }
+
+        // View Saved Estimates
+        function viewSavedEstimates() {
+            closeModal();
+            showToast('Viewing saved estimates');
+        }
+
+        // Modal Functions
+        function showSuccessModal() {
+            document.getElementById('successModal').classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('successModal').classList.remove('active');
+        }
+
+        // Toast
+        function showToast(text) {
+            const toast = document.getElementById('toastMessage');
+            toast.style.opacity = '1';
+            toast.innerText = text;
+            setTimeout(() => toast.style.opacity = '0', 2000);
+        }
+
+        // Close modal on outside click
+        window.onclick = function(event) {
+            const modal = document.getElementById('successModal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        };
+    </script>
+</body>
+</html>
+```
+    </div>
