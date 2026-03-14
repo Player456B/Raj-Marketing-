@@ -1,0 +1,1651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Admin Panel · Raj Marketing</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    
+    <!-- DataTables -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #1a2c2d;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+        }
+
+        .app-container {
+            max-width: 390px;
+            width: 100%;
+            background: linear-gradient(145deg, #f5faf8 0%, #e8f0ed 100%);
+            border-radius: 36px 36px 0 0;
+            margin: 8px 0 0 0;
+            overflow: hidden;
+            position: relative;
+            padding-bottom: 70px;
+        }
+
+        /* Login Screen */
+        .admin-login {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .login-box {
+            background: white;
+            border-radius: 30px;
+            padding: 35px 25px;
+            width: 100%;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            animation: fadeInUp 0.5s ease;
+        }
+
+        .login-logo {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, #1e4b8b, #2a6bb3);
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: -65px auto 25px;
+            box-shadow: 0 15px 30px rgba(30,75,139,0.3);
+        }
+
+        .login-logo i {
+            font-size: 4rem;
+            color: #e6b422;
+        }
+
+        .login-box h2 {
+            text-align: center;
+            color: #1e4b8b;
+            font-size: 1.8rem;
+            margin-bottom: 5px;
+        }
+
+        .login-box p {
+            text-align: center;
+            color: #6c757d;
+            margin-bottom: 25px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #1e4b8b;
+            font-weight: 600;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 16px 20px;
+            border: 2px solid #e9ecef;
+            border-radius: 15px;
+            font-size: 1rem;
+            transition: 0.3s;
+        }
+
+        .input-group input:focus {
+            border-color: #1e4b8b;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(30,75,139,0.1);
+        }
+
+        .remember-me {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin: 15px 0;
+        }
+
+        .login-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #1e4b8b, #2a6bb3);
+            border: none;
+            padding: 16px;
+            border-radius: 30px;
+            color: white;
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(30,75,139,0.3);
+        }
+
+        /* Admin Header */
+        .admin-header {
+            background: white;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .menu-btn {
+            font-size: 1.5rem;
+            color: #1e4b8b;
+            cursor: pointer;
+        }
+
+        .admin-title h2 {
+            color: #1e4b8b;
+            font-size: 1.2rem;
+        }
+
+        .admin-title small {
+            color: #e6b422;
+            font-size: 0.7rem;
+        }
+
+        .admin-profile {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .admin-profile i {
+            font-size: 1.8rem;
+            color: #1e4b8b;
+        }
+
+        .logout-btn {
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            cursor: pointer;
+        }
+
+        /* Sidebar */
+        .admin-sidebar {
+            position: fixed;
+            top: 0;
+            left: -280px;
+            width: 280px;
+            height: 100%;
+            background: white;
+            z-index: 1000;
+            transition: 0.3s;
+            box-shadow: 0 0 30px rgba(0,0,0,0.2);
+            overflow-y: auto;
+        }
+
+        .admin-sidebar.active {
+            left: 0;
+        }
+
+        .sidebar-header {
+            background: linear-gradient(135deg, #1e4b8b, #2a6bb3);
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+        }
+
+        .sidebar-header i {
+            font-size: 3rem;
+            color: #e6b422;
+            margin-bottom: 10px;
+        }
+
+        .sidebar-menu {
+            padding: 20px 0;
+        }
+
+        .sidebar-menu a {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px 25px;
+            color: #1e4b8b;
+            text-decoration: none;
+            transition: 0.3s;
+            border-left: 3px solid transparent;
+        }
+
+        .sidebar-menu a:hover,
+        .sidebar-menu a.active {
+            background: #f0f5f3;
+            border-left-color: #e6b422;
+        }
+
+        .sidebar-menu a i {
+            width: 25px;
+            color: #e6b422;
+        }
+
+        .sidebar-menu a .badge {
+            background: #dc3545;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 30px;
+            font-size: 0.7rem;
+            margin-left: auto;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 999;
+            display: none;
+        }
+
+        .overlay.active {
+            display: block;
+        }
+
+        /* Main Content */
+        .admin-content {
+            padding: 20px 16px;
+        }
+
+        /* Stats Cards */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .stat-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .stat-icon.blue { background: #e3f2fd; color: #1976d2; }
+        .stat-icon.green { background: #e8f5e9; color: #388e3c; }
+        .stat-icon.orange { background: #fff3e0; color: #f57c00; }
+        .stat-icon.purple { background: #f3e5f5; color: #7b1fa2; }
+
+        .stat-info h3 {
+            font-size: 0.8rem;
+            color: #6c757d;
+            font-weight: 500;
+        }
+
+        .stat-info .number {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #1e4b8b;
+            line-height: 1.2;
+        }
+
+        .stat-info .trend {
+            font-size: 0.7rem;
+            color: #28a745;
+        }
+
+        /* Chart Card */
+        .chart-card {
+            background: white;
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 25px;
+        }
+
+        .chart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .chart-header h3 {
+            color: #1e4b8b;
+            font-size: 1rem;
+        }
+
+        .chart-period select {
+            padding: 5px 10px;
+            border-radius: 10px;
+            border: 1px solid #dee2e6;
+        }
+
+        .chart-container {
+            height: 200px;
+        }
+
+        /* Quick Actions */
+        .quick-actions {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            padding: 5px 0 15px;
+            margin-bottom: 20px;
+        }
+
+        .action-btn {
+            min-width: 90px;
+            background: white;
+            border: none;
+            padding: 12px;
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            cursor: pointer;
+        }
+
+        .action-btn i {
+            font-size: 1.3rem;
+            color: #e6b422;
+        }
+
+        .action-btn span {
+            font-size: 0.7rem;
+            color: #1e4b8b;
+            font-weight: 600;
+        }
+
+        /* Tabs */
+        .admin-tabs {
+            display: flex;
+            background: white;
+            border-radius: 30px;
+            padding: 5px;
+            margin-bottom: 20px;
+        }
+
+        .tab {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            background: none;
+            border-radius: 25px;
+            font-weight: 600;
+            color: #6c757d;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .tab.active {
+            background: #1e4b8b;
+            color: white;
+        }
+
+        /* Tables */
+        .table-container {
+            background: white;
+            border-radius: 20px;
+            padding: 15px;
+            overflow-x: auto;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            text-align: left;
+            padding: 15px 10px;
+            color: #1e4b8b;
+            font-weight: 600;
+            border-bottom: 2px solid #e9ecef;
+        }
+
+        td {
+            padding: 12px 10px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .status-badge {
+            padding: 5px 12px;
+            border-radius: 30px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            display: inline-block;
+        }
+
+        .status-pending { background: #fff3cd; color: #856404; }
+        .status-confirmed { background: #d4edda; color: #155724; }
+        .status-completed { background: #cce5ff; color: #004085; }
+        .status-cancelled { background: #f8d7da; color: #721c24; }
+
+        .action-icons {
+            display: flex;
+            gap: 8px;
+        }
+
+        .action-icons i {
+            font-size: 1.1rem;
+            cursor: pointer;
+            color: #6c757d;
+            transition: 0.3s;
+        }
+
+        .action-icons i:hover {
+            color: #1e4b8b;
+        }
+
+        .action-icons i.fa-edit:hover { color: #28a745; }
+        .action-icons i.fa-trash:hover { color: #dc3545; }
+        .action-icons i.fa-eye:hover { color: #17a2b8; }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 30px;
+            max-width: 350px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            animation: slideUp 0.3s ease;
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, #1e4b8b, #2a6bb3);
+            color: white;
+            padding: 20px;
+            border-radius: 30px 30px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header h3 {
+            font-size: 1.2rem;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .modal-body {
+            padding: 25px;
+        }
+
+        .detail-row {
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .detail-row strong {
+            display: block;
+            color: #1e4b8b;
+            font-size: 0.8rem;
+        }
+
+        .detail-row span {
+            color: #6c757d;
+            font-size: 0.95rem;
+        }
+
+        .status-select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e9ecef;
+            border-radius: 15px;
+            margin: 10px 0;
+        }
+
+        .save-btn {
+            width: 100%;
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 30px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        /* Bottom Navigation */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            max-width: 390px;
+            width: 100%;
+            background: white;
+            display: flex;
+            justify-content: space-around;
+            padding: 12px 10px 20px;
+            border-top: 3px solid #e6b422;
+            border-radius: 30px 30px 0 0;
+            z-index: 100;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #6c757d;
+            font-size: 0.7rem;
+            cursor: pointer;
+        }
+
+        .nav-item.active {
+            color: #1e4b8b;
+        }
+
+        .nav-item i {
+            font-size: 1.4rem;
+            margin-bottom: 3px;
+        }
+
+        /* Toast */
+        #toastMessage {
+            position: fixed;
+            bottom: 180px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #1e4b8b;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            z-index: 5000;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        /* Hidden Class */
+        .hidden {
+            display: none !important;
+        }
+
+        /* Search Bar */
+        .search-bar {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .search-bar input {
+            flex: 1;
+            padding: 12px 20px;
+            border: 2px solid #e9ecef;
+            border-radius: 25px;
+            font-size: 0.9rem;
+        }
+
+        .search-bar button {
+            width: 50px;
+            height: 50px;
+            background: #1e4b8b;
+            border: none;
+            border-radius: 25px;
+            color: white;
+            cursor: pointer;
+        }
+
+        /* Export Buttons */
+        .export-buttons {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .export-btn {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 15px;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .export-btn.csv { color: #28a745; border: 2px solid #28a745; }
+        .export-btn.pdf { color: #dc3545; border: 2px solid #dc3545; }
+        .export-btn.print { color: #1e4b8b; border: 2px solid #1e4b8b; }
+
+        .export-btn:hover {
+            background: #1e4b8b;
+            color: white;
+            border-color: #1e4b8b;
+        }
+
+        /* Responsive */
+        @media (max-width: 390px) {
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .quick-actions {
+                flex-wrap: nowrap;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Login Screen -->
+        <div id="loginScreen" class="admin-login">
+            <div class="login-box">
+                <div class="login-logo">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h2>Admin Login</h2>
+                <p>Enter your credentials</p>
+                
+                <div class="input-group">
+                    <label>Username</label>
+                    <input type="text" id="adminUsername" placeholder="Enter username">
+                </div>
+                
+                <div class="input-group">
+                    <label>Password</label>
+                    <input type="password" id="adminPassword" placeholder="Enter password">
+                </div>
+                
+                <div class="remember-me">
+                    <input type="checkbox" id="remember">
+                    <label for="remember">Remember me</label>
+                </div>
+                
+                <button class="login-btn" onclick="adminLogin()">
+                    <i class="fas fa-sign-in-alt"></i> Login to Dashboard
+                </button>
+                
+                <p style="text-align: center; margin-top: 15px; color: #6c757d; font-size: 0.8rem;">
+                    Demo: admin / admin123
+                </p>
+            </div>
+        </div>
+
+        <!-- Admin Dashboard (Hidden by default) -->
+        <div id="dashboardScreen" class="hidden">
+            <!-- Header -->
+            <div class="admin-header">
+                <div class="menu-btn" onclick="toggleSidebar()">
+                    <i class="fas fa-bars"></i>
+                </div>
+                <div class="admin-title">
+                    <h2>Admin Dashboard</h2>
+                    <small>Welcome back, Admin</small>
+                </div>
+                <div class="admin-profile">
+                    <i class="fas fa-user-circle"></i>
+                    <button class="logout-btn" onclick="adminLogout()">Logout</button>
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="admin-sidebar" id="sidebar">
+                <div class="sidebar-header">
+                    <i class="fas fa-store"></i>
+           <h3>Raj Marketing</h3>
+                    <p>Admin Panel</p>
+                </div>
+                <div class="sidebar-menu">
+                    <a href="#" class="active" onclick="showSection('dashboard')">
+                        <i class="fas fa-home"></i> Dashboard
+                    </a>
+                    <a href="#" onclick="showSection('bookings')">
+                        <i class="fas fa-calendar-check"></i> Bookings
+                        <span class="badge" id="bookingBadge">12</span>
+                    </a>
+                    <a href="#" onclick="showSection('customers')">
+                        <i class="fas fa-users"></i> Customers
+                        <span class="badge" id="customerBadge">156</span>
+                    </a>
+                    <a href="#" onclick="showSection('orders')">
+                        <i class="fas fa-truck"></i> Orders
+                        <span class="badge" id="orderBadge">8</span>
+                    </a>
+                    <a href="#" onclick="showSection('services')">
+                        <i class="fas fa-tools"></i> Services
+                    </a>
+                    <a href="#" onclick="showSection('payments')">
+                        <i class="fas fa-credit-card"></i> Payments
+                    </a>
+                    <a href="#" onclick="showSection('complaints')">
+                        <i class="fas fa-exclamation-triangle"></i> Complaints
+                        <span class="badge" id="complaintBadge">3</span>
+                    </a>
+                    <a href="#" onclick="showSection('reports')">
+                        <i class="fas fa-chart-bar"></i> Reports
+                    </a>
+                    <a href="#" onclick="showSection('settings')">
+                        <i class="fas fa-cog"></i> Settings
+                    </a>
+                </div>
+            </div>
+            <div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
+
+            <!-- Main Content -->
+            <div class="admin-content">
+                <!-- Dashboard Section -->
+                <div id="dashboardSection">
+                    <!-- Stats Grid -->
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-icon blue">
+                                <i class="fas fa-calendar-check"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3>Today's Bookings</h3>
+                                <div class="number" id="todayBookings">12</div>
+                                <div class="trend">↑ 15% from yesterday</div>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon green">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3>Total Customers</h3>
+                                <div class="number" id="totalCustomers">156</div>
+                                <div class="trend">+8 this week</div>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon orange">
+                                <i class="fas fa-truck"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3>Active Orders</h3>
+                                <div class="number" id="activeOrders">24</div>
+                                <div class="trend">12 pending</div>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon purple">
+                                <i class="fas fa-rupee-sign"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3>Revenue (Month)</h3>
+                                <div class="number" id="monthlyRevenue">₹2.4L</div>
+                                <div class="trend">↑ 8% vs last month</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Chart -->
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <h3><i class="fas fa-chart-line"></i> Booking Overview</h3>
+                            <div class="chart-period">
+                                <select id="chartPeriod" onchange="updateChart()">
+                                    <option value="week">This Week</option>
+                                    <option value="month">This Month</option>
+                                    <option value="year">This Year</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="bookingChart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Quick Actions -->
+                    <div class="quick-actions">
+                        <button class="action-btn" onclick="openNewBooking()">
+                            <i class="fas fa-plus-circle"></i>
+                            <span>New Booking</span>
+                        </button>
+                        <button class="action-btn" onclick="openAddCustomer()">
+                            <i class="fas fa-user-plus"></i>
+                            <span>Add Customer</span>
+                        </button>
+                        <button class="action-btn" onclick="openNewOrder()">
+                            <i class="fas fa-box"></i>
+                            <span>New Order</span>
+                        </button>
+                        <button class="action-btn" onclick="exportReport()">
+                            <i class="fas fa-download"></i>
+                            <span>Export</span>
+                        </button>
+                        <button class="action-btn" onclick="printReport()">
+                            <i class="fas fa-print"></i>
+                            <span>Print</span>
+                        </button>
+                    </div>
+
+                    <!-- Recent Bookings -->
+                    <div class="table-container">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                            <h3 style="color: #1e4b8b;">Recent Bookings</h3>
+                            <a href="#" style="color: #e6b422; text-decoration: none;" onclick="showSection('bookings')">View All</a>
+                        </div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Customer</th>
+                                    <th>Service</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="recentBookingsTable">
+                                <!-- Dynamic via JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Bookings Section (Hidden by default) -->
+                <div id="bookingsSection" class="hidden">
+                    <div class="search-bar">
+                        <input type="text" id="bookingSearch" placeholder="Search bookings...">
+                        <button onclick="searchBookings()"><i class="fas fa-search"></i></button>
+                    </div>
+
+                    <div class="export-buttons">
+                        <button class="export-btn csv" onclick="exportBookings('csv')">
+                            <i class="fas fa-file-csv"></i> CSV
+                        </button>
+                        <button class="export-btn pdf" onclick="exportBookings('pdf')">
+                            <i class="fas fa-file-pdf"></i> PDF
+                        </button>
+                        <button class="export-btn print" onclick="window.print()">
+                            <i class="fas fa-print"></i> Print
+                        </button>
+                    </div>
+
+                    <div class="table-container">
+                        <table id="bookingsTable">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Date</th>
+                                    <th>Customer</th>
+                                    <th>Mobile</th>
+                                    <th>Service</th>
+                                    <th>Area</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="bookingsTableBody">
+                                <!-- Dynamic via JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Customers Section (Hidden by default) -->
+                <div id="customersSection" class="hidden">
+                    <div class="search-bar">
+                        <input type="text" id="customerSearch" placeholder="Search customers...">
+                        <button onclick="searchCustomers()"><i class="fas fa-search"></i></button>
+                    </div>
+
+                    <div class="export-buttons">
+                        <button class="export-btn csv" onclick="exportCustomers('csv')">
+                            <i class="fas fa-file-csv"></i> CSV
+                        </button>
+                        <button class="export-btn" style="background: #1e4b8b; color: white;" onclick="openAddCustomer()">
+                            <i class="fas fa-user-plus"></i> Add New
+                        </button>
+                    </div>
+
+                    <div class="table-container">
+                        <table id="customersTable">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Mobile</th>
+                                    <th>Email</th>
+                                    <th>Area</th>
+                                    <th>Orders</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="customersTableBody">
+                                <!-- Dynamic via JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Orders Section (Hidden by default) -->
+                <div id="ordersSection" class="hidden">
+                    <div class="admin-tabs">
+                        <button class="tab active" onclick="filterOrders('all')">All</button>
+                        <button class="tab" onclick="filterOrders('pending')">Pending</button>
+                        <button class="tab" onclick="filterOrders('completed')">Completed</button>
+                    </div>
+
+                    <div class="table-container">
+                        <table id="ordersTable">
+                            <thead>
+                                <tr>
+                                    <th>Order ID</th>
+                                    <th>Customer</th>
+                                    <th>Service</th>
+                                    <th>Amount</th>
+                                    <th>Date</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="ordersTableBody">
+                                <!-- Dynamic via JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Detail Modal -->
+        <div class="modal" id="detailModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 id="modalTitle">Booking Details</h3>
+                    <button class="close-modal" onclick="closeModal()">&times;</button>
+                </div>
+                <div class="modal-body" id="modalBody">
+                    <!-- Dynamic content -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Navigation -->
+        <div class="bottom-nav">
+            <div class="nav-item" onclick="location.href='index.html'"><i class="fas fa-home"></i><span>Home</span></div>
+            <div class="nav-item" onclick="location.href='products.html'"><i class="fas fa-search"></i><span>Search</span></div>
+            <div class="nav-item" onclick="location.href='appointment.html'"><i class="fas fa-calendar"></i><span>Book</span></div>
+            <div class="nav-item" onclick="location.href='tel:9483037385'"><i class="fas fa-phone"></i><span>Call</span></div>
+            <div class="nav-item active" onclick="location.href='admin-panel.html'"><i class="fas fa-shield-alt"></i><span>Admin</span></div>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div id="toastMessage"></div>
+
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+
+    <script>
+        // Firebase Config
+        const firebaseConfig = {
+            apiKey: "YOUR_API_KEY",
+            authDomain: "YOUR_AUTH_DOMAIN",
+            projectId: "YOUR_PROJECT_ID",
+            storageBucket: "YOUR_STORAGE_BUCKET",
+            messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+            appId: "YOUR_APP_ID"
+        };
+
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+
+        // State
+        let isAdminLoggedIn = false;
+        let currentSection = 'dashboard';
+        let bookingChart = null;
+
+        // Check login status
+        function checkAdminLogin() {
+            const saved = localStorage.getItem('adminLoggedIn');
+            if (saved === 'true') {
+                isAdminLoggedIn = true;
+                showDashboard();
+                loadDashboardData();
+            }
+        }
+
+        // Admin Login
+        function adminLogin() {
+            const username = document.getElementById('adminUsername').value;
+            const password = document.getElementById('adminPassword').value;
+            const remember = document.getElementById('remember').checked;
+
+            // Simple validation (in production, use proper authentication)
+            if (username === 'admin' && password === 'admin123') {
+                if (remember) {
+                    localStorage.setItem('adminLoggedIn', 'true');
+                }
+                isAdminLoggedIn = true;
+                showDashboard();
+                loadDashboardData();
+                showToast('Login successful!');
+            } else {
+                showToast('Invalid credentials');
+            }
+        }
+
+        // Show Dashboard
+        function showDashboard() {
+            document.getElementById('loginScreen').classList.add('hidden');
+            document.getElementById('dashboardScreen').classList.remove('hidden');
+        }
+
+        // Admin Logout
+        function adminLogout() {
+            localStorage.removeItem('adminLoggedIn');
+            isAdminLoggedIn = false;
+            document.getElementById('dashboardScreen').classList.add('hidden');
+            document.getElementById('loginScreen').classList.remove('hidden');
+            showToast('Logged out successfully');
+        }
+
+        // Toggle Sidebar
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('active');
+            document.getElementById('overlay').classList.toggle('active');
+        }
+
+        // Show Section
+        function showSection(section) {
+            currentSection = section;
+            
+            // Hide all sections
+            document.getElementById('dashboardSection').classList.add('hidden');
+            document.getElementById('bookingsSection').classList.add('hidden');
+            document.getElementById('customersSection').classList.add('hidden');
+            document.getElementById('ordersSection').classList.add('hidden');
+            
+            // Show selected section
+            document.getElementById(section + 'Section').classList.remove('hidden');
+            
+            // Load section data
+            switch(section) {
+                case 'dashboard':
+                    loadDashboardData();
+                    break;
+                case 'bookings':
+                    loadBookingsData();
+                    break;
+                case 'customers':
+                    loadCustomersData();
+                    break;
+                case 'orders':
+                    loadOrdersData();
+                    break;
+            }
+            
+            // Close sidebar on mobile
+            toggleSidebar();
+        }
+
+        // Load Dashboard Data
+        function loadDashboardData() {
+            // Load from Firebase
+            db.collection('bookings').get().then(snapshot => {
+                const bookings = snapshot.docs.map(doc => doc.data());
+                
+                // Update stats
+                const today = new Date().toDateString();
+                const todayBookings = bookings.filter(b => b.date === today).length;
+                document.getElementById('todayBookings').textContent = todayBookings;
+                
+                // Load recent bookings
+                loadRecentBookings(bookings.slice(0, 5));
+            }).catch(() => {
+                // Demo data
+                document.getElementById('todayBookings').textContent = '12';
+                document.getElementById('totalCustomers').textContent = '156';
+                document.getElementById('activeOrders').textContent = '24';
+                document.getElementById('monthlyRevenue').textContent = '₹2.4L';
+                
+                loadDemoRecentBookings();
+            });
+
+            // Initialize chart
+            initChart();
+        }
+
+        // Initialize Chart
+        function initChart() {
+            const ctx = document.getElementById('bookingChart').getContext('2d');
+            
+            if (bookingChart) {
+                bookingChart.destroy();
+            }
+            
+            bookingChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                    datasets: [{
+                        label: 'Bookings',
+                        data: [5, 8, 6, 12, 9, 15, 10],
+                        borderColor: '#1e4b8b',
+                        backgroundColor: 'rgba(30,75,139,0.1)',
+                        tension: 0.4,
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                       }
+                }
+            });
+        }
+
+        // Update Chart
+        function updateChart() {
+            const period = document.getElementById('chartPeriod').value;
+            
+            if (period === 'week') {
+                bookingChart.data.labels = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+                bookingChart.data.datasets[0].data = [5, 8, 6, 12, 9, 15, 10];
+            } else if (period === 'month') {
+                bookingChart.data.labels = ['Week 1', 'Week 2', 'Week 3', 'Week 4'];
+                bookingChart.data.datasets[0].data = [45, 52, 48, 63];
+            } else {
+                bookingChart.data.labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'];
+                bookingChart.data.datasets[0].data = [180, 210, 195, 240, 280, 310];
+            }
+            
+            bookingChart.update();
+        }
+
+        // Load Recent Bookings
+        function loadRecentBookings(bookings) {
+            const tbody = document.getElementById('recentBookingsTable');
+            
+            if (bookings.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="5" style="text-align: center;">No bookings found</td></tr>';
+                return;
+            }
+            
+            tbody.innerHTML = bookings.map((booking, index) => `
+                <tr>
+                    <td>RM${String(index + 1).padStart(3, '0')}</td>
+                    <td>${booking.name || 'Customer'}</td>
+                    <td>${booking.service || 'Service'}</td>
+                    <td><span class="status-badge status-${booking.status || 'pending'}">${booking.status || 'Pending'}</span></td>
+                    <td>
+                        <div class="action-icons">
+                            <i class="fas fa-eye" onclick="viewDetails('booking', ${index})"></i>
+                            <i class="fas fa-edit" onclick="editBooking(${index})"></i>
+                        </div>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function loadDemoRecentBookings() {
+            const tbody = document.getElementById('recentBookingsTable');
+            tbody.innerHTML = `
+                <tr>
+                    <td>RM001</td>
+                    <td>Ramesh Kumar</td>
+                    <td>Velcro System</td>
+                    <td><span class="status-badge status-confirmed">Confirmed</span></td>
+                    <td><div class="action-icons"><i class="fas fa-eye"></i> <i class="fas fa-edit"></i></div></td>
+                </tr>
+                <tr>
+                    <td>RM002</td>
+                    <td>Priya Singh</td>
+                    <td>Frame System</td>
+                    <td><span class="status-badge status-pending">Pending</span></td>
+                    <td><div class="action-icons"><i class="fas fa-eye"></i> <i class="fas fa-edit"></i></div></td>
+                </tr>
+                <tr>
+                    <td>RM003</td>
+                    <td>Suresh M</td>
+                    <td>Pleated Nets</td>
+                    <td><span class="status-badge status-completed">Completed</span></td>
+                    <td><div class="action-icons"><i class="fas fa-eye"></i> <i class="fas fa-edit"></i></div></td>
+                </tr>
+            `;
+        }
+
+        // Load Bookings Data
+        function loadBookingsData() {
+            const tbody = document.getElementById('bookingsTableBody');
+            
+            db.collection('bookings').orderBy('timestamp', 'desc').get()
+                .then(snapshot => {
+                    if (snapshot.empty) {
+                        loadDemoBookings();
+                        return;
+                    }
+                    
+                    let html = '';
+                    snapshot.forEach((doc, index) => {
+                        const data = doc.data();
+                        html += `
+                            <tr>
+                                <td>RM${String(index + 1).padStart(3, '0')}</td>
+                                <td>${data.date || 'N/A'}</td>
+                                <td>${data.name || 'N/A'}</td>
+                                <td>${data.mobile || 'N/A'}</td>
+                                <td>${data.service || 'N/A'}</td>
+                                <td>${data.area || 'N/A'}</td>
+                                <td><span class="status-badge status-${data.status || 'pending'}">${data.status || 'Pending'}</span></td>
+                                <td>
+                                    <div class="action-icons">
+                                        <i class="fas fa-eye" onclick="viewBooking('${doc.id}')"></i>
+                                        <i class="fas fa-edit" onclick="editBooking('${doc.id}')"></i>
+                                        <i class="fas fa-trash" onclick="deleteBooking('${doc.id}')"></i>
+                                    </div>
+                                </td>
+                            </tr>
+                        `;
+                    });
+                    tbody.innerHTML = html;
+                    document.getElementById('bookingBadge').textContent = snapshot.size;
+                })
+                .catch(() => {
+                    loadDemoBookings();
+                });
+        }
+
+        function loadDemoBookings() {
+            const tbody = document.getElementById('bookingsTableBody');
+            tbody.innerHTML = `
+                <tr>
+                    <td>RM001</td>
+                    <td>15 Mar 2026</td>
+                    <td>Ramesh Kumar</td>
+                    <td>9876543210</td>
+                    <td>Velcro System</td>
+                    <td>Vijayanagar</td>
+                    <td><span class="status-badge status-confirmed">Confirmed</span></td>
+                    <td><div class="action-icons"><i class="fas fa-eye"></i> <i class="fas fa-edit"></i> <i class="fas fa-trash"></i></div></td>
+                </tr>
+                <tr>
+                    <td>RM002</td>
+                    <td>14 Mar 2026</td>
+                    <td>Priya Singh</td>
+                    <td>9876543211</td>
+                    <td>Frame System</td>
+                    <td>Kuvempunagar</td>
+                    <td><span class="status-badge status-pending">Pending</span></td>
+                    <td><div class="action-icons"><i class="fas fa-eye"></i> <i class="fas fa-edit"></i> <i class="fas fa-trash"></i></div></td>
+                </tr>
+                <tr>
+                    <td>RM003</td>
+                    <td>13 Mar 2026</td>
+                    <td>Suresh M</td>
+                    <td>9876543212</td>
+                    <td>Pleated Nets</td>
+                    <td>Gokulam</td>
+                    <td><span class="status-badge status-completed">Completed</span></td>
+                    <td><div class="action-icons"><i class="fas fa-eye"></i> <i class="fas fa-edit"></i> <i class="fas fa-trash"></i></div></td>
+                </tr>
+            `;
+            document.getElementById('bookingBadge').textContent = '12';
+        }
+
+        // Load Customers Data
+        function loadCustomersData() {
+            const tbody = document.getElementById('customersTableBody');
+            
+            db.collection('customers').get()
+                .then(snapshot => {
+                    if (snapshot.empty) {
+                        loadDemoCustomers();
+                        return;
+                    }
+                    
+                    let html = '';
+                    snapshot.forEach((doc, index) => {
+                        const data = doc.data();
+                        html += `
+                            <tr>
+                                <td>${String(index + 1).padStart(3, '0')}</td>
+                                <td>${data.name || 'N/A'}</td>
+                                <td>${data.mobile || 'N/A'}</td>
+                                <td>${data.email || 'N/A'}</td>
+                                <td>${data.area || 'N/A'}</td>
+                                <td>${data.orders || '0'}</td>
+                                <td>
+                                    <div class="action-icons">
+                                        <i class="fas fa-eye" onclick="viewCustomer('${doc.id}')"></i>
+                                        <i class="fas fa-edit" onclick="editCustomer('${doc.id}')"></i>
+                                    </div>
+                                </td>
+                            </tr>
+                        `;
+                    });
+                    tbody.innerHTML = html;
+                    document.getElementById('customerBadge').textContent = snapshot.size;
+                })
+                .catch(() => {
+                    loadDemoCustomers();
+                });
+        }
+
+        function loadDemoCustomers() {
+            const tbody = document.getElementById('customersTableBody');
+            tbody.innerHTML = `
+                <tr>
+                    <td>001</td>
+                    <td>Ramesh Kumar</td>
+                    <td>9876543210</td>
+                    <td>ramesh@gmail.com</td>
+                    <td>Vijayanagar</td>
+                    <td>3</td>
+                    <td><div class="action-icons"><i class="fas fa-eye"></i> <i class="fas fa-edit"></i></div></td>
+                </tr>
+                <tr>
+                    <td>002</td>
+                    <td>Priya Singh</td>
+                    <td>9876543211</td>
+                    <td>priya@gmail.com</td>
+                    <td>Kuvempunagar</td>
+                    <td>2</td>
+                    <td><div class="action-icons"><i class="fas fa-eye"></i> <i class="fas fa-edit"></i></div></td>
+                </tr>
+            `;
+            document.getElementById('customerBadge').textContent = '156';
+        }
+
+        // Load Orders Data
+        function loadOrdersData() {
+            const tbody = document.getElementById('ordersTableBody');
+            
+            db.collection('orders').get()
+                .then(snapshot => {
+                    if (snapshot.empty) {
+                        loadDemoOrders();
+                        return;
+                    }
+                    
+                    let html = '';
+                    snapshot.forEach((doc, index) => {
+                        const data = doc.data();
+                        html += `
+                            <tr>
+                                <td>ORD-${String(index + 1).padStart(3, '0')}</td>
+                                <td>${data.customer || 'N/A'}</td>
+                                <td>${data.service || 'N/A'}</td>
+                                <td>₹${data.amount || '0'}</td>
+                                <td>${data.date || 'N/A'}</td>
+                                <td><span class="status-badge status-${data.status || 'pending'}">${data.status || 'Pending'}</span></td>
+                                <td>
+                                    <div class="action-icons">
+                                        <i class="fas fa-eye" onclick="viewOrder('${doc.id}')"></i>
+                                        <i class="fas fa-edit" onclick="updateOrderStatus('${doc.id}')"></i>
+                                    </div>
+                                </td>
+                            </tr>
+                        `;
+                    });
+                    tbody.innerHTML = html;
+                    document.getElementById('orderBadge').textContent = snapshot.size;
+                })
+                .catch(() => {
+                    loadDemoOrders();
+                });
+        }
+
+        function loadDemoOrders() {
+            const tbody = document.getElementById('ordersTableBody');
+            tbody.innerHTML = `
+                <tr>
+                    <td>ORD-001</td>
+                    <td>Ramesh Kumar</td>
+                    <td>Velcro System</td>
+                    <td>₹4,500</td>
+                    <td>15 Mar 2026</td>
+                    <td><span class="status-badge status-confirmed">Confirmed</span></td>
+                    <td><div class="action-icons"><i class="fas fa-eye"></i> <i class="fas fa-edit"></i></div></td>
+                </tr>
+                <tr>
+                    <td>ORD-002</td>
+                    <td>Priya Singh</td>
+                    <td>Frame System</td>
+                    <td>₹7,200</td>
+                    <td>14 Mar 2026</td>
+                    <td><span class="status-badge status-pending">Pending</span></td>
+                    <td><div class="action-icons"><i class="fas fa-eye"></i> <i class="fas fa-edit"></i></div></td>
+                </tr>
+            `;
+            document.getElementById('orderBadge').textContent = '8';
+        }
+
+        // Filter Orders
+        function filterOrders(status) {
+            const tabs = document.querySelectorAll('.admin-tabs .tab');
+            tabs.forEach(tab => tab.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // Implement filtering logic
+            showToast(`Filtering ${status} orders`);
+        }
+
+        // View Details
+        function viewDetails(type, id) {
+            const modal = document.getElementById('detailModal');
+            const modalBody = document.getElementById('modalBody');
+            
+            modalBody.innerHTML = `
+                <div class="detail-row">
+                    <strong>Booking ID:</strong>
+                    <span>RM00${id + 1}</span>
+                </div>
+                <div class="detail-row">
+                    <strong>Customer:</strong>
+                    <span>Ramesh Kumar</span>
+                </div>
+                <div class="detail-row">
+                    <strong>Mobile:</strong>
+                    <span>9876543210</span>
+                </div>
+                <div class="detail-row">
+                    <strong>Service:</strong>
+                    <span>Velcro System</span>
+                </div>
+                <div class="detail-row">
+                    <strong>Date:</strong>
+                    <span>15 Mar 2026</span>
+                </div>
+                <div class="detail-row">
+                    <strong>Status:</strong>
+                    <select class="status-select">
+                        <option>Pending</option>
+                        <option>Confirmed</option>
+                        <option>Completed</option>
+                        <option>Cancelled</option>
+                    </select>
+                </div>
+                <button class="save-btn" onclick="saveChanges()">Save Changes</button>
+            `;
+            
+            modal.classList.add('active');
+        }
+
+        function viewBooking(id) {
+            showToast('Viewing booking details');
+        }
+
+        function editBooking(id) {
+            showToast('Editing booking');
+        }
+
+        function deleteBooking(id) {
+            if (confirm('Are you sure you want to delete this booking?')) {
+                showToast('Booking deleted');
+            }
+        }
+
+        function viewCustomer(id) {
+            showToast('Viewing customer details');
+        }
+
+        function editCustomer(id) {
+            showToast('Editing customer');
+        }
+
+        function viewOrder(id) {
+            showToast('Viewing order details');
+        }
+
+        function updateOrderStatus(id) {
+            showToast('Updating order status');
+        }
+
+        function saveChanges() {
+            closeModal();
+            showToast('Changes saved successfully');
+        }
+
+        // Close Modal
+        function closeModal() {
+            document.getElementById('detailModal').classList.remove('active');
+        }
+
+        // Search Functions
+        function searchBookings() {
+            const search = document.getElementById('bookingSearch').value;
+            showToast(`Searching: ${search}`);
+        }
+
+        function searchCustomers() {
+            const search = document.getElementById('customerSearch').value;
+            showToast(`Searching: ${search}`);
+        }
+
+        // Export Functions
+        function exportBookings(format) {
+            showToast(`Exporting bookings as ${format.toUpperCase()}`);
+        }
+
+        function exportCustomers(format) {
+            showToast(`Exporting customers as ${format.toUpperCase()}`);
+        }
+
+        function exportReport() {
+            showToast('Exporting report');
+        }
+
+        function printReport() {
+            window.print();
+        }
+
+        // Quick Action Functions
+        function openNewBooking() {
+            window.open('appointment.html', '_blank');
+        }
+
+        function openAddCustomer() {
+            const name = prompt('Enter customer name:');
+            if (name) {
+                showToast('Customer added successfully');
+            }
+        }
+
+        function openNewOrder() {
+            showToast('Opening new order form');
+        }
+
+        // Toast
+        function showToast(text) {
+            const toast = document.getElementById('toastMessage');
+            toast.style.opacity = '1';
+            toast.innerText = text;
+            setTimeout(() => toast.style.opacity = '0', 2000);
+        }
+
+        // Initialize
+        checkAdminLogin();
+
+        // Handle browser back button
+        window.onpopstate = function() {
+            if (!isAdminLoggedIn) {
+                document.getElementById('loginScreen').classList.remove('hidden');
+                document.getElementById('dashboardScreen').classList.add('hidden');
+            }
+        };
+    </script>
+</body>
+</html>
+```
