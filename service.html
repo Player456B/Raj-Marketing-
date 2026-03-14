@@ -1,0 +1,1456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Service & Support · Raj Marketing</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #1a2c2d;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+        }
+
+        .app-container {
+            max-width: 390px;
+            width: 100%;
+            background: linear-gradient(145deg, #f5faf8 0%, #e8f0ed 100%);
+            border-radius: 36px 36px 0 0;
+            margin: 8px 0 0 0;
+            overflow: hidden;
+            position: relative;
+            padding-bottom: 70px;
+        }
+
+        /* Header */
+        .page-header {
+            height: 60px;
+            background: white;
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            gap: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .back-btn {
+            width: 40px;
+            height: 40px;
+            background: #f0f5f3;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #1e4b8b;
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: 0.3s;
+        }
+
+        .back-btn:hover {
+            background: #1e4b8b;
+            color: white;
+        }
+
+        .page-header h1 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #1e4b8b;
+        }
+
+        .page-header h1 i {
+            color: #e6b422;
+            margin-right: 8px;
+        }
+
+        .help-icon {
+            margin-left: auto;
+            font-size: 1.5rem;
+            color: #e6b422;
+            cursor: pointer;
+        }
+
+        /* Service Banner */
+        .service-banner {
+            background: linear-gradient(135deg, #1e4b8b, #2a6bb3);
+            margin: 20px 16px;
+            padding: 25px;
+            border-radius: 25px;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-banner::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200px;
+            height: 200px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+        }
+
+        .service-banner h2 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .service-banner p {
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+
+        .banner-btn {
+            background: #e6b422;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 30px;
+            color: #1e4b8b;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .banner-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        /* Quick Service Cards */
+        .quick-service-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            padding: 0 16px 20px;
+        }
+
+        .quick-service-card {
+            background: white;
+            border-radius: 20px;
+            padding: 20px 10px;
+            text-align: center;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .quick-service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+
+        .quick-service-card i {
+            font-size: 2rem;
+            color: #e6b422;
+            margin-bottom: 10px;
+        }
+
+        .quick-service-card span {
+            display: block;
+            font-weight: 600;
+            color: #1e4b8b;
+            font-size: 0.9rem;
+        }
+
+        .quick-service-card small {
+            color: #6c757d;
+            font-size: 0.7rem;
+        }
+
+        /* Search Section */
+        .search-section {
+            padding: 0 16px 20px;
+        }
+
+        .search-container {
+            background: white;
+            border-radius: 30px;
+            padding: 5px 5px 5px 20px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+        }
+
+        .search-container input {
+            flex: 1;
+            border: none;
+            padding: 15px 0;
+            font-size: 0.95rem;
+            outline: none;
+        }
+
+        .search-container button {
+            width: 50px;
+            height: 50px;
+            background: #1e4b8b;
+            border: none;
+            border-radius: 30px;
+            color: white;
+            cursor: pointer;
+        }
+
+        /* Categories */
+        .categories-slider {
+            padding: 0 16px 20px;
+        }
+
+        .categories-slider .swiper-slide {
+            width: auto;
+        }
+
+        .category-chip {
+            background: white;
+            padding: 12px 25px;
+            border-radius: 30px;
+            font-weight: 600;
+            color: #1e4b8b;
+            box-shadow: 0 5px 10px rgba(0,0,0,0.05);
+            cursor: pointer;
+            transition: 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .category-chip.active {
+            background: #1e4b8b;
+            color: white;
+            border-color: #e6b422;
+        }
+
+        /* Service Grid */
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            padding: 0 16px 20px;
+        }
+
+        .service-item {
+            background: white;
+            border-radius: 20px;
+            padding: 20px 15px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            cursor: pointer;
+            transition: 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+
+        .service-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #1e4b8b, #e6b422);
+        }
+
+        .service-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(230,180,34,0.1);
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+
+        .service-icon i {
+            font-size: 2rem;
+            color: #e6b422;
+        }
+
+        .service-item h3 {
+            color: #1e4b8b;
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+        }
+
+        .service-item p {
+            color: #6c757d;
+            font-size: 0.8rem;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        .service-price {
+            font-weight: 800;
+            color: #e6b422;
+            font-size: 1.2rem;
+        }
+
+        .service-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: #28a745;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.65rem;
+            font-weight: 700;
+        }
+
+        /* Service Details Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 30px;
+            max-width: 350px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            animation: slideUp 0.3s ease;
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, #1e4b8b, #2a6bb3);
+            color: white;
+            padding: 20px;
+            border-radius: 30px 30px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header h3 {
+            font-size: 1.2rem;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .modal-body {
+            padding: 25px;
+        }
+
+        .service-detail-icon {
+            width: 80px;
+            height: 80px;
+            background: rgba(230,180,34,0.1);
+            border-radius: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+        }
+
+        .service-detail-icon i {
+            font-size: 3rem;
+            color: #e6b422;
+        }
+
+        .service-detail-title {
+            text-align: center;
+            color: #1e4b8b;
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+
+        .service-detail-desc {
+            color: #6c757d;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .service-features {
+            list-style: none;
+            margin-bottom: 20px;
+        }
+
+        .service-features li {
+            padding: 12px 0;
+            border-bottom: 1px solid #f0f0f0;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .service-features i {
+            color: #28a745;
+            width: 20px;
+        }
+
+        .price-tag {
+            background: #1e4b8b;
+            color: white;
+            padding: 15px;
+            border-radius: 15px;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .price-tag .amount {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #e6b422;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .book-btn {
+            flex: 1;
+            background: linear-gradient(135deg, #e6b422, #f5c542);
+            border: none;
+            padding: 15px;
+            border-radius: 30px;
+            font-weight: 700;
+            color: #1e4b8b;
+            cursor: pointer;
+        }
+
+        .enquiry-btn {
+            flex: 1;
+            background: white;
+            border: 2px solid #1e4b8b;
+            padding: 15px;
+            border-radius: 30px;
+            font-weight: 700;
+            color: #1e4b8b;
+            cursor: pointer;
+        }
+
+        /* Service Status */
+        .status-card {
+            background: white;
+            border-radius: 20px;
+            padding: 20px;
+            margin: 20px 16px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+        }
+
+        .status-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+
+        .status-header i {
+            font-size: 1.5rem;
+            color: #e6b422;
+        }
+
+        .status-header h3 {
+            color: #1e4b8b;
+            font-size: 1.1rem;
+        }
+
+        .status-input {
+            display: flex;
+            gap: 10px;
+        }
+
+        .status-input input {
+            flex: 1;
+            padding: 15px;
+            border: 2px solid #e9ecef;
+            border-radius: 15px;
+            font-size: 0.95rem;
+        }
+
+        .status-input button {
+            background: #1e4b8b;
+            color: white;
+            border: none;
+            padding: 0 20px;
+            border-radius: 15px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .status-result {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            display: none;
+        }
+
+        .status-result.active {
+            display: block;
+        }
+
+        .status-progress {
+            display: flex;
+            justify-content: space-between;
+            margin: 20px 0;
+            position: relative;
+        }
+
+        .progress-step {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .step-dot {
+            width: 35px;
+            height: 35px;
+            background: white;
+            border: 3px solid #dee2e6;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 8px;
+            font-weight: 700;
+            transition: 0.3s;
+        }
+
+        .step-dot.completed {
+            background: #28a745;
+            border-color: #28a745;
+            color: white;
+        }
+
+        .step-dot.active {
+            background: #1e4b8b;
+            border-color: #1e4b8b;
+            color: white;
+        }
+
+        .step-label {
+            font-size: 0.65rem;
+            color: #6c757d;
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            padding: 20px 16px;
+        }
+
+        .faq-item {
+            background: white;
+            border-radius: 18px;
+            margin-bottom: 12px;
+            overflow: hidden;
+        }
+
+        .faq-question {
+            padding: 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-weight: 600;
+            color: #1e4b8b;
+        }
+
+        .faq-question i {
+            color: #e6b422;
+            transition: 0.3s;
+        }
+
+        .faq-answer {
+            padding: 0 18px 18px;
+            color: #6c757d;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            display: none;
+        }
+
+        .faq-item.active .faq-answer {
+            display: block;
+        }
+
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+
+        /* Contact Section */
+        .contact-section {
+            background: white;
+            border-radius: 25px;
+            padding: 25px;
+            margin: 20px 16px;
+        }
+
+        .contact-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .contact-header i {
+            font-size: 1.8rem;
+            color: #e6b422;
+        }
+
+        .contact-header h3 {
+            color: #1e4b8b;
+            font-size: 1.2rem;
+        }
+
+        .contact-methods {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .contact-method {
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .contact-method i {
+            width: 50px;
+            height: 50px;
+            background: rgba(230,180,34,0.1);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 8px;
+            font-size: 1.3rem;
+            color: #e6b422;
+        }
+
+        .contact-method span {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #1e4b8b;
+        }
+
+        .support-time {
+            text-align: center;
+            color: #6c757d;
+            font-size: 0.8rem;
+            padding-top: 15px;
+            border-top: 1px solid #f0f0f0;
+        }
+
+        /* Bottom Navigation */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            max-width: 390px;
+            width: 100%;
+            background: white;
+            display: flex;
+            justify-content: space-around;
+            padding: 12px 10px 20px;
+            border-top: 3px solid #e6b422;
+            border-radius: 30px 30px 0 0;
+            z-index: 100;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #6c757d;
+            font-size: 0.7rem;
+            cursor: pointer;
+        }
+
+        .nav-item.active {
+            color: #1e4b8b;
+        }
+
+        .nav-item i {
+            font-size: 1.4rem;
+            margin-bottom: 3px;
+        }
+
+        /* Toast */
+        #toastMessage {
+            position: fixed;
+            bottom: 180px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #1e4b8b;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            z-index: 5000;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+
+        /* Animations */
+        @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        /* Hidden Class */
+        .hidden {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <div class="page-header">
+            <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i></a>
+            <h1><i class="fas fa-headset"></i> Service & Support</h1>
+            <i class="fas fa-question-circle help-icon" onclick="showHelp()"></i>
+        </div>
+
+        <!-- Service Banner -->
+        <div class="service-banner animate__animated animate__fadeIn">
+            <h2>24/7 Service Support</h2>
+            <p>We're here to help you with any issues or questions</p>
+            <button class="banner-btn" onclick="emergencyContact()">
+                <i class="fas fa-phone-alt"></i> Emergency Support
+            </button>
+        </div>
+
+        <!-- Quick Service Cards -->
+        <div class="quick-service-grid">
+            <div class="quick-service-card" onclick="quickService('install')">
+                <i class="fas fa-tools"></i>
+                <span>Installation</span>
+                <small>New Setup</small>
+            </div>
+            <div class="quick-service-card" onclick="quickService('repair')">
+                <i class="fas fa-wrench"></i>
+                <span>Repair</span>
+                <small>Fix Issues</small>
+            </div>
+            <div class="quick-service-card" onclick="quickService('maintain')">
+                <i class="fas fa-brush"></i>
+                <span>Maintenance</span>
+                <small>Regular Care</small>
+            </div>
+      <div class="quick-service-card" onclick="quickService('inspect')">
+                <i class="fas fa-search"></i>
+                <span>Inspection</span>
+                <small>Check-up</small>
+            </div>
+            <div class="quick-service-card" onclick="quickService('replace')">
+                <i class="fas fa-sync-alt"></i>
+                <span>Replacement</span>
+                <small>Parts</small>
+            </div>
+            <div class="quick-service-card" onclick="quickService('consult')">
+                <i class="fas fa-comments"></i>
+                <span>Consultation</span>
+                <small>Advice</small>
+            </div>
+        </div>
+
+        <!-- Search Section -->
+        <div class="search-section">
+            <div class="search-container">
+                <input type="text" id="serviceSearch" placeholder="Search services..." onkeyup="searchServices()">
+                <button onclick="searchServices()"><i class="fas fa-search"></i></button>
+            </div>
+        </div>
+
+        <!-- Categories Slider -->
+        <div class="swiper categories-slider">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <div class="category-chip active" onclick="filterServices('all')">All Services</div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="category-chip" onclick="filterServices('installation')">Installation</div>
+                </div>
+                <div class="swiper-slide">
+                                        <div class="category-chip" onclick="filterServices('repair')">Repair</div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="category-chip" onclick="filterServices('maintenance')">Maintenance</div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="category-chip" onclick="filterServices('warranty')">Warranty</div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="category-chip" onclick="filterServices('emergency')">Emergency</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Service Grid -->
+        <div class="service-grid" id="serviceGrid">
+            <!-- Installation Services -->
+            <div class="service-item" onclick="showServiceDetails('install')">
+                <div class="service-icon">
+                    <i class="fas fa-tools"></i>
+                </div>
+                <h3>New Installation</h3>
+                <p>Professional installation service for all net types</p>
+                <div class="service-price">₹499 onwards</div>
+                <span class="service-badge">Popular</span>
+            </div>
+
+            <div class="service-item" onclick="showServiceDetails('repair')">
+                <div class="service-icon">
+                    <i class="fas fa-wrench"></i>
+                </div>
+                <h3>Repair Service</h3>
+                <p>Fix tears, frame issues, and magnetic problems</p>
+                <div class="service-price">₹299 onwards</div>
+            </div>
+
+            <div class="service-item" onclick="showServiceDetails('maintenance')">
+                <div class="service-icon">
+                    <i class="fas fa-brush"></i>
+                </div>
+                <h3>Annual Maintenance</h3>
+                <p>Regular cleaning and maintenance contract</p>
+                <div class="service-price">₹1999/year</div>
+                <span class="service-badge">Save 20%</span>
+            </div>
+
+            <div class="service-item" onclick="showServiceDetails('inspection')">
+                <div class="service-icon">
+                    <i class="fas fa-search"></i>
+                </div>
+                <h3>Site Inspection</h3>
+                <p>Thorough inspection of existing nets</p>
+                <div class="service-price">Free*</div>
+            </div>
+
+            <div class="service-item" onclick="showServiceDetails('replacement')">
+                <div class="service-icon">
+                    <i class="fas fa-sync-alt"></i>
+                </div>
+                <h3>Mesh Replacement</h3>
+                <p>Replace old mesh with new premium quality</p>
+                <div class="service-price">₹399 onwards</div>
+            </div>
+
+            <div class="service-item" onclick="showServiceDetails('upgrade')">
+                <div class="service-icon">
+                    <i class="fas fa-arrow-up"></i>
+                </div>
+                <h3>System Upgrade</h3>
+                <p>Upgrade from velcro to frame system</p>
+                <div class="service-price">₹999 onwards</div>
+            </div>
+
+            <div class="service-item" onclick="showServiceDetails('emergency')">
+                <div class="service-icon">
+                    <i class="fas fa-ambulance"></i>
+                </div>
+                <h3>Emergency Service</h3>
+                <p>24/7 emergency repair service</p>
+                <div class="service-price">₹999</div>
+                <span class="service-badge">24/7</span>
+            </div>
+
+            <div class="service-item" onclick="showServiceDetails('warranty')">
+                <div class="service-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h3>Warranty Claim</h3>
+                <p>File and process warranty claims</p>
+                <div class="service-price">Free</div>
+            </div>
+        </div>
+
+        <!-- Service Status Tracker -->
+        <div class="status-card">
+            <div class="status-header">
+                <i class="fas fa-clock"></i>
+                <h3>Track Service Status</h3>
+            </div>
+            <div class="status-input">
+                <input type="text" id="serviceId" placeholder="Enter Service ID (e.g., SRV001)">
+                <button onclick="trackService()">Track</button>
+            </div>
+            <div class="status-result" id="statusResult">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 15px;">
+                    <span style="color: #1e4b8b; font-weight: 700;">Service ID: SRV001</span>
+                    <span style="color: #e6b422; font-weight: 700;">Installation</span>
+                </div>
+                
+                <div class="status-progress">
+                    <div class="progress-step">
+                        <div class="step-dot completed">✓</div>
+                        <div class="step-label">Booked</div>
+                    </div>
+                    <div class="progress-step">
+                        <div class="step-dot active">2</div>
+                        <div class="step-label">Assigned</div>
+                    </div>
+                    <div class="progress-step">
+                        <div class="step-dot">3</div>
+                        <div class="step-label">In Progress</div>
+                    </div>
+                    <div class="progress-step">
+                        <div class="step-dot">4</div>
+                        <div class="step-label">Completed</div>
+                    </div>
+                </div>
+                
+                <div style="background: #f8f9fa; padding: 15px; border-radius: 12px; margin-top: 15px;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                        <span style="color: #6c757d;">Technician:</span>
+                        <span style="color: #1e4b8b; font-weight: 600;">Ramesh (ID: TEC001)</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                        <span style="color: #6c757d;">Visit Date:</span>
+                        <span style="color: #1e4b8b; font-weight: 600;">15 Mar 2026, 10:00 AM</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between;">
+                        <span style="color: #6c757d;">Est. Completion:</span>
+                        <span style="color: #28a745; font-weight: 600;">Today, 4:00 PM</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- FAQ Section -->
+        <div class="faq-section">
+            <h3 style="color: #1e4b8b; margin-bottom: 15px; padding-left: 5px;">
+                <i class="fas fa-question-circle" style="color: #e6b422; margin-right: 8px;"></i>
+                Frequently Asked Questions
+            </h3>
+
+            <div class="faq-item active">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <span>How long does installation take?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    Standard installation takes 2-4 hours depending on the number of windows/doors. Velcro systems are faster (1-2 hours), while frame systems may take 3-4 hours.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <span>What is your warranty period?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    We offer 2 years warranty on velcro systems, 5 years on frame systems, and 3 years on pleated nets. All installations come with 1 year service warranty.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <span>Do you provide emergency service?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    Yes! We offer 24/7 emergency repair services. Call our emergency helpline at 9483037385 for immediate assistance.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <span>How to claim warranty?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    You can claim warranty by visiting our service page, calling our support number, or visiting our office with the original bill and warranty card.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <span>What areas do you serve?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    We serve all areas of Mysore including Vijayanagar, Kuvempunagar, Gokulam, Jayalakshmipuram, Hebbal, and surrounding areas.
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact Section -->
+        <div class="contact-section">
+            <div class="contact-header">
+                <i class="fas fa-headset"></i>
+                <h3>Need Help? Contact Us</h3>
+            </div>
+
+            <div class="contact-methods">
+                <div class="contact-method" onclick="callSupport()">
+                    <i class="fas fa-phone-alt"></i>
+                    <span>Call</span>
+                </div>
+                <div class="contact-method" onclick="whatsappSupport()">
+                    <i class="fab fa-whatsapp"></i>
+                    <span>WhatsApp</span>
+                </div>
+                <div class="contact-method" onclick="emailSupport()">
+                    <i class="fas fa-envelope"></i>
+                    <span>Email</span>
+                </div>
+                <div class="contact-method" onclick="chatSupport()">
+                    <i class="fas fa-comments"></i>
+                    <span>Chat</span>
+                </div>
+                <div class="contact-method" onclick="visitOffice()">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Visit</span>
+                </div>
+                <div class="contact-method" onclick="callback()">
+                    <i class="fas fa-phone-volume"></i>
+                    <span>Callback</span>
+                </div>
+            </div>
+
+            <div class="support-time">
+                <i class="fas fa-clock" style="color: #e6b422; margin-right: 5px;"></i>
+                Support Available: 24/7 for Emergency | Regular: 9 AM - 8 PM
+            </div>
+        </div>
+
+        <!-- Service Details Modal -->
+        <div class="modal" id="serviceModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 id="modalTitle">Service Details</h3>
+                    <button class="close-modal" onclick="closeModal()">&times;</button>
+                </div>
+                <div class="modal-body" id="modalBody">
+                    <!-- Dynamic content -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Callback Modal -->
+        <div class="modal" id="callbackModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Request Callback</h3>
+                    <button class="close-modal" onclick="closeCallbackModal()">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div style="text-align: center; margin-bottom: 20px;">
+                        <i class="fas fa-phone-volume" style="font-size: 3rem; color: #e6b422;"></i>
+                    </div>
+                    <p style="text-align: center; color: #6c757d; margin-bottom: 20px;">
+                        Enter your details and we'll call you back within 30 minutes
+                    </p>
+                    
+                    <div style="margin-bottom: 15px;">
+                        <label style="color: #1e4b8b; font-weight: 600; display: block; margin-bottom: 5px;">Name</label>
+                        <input type="text" id="callbackName" placeholder="Enter your name" style="width: 100%; padding: 12px; border: 2px solid #e9ecef; border-radius: 12px;">
+                    </div>
+                    
+                    <div style="margin-bottom: 15px;">
+                        <label style="color: #1e4b8b; font-weight: 600; display: block; margin-bottom: 5px;">Phone Number</label>
+                        <input type="tel" id="callbackPhone" placeholder="10 digit mobile number" maxlength="10" style="width: 100%; padding: 12px; border: 2px solid #e9ecef; border-radius: 12px;">
+                    </div>
+                    
+                    <div style="margin-bottom: 20px;">
+                        <label style="color: #1e4b8b; font-weight: 600; display: block; margin-bottom: 5px;">Best Time to Call</label>
+                        <select id="callbackTime" style="width: 100%; padding: 12px; border: 2px solid #e9ecef; border-radius: 12px;">
+                            <option>9 AM - 12 PM</option>
+                            <option>12 PM - 3 PM</option>
+                            <option>3 PM - 6 PM</option>
+                            <option>6 PM - 9 PM</option>
+                        </select>
+                    </div>
+                    
+                    <button class="book-btn" onclick="submitCallback()" style="width: 100%;">Request Callback</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Navigation -->
+        <div class="bottom-nav">
+            <div class="nav-item" onclick="location.href='index.html'"><i class="fas fa-home"></i><span>Home</span></div>
+            <div class="nav-item" onclick="location.href='products.html'"><i class="fas fa-search"></i><span>Search</span></div>
+            <div class="nav-item" onclick="location.href='estimate.html'"><i class="fas fa-calculator"></i><span>Estimate</span></div>
+            <div class="nav-item active" onclick="location.href='service.html'"><i class="fas fa-headset"></i><span>Service</span></div>
+            <div class="nav-item" onclick="location.href='customer-login.html'"><i class="fas fa-user"></i><span>Account</span></div>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div id="toastMessage"></div>
+
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+
+    <script>
+        // Firebase Config
+        const firebaseConfig = {
+            apiKey: "YOUR_API_KEY",
+            authDomain: "YOUR_AUTH_DOMAIN",
+            projectId: "YOUR_PROJECT_ID",
+            storageBucket: "YOUR_STORAGE_BUCKET",
+            messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+            appId: "YOUR_APP_ID"
+        };
+
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+
+        // Initialize Swiper
+        document.addEventListener('DOMContentLoaded', function() {
+            new Swiper('.categories-slider', {
+                slidesPerView: 'auto',
+                spaceBetween: 10,
+                freeMode: true
+            });
+        });
+
+        // Filter Services
+        function filterServices(category) {
+            document.querySelectorAll('.category-chip').forEach(chip => {
+                chip.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            showToast(`Showing ${category} services`);
+        }
+
+        // Search Services
+        function searchServices() {
+            const searchTerm = document.getElementById('serviceSearch').value.toLowerCase();
+            showToast(`Searching: ${searchTerm}`);
+        }
+
+        // Quick Service
+        function quickService(type) {
+            const services = {
+                'install': 'Installation Service',
+                'repair': 'Repair Service',
+                'maintain': 'Maintenance Service',
+                'inspect': 'Inspection Service',
+                'replace': 'Replacement Service',
+                'consult': 'Consultation Service'
+            };
+            showToast(`Opening ${services[type]}`);
+            showServiceDetails(type);
+        }
+
+        // Show Service Details
+        function showServiceDetails(service) {
+            const modal = document.getElementById('serviceModal');
+            const modalBody = document.getElementById('modalBody');
+            
+            const serviceDetails = {
+                'install': {
+                    title: 'New Installation Service',
+                    icon: 'fas fa-tools',
+                    price: '₹499 onwards',
+                    features: [
+                        'Professional installation team',
+                        'Quality check after installation',
+                        'Cleanup after work',
+                        'Demonstration of usage',
+                        '1 month service warranty'
+                    ]
+                },
+                'repair': {
+                    title: 'Repair Service',
+                    icon: 'fas fa-wrench',
+                    price: '₹299 onwards',
+                    features: [
+                        'Expert technicians',
+                        'Same day service',
+                        'Genuine spare parts',
+                        'Free inspection',
+                        '3 months warranty on repairs'
+                    ]
+                },
+                'maintenance': {
+                    title: 'Annual Maintenance',
+                    icon: 'fas fa-brush',
+                    price: '₹1999/year',
+                    features: [
+                        'Quarterly cleaning',
+                        'Free repairs within contract',
+                        'Priority service',
+                        '10% discount on new purchases',
+                        'Extended warranty'
+                    ]
+                },
+                'inspection': {
+                    title: 'Site Inspection',
+                    icon: 'fas fa-search',
+                    price: 'Free',
+                    features: [
+                        'Thorough inspection of all nets',
+                        'Identify potential issues',
+                        'Maintenance recommendations',
+                        'Cost estimate for repairs',
+                        'Digital report'
+                    ]
+                },
+                'replacement': {
+                    title: 'Mesh Replacement',
+                    icon: 'fas fa-sync-alt',
+                    price: '₹399 onwards',
+                    features: [
+                        'Premium quality mesh',
+                        'Color matching',
+                        'Frame inspection',
+                        'Quick replacement',
+                        '6 months warranty'
+                    ]
+                },
+                'upgrade': {
+                    title: 'System Upgrade',
+                    icon: 'fas fa-arrow-up',
+                    price: '₹999 onwards',
+                    features: [
+                        'Upgrade to premium systems',
+                        'Frame strengthening',
+                        'Better durability',
+                        'Enhanced protection',
+                        '   '2 years warranty'
+                    ]
+                },
+                'emergency': {
+                    title: 'Emergency Service',
+                    icon: 'fas fa-ambulance',
+                    price: '₹999',
+                    features: [
+                        '24/7 availability',
+                        '2 hour response time',
+                        'Emergency repairs',
+                        'Temporary fixes',
+                        'Permanent solution within 24hrs'
+                    ]
+                },
+                'warranty': {
+                    title: 'Warranty Claim',
+                    icon: 'fas fa-shield-alt',
+                    price: 'Free',
+                    features: [
+                        'Easy claim process',
+                        'Quick verification',
+                        'Free replacement if eligible',
+                        'No hidden charges',
+                        'Doorstep service'
+                    ]
+                }
+            };
+            
+            const details = serviceDetails[service] || serviceDetails['install'];
+            
+            modalBody.innerHTML = `
+                <div class="service-detail-icon">
+                    <i class="${details.icon}"></i>
+                </div>
+                <h3 class="service-detail-title">${details.title}</h3>
+                <p class="service-detail-desc">Professional service by trained technicians with quality guarantee.</p>
+                
+                <ul class="service-features">
+                    ${details.features.map(f => `<li><i class="fas fa-check-circle"></i> ${f}</li>`).join('')}
+                </ul>
+                
+                <div class="price-tag">
+                    <div style="font-size: 0.9rem; margin-bottom: 5px;">Starting from</div>
+                    <div class="amount">${details.price}</div>
+                </div>
+                
+                <div class="action-buttons">
+                    <button class="book-btn" onclick="bookService('${service}')">Book Now</button>
+                    <button class="enquiry-btn" onclick="enquiry('${service}')">Enquiry</button>
+                </div>
+            `;
+            
+            modal.classList.add('active');
+        }
+
+        // Track Service
+        function trackService() {
+            const serviceId = document.getElementById('serviceId').value;
+            
+            if (!serviceId) {
+                showToast('Please enter Service ID');
+                return;
+            }
+            
+            document.getElementById('statusResult').classList.add('active');
+        }
+
+        // Toggle FAQ
+        function toggleFAQ(element) {
+            const faqItem = element.closest('.faq-item');
+            faqItem.classList.toggle('active');
+        }
+
+        // Book Service
+        function bookService(type) {
+            closeModal();
+            showToast('Redirecting to booking...');
+            setTimeout(() => {
+                window.location.href = `appointment.html?service=${type}`;
+            }, 1000);
+        }
+
+        // Enquiry
+        function enquiry(type) {
+            closeModal();
+            showToast('Opening enquiry form...');
+        }
+
+        // Contact Functions
+        function callSupport() {
+            window.location.href = 'tel:9483037385';
+        }
+
+        function whatsappSupport() {
+            window.open('https://wa.me/919483037385?text=Need%20service%20support');
+        }
+
+        function emailSupport() {
+            window.location.href = 'mailto:support@rajmarketing.com';
+        }
+
+        function chatSupport() {
+            showToast('Live chat coming soon');
+        }
+
+        function visitOffice() {
+            window.open('https://maps.google.com/?q=12.3456,76.6789');
+        }
+
+        function callback() {
+            document.getElementById('callbackModal').classList.add('active');
+        }
+
+        // Submit Callback
+        function submitCallback() {
+            const name = document.getElementById('callbackName').value;
+            const phone = document.getElementById('callbackPhone').value;
+            const time = document.getElementById('callbackTime').value;
+            
+            if (!name || !phone) {
+                showToast('Please fill all fields');
+                return;
+            }
+            
+            if (phone.length !== 10) {
+                showToast('Enter valid phone number');
+                return;
+            }
+            
+            // Save to Firebase
+            db.collection('callbacks').add({
+                name: name,
+                phone: phone,
+                time: time,
+                timestamp: firebase.firestore.FieldValue.serverTimestamp()
+            }).then(() => {
+                showToast('Callback requested! We\'ll call you soon.');
+                closeCallbackModal();
+            }).catch(() => {
+                showToast('Callback requested!');
+                closeCallbackModal();
+            });
+        }
+
+        // Emergency Contact
+        function emergencyContact() {
+            if (confirm('Call emergency support?')) {
+                window.location.href = 'tel:9483037385';
+            }
+        }
+
+        // Show Help
+        function showHelp() {
+            showToast('How can we help you?');
+        }
+
+        // Close Modal
+        function closeModal() {
+            document.getElementById('serviceModal').classList.remove('active');
+        }
+
+        function closeCallbackModal() {
+            document.getElementById('callbackModal').classList.remove('active');
+        }
+
+        // Toast
+        function showToast(text) {
+            const toast = document.getElementById('toastMessage');
+            toast.style.opacity = '1';
+            toast.innerText = text;
+            setTimeout(() => toast.style.opacity = '0', 2000);
+        }
+
+        // Close modal on outside click
+        window.onclick = function(event) {
+            const serviceModal = document.getElementById('serviceModal');
+            const callbackModal = document.getElementById('callbackModal');
+            
+            if (event.target === serviceModal) {
+                closeModal();
+            }
+            if (event.target === callbackModal) {
+                closeCallbackModal();
+            }
+        };
+    </script>
+</body>
+</html>
+```
