@@ -1,0 +1,1229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Complaint Registration · Raj Marketing</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #1a2c2d;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+        }
+
+        .app-container {
+            max-width: 390px;
+            width: 100%;
+            background: linear-gradient(145deg, #f5faf8 0%, #e8f0ed 100%);
+            border-radius: 36px 36px 0 0;
+            margin: 8px 0 0 0;
+            overflow: hidden;
+            position: relative;
+            padding-bottom: 70px;
+        }
+
+        /* Header */
+        .page-header {
+            height: 60px;
+            background: white;
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            gap: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .back-btn {
+            width: 40px;
+            height: 40px;
+            background: #f0f5f3;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #1e4b8b;
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: 0.3s;
+        }
+
+        .back-btn:hover {
+            background: #1e4b8b;
+            color: white;
+        }
+
+        .page-header h1 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #1e4b8b;
+        }
+
+        .page-header h1 i {
+            color: #e6b422;
+            margin-right: 8px;
+        }
+
+        /* Complaint Banner */
+        .complaint-banner {
+            background: linear-gradient(135deg, #dc3545, #ff6b6b);
+            margin: 20px 16px;
+            padding: 25px;
+            border-radius: 25px;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .complaint-banner::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200px;
+            height: 200px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+        }
+
+        .complaint-banner h2 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .complaint-banner p {
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+
+        /* Tabs */
+        .complaint-tabs {
+            display: flex;
+            background: white;
+            border-radius: 30px;
+            padding: 5px;
+            margin: 0 16px 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 15px;
+            border: none;
+            background: none;
+            border-radius: 30px;
+            font-weight: 600;
+            color: #6c757d;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .tab-btn.active {
+            background: #1e4b8b;
+            color: white;
+        }
+
+        .tab-btn i {
+            margin-right: 8px;
+        }
+
+        /* Form Container */
+        .form-container {
+            padding: 0 16px 20px;
+        }
+
+        .form-card {
+            background: white;
+            border-radius: 25px;
+            padding: 25px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
+        }
+
+        .form-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #dc3545, #ff6b6b);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: -45px auto 20px;
+            box-shadow: 0 10px 20px rgba(220,53,69,0.3);
+        }
+
+        .form-icon i {
+            font-size: 2.5rem;
+            color: white;
+        }
+
+        .form-card h2 {
+            text-align: center;
+            color: #1e4b8b;
+            font-size: 1.3rem;
+            margin-bottom: 5px;
+        }
+
+        .form-card p {
+            text-align: center;
+            color: #6c757d;
+            font-size: 0.85rem;
+            margin-bottom: 25px;
+        }
+
+        /* Form Groups */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #1e4b8b;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .form-group label i {
+            color: #dc3545;
+            margin-right: 8px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e9ecef;
+            border-radius: 15px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.95rem;
+            transition: 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: #dc3545;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(220,53,69,0.1);
+        }
+
+        .form-row {
+            display: flex;
+            gap: 12px;
+        }
+
+        .form-group.half {
+            flex: 1;
+        }
+
+        /* Complaint Type Cards */
+        .complaint-type-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin: 15px 0;
+        }
+
+        .complaint-type-card {
+            background: #f8f9fa;
+            border: 2px solid transparent;
+            border-radius: 18px;
+            padding: 15px 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .complaint-type-card.selected {
+            border-color: #dc3545;
+            background: #fff5f5;
+        }
+
+        .complaint-type-card i {
+            font-size: 1.8rem;
+            color: #dc3545;
+            margin-bottom: 8px;
+        }
+
+        .complaint-type-card span {
+            display: block;
+            font-weight: 600;
+            color: #1e4b8b;
+            font-size: 0.8rem;
+        }
+
+        /* Priority Selector */
+        .priority-selector {
+            display: flex;
+            gap: 12px;
+            margin: 15px 0;
+        }
+
+        .priority-option {
+            flex: 1;
+            text-align: center;
+            padding: 15px;
+            border: 2px solid #e9ecef;
+            border-radius: 18px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .priority-option.selected {
+            border-color: #dc3545;
+            background: #fff5f5;
+        }
+
+        .priority-option i {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+        }
+
+        .priority-option.low i { color: #28a745; }
+        .priority-option.medium i { color: #ffc107; }
+        .priority-option.high i { color: #dc3545; }
+
+        .priority-option span {
+            display: block;
+            font-weight: 600;
+            color: #1e4b8b;
+        }
+
+        /* File Upload */
+        .file-upload {
+            border: 2px dashed #e9ecef;
+            border-radius: 18px;
+            padding: 25px;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.3s;
+            background: #f8f9fa;
+        }
+
+        .file-upload:hover {
+            border-color: #dc3545;
+            background: #fff5f5;
+        }
+
+        .file-upload i {
+            font-size: 2.5rem;
+            color: #dc3545;
+            margin-bottom: 10px;
+        }
+
+        .file-upload p {
+            color: #6c757d;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+
+        .file-upload small {
+            color: #1e4b8b;
+            font-weight: 600;
+        }
+
+        .file-list {
+            margin-top: 15px;
+        }
+
+        .file-item {
+            background: #f8f9fa;
+            padding: 10px 15px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 8px;
+        }
+
+        .file-item i {
+            color: #28a745;
+        }
+
+        .file-item .file-name {
+            flex: 1;
+            font-size: 0.85rem;
+            color: #1e4b8b;
+        }
+
+        .file-item .file-size {
+            color: #6c757d;
+            font-size: 0.7rem;
+        }
+
+        .remove-file {
+            color: #dc3545;
+            cursor: pointer;
+        }
+
+        /* Submit Button */
+        .submit-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #dc3545, #ff6b6b);
+            border: none;
+            padding: 18px;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: white;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(220,53,69,0.3);
+        }
+
+        /* Track Complaint Section */
+        .track-section {
+            padding: 0 16px 20px;
+        }
+
+        .track-card {
+            background: white;
+            border-radius: 25px;
+            padding: 25px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+        }
+
+        .track-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .track-header i {
+            font-size: 1.8rem;
+            color: #dc3545;
+        }
+
+        .track-header h3 {
+            color: #1e4b8b;
+            font-size: 1.2rem;
+        }
+
+        .track-input {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .track-input input {
+            flex: 1;
+            padding: 15px;
+            border: 2px solid #e9ecef;
+            border-radius: 15px;
+            font-size: 0.95rem;
+        }
+
+        .track-input button {
+            background: #1e4b8b;
+            color: white;
+            border: none;
+            padding: 0 25px;
+            border-radius: 15px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        /* Complaint Status */
+        .complaint-status {
+            background: #f8f9fa;
+            border-radius: 20px;
+            padding: 20px;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .complaint-status.active {
+            display: block;
+        }
+
+        .status-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #e9ecef;
+        }
+
+        .complaint-id {
+            font-weight: 800;
+            color: #1e4b8b;
+            font-size: 1.1rem;
+        }
+
+        .complaint-badge {
+            padding: 5px 15px;
+            border-radius: 30px;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+
+        .badge-pending { background: #ffc107; color: #856404; }
+        .badge-processing { background: #17a2b8; color: white; }
+        .badge-resolved { background: #28a745; color: white; }
+        .badge-rejected { background: #dc3545; color: white; }
+
+        .status-timeline {
+            position: relative;
+            padding-left: 30px;
+            margin: 25px 0;
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-bottom: 25px;
+        }
+
+        .timeline-item:last-child {
+            padding-bottom: 0;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -20px;
+            top: 0;
+            width: 2px;
+            height: 100%;
+            background: #e9ecef;
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            left: -26px;
+            top: 0;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: white;
+            border: 2px solid #1e4b8b;
+        }
+
+        .timeline-item.completed::after {
+            background: #28a745;
+            border-color: #28a745;
+        }
+
+        .timeline-item.active::after {
+            background: #dc3545;
+            border-color: #dc3545;
+            animation: pulse 2s infinite;
+        }
+
+        .timeline-date {
+            font-size: 0.7rem;
+            color: #6c757d;
+            margin-bottom: 3px;
+        }
+
+        .timeline-text {
+            font-weight: 600;
+            color: #1e4b8b;
+        }
+
+        .complaint-details {
+            background: white;
+            border-radius: 15px;
+            padding: 15px;
+            margin-top: 20px;
+        }
+
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            padding-bottom: 8px;
+            border-bottom: 1px dashed #e9ecef;
+        }
+
+        .detail-row:last-child {
+            border-bottom: none;
+        }
+
+        .detail-label {
+            color: #6c757d;
+            font-size: 0.85rem;
+        }
+
+        .detail-value {
+            font-weight: 600;
+            color: #1e4b8b;
+        }
+
+        .resolution-info {
+            background: #d4edda;
+            border-radius: 15px;
+            padding: 15px;
+            margin-top: 15px;
+            color: #155724;
+        }
+
+        /* Complaint History */
+        .history-section {
+            padding: 20px 16px;
+        }
+
+        .history-item {
+            background: white;
+            border-radius: 18px;
+            padding: 18px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .history-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .history-icon {
+            width: 50px;
+            height: 50px;
+            background: #fff5f5;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #dc3545;
+            font-size: 1.5rem;
+        }
+
+        .history-details {
+            flex: 1;
+        }
+
+        .history-title {
+            font-weight: 700;
+            color: #1e4b8b;
+            margin-bottom: 5px;
+        }
+
+        .history-meta {
+            display: flex;
+            gap: 15px;
+            font-size: 0.7rem;
+            color: #6c757d;
+        }
+
+        .history-status {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 700;
+        }
+
+        /* Bottom Navigation */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            max-width: 390px;
+            width: 100%;
+            background: white;
+            display: flex;
+            justify-content: space-around;
+            padding: 12px 10px 20px;
+            border-top: 3px solid #e6b422;
+            border-radius: 30px 30px 0 0;
+            z-index: 100;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #6c757d;
+            font-size: 0.7rem;
+            cursor: pointer;
+        }
+
+        .nav-item.active {
+            color: #1e4b8b;
+        }
+
+        .nav-item i {
+            font-size: 1.4rem;
+            margin-bottom: 3px;
+        }
+
+        /* Toast */
+        #toastMessage {
+            position: fixed;
+            bottom: 180px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #1e4b8b;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            z-index: 5000;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+
+        /* Animations */
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.7; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .animate-in {
+            animation: slideIn 0.5s ease;
+        }
+
+        /* Hidden Class */
+        .hidden {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <div class="page-header">
+            <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i></a>
+            <h1><i class="fas fa-exclamation-triangle"></i> Complaint</h1>
+        </div>
+
+        <!-- Complaint Banner -->
+        <div class="complaint-banner animate__animated animate__fadeIn">
+            <h2>We're Here to Help</h2>
+            <p>Register your complaint and we'll resolve it within 24 hours</p>
+        </div>
+
+        <!-- Tabs -->
+        <div class="complaint-tabs">
+            <button class="tab-btn active" id="newTab" onclick="switchTab('new')">
+                <i class="fas fa-plus-circle"></i> New Complaint
+            </button>
+            <button class="tab-btn" id="trackTab" onclick="switchTab('track')">
+                <i class="fas fa-search"></i> Track Complaint
+            </button>
+            <button class="tab-btn" id="historyTab" onclick="switchTab('history')">
+                <i class="fas fa-history"></i> History
+            </button>
+        </div>
+
+        <!-- New Complaint Form -->
+        <div id="newComplaintSection">
+            <div class="form-container">
+                <div class="form-card animate-in">
+                    <div class="form-icon">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <h2>Register Complaint</h2>
+                    <p>Please provide details about your issue</p>
+
+                    <div class="form-group">
+                        <label><i class="fas fa-user"></i> Full Name *</label>
+                        <input type="text" id="complaintName" placeholder="Enter your full name">
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group half">
+                            <label><i class="fas fa-phone"></i> Mobile *</label>
+                            <input type="tel" id="complaintMobile" placeholder="10 digit" maxlength="10">
+                        </div>
+                        <div class="form-group half">
+                            <label><i class="fas fa-envelope"></i> Email</label>
+                            <input type="email" id="complaintEmail" placeholder="Optional">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label><i class="fas fa-tag"></i> Complaint Type *</label>
+                        <div class="complaint-type-grid">
+                            <div class="complaint-type-card selected" onclick="selectComplaintType('product')" id="typeProduct">
+                                <i class="fas fa-box"></i>
+                                <span>Product</span>
+                            </div>
+                            <div class="complaint-type-card" onclick="selectComplaintType('service')" id="typeService">
+                                <i class="fas fa-tools"></i>
+                                <span>Service</span>
+                            </div>
+                            <div class="complaint-type-card" onclick="selectComplaintType('installation')" id="typeInstall">
+                                <i class="fas fa-wrench"></i>
+                                <span>Installation</span>
+                            </div>
+                            <div class="complaint-type-card" onclick="selectComplaintType('billing')" id="typeBilling">
+                                <i class="fas fa-file-invoice"></i>
+                                <span>Billing</span>
+                            </div>
+                            <div class="complaint-type-card" onclick="selectComplaintType('delivery')" id="typeDelivery">
+                                <i class="fas fa-truck"></i>
+                                <span>Delivery</span>
+                            </div>
+                            <div class="complaint-type-card" onclick="selectComplaintType('other')" id="typeOther">
+                                <i class="fas fa-question"></i>
+                                <span>Other</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label><i class="fas fa-exclamation-circle"></i> Priority *</label>
+                        <div class="priority-selector">
+                            <div class="priority-option low selected" onclick="selectPriority('low')" id="priorityLow">
+                                <i class="fas fa-arrow-down"></i>
+                                <span>Low</span>
+                            </div>
+                            <div class="priority-option medium" onclick="selectPriority('medium')" id="priorityMedium">
+                                <i class="fas fa-minus"></i>
+                                <span>Medium</span>
+                            </div>
+                            <div class="priority-option high" onclick="selectPriority('high')" id="priorityHigh">
+                                <i class="fas fa-arrow-up"></i>
+                                <span>High</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label><i class="fas fa-calendar"></i> Order/Service ID (Optional)</label>
+                        <input type="text" id="orderId" placeholder="e.g., ORD001 or SRV001">
+                    </div>
+
+                    <div class="form-group">
+                        <label><i class="fas fa-heading"></i> Subject *</label>
+                        <input type="text" id="subject" placeholder="Brief subject of complaint">
+                    </div>
+
+                    <div class="form-group">
+                        <label><i class="fas fa-align-left"></i> Description *</label>
+                        <textarea id="description" rows="4" placeholder="Describe your issue in detail..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label><i class="fas fa-camera"></i> Attach Images/Videos</label>
+                        <div class="file-upload" onclick="document.getElementById('fileInput').click()">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <p>Click to upload files</p>
+                            <small>Max 5 files (JPG, PNG, MP4)</small>
+                            <input type="file" id="fileInput" multiple accept="image/*,video/*" style="display: none;" onchange="handleFiles(this.files)">
+                        </div>
+                        <div class="file-list" id="fileList"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label><i class="fas fa-map-marker-alt"></i> Address (if site visit required)</label>
+                        <textarea id="complaintAddress" rows="2" placeholder="Complete address"></textarea>
+                    </div>
+
+                    <div style="margin: 20px 0;">
+                        <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
+                            <input type="checkbox" id="terms" checked>
+                            <span style="color: #6c757d; font-size: 0.85rem;">I agree to the <a href="#" style="color: #1e4b8b;">Terms & Conditions</a></span>
+                        </label>
+                    </div>
+
+                    <button class="submit-btn" onclick="submitComplaint()">
+                        <i class="fas fa-paper-plane"></i> Submit Complaint
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Track Complaint Section -->
+        <div id="trackComplaintSection" class="hidden">
+            <div class="track-section">
+                <div class="track-card animate-in">
+                    <div class="track-header">
+                        <i class="fas fa-search"></i>
+                        <h3>Track Your Complaint</h3>
+                    </div>
+                    
+                    <div class="track-input">
+                        <input type="text" id="complaintId" placeholder="Enter Complaint ID (e.g., CMP001)">
+                        <button onclick="trackComplaint()">Track</button>
+                    </div>
+
+                    <div class="complaint-status" id="complaintStatus">
+                        <div class="status-header">
+                            <span class="complaint-id" id="displayComplaintId">CMP001</span>
+                            <span class="complaint-badge badge-processing" id="displayStatus">In Progress</span>
+                        </div>
+
+                        <div class="status-timeline" id="statusTimeline">
+                            <div class="timeline-item completed">
+                                <div class="timeline-date">15 Mar 2026, 10:30 AM</div>
+                                <div class="timeline-text">Complaint Registered</div>
+                            </div>
+                            <div class="timeline-item completed">
+                                <div class="timeline-date">15 Mar 2026, 11:45 AM</div>
+                                <div class="timeline-text">Assigned to Support Team</div>
+                            </div>
+                            <div class="timeline-item active">
+                                <div class="timeline-date">15 Mar 2026, 2:15 PM</div>
+                                <div class="timeline-text">Under Review</div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-date">Expected: 16 Mar 2026</div>
+                                <div class="timeline-text">Resolution</div>
+                            </div>
+                        </div>
+
+                        <div class="complaint-details">
+                            <div class="detail-row">
+                                <span class="detail-label">Type:</span>
+                                <span class="detail-value" id="displayType">Product Issue</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">Priority:</span>
+                                <span class="detail-value" id="displayPriority">High</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">Subject:</span>
+                                <span class="detail-value" id="displaySubject">Net torn after 2 months</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">Assigned To:</span>
+                                <span class="detail-value" id="displayAssignee">Ramesh (Support)</span>
+                            </div>
+                        </div>
+
+                        <div class="resolution-info" id="resolutionInfo">
+                            <i class="fas fa-info-circle"></i>
+                            <strong>Update:</strong> Your complaint is being reviewed. We'll update within 4 hours.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- History Section -->
+        <div id="historySection" class="hidden">
+            <div class="history-section">
+                <div class="history-item" onclick="viewComplaint('CMP001')">
+                    <div class="history-icon">
+                        <i class="fas fa-exclamation-circle"></i>
+                    </div>
+                    <div class="history-details">
+                        <div class="history-title">Product Issue - Velcro Net</div>
+                        <div class="history-meta">
+                            <span>CMP001 • 15 Mar 2026</span>
+                            <span class="history-status badge-processing">In Progress</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="history-item" onclick="viewComplaint('CMP002')">
+                    <div class="history-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="history-details">
+                        <div class="history-title">Installation Issue</div>
+                        <div class="history-meta">
+                            <span>CMP002 • 10 Mar 2026</span>
+                            <span class="history-status badge-resolved">Resolved</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="history-item" onclick="viewComplaint('CMP003')">
+                    <div class="history-icon">
+                        <i class="fas fa-times-circle"></i>
+                    </div>
+                    <div class="history-details">
+                        <div class="history-title">Billing Discrepancy</div>
+                        <div class="history-meta">
+                            <span>CMP003 • 05 Mar 2026</span>
+                            <span class="history-status badge-resolved">Resolved</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Navigation -->
+        <div class="bottom-nav">
+            <div class="nav-item" onclick="location.href='index.html'"><i class="fas fa-home"></i><span>Home</span></div>
+            <div class="nav-item" onclick="location.href='products.html'"><i class="fas fa-search"></i><span>Search</span></div>
+            <div class="nav-item" onclick="location.href='estimate.html'"><i class="fas fa-calculator"></i><span>Estimate</span></div>
+            <div class="nav-item active" onclick="location.href='service.html'"><i class="fas fa-headset"></i><span>Service</span></div>
+            <div class="nav-item" onclick="location.href='complaint.html'"><i class="fas fa-exclamation-triangle"></i><span>Complaint</span></div>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div id="toastMessage"></div>
+
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+
+    <script>
+        // Firebase Config
+        const firebaseConfig = {
+            apiKey: "YOUR_API_KEY",
+            authDomain: "YOUR_AUTH_DOMAIN",
+            projectId: "YOUR_PROJECT_ID",
+            storageBucket: "YOUR_STORAGE_BUCKET",
+            messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+            appId: "YOUR_APP_ID"
+        };
+
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+
+        // State
+        let selectedType = 'product';
+        let selectedPriority = 'low';
+        let uploadedFiles = [];
+
+        // Tab Switching
+        function switchTab(tab) {
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            document.getElementById('newComplaintSection').classList.add('hidden');
+            document.getElementById('trackComplaintSection').classList.add('hidden');
+            document.getElementById('historySection').classList.add('hidden');
+            
+            if (tab === 'new') {
+                document.getElementById('newTab').classList.add('active');
+                document.getElementById('newComplaintSection').classList.remove('hidden');
+            } else if (tab === 'track') {
+                document.getElementById('trackTab').classList.add('active');
+                document.getElementById('trackComplaintSection').classList.remove('hidden');
+            } else {
+                document.getElementById('historyTab').classList.add('active');
+                document.getElementById('historySection').classList.remove('hidden');
+            }
+        }
+
+        // Select Complaint Type
+        function selectComplaintType(type) {
+            selectedType = type;
+            
+            document.querySelectorAll('.complaint-type-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            document.getElementById(`type${type.charAt(0).toUpperCase() + type.slice(1)}`).classList.add('selected');
+        }
+
+        // Select Priority
+        function selectPriority(priority) {
+            selectedPriority = priority;
+            
+            document.querySelectorAll('.priority-option').forEach(opt => {
+                opt.classList.remove('selected');
+            });
+            document.getElementById(`priority${priority.charAt(0).toUpperCase() + priority.slice(1)}`).classList.add('selected');
+        }
+
+        // Handle File Upload
+        function handleFiles(files) {
+            const fileList = document.getElementById('fileList');
+            
+            for (let i = 0; i < files.length; i++) {
+                const file = files[i];
+                const fileSize = (file.size / 1024).toFixed(1);
+                
+                uploadedFiles.push(file);
+                
+                const fileItem = document.createElement('div');
+                fileItem.className = 'file-item';
+                fileItem.innerHTML = `
+                    <i class="fas fa-file"></i>
+                    <span class="file-name">${file.name}</span>
+                    <span class="file-size">${fileSize} KB</span>
+                    <i class="fas fa-times remove-file" onclick="removeFile(this)"></i>
+                `;
+                
+                fileList.appendChild(fileItem);
+            }
+        }
+
+        function removeFile(element) {
+            const fileItem = element.closest('.file-item');
+            const fileName = fileItem.querySelector('.file-name').textContent;
+            
+            uploadedFiles = uploadedFiles.filter(f => f.name !== fileName);
+            fileItem.remove();
+        }
+
+        // Submit Complaint
+        function submitComplaint() {
+            const name = document.getElementById('complaintName').value;
+            const mobile = document.getElementById('complaintMobile').value;
+            const email = document.getElementById('complaintEmail').value;
+            const orderId = document.getElementById('orderId').value;
+            const subject = document.getElementById('subject').value;
+            const description = document.getElementById('description').value;
+            const address = document.getElementById('complaintAddress').value;
+            const terms = document.getElementById('terms').checked;
+
+            // Validation
+            if (!name || !mobile || !subject || !description) {
+                showToast('Please fill all required fields');
+                return;
+            }
+
+            if (mobile.length !== 10) {
+                showToast('Enter valid 10 digit mobile number');
+                return;
+            }
+
+            if (!terms) {
+                showToast('Please accept terms and conditions');
+                return;
+            }
+
+            // Generate Complaint ID
+            const complaintId = 'CMP' + Date.now().toString().slice(-4);
+
+            // Create complaint object
+            const complaint = {
+                complaintId: complaintId,
+                name: name,
+                mobile: mobile,
+                email: email || '',
+                type: selectedType,
+                priority: selectedPriority,
+                orderId: orderId || '',
+                subject: subject,
+                description: description,
+                address: address || '',
+                status: 'pending',
+                createdAt: new Date().toISOString(),
+                timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+                updates: [{
+                    date: new Date().toLocaleString(),
+                    message: 'Complaint registered',
+                    status: 'pending'
+                }]
+            };
+
+            // Save to Firebase
+            db.collection('complaints').add(complaint).then(() => {
+                showToast(`Complaint registered! ID: ${complaintId}`);
+                
+                // Clear form
+                document.getElementById('complaintName').value = '';
+                document.getElementById('complaintMobile').value = '';
+                document.getElementById('complaintEmail').value = '';
+                document.getElementById('orderId').value = '';
+                document.getElementById('subject').value = '';
+                document.getElementById('description').value = '';
+                document.getElementById('complaintAddress').value = '';
+                document.getElementById('fileList').innerHTML = '';
+                uploadedFiles = [];
+                
+                // Switch to track tab
+                setTimeout(() => {
+                    switchTab('track');
+                    document.getElementById('complaintId').value = complaintId;
+                    trackComplaint();
+                }, 2000);
+                
+            }).catch(() => {
+                showToast(`Complaint registered! ID: ${complaintId}`);
+            });
+        }
+
+        // Track Complaint
+        function trackComplaint() {
+            const complaintId = document.getElementById('complaintId').value;
+            
+            if (!complaintId) {
+                showToast('Please enter Complaint ID');
+                return;
+            }
+
+            // Search in Firebase
+            db.collection('complaints').where('complaintId', '==', complaintId).get()
+                .then(snapshot => {
+                    if (!snapshot.empty) {
+                        const data = snapshot.docs[0].data();
+                        displayComplaintStatus(data);
+                    } else {
+                        // Show demo data
+                        showDemoComplaintStatus();
+                    }
+                })
+                .catch(() => {
+                    showDemoComplaintStatus();
+                });
+        }
+
+        function displayComplaintStatus(data) {
+            document.getElementById('complaintStatus').classList.add('active');
+            document.getElementById('displayComplaintId').textContent = data.complaintId;
+            document.getElementById('displayStatus').textContent = data.status;
+            document.getElementById('displayType').textContent = data.type;
+            document.getElementById('displayPriority').textContent = data.priority;
+            document.getElementById('displaySubject').textContent = data.subject;
+            
+            // Update status badge class
+            const badge = document.getElementById('displayStatus');
+            badge.className = `complaint-badge badge-${data.status}`;
+        }
+
+        function showDemoComplaintStatus() {
+            document.getElementById('complaintStatus').classList.add('active');
+        }
+
+        // View Complaint from History
+        function viewComplaint(id) {
+            document.getElementById('complaintId').value = id;
+            switchTab('track');
+            trackComplaint();
+        }
+
+        // Toast
+        function showToast(text) {
+            const toast = document.getElementById('toastMessage');
+            toast.style.opacity = '1';
+            toast.innerText = text;
+            setTimeout(() => toast.style.opacity = '0', 2000);
+        }
+    </script>
+</body>
+</html>
