@@ -782,4 +782,438 @@
             <div class="status-card">
                 <div class="status-header">
                     <span class="order-id" id="displayOrderId">ORD-2026-001</span>
-                    <span class="order-badge badge-processing" id="displayStatus">In
+                  <span class="order-badge badge-processing" id="displayStatus">In Progress</span>
+                </div>
+
+                <!-- Progress Timeline -->
+                <div class="progress-timeline" id="progressTimeline">
+                    <div class="progress-step completed">
+                        <div class="step-icon">✓</div>
+                        <div class="step-content">
+                            <div class="step-title">Order Placed</div>
+                            <div class="step-date">15 Mar 2026, 10:30 AM</div>
+                            <div class="step-desc">Your order has been confirmed</div>
+                        </div>
+                    </div>
+                    
+                    <div class="progress-step completed">
+                        <div class="step-icon">⚙️</div>
+                        <div class="step-content">
+                            <div class="step-title">Processing</div>
+                            <div class="step-date">15 Mar 2026, 2:15 PM</div>
+                            <div class="step-desc">Order is being prepared</div>
+                        </div>
+                    </div>
+                    
+                    <div class="progress-step active">
+                        <div class="step-icon">📦</div>
+                        <div class="step-content">
+                            <div class="step-title">Shipped</div>
+                            <div class="step-date">16 Mar 2026, 9:00 AM</div>
+                            <div class="step-desc">Out for delivery ·预计送达今天 6 PM</div>
+                        </div>
+                    </div>
+                    
+                    <div class="progress-step">
+                        <div class="step-icon">🏠</div>
+                        <div class="step-content">
+                            <div class="step-title">Delivered</div>
+                            <div class="step-date">Expected: Today</div>
+                            <div class="step-desc">Will be delivered today</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Order Details Grid -->
+                <div class="details-grid">
+                    <div class="detail-item">
+                        <div class="detail-label">Order Date</div>
+                        <div class="detail-value" id="orderDate">15 Mar 2026</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Total Amount</div>
+                        <div class="detail-value" id="orderAmount">₹4,500</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Payment</div>
+                        <div class="detail-value" id="paymentStatus">Paid <small>(UPI)</small></div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Items</div>
+                        <div class="detail-value" id="itemCount">3 Items</div>
+                    </div>
+                </div>
+
+                <!-- Product List -->
+                <div class="product-list" id="productList">
+                    <div class="product-item">
+                        <div class="product-image">
+                            <i class="fas fa-mosquito-net"></i>
+                        </div>
+                        <div class="product-details">
+                            <div class="product-name">Premium Velcro System</div>
+                            <div class="product-meta">
+                                <span>Qty: 2</span>
+                                <span>Size: 3x4 ft</span>
+                            </div>
+                            <div class="product-price">₹3,600</div>
+                        </div>
+                    </div>
+                    
+                    <div class="product-item">
+                        <div class="product-image">
+                            <i class="fas fa-door-open"></i>
+                        </div>
+                        <div class="product-details">
+                            <div class="product-name">Mesh Door</div>
+                            <div class="product-meta">
+                                <span>Qty: 1</span>
+                                <span>Size: 3x7 ft</span>
+                            </div>
+                            <div class="product-price">₹900</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Delivery Map -->
+                <div class="map-container">
+                    <div id="deliveryMap" class="map-placeholder">
+                        <i class="fas fa-map-marked-alt" style="font-size: 2rem; color: #1e4b8b; margin-bottom: 10px;"></i>
+                        <p>Delivery partner is 2.5 km away</p>
+                    </div>
+                </div>
+
+                <!-- Delivery Info -->
+                <div class="delivery-info">
+                    <div class="delivery-row">
+                        <i class="fas fa-user"></i>
+                        <span><strong>Delivery Partner:</strong> Ramesh (ID: DEV001)</span>
+                    </div>
+                    <div class="delivery-row">
+                        <i class="fas fa-phone"></i>
+                        <span><strong>Contact:</strong> <a href="tel:9876543210" style="color: #1e4b8b; text-decoration: none;">9876543210</a></span>
+                    </div>
+                    <div class="delivery-row">
+                        <i class="fas fa-clock"></i>
+                        <span><strong>Estimated Time:</strong> <strong id="eta">Today, 5:30 - 6:30 PM</strong></span>
+                    </div>
+                    <div class="delivery-row">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span><strong>Delivery Address:</strong> #123, 2nd Main, Vijayanagar, Mysore</span>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="action-buttons">
+                    <button class="action-btn primary" onclick="contactDelivery()">
+                        <i class="fas fa-phone"></i> Call Partner
+                    </button>
+                    <button class="action-btn secondary" onclick="shareOrder()">
+                        <i class="fas fa-share"></i> Share
+                    </button>
+                </div>
+                
+                <div style="margin-top: 15px;">
+                    <button class="action-btn outline" onclick="cancelOrder()">
+                        <i class="fas fa-times"></i> Cancel Order
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Orders -->
+        <div class="recent-orders">
+            <div class="section-title">
+                <h3>📦 Recent Orders</h3>
+                <a href="#" onclick="viewAllOrders()">View All</a>
+            </div>
+
+            <div class="recent-item" onclick="loadOrder('ORD001')">
+                <div class="recent-icon">
+                    <i class="fas fa-box"></i>
+                </div>
+                <div class="recent-details">
+                    <div class="recent-title">ORD-2026-001</div>
+                    <div class="recent-meta">
+                        <span>15 Mar 2026</span>
+                        <span>₹4,500</span>
+                    </div>
+                </div>
+                <span class="recent-status badge-processing">In Transit</span>
+            </div>
+
+            <div class="recent-item" onclick="loadOrder('ORD002')">
+                <div class="recent-icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <div class="recent-details">
+                    <div class="recent-title">ORD-2026-002</div>
+                    <div class="recent-meta">
+                        <span>10 Mar 2026</span>
+                        <span>₹7,200</span>
+                    </div>
+                </div>
+                <span class="recent-status badge-delivered">Delivered</span>
+            </div>
+
+            <div class="recent-item" onclick="loadOrder('ORD003')">
+                <div class="recent-icon">
+                    <i class="fas fa-clock"></i>
+                </div>
+                <div class="recent-details">
+                    <div class="recent-title">ORD-2026-003</div>
+                    <div class="recent-meta">
+                        <span>05 Mar 2026</span>
+                        <span>₹2,800</span>
+                    </div>
+                </div>
+                <span class="recent-status badge-pending">Pending</span>
+            </div>
+        </div>
+
+        <!-- Share Modal -->
+        <div class="modal" id="shareModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <i class="fas fa-share-alt"></i>
+                    <h3>Share Order</h3>
+                </div>
+                <div class="share-options">
+                    <div class="share-option" onclick="shareVia('whatsapp')">
+                        <i class="fab fa-whatsapp" style="color: #25d366;"></i>
+                        <span>WhatsApp</span>
+                    </div>
+                    <div class="share-option" onclick="shareVia('telegram')">
+                        <i class="fab fa-telegram" style="color: #0088cc;"></i>
+                        <span>Telegram</span>
+                    </div>
+                    <div class="share-option" onclick="shareVia('sms')">
+                        <i class="fas fa-sms" style="color: #1e4b8b;"></i>
+                        <span>SMS</span>
+                    </div>
+                    <div class="share-option" onclick="shareVia('email')">
+                        <i class="fas fa-envelope" style="color: #ea4335;"></i>
+                        <span>Email</span>
+                    </div>
+                    <div class="share-option" onclick="shareVia('copy')">
+                        <i class="fas fa-link" style="color: #6c757d;"></i>
+                        <span>Copy Link</span>
+                    </div>
+                    <div class="share-option" onclick="shareVia('more')">
+                        <i class="fas fa-ellipsis-h" style="color: #6c757d;"></i>
+                        <span>More</span>
+                    </div>
+                </div>
+                <button class="close-modal" onclick="closeShareModal()">Close</button>
+            </div>
+        </div>
+
+        <!-- Bottom Navigation -->
+        <div class="bottom-nav">
+            <div class="nav-item" onclick="location.href='index.html'"><i class="fas fa-home"></i><span>Home</span></div>
+            <div class="nav-item" onclick="location.href='products.html'"><i class="fas fa-search"></i><span>Search</span></div>
+            <div class="nav-item active" onclick="location.href='track-order.html'"><i class="fas fa-truck"></i><span>Track</span></div>
+            <div class="nav-item" onclick="location.href='tel:9483037385'"><i class="fas fa-phone"></i><span>Call</span></div>
+            <div class="nav-item" onclick="location.href='customer-login.html'"><i class="fas fa-user"></i><span>Account</span></div>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div id="toastMessage"></div>
+
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+
+    <script>
+        // Firebase Config
+        const firebaseConfig = {
+            apiKey: "YOUR_API_KEY",
+            authDomain: "YOUR_AUTH_DOMAIN",
+            projectId: "YOUR_PROJECT_ID",
+            storageBucket: "YOUR_STORAGE_BUCKET",
+            messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+            appId: "YOUR_APP_ID"
+        };
+
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+
+        // Initialize Map
+        let map = null;
+
+        // URL Parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const orderParam = urlParams.get('id');
+        const mobileParam = urlParams.get('mobile');
+
+        if (orderParam || mobileParam) {
+            document.getElementById('orderSearch').value = orderParam || mobileParam;
+            setTimeout(trackOrder, 500);
+        }
+
+        // Track Order
+        function trackOrder() {
+            const searchValue = document.getElementById('orderSearch').value;
+            
+            if (!searchValue) {
+                showToast('Please enter Order ID or Mobile Number');
+                return;
+            }
+
+            // Show loading
+            showToast('Fetching order details...');
+
+            // Search in Firebase
+            db.collection('orders').where('orderId', '==', searchValue).get()
+                .then(snapshot => {
+                    if (!snapshot.empty) {
+                        const orderData = snapshot.docs[0].data();
+                        displayOrder(orderData);
+                    } else {
+                        // Search by mobile
+                        db.collection('orders').where('mobile', '==', searchValue).get()
+                            .then(mobileSnapshot => {
+                                if (!mobileSnapshot.empty) {
+                                    const orderData = mobileSnapshot.docs[0].data();
+                                    displayOrder(orderData);
+                                } else {
+                                    showDemoOrder();
+                                }
+                            })
+                            .catch(() => showDemoOrder());
+                    }
+                })
+                .catch(() => showDemoOrder());
+        }
+
+        function displayOrder(order) {
+            document.getElementById('orderStatus').classList.add('active');
+            document.getElementById('displayOrderId').textContent = order.orderId || 'ORD-2026-001';
+            document.getElementById('orderDate').textContent = order.date || '15 Mar 2026';
+            document.getElementById('orderAmount').textContent = `₹${order.amount || '4,500'}`;
+            document.getElementById('itemCount').textContent = `${order.items || 3} Items`;
+            
+            // Update status badge
+            const badge = document.getElementById('displayStatus');
+            badge.textContent = order.status || 'In Progress';
+            badge.className = `order-badge badge-${order.status || 'processing'}`;
+            
+            // Update payment status
+            document.getElementById('paymentStatus').innerHTML = order.paymentStatus || 'Paid <small>(UPI)</small>';
+            
+            // Update ETA
+            document.getElementById('eta').textContent = order.eta || 'Today, 5:30 - 6:30 PM';
+            
+            showToast('Order found!');
+        }
+
+        function showDemoOrder() {
+            document.getElementById('orderStatus').classList.add('active');
+            showToast('Showing demo order');
+        }
+
+        // Load Order from Recent
+        function loadOrder(orderId) {
+            document.getElementById('orderSearch').value = orderId;
+            trackOrder();
+            
+            // Scroll to status
+            document.getElementById('orderStatus').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Track Options
+        function useOrderId() {
+            document.getElementById('orderSearch').placeholder = 'Enter Order ID (e.g., ORD001)';
+            showToast('Enter your Order ID');
+        }
+
+        function useMobile() {
+            document.getElementById('orderSearch').placeholder = 'Enter 10 digit mobile number';
+            showToast('Enter your registered mobile number');
+        }
+
+        function scanQR() {
+            showToast('QR Scanner opening...');
+        }
+
+        // Action Functions
+        function contactDelivery() {
+            window.location.href = 'tel:9876543210';
+        }
+
+        function shareOrder() {
+            document.getElementById('shareModal').classList.add('active');
+        }
+
+        function cancelOrder() {
+            if (confirm('Are you sure you want to cancel this order?')) {
+                showToast('Cancellation request submitted');
+            }
+        }
+
+        // Share Functions
+        function shareVia(platform) {
+            const orderId = document.getElementById('displayOrderId').textContent;
+            const text = `Track your order ${orderId} with Raj Marketing`;
+            
+            switch(platform) {
+                case 'whatsapp':
+                    window.open(`https://wa.me/?text=${encodeURIComponent(text)}`);
+                    break;
+                case 'telegram':
+                    window.open(`https://t.me/share/url?url=${encodeURIComponent(text)}`);
+                    break;
+                case 'sms':
+                    window.location.href = `sms:?body=${encodeURIComponent(text)}`;
+                    break;
+                case 'email':
+                    window.location.href = `mailto:?subject=Order Tracking&body=${encodeURIComponent(text)}`;
+                    break;
+                case 'copy':
+                    navigator.clipboard.writeText(text);
+                    showToast('Link copied!');
+                    break;
+                default:
+                    showToast('Sharing...');
+            }
+            
+            closeShareModal();
+        }
+
+        function closeShareModal() {
+            document.getElementById('shareModal').classList.remove('active');
+        }
+
+        // View All Orders
+        function viewAllOrders() {
+            showToast('Viewing all orders');
+        }
+
+        // Initialize Map (if needed)
+        function initMap() {
+            if (document.getElementById('deliveryMap') && !map) {
+                // This would initialize actual map with Leaflet
+                // For demo, we're using placeholder
+            }
+        }
+
+        // Toast
+        function showToast(text) {
+            const toast = document.getElementById('toastMessage');
+            toast.style.opacity = '1';
+            toast.innerText = text;
+            setTimeout(() => toast.style.opacity = '0', 2000);
+        }
+
+        // Close modal on outside click
+        window.onclick = function(event) {
+            const modal = document.getElementById('shareModal');
+            if (event.target === modal) {
+                closeShareModal();
+            }
+        };
+    </script>
+</body>
+</html>
+```
