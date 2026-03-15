@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Gallery · Raj Marketing</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <!-- LightGallery for beautiful gallery -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.2/css/lightgallery.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.2/css/lg-zoom.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.2/css/lg-thumbnail.min.css">
+    
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #1a2c2d;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+        }
+
+        .app-container {
+            max-width: 390px;
+            width: 100%;
+            background: linear-gradient(145deg, #f5faf8 0%, #e8f0ed 100%);
+            border-radius: 36px 36px 0 0;
+            margin: 8px 0 0 0;
+            overflow: hidden;
+            position: relative;
+            padding-bottom: 70px;
+        }
+
+        /* Header */
+        .page-header {
+            height: 60px;
+            background: white;
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            gap: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .back-btn {
+            width: 40px;
+            height: 40px;
+            background: #f0f5f3;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #1e4b8b;
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: 0.3s;
+        }
+
+        .back-btn:hover {
+            background: #1e4b8b;
+            color: white;
+        }
+
+        .page-header h1 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #1e4b8b;
+        }
+
+        .page-header h1 i {
+            color: #e6b422;
+            margin-right: 8px;
+        }
+
+        /* Gallery Categories */
+        .gallery-categories {
+            display: flex;
+            gap: 12px;
+            overflow-x: auto;
+            padding: 20px 16px;
+            scrollbar-width: none;
+        }
+
+        .gallery-categories::-webkit-scrollbar {
+            display: none;
+        }
+
+        .category-chip {
+            background: white;
+            padding: 12px 25px;
+            border-radius: 30px;
+            font-weight: 600;
+            color: #1e4b8b;
+            box-shadow: 0 5px 10px rgba(0,0,0,0.05);
+            cursor: pointer;
+            transition: 0.3s;
+            white-space: nowrap;
+            border: 2px solid transparent;
+        }
+
+        .category-chip.active {
+            background: #1e4b8b;
+            color: white;
+            border-color: #e6b422;
+        }
+
+        .category-chip i {
+            margin-right: 8px;
+        }
+
+        /* Gallery Grid */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            padding: 0 16px 20px;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            aspect-ratio: 1;
+            cursor: pointer;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            transition: 0.3s;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.02);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: 0.3s;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            padding: 20px 15px 15px;
+            color: white;
+            transform: translateY(100%);
+            transition: 0.3s;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            transform: translateY(0);
+        }
+
+        .gallery-title {
+            font-weight: 700;
+            font-size: 0.9rem;
+            margin-bottom: 3px;
+        }
+
+        .gallery-subtitle {
+            font-size: 0.7rem;
+            opacity: 0.9;
+        }
+
+        .gallery-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #e6b422;
+            color: #1e4b8b;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.65rem;
+            font-weight: 700;
+            z-index: 2;
+        }
+
+        /* Featured Video */
+        .video-section {
+            padding: 20px 16px;
+        }
+
+        .video-card {
+            background: linear-gradient(145deg, #1e4b8b, #2a6bb3);
+            border-radius: 25px;
+            padding: 25px;
+            color: white;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .video-play {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background: #e6b422;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            color: #1e4b8b;
+            animation: pulse 2s infinite;
+            z-index: 2;
+        }
+
+        .video-thumbnail {
+            width: 100%;
+            height: 180px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .video-thumbnail::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.3);
+        }
+
+        .video-info {
+            margin-top: 15px;
+        }
+
+        .video-info h3 {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+
+        .video-info p {
+            opacity: 0.9;
+            font-size: 0.8rem;
+        }
+
+        /* Before/After Slider */
+        .comparison-section {
+            padding: 20px 16px;
+        }
+
+        .comparison-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .comparison-title i {
+            font-size: 1.5rem;
+            color: #e6b422;
+        }
+
+        .comparison-title h3 {
+            color: #1e4b8b;
+            font-size: 1.1rem;
+        }
+
+        .comparison-card {
+            background: white;
+            border-radius: 25px;
+            padding: 20px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+        }
+
+        .comparison-images {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .comparison-image {
+            flex: 1;
+            aspect-ratio: 1;
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .comparison-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .comparison-label {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: #1e4b8b;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.65rem;
+            font-weight: 700;
+        }
+
+        .comparison-label.after {
+            background: #28a745;
+        }
+
+        .comparison-stats {
+            display: flex;
+            justify-content: space-around;
+            text-align: center;
+        }
+
+        .stat-item {
+            flex: 1;
+        }
+
+        .stat-value {
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: #1e4b8b;
+        }
+
+        .stat-label {
+            font-size: 0.7rem;
+            color: #6c757d;
+        }
+
+        /* Customer Projects */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            padding: 0 16px 20px;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+
+        .project-image {
+            height: 140px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .project-rating {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #e6b422;
+            color: #1e4b8b;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.65rem;
+            font-weight: 700;
+        }
+
+        .project-info {
+            padding: 15px;
+        }
+
+        .project-name {
+            font-weight: 700;
+            color: #1e4b8b;
+            margin-bottom: 3px;
+        }
+
+        .project-location {
+            font-size: 0.7rem;
+            color: #6c757d;
+            margin-bottom: 8px;
+        }
+
+        .project-tags {
+            display: flex;
+            gap: 5px;
+            flex-wrap: wrap;
+        }
+
+        .project-tag {
+            background: #f8f9fa;
+            padding: 3px 10px;
+            border-radius: 15px;
+            font-size: 0.6rem;
+            color: #1e4b8b;
+        }
+
+        /* Fullscreen Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            max-width: 390px;
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .modal-image {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            background: #e6b422;
+            border: none;
+            border-radius: 50%;
+            color: #1e4b8b;
+            font-size: 1.2rem;
+            cursor: pointer;
+            z-index: 2001;
+        }
+
+        .modal-caption {
+            position: absolute;
+            bottom: 30px;
+            left: 20px;
+            right: 20px;
+            color: white;
+            text-align: center;
+            background: rgba(0,0,0,0.5);
+            padding: 15px;
+            border-radius: 25px;
+            backdrop-filter: blur(10px);
+        }
+
+        .modal-caption h3 {
+            margin-bottom: 5px;
+        }
+
+        .modal-caption p {
+            font-size: 0.8rem;
+            opacity: 0.9;
+        }
+
+        /* Bottom Navigation */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            max-width: 390px;
+            width: 100%;
+            background: white;
+            display: flex;
+            justify-content: space-around;
+            padding: 12px 10px 20px;
+            border-top: 3px solid #e6b422;
+            border-radius: 30px 30px 0 0;
+            z-index: 100;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #6c757d;
+            font-size: 0.7rem;
+            cursor: pointer;
+        }
+
+        .nav-item.active {
+            color: #1e4b8b;
+        }
+
+        .nav-item i {
+            font-size: 1.4rem;
+            margin-bottom: 3px;
+        }
+
+        /* Toast */
+        #toastMessage {
+            position: fixed;
+            bottom: 180px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #1e4b8b;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            z-index: 5000;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+
+        /* Animations */
+        @keyframes pulse {
+            0% { transform: translate(-50%, -50%) scale(1); }
+            50% { transform: translate(-50%, -50%) scale(1.1); }
+            100% { transform: translate(-50%, -50%) scale(1); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        /* Hidden */
+        .hidden {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <div class="page-header">
+            <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i></a>
+            <h1><i class="fas fa-images"></i> Gallery</h1>
+        </div>
+
+        <!-- Gallery Categories -->
+        <div class="gallery-categories">
+            <div class="category-chip active" onclick="filterGallery('all')">
+                <i class="fas fa-border-all"></i> All
+            </div>
+            <div class="category-chip" onclick="filterGallery('velcro')">
+                <i class="fas fa-mosquito-net"></i> Velcro
+            </div>
+            <div class="category-chip" onclick="filterGallery('frame')">
+                <i class="fas fa-window-maximize"></i> Frame
+            </div>
+            <div class="category-chip" onclick="filterGallery('pleated')">
+                <i class="fas fa-arrows-spin"></i> Pleated
+            </div>
+            <div class="category-chip" onclick="filterGallery('doors')">
+                <i class="fas fa-door-open"></i> Doors
+            </div>
+            <div class="category-chip" onclick="filterGallery('projects')">
+                <i class="fas fa-building"></i> Projects
+            </div>
+        </div>
+
+        <!-- Gallery Grid -->
+        <div class="gallery-grid" id="galleryGrid">
+            <!-- Velcro Systems -->
+            <div class="gallery-item" data-category="velcro" onclick="openFullscreen(this)">
+                <img src="https://images.unsplash.com/photo-1584017911766-451b3d0e8434?w=400" alt="Velcro System">
+                <span class="gallery-badge">New</span>
+                <div class="gallery-overlay">
+                    <div class="gallery-title">Premium Velcro System</div>
+                    <div class="gallery-subtitle">White · 3x4 ft</div>
+                </div>
+            </div>
+
+            <div class="gallery-item" data-category="velcro" onclick="openFullscreen(this)">
+                <img src="https://images.unsplash.com/photo-1584017911766-451b3d0e8434?w=400" alt="Velcro System">
+                <div class="gallery-overlay">
+                    <div class="gallery-title">Velcro with Frame</div>
+                    <div class="gallery-subtitle">Brown · 4x5 ft</div>
+                </div>
+            </div>
+
+            <!-- Frame Systems -->
+            <div class="gallery-item" data-category="frame" onclick="openFullscreen(this)">
+                <img src="https://images.unsplash.com/photo-1513694203232-719a280e022f?w=400" alt="Frame System">
+                <span class="gallery-badge">Popular</span>
+                <div class="gallery-overlay">
+                    <div class="gallery-title">Aluminum Frame</div>
+                    <div class="gallery-subtitle">Silver · 3x5 ft</div>
+                </div>
+            </div>
+
+            <div class="gallery-item" data-category="frame" onclick="openFullscreen(this)">
+                <img src="https://images.unsplash.com/photo-1513694203232-719a280e022f?w=400" alt="Frame System">
+                <div class="gallery-overlay">
+                    <div class="gallery-title">Brown Frame</div>
+                    <div class="gallery-subtitle">Premium · 4x6 ft</div>
+                </div>
+            </div>
+
+            <!-- Pleated Nets -->
+            <div class="gallery-item" data-category="pleated" onclick="openFullscreen(this)">
+                <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=400" alt="Pleated Nets">
+                <span class="gallery-badge">New</span>
+                <div class="gallery-overlay">
+                    <div class="gallery-title">Pleated Retractable</div>
+                    <div class="gallery-subtitle">Black · 5x5 ft</div>
+                </div>
+            </div>
+
+            <div class="gallery-item" data-category="pleated" onclick="openFullscreen(this)">
+                <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=400" alt="Pleated Nets">
+                <div class="gallery-overlay">
+                    <div class="gallery-title">White Pleated</div>
+                    <div class="gallery-subtitle">Space Saving</div>
+                </div>
+            </div>
+
+            <!-- Mesh Doors -->
+            <div class="gallery-item" data-category="doors" onclick="openFullscreen(this)">
+                <img src="https://images.unsplash.com/photo-1507089947368-19c1da9775ae?w=400" alt="Mesh Door">
+                <span class="gallery-badge">Best Seller</span>
+                <div class="gallery-overlay">
+                    <div class="gallery-title">Magnetic Mesh Door</div>
+                    <div class="gallery-subtitle">3x7 ft · White</div>
+                </div>
+            </div>
+
+            <div class="gallery-item" data-category="doors" onclick="openFullscreen(this)">
+                <img src="https://images.unsplash.com/photo-1507089947368-19c1da9775ae?w=400" alt="Mesh Door">
+                <div class="gallery-overlay">
+                    <div class="gallery-title">French Door Mesh</div>
+                    <div class="gallery-subtitle">Double Door</div>
+                </div>
+            </div>
+
+            <!-- Projects -->
+            <div class="gallery-item" data-category="projects" onclick="openFullscreen(this)">
+                <img src="https://images.unsplash.com/photo-1558036117-15d82a90b9b1?w=400" alt="Project">
+                <div class="gallery-overlay">
+                    <div class="gallery-title">Villa Installation</div>
+                    <div class="gallery-subtitle">Gokulam · 15 windows</div>
+                </div>
+            </div>
+
+            <div class="gallery-item" data-category="projects" onclick="openFullscreen(this)">
+                <img src="https://images.unsplash.com/photo-1558036117-15d82a90b9b1?w=400" alt="Project">
+                <div class="gallery-overlay">
+                    <div class="gallery-title">Apartment Complex</div>
+                    <div class="gallery-subtitle">Vijayanagar · 50 units</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Featured Video -->
+        <div class="video-section">
+            <div class="video-card" onclick="playVideo()">
+                <div class="video-thumbnail" style="background-image: url('https://images.unsplash.com/photo-1558036117-15d82a90b9b1?w=400')">
+                    <div class="video-play">
+                        <i class="fas fa-play"></i>
+                    </div>
+                </div>
+                <div class="video-info">
+                    <h3>Installation Process</h3>
+                    <p>Watch how we install mosquito nets professionally</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Before/After Comparison -->
+        <div class="comparison-section">
+            <div class="comparison-title">
+                <i class="fas fa-balance-scale"></i>
+                <h3>Before & After</h3>
+            </div>
+
+            <div class="comparison-card">
+                <div class="comparison-images">
+                    <div class="comparison-image">
+                        <img src="https://images.unsplash.com/photo-1584017911766-451b3d0e8434?w=400" alt="Before">
+                        <span class="comparison-label">Before</span>
+                    </div>
+                    <div class="comparison-image">
+                        <img src="https://images.unsplash.com/photo-1584017911766-451b3d0e8434?w=400" alt="After">
+                        <span class="comparison-label after">After</span>
+                    </div>
+                </div>
+                <div class="comparison-stats">
+                    <div class="stat-item">
+                        <div class="stat-value">100%</div>
+                        <div class="stat-label">Protection</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">-5°C</div>
+                        <div class="stat-label">Cooler</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">99%</div>
+                        <div class="stat-label">Air Flow</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Customer Projects -->
+        <div class="section-title" style="padding: 0 16px; margin-bottom: 15px;">
+            <h3 style="color: #1e4b8b;">🏆 Customer Projects</h3>
+        </div>
+
+        <div class="projects-grid">
+            <div class="project-card" onclick="showProject(1)">
+                <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1558036117-15d82a90b9b1?w=400')">
+                    <span class="project-rating">⭐ 4.9</span>
+                </div>
+                <div class="project-info">
+                    <div class="project-name">Ramesh's Villa</div>
+                    <div class="project-location">Vijayanagar</div>
+                    <div class="project-tags">
+                        <span class="project-tag">15 Windows</span>
+                        <span class="project-tag">3 Doors</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card" onclick="showProject(2)">
+                <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1558036117-15d82a90b9b1?w=400')">
+                    <span class="project-rating">⭐ 5.0</span>
+                </div>
+                <div class="project-info">
+                    <div class="project-name">Priya's Apartment</div>
+                    <div class="project-location">Kuvempunagar</div>
+                    <div class="project-tags">
+                        <span class="project-tag">8 Windows</span>
+                        <span class="project-tag">2 Doors</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Fullscreen Modal -->
+        <div class="modal" id="fullscreenModal">
+            <div class="modal-content">
+                <button class="modal-close" onclick="closeFullscreen()">&times;</button>
+                <img src="" alt="" class="modal-image" id="modalImage">
+                <div class="modal-caption" id="modalCaption">
+                    <h3>Premium Velcro System</h3>
+                    <p>White · 3x4 ft · Installation at Vijayanagar</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Navigation -->
+        <div class="bottom-nav">
+            <div class="nav-item" onclick="location.href='index.html'"><i class="fas fa-home"></i><span>Home</span></div>
+            <div class="nav-item" onclick="location.href='products.html'"><i class="fas fa-search"></i><span>Search</span></div>
+            <div class="nav-item active" onclick="location.href='gallery.html'"><i class="fas fa-images"></i><span>Gallery</span></div>
+            <div class="nav-item" onclick="location.href='tel:9483037385'"><i class="fas fa-phone"></i><span>Call</span></div>
+            <div class="nav-item" onclick="location.href='customer-login.html'"><i class="fas fa-user"></i><span>Account</span></div>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div id="toastMessage"></div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.2/lightgallery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.2/plugins/zoom/lg-zoom.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.2/plugins/thumbnail/lg-thumbnail.min.js"></script>
+
+    <script>
+        // Filter Gallery
+        function filterGallery(category) {
+            document.querySelectorAll('.category-chip').forEach(chip => {
+                chip.classList.remove('active');
+            });
+            event.target.classList.add('active');
+
+            const items = document.querySelectorAll('.gallery-item');
+            
+            items.forEach(item => {
+                if (category === 'all' || item.dataset.category === category) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+
+        // Fullscreen View
+        function openFullscreen(element) {
+            const modal = document.getElementById('fullscreenModal');
+            const modalImage = document.getElementById('modalImage');
+            const img = element.querySelector('img');
+            
+            modalImage.src = img.src;
+            modal.classList.add('active');
+        }
+
+        function closeFullscreen() {
+            document.getElementById('fullscreenModal').classList.remove('active');
+        }
+
+        // Play Video
+        function playVideo() {
+            showToast('Opening video player...');
+        }
+
+        // Show Project
+        function showProject(id) {
+            showToast(`Viewing project ${id}`);
+        }
+
+        // Toast
+        function showToast(text) {
+            const toast = document.getElementById('toastMessage');
+            toast.style.opacity = '1';
+            toast.innerText = text;
+            setTimeout(() => toast.style.opacity = '0', 2000);
+        }
+
+        // Close modal on outside click
+        window.onclick = function(event) {
+            const modal = document.getElementById('fullscreenModal');
+            if (event.target === modal) {
+                closeFullscreen();
+            }
+        };
+    </script>
+</body>
+</html>
+```
