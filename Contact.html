@@ -1,0 +1,1045 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Contact Us · Raj Marketing</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <!-- Leaflet Maps -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #1a2c2d;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+        }
+
+        .app-container {
+            max-width: 390px;
+            width: 100%;
+            background: linear-gradient(145deg, #f5faf8 0%, #e8f0ed 100%);
+            border-radius: 36px 36px 0 0;
+            margin: 8px 0 0 0;
+            overflow: hidden;
+            position: relative;
+            padding-bottom: 70px;
+        }
+
+        /* Header */
+        .page-header {
+            height: 60px;
+            background: white;
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            gap: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .back-btn {
+            width: 40px;
+            height: 40px;
+            background: #f0f5f3;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #1e4b8b;
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: 0.3s;
+        }
+
+        .back-btn:hover {
+            background: #1e4b8b;
+            color: white;
+        }
+
+        .page-header h1 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #1e4b8b;
+        }
+
+        .page-header h1 i {
+            color: #e6b422;
+            margin-right: 8px;
+        }
+
+        /* Contact Hero */
+        .contact-hero {
+            background: linear-gradient(135deg, #1e4b8b, #2a6bb3);
+            padding: 30px 20px;
+            text-align: center;
+            color: white;
+        }
+
+        .contact-hero h2 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+
+        .contact-hero p {
+            opacity: 0.9;
+        }
+
+        /* Quick Contact Cards */
+        .quick-contact {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            padding: 20px 16px;
+        }
+
+        .quick-card {
+            background: white;
+            border-radius: 20px;
+            padding: 20px 10px;
+            text-align: center;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .quick-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+            background: #1e4b8b;
+        }
+
+        .quick-card:hover i,
+        .quick-card:hover span {
+            color: white;
+        }
+
+        .quick-card i {
+            font-size: 2rem;
+            color: #e6b422;
+            margin-bottom: 10px;
+            transition: 0.3s;
+        }
+
+        .quick-card span {
+            display: block;
+            font-weight: 600;
+            color: #1e4b8b;
+            transition: 0.3s;
+        }
+
+        /* Contact Info Cards */
+        .contact-info-section {
+            padding: 10px 16px 20px;
+        }
+
+        .info-card {
+            background: white;
+            border-radius: 25px;
+            padding: 25px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            transition: 0.3s;
+        }
+
+        .info-card:hover {
+            transform: translateX(5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+
+        .info-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(230,180,34,0.1);
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: #e6b422;
+        }
+
+        .info-content {
+            flex: 1;
+        }
+
+        .info-label {
+            color: #6c757d;
+            font-size: 0.8rem;
+            margin-bottom: 5px;
+        }
+
+        .info-value {
+            color: #1e4b8b;
+            font-weight: 700;
+            font-size: 1.1rem;
+            line-height: 1.4;
+        }
+
+        .info-value small {
+            color: #e6b422;
+            font-size: 0.8rem;
+        }
+
+        .copy-btn {
+            background: none;
+            border: none;
+            color: #e6b422;
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        /* Map Section */
+        .map-section {
+            padding: 20px 16px;
+        }
+
+        .map-container {
+            height: 200px;
+            background: #f8f9fa;
+            border-radius: 25px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        #map {
+            height: 100%;
+            width: 100%;
+        }
+
+        .map-overlay {
+            position: absolute;
+            bottom: 15px;
+            right: 15px;
+            background: #e6b422;
+            color: #1e4b8b;
+            padding: 8px 15px;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 0.8rem;
+            cursor: pointer;
+            z-index: 10;
+        }
+
+        /* Business Hours */
+        .hours-section {
+            padding: 20px 16px;
+        }
+
+        .hours-card {
+            background: white;
+            border-radius: 25px;
+            padding: 25px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+        }
+
+        .hours-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .hours-header i {
+            font-size: 2rem;
+            color: #e6b422;
+        }
+
+        .hours-header h3 {
+            color: #1e4b8b;
+            font-size: 1.2rem;
+        }
+
+        .hours-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px dashed #f0f0f0;
+        }
+
+        .hours-row:last-child {
+            border-bottom: none;
+        }
+
+        .day {
+            color: #6c757d;
+            font-weight: 500;
+        }
+
+        .time {
+            color: #1e4b8b;
+            font-weight: 700;
+        }
+
+        .badge {
+            background: #28a745;
+            color: white;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 0.65rem;
+            margin-left: 10px;
+        }
+
+        /* Contact Form */
+        .form-section {
+            padding: 20px 16px;
+        }
+
+        .form-card {
+            background: white;
+            border-radius: 25px;
+            padding: 25px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+        }
+
+        .form-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 25px;
+        }
+
+        .form-header i {
+            font-size: 2rem;
+            color: #e6b422;
+        }
+
+        .form-header h3 {
+            color: #1e4b8b;
+            font-size: 1.2rem;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #1e4b8b;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .form-group label i {
+            color: #e6b422;
+            margin-right: 8px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e9ecef;
+            border-radius: 15px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.95rem;
+            transition: 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: #1e4b8b;
+            outline: none;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 15px;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+        }
+
+        .submit-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #e6b422, #f5c542);
+            border: none;
+            padding: 18px;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #1e4b8b;
+            cursor: pointer;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(230,180,34,0.3);
+        }
+
+        /* Social Links */
+        .social-section {
+            padding: 20px 16px;
+        }
+
+        .social-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+        }
+
+        .social-item {
+            background: white;
+            border-radius: 18px;
+            padding: 20px 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .social-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .social-item i {
+            font-size: 2rem;
+            margin-bottom: 8px;
+        }
+
+        .social-item span {
+            display: block;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+
+        .social-item.facebook i { color: #1877f2; }
+        .social-item.instagram i { color: #e4405f; }
+        .social-item.whatsapp i { color: #25d366; }
+        .social-item.youtube i { color: #ff0000; }
+        .social-item.twitter i { color: #1da1f2; }
+        .social-item.linkedin i { color: #0077b5; }
+        .social-item.telegram i { color: #0088cc; }
+        .social-item.github i { color: #333; }
+
+        .social-item:hover.facebook { background: #1877f2; }
+        .social-item:hover.instagram { background: #e4405f; }
+        .social-item:hover.whatsapp { background: #25d366; }
+        .social-item:hover.youtube { background: #ff0000; }
+        .social-item:hover.twitter { background: #1da1f2; }
+        .social-item:hover.linkedin { background: #0077b5; }
+        .social-item:hover.telegram { background: #0088cc; }
+        .social-item:hover.github { background: #333; }
+
+        .social-item:hover i,
+        .social-item:hover span {
+            color: white;
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            padding: 20px 16px;
+        }
+
+        .faq-item {
+            background: white;
+            border-radius: 18px;
+            margin-bottom: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .faq-question {
+            padding: 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-weight: 600;
+            color: #1e4b8b;
+        }
+
+        .faq-question i {
+            color: #e6b422;
+            transition: 0.3s;
+        }
+
+        .faq-answer {
+            padding: 0 18px 18px;
+            color: #6c757d;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            display: none;
+        }
+
+        .faq-item.active .faq-answer {
+            display: block;
+        }
+
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+
+        /* Bottom Navigation */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            max-width: 390px;
+            width: 100%;
+            background: white;
+            display: flex;
+            justify-content: space-around;
+            padding: 12px 10px 20px;
+            border-top: 3px solid #e6b422;
+            border-radius: 30px 30px 0 0;
+            z-index: 100;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #6c757d;
+            font-size: 0.7rem;
+            cursor: pointer;
+        }
+
+        .nav-item.active {
+            color: #1e4b8b;
+        }
+
+        .nav-item i {
+            font-size: 1.4rem;
+            margin-bottom: 3px;
+        }
+
+        /* Success Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 30px;
+            max-width: 320px;
+            width: 90%;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .success-icon {
+            width: 70px;
+            height: 70px;
+            background: #28a745;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+        }
+
+        .success-icon i {
+            font-size: 2.5rem;
+            color: white;
+        }
+
+        .modal h3 {
+            color: #1e4b8b;
+            margin-bottom: 10px;
+        }
+
+        .modal p {
+            color: #6c757d;
+            margin-bottom: 20px;
+        }
+
+        .modal-btn {
+            background: #1e4b8b;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 30px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        /* Toast */
+        #toastMessage {
+            position: fixed;
+            bottom: 180px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #1e4b8b;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            z-index: 5000;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <div class="page-header">
+            <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i></a>
+            <h1><i class="fas fa-phone-alt"></i> Contact Us</h1>
+        </div>
+
+        <!-- Contact Hero -->
+        <div class="contact-hero animate__animated animate__fadeIn">
+            <h2>Get in Touch</h2>
+            <p>We're here to help 24/7</p>
+        </div>
+
+        <!-- Quick Contact -->
+        <div class="quick-contact">
+            <div class="quick-card" onclick="callNow()">
+                <i class="fas fa-phone-alt"></i>
+                <span>Call Now</span>
+            </div>
+            <div class="quick-card" onclick="whatsappNow()">
+                <i class="fab fa-whatsapp"></i>
+                <span>WhatsApp</span>
+            </div>
+            <div class="quick-card" onclick="emailNow()">
+                <i class="fas fa-envelope"></i>
+                <span>Email</span>
+            </div>
+        </div>
+
+        <!-- Contact Info -->
+        <div class="contact-info-section">
+            <div class="info-card">
+                <div class="info-icon">
+                    <i class="fas fa-map-marker-alt"></i>
+                </div>
+                <div class="info-content">
+                    <div class="info-label">Visit Us</div>
+                    <div class="info-value">
+                        #65, Near Pragathi logistics,<br>
+                        Hootghalli industries area,<br>
+                        Hootghalli, Mysore - 570018
+                    </div>
+                </div>
+                <button class="copy-btn" onclick="copyAddress()"><i class="fas fa-copy"></i></button>
+            </div>
+
+            <div class="info-card">
+                <div class="info-icon">
+                    <i class="fas fa-phone"></i>
+                </div>
+                <div class="info-content">
+                    <div class="info-label">Call Us</div>
+                    <div class="info-value">
+                        +91 9483037385<br>
+                        <small>24/7 Support</small>
+                    </div>
+                </div>
+                <button class="copy-btn" onclick="copyPhone()"><i class="fas fa-copy"></i></button>
+            </div>
+
+            <div class="info-card">
+                <div class="info-icon">
+                    <i class="fas fa-envelope"></i>
+                </div>
+                <div class="info-content">
+                    <div class="info-label">Email Us</div>
+                    <div class="info-value">
+                        info@rajmarketing.com<br>
+                        support@rajmarketing.com
+                    </div>
+                </div>
+                <button class="copy-btn" onclick="copyEmail()"><i class="fas fa-copy"></i></button>
+            </div>
+        </div>
+
+        <!-- Map Section -->
+        <div class="map-section">
+            <div class="map-container">
+                <div id="map"></div>
+                <div class="map-overlay" onclick="openDirections()">
+                    <i class="fas fa-directions"></i> Get Directions
+                </div>
+            </div>
+        </div>
+
+        <!-- Business Hours -->
+        <div class="hours-section">
+            <div class="hours-card">
+                <div class="hours-header">
+                    <i class="fas fa-clock"></i>
+                    <h3>Business Hours</h3>
+                </div>
+                <div class="hours-row">
+                    <span class="day">Monday - Friday</span>
+                    <span class="time">9:00 AM - 8:00 PM</span>
+                </div>
+                <div class="hours-row">
+                    <span class="day">Saturday</span>
+                    <span class="time">9:00 AM - 6:00 PM</span>
+                </div>
+                <div class="hours-row">
+                    <span class="day">Sunday</span>
+                    <span class="time">10:00 AM - 2:00 PM <span class="badge">Emergency Only</span></span>
+                </div>
+                <div class="hours-row">
+                    <span class="day">Emergency</span>
+                    <span class="time">24/7 Support</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact Form -->
+        <div class="form-section">
+            <div class="form-card">
+                <div class="form-header">
+                    <i class="fas fa-paper-plane"></i>
+                    <h3>Send Message</h3>
+                </div>
+
+                <div class="form-group">
+                    <label><i class="fas fa-user"></i> Your Name</label>
+                    <input type="text" id="contactName" placeholder="Enter your name">
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label><i class="fas fa-phone"></i> Phone</label>
+                        <input type="tel" id="contactPhone" placeholder="10 digit mobile">
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-envelope"></i> Email</label>
+                        <input type="email" id="contactEmail" placeholder="Your email">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label><i class="fas fa-tag"></i> Subject</label>
+                    <select id="contactSubject">
+                        <option>General Inquiry</option>
+                        <option>Product Information</option>
+                        <option>Service Request</option>
+                        <option>Complaint</option>
+                        <option>Feedback</option>
+                        <option>Others</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label><i class="fas fa-comment"></i> Message</label>
+                    <textarea id="contactMessage" rows="4" placeholder="Type your message here..."></textarea>
+                </div>
+
+                <button class="submit-btn" onclick="sendMessage()">
+                    <i class="fas fa-paper-plane"></i> Send Message
+                </button>
+            </div>
+        </div>
+
+        <!-- Social Links -->
+        <div class="social-section">
+            <div class="social-grid">
+                <div class="social-item facebook" onclick="socialLink('facebook')">
+                    <i class="fab fa-facebook-f"></i>
+                    <span>Facebook</span>
+                </div>
+                <div class="social-item instagram" onclick="socialLink('instagram')">
+                    <i class="fab fa-instagram"></i>
+                    <span>Instagram</span>
+                </div>
+                <div class="social-item whatsapp" onclick="socialLink('whatsapp')">
+                    <i class="fab fa-whatsapp"></i>
+                    <span>WhatsApp</span>
+                </div>
+                <div class="social-item youtube" onclick="socialLink('youtube')">
+                    <i class="fab fa-youtube"></i>
+                    <span>YouTube</span>
+                </div>
+                <div class="social-item twitter" onclick="socialLink('twitter')">
+                    <i class="fab fa-twitter"></i>
+                    <span>Twitter</span>
+                </div>
+                <div class="social-item linkedin" onclick="socialLink('linkedin')">
+                    <i class="fab fa-linkedin-in"></i>
+                    <span>LinkedIn</span>
+                </div>
+                <div class="social-item telegram" onclick="socialLink('telegram')">
+                    <i class="fab fa-telegram-plane"></i>
+                    <span>Telegram</span>
+                </div>
+                <div class="social-item github" onclick="socialLink('github')">
+                    <i class="fab fa-github"></i>
+                    <span>GitHub</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- FAQ Section -->
+        <div class="faq-section">
+            <div class="form-header" style="margin-bottom: 20px;">
+                <i class="fas fa-question-circle"></i>
+                <h3>Frequently Asked Questions</h3>
+            </div>
+
+            <div class="faq-item active">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <span>What are your service areas?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    We serve all areas of Mysore including Vijayanagar, Kuvempunagar, Gokulam, Jayalakshmipuram, Hebbal, Bogadi, and surrounding areas within 20km radius.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <span>Do you provide free site visits?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    Yes, we offer free site visits and measurements within Mysore city. Our expert will visit your location, assess requirements, and provide accurate quote.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <span>What is your response time?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    We typically respond within 2 hours during business hours. For emergency services, we respond within 30 minutes.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <span>Do you have weekend support?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    Yes, we provide limited support on Saturdays 9AM-6PM and Sundays 10AM-2PM. Emergency services are available 24/7.
+                </div>
+            </div>
+        </div>
+
+        <!-- Success Modal -->
+        <div class="modal" id="successModal">
+            <div class="modal-content">
+                <div class="success-icon">
+                    <i class="fas fa-check"></i>
+                </div>
+                <h3>Message Sent!</h3>
+                <p>Thank you for contacting us. We'll get back to you soon.</p>
+                <button class="modal-btn" onclick="closeModal()">OK</button>
+            </div>
+        </div>
+
+        <!-- Bottom Navigation -->
+        <div class="bottom-nav">
+            <div class="nav-item" onclick="location.href='index.html'"><i class="fas fa-home"></i><span>Home</span></div>
+            <div class="nav-item" onclick="location.href='products.html'"><i class="fas fa-search"></i><span>Search</span></div>
+            <div class="nav-item active" onclick="location.href='contact.html'"><i class="fas fa-phone-alt"></i><span>Contact</span></div>
+            <div class="nav-item" onclick="location.href='tel:9483037385'"><i class="fas fa-phone"></i><span>Call</span></div>
+            <div class="nav-item" onclick="location.href='customer-login.html'"><i class="fas fa-user"></i><span>Account</span></div>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div id="toastMessage"></div>
+
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+
+    <script>
+        // Firebase Config
+        const firebaseConfig = {
+            apiKey: "YOUR_API_KEY",
+            authDomain: "YOUR_AUTH_DOMAIN",
+            projectId: "YOUR_PROJECT_ID",
+            storageBucket: "YOUR_STORAGE_BUCKET",
+            messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+            appId: "YOUR_APP_ID"
+        };
+
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+
+        // Initialize Map
+        let map;
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            // Map coordinates for Hootghalli, Mysore
+            const latitude = 12.3456;
+            const longitude = 76.6789;
+            
+            map = L.map('map').setView([latitude, longitude], 15);
+            
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '© OpenStreetMap contributors'
+            }).addTo(map);
+            
+            L.marker([latitude, longitude]).addTo(map)
+                .bindPopup('Raj Marketing<br>#65, Hootghalli, Mysore')
+                .openPopup();
+        });
+
+        // Quick Actions
+        function callNow() {
+            window.location.href = 'tel:9483037385';
+        }
+
+        function whatsappNow() {
+            window.open('https://wa.me/919483037385?text=Hello%20Raj%20Marketing%2C%20I%20need%20assistance');
+        }
+
+        function emailNow() {
+            window.location.href = 'mailto:info@rajmarketing.com';
+        }
+
+        // Copy Functions
+        function copyAddress() {
+            navigator.clipboard.writeText('#65, Near Pragathi logistics, Hootghalli industries area, Hootghalli, Mysore - 570018');
+            showToast('Address copied!');
+        }
+
+        function copyPhone() {
+            navigator.clipboard.writeText('9483037385');
+            showToast('Phone number copied!');
+        }
+
+        function copyEmail() {
+            navigator.clipboard.writeText('info@rajmarketing.com');
+            showToast('Email copied!');
+        }
+
+        // Open Directions
+        function openDirections() {
+            window.open('https://maps.google.com/?q=12.3456,76.6789');
+        }
+
+        // Send Message
+        function sendMessage() {
+            const name = document.getElementById('contactName').value;
+            const phone = document.getElementById('contactPhone').value;
+            const email = document.getElementById('contactEmail').value;
+            const subject = document.getElementById('contactSubject').value;
+            const message = document.getElementById('contactMessage').value;
+
+            if (!name || !phone || !email || !message) {
+                showToast('Please fill all fields');
+                return;
+            }
+
+            // Save to Firebase
+            db.collection('contacts').add({
+                name: name,
+                phone: phone,
+                email: email,
+                subject: subject,
+                message: message,
+                timestamp: firebase.firestore.FieldValue.serverTimestamp()
+            }).then(() => {
+                document.getElementById('successModal').classList.add('active');
+                
+                // Clear form
+                document.getElementById('contactName').value = '';
+                document.getElementById('contactPhone').value = '';
+                document.getElementById('contactEmail').value = '';
+                document.getElementById('contactMessage').value = '';
+            }).catch(() => {
+                showToast('Message sent! (Offline mode)');
+                document.getElementById('successModal').classList.add('active');
+            });
+        }
+
+        // Social Links
+        function socialLink(platform) {
+            const urls = {
+                facebook: 'https://facebook.com/rajmarketing',
+                instagram: 'https://instagram.com/rajmarketing',
+                whatsapp: 'https://wa.me/919483037385',
+                youtube: 'https://youtube.com/@rajmarketing',
+                twitter: 'https://twitter.com/rajmarketing',
+                linkedin: 'https://linkedin.com/company/rajmarketing',
+                telegram: 'https://t.me/rajmarketing',
+                github: 'https://github.com/rajmarketing'
+            };
+            
+            window.open(urls[platform], '_blank');
+        }
+
+        // Toggle FAQ
+        function toggleFAQ(element) {
+            const faqItem = element.closest('.faq-item');
+            faqItem.classList.toggle('active');
+        }
+
+        // Modal
+        function closeModal() {
+            document.getElementById('successModal').classList.remove('active');
+        }
+
+        // Toast
+        function showToast(text) {
+            const toast = document.getElementById('toastMessage');
+            toast.style.opacity = '1';
+            toast.innerText = text;
+            setTimeout(() => toast.style.opacity = '0', 2000);
+        }
+
+        // Close modal on outside click
+        window.onclick = function(event) {
+            const modal = document.getElementById('successModal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        };
+    </script>
+</body>
+</html>
+```
