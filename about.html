@@ -1,0 +1,1010 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>About Us · Raj Marketing</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #1a2c2d;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+        }
+
+        .app-container {
+            max-width: 390px;
+            width: 100%;
+            background: linear-gradient(145deg, #f5faf8 0%, #e8f0ed 100%);
+            border-radius: 36px 36px 0 0;
+            margin: 8px 0 0 0;
+            overflow: hidden;
+            position: relative;
+            padding-bottom: 70px;
+        }
+
+        /* Header */
+        .page-header {
+            height: 60px;
+            background: white;
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            gap: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .back-btn {
+            width: 40px;
+            height: 40px;
+            background: #f0f5f3;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #1e4b8b;
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: 0.3s;
+        }
+
+        .back-btn:hover {
+            background: #1e4b8b;
+            color: white;
+        }
+
+        .page-header h1 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #1e4b8b;
+        }
+
+        .page-header h1 i {
+            color: #e6b422;
+            margin-right: 8px;
+        }
+
+        /* Hero Section */
+        .about-hero {
+            background: linear-gradient(135deg, #1e4b8b, #2a6bb3);
+            padding: 40px 20px;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200px;
+            height: 200px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+        }
+
+        .about-hero::after {
+            content: '';
+            position: absolute;
+            bottom: -50%;
+            left: -50%;
+            width: 200px;
+            height: 200px;
+            background: rgba(230,180,34,0.1);
+            border-radius: 50%;
+        }
+
+        .hero-logo {
+            width: 100px;
+            height: 100px;
+            background: #e6b422;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 3rem;
+            color: #1e4b8b;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            position: relative;
+            z-index: 2;
+        }
+
+        .about-hero h2 {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .about-hero p {
+            font-size: 1rem;
+            opacity: 0.9;
+            position: relative;
+            z-index: 2;
+        }
+
+        .est-year {
+            background: #e6b422;
+            color: #1e4b8b;
+            display: inline-block;
+            padding: 8px 25px;
+            border-radius: 40px;
+            font-weight: 800;
+            margin-top: 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Stats Section */
+        .stats-section {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            padding: 30px 16px;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 20px;
+            padding: 25px 15px;
+            text-align: center;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            transition: 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+
+        .stat-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(230,180,34,0.1);
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            font-size: 2rem;
+            color: #e6b422;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #1e4b8b;
+            line-height: 1.2;
+        }
+
+        .stat-label {
+            color: #6c757d;
+            font-size: 0.85rem;
+        }
+
+        /* Story Section */
+        .story-section {
+            padding: 20px 16px;
+        }
+
+        .story-card {
+            background: white;
+            border-radius: 25px;
+            padding: 30px 25px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+        }
+
+        .story-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .story-title i {
+            font-size: 2rem;
+            color: #e6b422;
+        }
+
+        .story-title h3 {
+            color: #1e4b8b;
+            font-size: 1.3rem;
+        }
+
+        .story-text {
+            color: #6c757d;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .story-highlight {
+            background: linear-gradient(135deg, #1e4b8b, #2a6bb3);
+            color: white;
+            padding: 20px;
+            border-radius: 18px;
+            margin: 20px 0;
+        }
+
+        .story-highlight p {
+            font-style: italic;
+            margin-bottom: 10px;
+        }
+
+        .story-highlight .author {
+            color: #e6b422;
+            font-weight: 700;
+        }
+
+        /* Values Section */
+        .values-section {
+            padding: 20px 16px;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .section-header h3 {
+            color: #1e4b8b;
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+        }
+
+        .section-header p {
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .value-item {
+            background: white;
+            border-radius: 20px;
+            padding: 20px 15px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: 0.3s;
+        }
+
+        .value-item:hover {
+            transform: translateY(-5px);
+            background: #1e4b8b;
+        }
+
+        .value-item:hover i,
+        .value-item:hover h4,
+        .value-item:hover p {
+            color: white;
+        }
+
+        .value-item i {
+            font-size: 2rem;
+            color: #e6b422;
+            margin-bottom: 12px;
+            transition: 0.3s;
+        }
+
+        .value-item h4 {
+            color: #1e4b8b;
+            margin-bottom: 8px;
+            transition: 0.3s;
+        }
+
+        .value-item p {
+            color: #6c757d;
+            font-size: 0.75rem;
+            transition: 0.3s;
+        }
+
+        /* Team Section */
+        .team-section {
+            padding: 20px 16px;
+        }
+
+        .team-slider {
+            margin: 20px 0;
+        }
+
+        .team-slider .swiper-slide {
+            width: 260px;
+        }
+
+        .team-card {
+            background: white;
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+
+        .team-image {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .team-social {
+            position: absolute;
+            bottom: 15px;
+            right: 15px;
+            display: flex;
+            gap: 8px;
+        }
+
+        .team-social a {
+            width: 35px;
+            height: 35px;
+            background: #e6b422;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #1e4b8b;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .team-social a:hover {
+            transform: scale(1.1);
+            background: #1e4b8b;
+            color: white;
+        }
+
+        .team-info {
+            padding: 20px;
+        }
+
+        .team-name {
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: #1e4b8b;
+            margin-bottom: 5px;
+        }
+
+        .team-role {
+            color: #e6b422;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .team-desc {
+            color: #6c757d;
+            font-size: 0.85rem;
+            line-height: 1.6;
+        }
+
+        /* Testimonials */
+        .testimonials-section {
+            padding: 20px 16px;
+        }
+
+        .testimonial-card {
+            background: white;
+            border-radius: 25px;
+            padding: 30px 25px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+            margin: 20px 0;
+            position: relative;
+        }
+
+        .quote-icon {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            font-size: 4rem;
+            color: rgba(230,180,34,0.1);
+        }
+
+        .testimonial-text {
+            color: #6c757d;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            background: #1e4b8b;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+        }
+
+        .author-info h4 {
+            color: #1e4b8b;
+            margin-bottom: 3px;
+        }
+
+        .author-info p {
+            color: #e6b422;
+            font-size: 0.8rem;
+        }
+
+        .rating {
+            color: #e6b422;
+            margin-top: 5px;
+        }
+
+        /* Achievements */
+        .achievements-section {
+            padding: 20px 16px;
+        }
+
+        .achievement-item {
+            background: white;
+            border-radius: 18px;
+            padding: 20px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .achievement-icon {
+            width: 60px;
+            height: 60px;
+            background: #1e4b8b;
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #e6b422;
+            font-size: 2rem;
+        }
+
+        .achievement-content h4 {
+            color: #1e4b8b;
+            margin-bottom: 5px;
+        }
+
+        .achievement-content p {
+            color: #6c757d;
+            font-size: 0.85rem;
+        }
+
+        /* Partners */
+        .partners-section {
+            padding: 20px 16px;
+        }
+
+        .partners-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+
+        .partner-item {
+            background: white;
+            border-radius: 15px;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .partner-item img {
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
+            margin-bottom: 8px;
+        }
+
+        .partner-item span {
+            font-size: 0.7rem;
+            color: #1e4b8b;
+            font-weight: 600;
+        }
+
+        /* Timeline */
+        .timeline-section {
+            padding: 20px 16px;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #e6b422;
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-bottom: 30px;
+        }
+
+        .timeline-item:last-child {
+            padding-bottom: 0;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: -36px;
+            top: 0;
+            width: 12px;
+            height: 12px;
+            background: #e6b422;
+            border: 3px solid #1e4b8b;
+            border-radius: 50%;
+        }
+
+        .timeline-year {
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: #1e4b8b;
+            margin-bottom: 8px;
+        }
+
+        .timeline-content {
+            background: white;
+            border-radius: 18px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .timeline-content h4 {
+            color: #1e4b8b;
+            margin-bottom: 5px;
+        }
+
+        .timeline-content p {
+            color: #6c757d;
+            font-size: 0.85rem;
+        }
+
+        /* Bottom Navigation */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            max-width: 390px;
+            width: 100%;
+            background: white;
+            display: flex;
+            justify-content: space-around;
+            padding: 12px 10px 20px;
+            border-top: 3px solid #e6b422;
+            border-radius: 30px 30px 0 0;
+            z-index: 100;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #6c757d;
+            font-size: 0.7rem;
+            cursor: pointer;
+        }
+
+        .nav-item.active {
+            color: #1e4b8b;
+        }
+
+        .nav-item i {
+            font-size: 1.4rem;
+            margin-bottom: 3px;
+        }
+
+        /* Toast */
+        #toastMessage {
+            position: fixed;
+            bottom: 180px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #1e4b8b;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            z-index: 5000;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate-up {
+            animation: fadeInUp 0.6s ease;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <div class="page-header">
+            <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i></a>
+            <h1><i class="fas fa-info-circle"></i> About Us</h1>
+        </div>
+
+        <!-- Hero Section -->
+        <div class="about-hero animate__animated animate__fadeIn">
+            <div class="hero-logo">
+                <i class="fas fa-store"></i>
+            </div>
+            <h2>Raj Marketing</h2>
+            <p>Your Trusted Mosquito Net Partner Since 2012</p>
+            <div class="est-year">EST. 2012</div>
+        </div>
+
+        <!-- Stats Section -->
+        <div class="stats-section">
+            <div class="stat-card animate-up">
+                <div class="stat-icon">
+                    <i class="fas fa-calendar-alt"></i>
+                </div>
+                <div class="stat-number">13+</div>
+                <div class="stat-label">Years of Excellence</div>
+            </div>
+            <div class="stat-card animate-up" style="animation-delay: 0.1s;">
+                <div class="stat-icon">
+                    <i class="fas fa-smile"></i>
+                </div>
+                <div class="stat-number">5000+</div>
+                <div class="stat-label">Happy Customers</div>
+            </div>
+            <div class="stat-card animate-up" style="animation-delay: 0.2s;">
+                <div class="stat-icon">
+                    <i class="fas fa-tools"></i>
+                </div>
+                <div class="stat-number">15000+</div>
+                <div class="stat-label">Installations</div>
+            </div>
+            <div class="stat-card animate-up" style="animation-delay: 0.3s;">
+                <div class="stat-icon">
+                    <i class="fas fa-star"></i>
+                </div>
+                <div class="stat-number">4.9</div>
+                <div class="stat-label">Google Rating</div>
+            </div>
+        </div>
+
+        <!-- Story Section -->
+        <div class="story-section">
+            <div class="story-card">
+                <div class="story-title">
+                    <i class="fas fa-book-open"></i>
+                    <h3>Our Story</h3>
+                </div>
+                <div class="story-text">
+                    <p>Founded in 2016 by Mr. Govinda Raju, Raj Marketing started as a small workshop in Hootghalli, Mysore. With a vision to provide affordable and high-quality mosquito net solutions to every home, we have grown into one of Mysore's most trusted mosquito net manufacturers and installers.</p>
+                    <p>What began as a one-man operation has now expanded into a team of 25+ skilled professionals, serving thousands of satisfied customers across Mysore and surrounding areas.</p>
+                </div>
+                <div class="story-highlight">
+                    <p>"Our mission is simple - to protect every family from mosquitoes while ensuring comfort and style. We believe that quality shouldn't be a luxury, it should be accessible to all."</p>
+                    <div class="author">- Govinda Raju, Founder</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Values Section -->
+        <div class="values-section">
+            <div class="section-header">
+                <h3>Our Core Values</h3>
+                <p>What drives us every day</p>
+            </div>
+            <div class="values-grid">
+                <div class="value-item">
+                    <i class="fas fa-gem"></i>
+                    <h4>Quality</h4>
+                    <p>Premium materials & craftsmanship</p>
+                </div>
+                <div class="value-item">
+                    <i class="fas fa-hand-holding-heart"></i>
+                    <h4>Trust</h4>
+                    <p>Building lasting relationships</p>
+                </div>
+                <div class="value-item">
+                    <i class="fas fa-clock"></i>
+                    <h4>Reliability</h4>
+                    <p>On-time delivery & service</p>
+                </div>
+                <div class="value-item">
+                    <i class="fas fa-lightbulb"></i>
+                    <h4>Innovation</h4>
+                    <p>Modern solutions for modern homes</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Timeline Section -->
+        <div class="timeline-section">
+            <div class="section-header">
+                <h3>Our Journey</h3>
+                <p>Milestones along the way</p>
+            </div>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-year">2012</div>
+                    <div class="timeline-content">
+                        <h4>The Beginning</h4>
+                        <p>Started as a small workshop in Hootghalli with just 2 employees</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-year">2015</div>
+                    <div class="timeline-content">
+                        <h4>First Expansion</h4>
+                        <p>Moved to larger facility, expanded team to 10 members</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-year">2018</div>
+                    <div class="timeline-content">
+                        <h4>New Products</h4>
+                        <p>Introduced premium frame and pleated net systems</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-year">2022</div>
+                    <div class="timeline-content">
+                        <h4>10 Year Anniversary</h4>
+                        <p>Celebrated 10 years with 5000+ happy customers</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-year">2025</div>
+                    <div class="timeline-content">
+                        <h4>Digital Transformation</h4>
+                        <p>Launched online booking and tracking system</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Team Section -->
+        <div class="team-section">
+            <div class="section-header">
+                <h3>Meet Our Team</h3>
+                <p>The people behind your protection</p>
+            </div>
+            <div class="swiper team-slider">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <div class="team-card">
+                            <div class="team-image" style="background-image: url('https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400')">
+                                <div class="team-social">
+                                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                                    <a href="#"><i class="fab fa-twitter"></i></a>
+                                </div>
+                            </div>
+                            <div class="team-info">
+                                <div class="team-name">Rajesh Kumar</div>
+                                <div class="team-role">Founder & CEO</div>
+                                <div class="team-desc">15+ years experience in mosquito net industry</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="team-card">
+                            <div class="team-image" style="background-image: url('https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400')">
+                                <div class="team-social">
+                                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                                    <a href="#"><i class="fab fa-twitter"></i></a>
+                                </div>
+                            </div>
+                            <div class="team-info">
+                                <div class="team-name">Priya Singh</div>
+                                <div class="team-role">Operations Head</div>
+                                <div class="team-desc">Ensures smooth installation & customer service</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="team-card">
+                            <div class="team-image" style="background-image: url('https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400')">
+                                <div class="team-social">
+                                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                                    <a href="#"><i class="fab fa-twitter"></i></a>
+                                </div>
+                            </div>
+                            <div class="team-info">
+                                <div class="team-name">Suresh M</div>
+                                <div class="team-role">Technical Director</div>
+                                <div class="team-desc">Expert in product innovation & quality</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-pagination"></div>
+            </div>
+        </div>
+
+        <!-- Testimonials -->
+        <div class="testimonials-section">
+            <div class="section-header">
+                <h3>What Customers Say</h3>
+                <p>Real feedback from our clients</p>
+            </div>
+            <div class="testimonial-card">
+                <i class="fas fa-quote-right quote-icon"></i>
+                <div class="testimonial-text">
+                    "Excellent quality and professional service. The team installed 8 windows and 2 doors in my house. Very happy with the result!"
+                </div>
+                <div class="testimonial-author">
+                    <div class="author-avatar">RK</div>
+                    <div class="author-info">
+                        <h4>Ramesh Kumar</h4>
+                        <p>Vijayanagar, Mysore</p>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Achievements -->
+        <div class="achievements-section">
+            <div class="section-header">
+                <h3>Achievements</h3>
+                <p>Recognition & milestones</p>
+            </div>
+            <div class="achievement-item">
+                <div class="achievement-icon">
+                    <i class="fas fa-trophy"></i>
+                </div>
+                <div class="achievement-content">
+                    <h4>Best Service Provider 2023</h4>
+                    <p>Mysore Business Excellence Awards</p>
+                </div>
+            </div>
+            <div class="achievement-item">
+                <div class="achievement-icon">
+                    <i class="fas fa-award"></i>
+                </div>
+                <div class="achievement-content">
+                    <h4>ISO 9001:2025 Certified</h4>
+                    <p>International quality standards</p>
+                </div>
+            </div>
+            <div class="achievement-item">
+                <div class="achievement-icon">
+                    <i class="fas fa-medal"></i>
+                </div>
+                <div class="achievement-content">
+                    <h4>Top Rated on Google</h4>
+                    <p>4.9 stars from 500+ reviews</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Partners -->
+        <div class="partners-section">
+            <div class="section-header">
+                <h3>Our Partners</h3>
+                <p>Trusted by industry leaders</p>
+            </div>
+            <div class="partners-grid">
+                <div class="partner-item">
+                    <i class="fas fa-building" style="font-size: 2rem; color: #1e4b8b;"></i>
+                    <span>Asian Paints</span>
+                </div>
+                <div class="partner-item">
+                    <i class="fas fa-industry" style="font-size: 2rem; color: #1e4b8b;"></i>
+                    <span>Jindal</span>
+                </div>
+                <div class="partner-item">
+                    <i class="fas fa-hard-hat" style="font-size: 2rem; color: #1e4b8b;"></i>
+                    <span>L&T</span>
+                </div>
+                <div class="partner-item">
+                    <i class="fas fa-tools" style="font-size: 2rem; color: #1e4b8b;"></i>
+                    <span>Bosch</span>
+                </div>
+                <div class="partner-item">
+                    <i class="fas fa-paint-roller" style="font-size: 2rem; color: #1e4b8b;"></i>
+                    <span>Nerolac</span>
+                </div>
+                <div class="partner-item">
+                    <i class="fas fa-cogs" style="font-size: 2rem; color: #1e4b8b;"></i>
+                    <span>Siemens</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Navigation -->
+        <div class="bottom-nav">
+            <div class="nav-item" onclick="location.href='index.html'"><i class="fas fa-home"></i><span>Home</span></div>
+            <div class="nav-item" onclick="location.href='products.html'"><i class="fas fa-search"></i><span>Search</span></div>
+            <div class="nav-item active" onclick="location.href='about.html'"><i class="fas fa-info-circle"></i><span>About</span></div>
+            <div class="nav-item" onclick="location.href='tel:9483037385'"><i class="fas fa-phone"></i><span>Call</span></div>
+            <div class="nav-item" onclick="location.href='customer-login.html'"><i class="fas fa-user"></i><span>Account</span></div>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div id="toastMessage"></div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+    <script>
+        // Initialize Swiper
+        document.addEventListener('DOMContentLoaded', function() {
+            new Swiper('.team-slider', {
+                slidesPerView: 'auto',
+                spaceBetween: 20,
+                freeMode: true,
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true
+                }
+            });
+        });
+
+        // Toast function
+        function showToast(text) {
+            const toast = document.getElementById('toastMessage');
+            toast.style.opacity = '1';
+            toast.innerText = text;
+            setTimeout(() => toast.style.opacity = '0', 2000);
+        }
+    </script>
+</body>
+</html>
+```
