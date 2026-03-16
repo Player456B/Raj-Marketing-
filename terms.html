@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Terms & Conditions · Raj Marketing</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #1a2c2d;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+        }
+
+        .app-container {
+            max-width: 390px;
+            width: 100%;
+            background: linear-gradient(145deg, #f5faf8 0%, #e8f0ed 100%);
+            border-radius: 36px 36px 0 0;
+            margin: 8px 0 0 0;
+            overflow: hidden;
+            position: relative;
+            padding-bottom: 70px;
+        }
+
+        /* Header */
+        .page-header {
+            height: 60px;
+            background: white;
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            gap: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .back-btn {
+            width: 40px;
+            height: 40px;
+            background: #f0f5f3;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #1e4b8b;
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: 0.3s;
+        }
+
+        .back-btn:hover {
+            background: #1e4b8b;
+            color: white;
+        }
+
+        .page-header h1 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #1e4b8b;
+        }
+
+        .page-header h1 i {
+            color: #e6b422;
+            margin-right: 8px;
+        }
+
+        .version {
+            margin-left: auto;
+            font-size: 0.7rem;
+            color: #6c757d;
+        }
+
+        /* Content */
+        .content-container {
+            padding: 20px 16px;
+        }
+
+        .terms-section {
+            background: white;
+            border-radius: 25px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .section-number {
+            width: 40px;
+            height: 40px;
+            background: #1e4b8b;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 800;
+            font-size: 1.2rem;
+        }
+
+        .section-header h2 {
+            color: #1e4b8b;
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+
+        .section-content {
+            color: #6c757d;
+            line-height: 1.8;
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+        }
+
+        .terms-list {
+            list-style: none;
+            margin: 15px 0;
+        }
+
+        .terms-list li {
+            margin-bottom: 15px;
+            padding-left: 30px;
+            position: relative;
+            color: #6c757d;
+        }
+
+        .terms-list li i {
+            position: absolute;
+            left: 0;
+            top: 3px;
+            color: #e6b422;
+            font-size: 0.9rem;
+        }
+
+        .terms-list li strong {
+            color: #1e4b8b;
+            display: block;
+            margin-bottom: 3px;
+        }
+
+        .alert-box {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            border-radius: 18px;
+            padding: 20px;
+            margin: 20px 0;
+            color: #856404;
+        }
+
+        .alert-box i {
+            margin-right: 10px;
+            color: #856404;
+        }
+
+        .alert-box strong {
+            color: #856404;
+        }
+
+        .warning-box {
+            background: #f8d7da;
+            border: 2px solid #dc3545;
+            border-radius: 18px;
+            padding: 20px;
+            margin: 20px 0;
+            color: #721c24;
+        }
+
+        .warning-box i {
+            margin-right: 10px;
+            color: #721c24;
+        }
+
+        .table-container {
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+
+        .terms-table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 300px;
+        }
+
+        .terms-table th {
+            background: #1e4b8b;
+            color: white;
+            padding: 12px;
+            font-size: 0.85rem;
+            text-align: left;
+        }
+
+        .terms-table td {
+            padding: 12px;
+            border-bottom: 1px solid #f0f0f0;
+            color: #6c757d;
+            font-size: 0.85rem;
+        }
+
+        .terms-table tr:hover {
+            background: #f8f9fa;
+        }
+
+        .payment-terms {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .payment-term {
+            background: #f8f9fa;
+            border-radius: 18px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .payment-term i {
+            font-size: 2rem;
+            color: #e6b422;
+            margin-bottom: 10px;
+        }
+
+        .payment-term h4 {
+            color: #1e4b8b;
+            margin-bottom: 5px;
+        }
+
+        .payment-term p {
+            color: #6c757d;
+            font-size: 0.8rem;
+        }
+
+        .warranty-card {
+            background: linear-gradient(135deg, #1e4b8b, #2a6bb3);
+            border-radius: 20px;
+            padding: 25px;
+            color: white;
+            margin: 20px 0;
+        }
+
+        .warranty-card h4 {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .warranty-card ul {
+            list-style: none;
+        }
+
+        .warranty-card li {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .warranty-card li i {
+            color: #e6b422;
+        }
+
+        .acceptance-box {
+            background: white;
+            border: 3px solid #e6b422;
+            border-radius: 25px;
+            padding: 25px;
+            margin: 30px 0;
+            text-align: center;
+        }
+
+        .acceptance-box h3 {
+            color: #1e4b8b;
+            margin-bottom: 15px;
+        }
+
+        .acceptance-box p {
+            color: #6c757d;
+            margin-bottom: 20px;
+        }
+
+        .accept-btn {
+            background: linear-gradient(135deg, #1e4b8b, #2a6bb3);
+            color: white;
+            border: none;
+            padding: 18px 40px;
+            border-radius: 40px;
+            font-weight: 800;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .accept-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(30,75,139,0.3);
+        }
+
+        .print-date {
+            text-align: right;
+            color: #6c757d;
+            font-size: 0.7rem;
+            margin-top: 20px;
+        }
+
+        /* Bottom Navigation */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            max-width: 390px;
+            width: 100%;
+            background: white;
+            display: flex;
+            justify-content: space-around;
+            padding: 12px 10px 20px;
+            border-top: 3px solid #e6b422;
+            border-radius: 30px 30px 0 0;
+            z-index: 100;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #6c757d;
+            font-size: 0.7rem;
+            cursor: pointer;
+        }
+
+        .nav-item.active {
+            color: #1e4b8b;
+        }
+
+        .nav-item i {
+            font-size: 1.4rem;
+            margin-bottom: 3px;
+        }
+
+        /* Toast */
+        #toastMessage {
+            position: fixed;
+            bottom: 180px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #1e4b8b;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            z-index: 5000;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <div class="page-header">
+            <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i></a>
+            <h1><i class="fas fa-file-contract"></i> Terms & Conditions</h1>
+            <span class="version">v3.0</span>
+        </div>
+
+        <!-- Content -->
+        <div class="content-container">
+            <!-- Section 1 -->
+            <div class="terms-section">
+                <div class="section-header">
+                    <div class="section-number">1</div>
+                    <h2>Acceptance of Terms</h2>
+                </div>
+                <div class="section-content">
+                    By accessing or using the services provided by Raj Marketing ("Company", "we", "us", or "our"), you agree to be bound by these Terms and Conditions. If you disagree with any part of the terms, you may not access our services.
+                </div>
+                <div class="alert-box">
+                    <i class="fas fa-info-circle"></i>
+                    <strong>Please read carefully:</strong> These terms constitute a legally binding agreement between you and Raj Marketing.
+                </div>
+            </div>
+
+            <!-- Section 2 -->
+            <div class="terms-section">
+                <div class="section-header">
+                    <div class="section-number">2</div>
+                    <h2>Services Description</h2>
+                </div>
+                <div class="section-content">
+                    Raj Marketing provides mosquito net manufacturing, installation, repair, and maintenance services. Our services include but are not limited to:
+                </div>
+                <ul class="terms-list">
+                    <li>
+                        <i class="fas fa-mosquito-net"></i>
+                        <strong>Velcro System Installation</strong>
+                        Easy-to-install velcro-based mosquito nets for windows and doors
+                    </li>
+                    <li>
+                        <i class="fas fa-window-maximize"></i>
+                        <strong>Frame System Installation</strong>
+                        Durable aluminum frame nets with long-lasting protection
+                    </li>
+                    <li>
+                        <i class="fas fa-arrows-spin"></i>
+                        <strong>Pleated Nets</strong>
+                        Retractable nets for space-saving solutions
+                    </li>
+                    <li>
+                        <i class="fas fa-door-open"></i>
+                        <strong>Mesh Doors</strong>
+                        Magnetic and sliding mesh door installations
+                    </li>
+                    <li>
+                        <i class="fas fa-tools"></i>
+                        <strong>Repair & Maintenance</strong>
+                        Repair services for all types of mosquito nets
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Section 3 -->
+            <div class="terms-section">
+                <div class="section-header">
+                    <div class="section-number">3</div>
+                    <h2>Booking and Appointments</h2>
+                </div>
+                <div class="table-container">
+                    <table class="terms-table">
+                        <thead>
+                            <tr>
+                                <th>Booking Type</th>
+                                <th>Lead Time</th>
+                                <th>Cancellation</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Site Visit</td>
+                                <td>24 hours</td>
+                                <td>Free (2 hours before)</td>
+                            </tr>
+                            <tr>
+                                <td>Installation</td>
+                                <td>48 hours</td>
+                                <td>Free (24 hours before)</td>
+                            </tr>
+                            <tr>
+                                <td>Repair Service</td>
+                                <td>24 hours</td>
+                                <td>Free (2 hours before)</td>
+                            </tr>
+                            <tr>
+                                <td>Emergency Service</td>
+                                <td>2 hours</td>
+                                <td>Non-cancellable</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="warning-box">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <strong>Cancellation Policy:</strong> Late cancellations may incur a fee of ₹200 for site visits and ₹500 for installations.
+                </div>
+            </div>
+
+            <!-- Section 4 -->
+            <div class="terms-section">
+                <div class="section-header">
+                    <div class="section-number">4</div>
+                    <h2>Pricing and Payment</h2>
+                </div>
+                
+                <div class="payment-terms">
+                    <div class="payment-term">
+                        <i class="fas fa-credit-card"></i>
+                        <h4>Online Payment</h4>
+                        <p>UPI, Card, Net Banking</p>
+                    </div>
+                    <div class="payment-term">
+                        <i class="fas fa-money-bill-wave"></i>
+                        <h4>Cash on Delivery</h4>
+                        <p>Pay at installation</p>
+                    </div>
+                </div>
+
+                <div class="section-content">
+                    Our pricing structure:
+                </div>
+                <ul class="terms-list">
+                    <li><i class="fas fa-check-circle"></i> All prices are in Indian Rupees (₹) and inclusive of GST unless stated otherwise</li>
+                    <li><i class="fas fa-check-circle"></i> Site visit and quotation are completely free</li>
+                    <li><i class="fas fa-check-circle"></i> 50% advance payment required for material procurement</li>
+                    <li><i class="fas fa-check-circle"></i> Balance payment due upon completion of installation</li>
+                    <li><i class="fas fa-check-circle"></i> Additional charges may apply for custom sizes or special requirements</li>
+                </ul>
+            </div>
+
+            <!-- Section 5 -->
+            <div class="terms-section">
+                <div class="section-header">
+                    <div class="section-number">5</div>
+                    <h2>Warranty Policy</h2>
+                </div>
+
+                <div class="warranty-card">
+                    <h4><i class="fas fa-shield-alt"></i> Product Warranty</h4>
+                    <ul>
+                        <li><i class="fas fa-check"></i> Velcro Systems: 2 years warranty</li>
+                        <li><i class="fas fa-check"></i> Frame Systems: 5 years warranty</li>
+                        <li><i class="fas fa-check"></i> Pleated Nets: 3 years warranty</li>
+                        <li><i class="fas fa-check"></i> Mesh Doors: 2 years warranty</li>
+                        <li><i class="fas fa-check"></i> Installation Service: 1 year warranty</li>
+                    </ul>
+                </div>
+
+                <div class="alert-box">
+                    <i class="fas fa-info-circle"></i>
+                    Warranty covers manufacturing defects only. Damage due to misuse, accidents, or natural calamities is not covered.
+                </div>
+            </div>
+
+            <!-- Section 6 -->
+            <div class="terms-section">
+                <div class="section-header">
+                    <div class="section-number">6</div>
+                    <h2>Installation Terms</h2>
+                </div>
+                <ul class="terms-list">
+                    <li><i class="fas fa-check-circle"></i> Customer must ensure site readiness before installation</li>
+                    <li><i class="fas fa-check-circle"></i> Our team will handle all installation work professionally</li>
+                    <li><i class="fas fa-check-circle"></i> Customer must inspect and approve work before signing completion form</li>
+                    <li><i class="fas fa-check-circle"></i> Any damage to existing structure during installation will be assessed case-by-case</li>
+                    <li><i class="fas fa-check-circle"></i> Installation time may vary based on complexity and weather conditions</li>
+                </ul>
+            </div>
+
+            <!-- Section 7 -->
+            <div class="terms-section">
+                <div class="section-header">
+                    <div class="section-number">7</div>
+                    <h2>Liability Limitation</h2>
+                </div>
+                <div class="section-content">
+                    To the maximum extent permitted by law, Raj Marketing shall not be liable for any indirect, incidental, special, consequential, or punitive damages, including without limitation, loss of profits, data, use, goodwill, or other intangible losses, resulting from:
+                </div>
+                <ul class="terms-list">
+                    <li><i class="fas fa-exclamation-circle"></i> Your use or inability to use our services</li>
+                    <li><i class="fas fa-exclamation-circle"></i> Any unauthorized access to or use of our servers</li>
+                    <li><i class="fas fa-exclamation-circle"></i> Any interruption or cessation of transmission</li>
+                    <li><i class="fas fa-exclamation-circle"></i> Any bugs, viruses, or the like</li>
+                </ul>
+            </div>
+
+            <!-- Section 8 -->
+            <div class="terms-section">
+                <div class="section-header">
+                    <div class="section-number">8</div>
+                    <h2>User Responsibilities</h2>
+                </div>
+                <ul class="terms-list">
+                    <li><i class="fas fa-check-circle"></i> Provide accurate and complete information</li>
+                    <li><i class="fas fa-check-circle"></i> Maintain the confidentiality of your account</li>
+                    <li><i class="fas fa-check-circle"></i> Notify us immediately of any unauthorized use</li>
+                    <li><i class="fas fa-check-circle"></i> Comply with all applicable laws and regulations</li>
+                    <li><i class="fas fa-check-circle"></i> Not to misuse or abuse our services</li>
+                </ul>
+            </div>
+
+            <!-- Section 9 -->
+            <div class="terms-section">
+                <div class="section-header">
+                    <div class="section-number">9</div>
+                    <h2>Intellectual Property</h2>
+                </div>
+                <div class="section-content">
+                    All content, features, and functionality of our website and services, including but not limited to text, graphics, logos, images, and software, are the exclusive property of Raj Marketing and are protected by Indian and international copyright, trademark, and other intellectual property laws.
+                </div>
+            </div>
+
+            <!-- Section 10 -->
+            <div class="terms-section">
+                <div class="section-header">
+                    <div class="section-number">10</div>
+                    <h2>Governing Law</h2>
+                </div>
+                <div class="section-content">
+                    These Terms shall be governed and construed in accordance with the laws of India, without regard to its conflict of law provisions. Any disputes arising under these Terms shall be subject to the exclusive jurisdiction of the courts in Mysore, Karnataka.
+                </div>
+            </div>
+
+            <!-- Section 11 -->
+            <div class="terms-section">
+                <div class="section-header">
+                    <div class="section-number">11</div>
+                    <h2>Changes to Terms</h2>
+                </div>
+                <div class="section-content">
+                    We reserve the right to modify or replace these Terms at any time. If a revision is material, we will try to provide at least 30 days' notice prior to any new terms taking effect. What constitutes a material change will be determined at our sole discretion.
+                </div>
+            </div>
+
+            <!-- Acceptance -->
+            <div class="acceptance-box">
+                <h3>Acceptance of Terms</h3>
+                <p>By using our services, you acknowledge that you have read, understood, and agree to be bound by these Terms and Conditions.</p>
+                <button class="accept-btn" onclick="acceptTerms()">
+                    <i class="fas fa-check-circle"></i> I Accept
+                </button>
+            </div>
+
+            <div class="print-date">
+                Last Updated: 15 March 2026 | Generated for: User
+            </div>
+        </div>
+
+        <!-- Bottom Navigation -->
+        <div class="bottom-nav">
+            <div class="nav-item" onclick="location.href='index.html'"><i class="fas fa-home"></i><span>Home</span></div>
+            <div class="nav-item" onclick="location.href='products.html'"><i class="fas fa-search"></i><span>Search</span></div>
+            <div class="nav-item active" onclick="location.href='terms.html'"><i class="fas fa-file-contract"></i><span>Terms</span></div>
+            <div class="nav-item" onclick="location.href='tel:9483037385'"><i class="fas fa-phone"></i><span>Call</span></div>
+            <div class="nav-item" onclick="location.href='customer-login.html'"><i class="fas fa-user"></i><span>Account</span></div>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div id="toastMessage"></div>
+
+    <script>
+        function acceptTerms() {
+            localStorage.setItem('termsAccepted', 'true');
+            showToast('Terms accepted! Thank you.');
+        }
+
+        function showToast(text) {
+            const toast = document.getElementById('toastMessage');
+            toast.style.opacity = '1';
+            toast.innerText = text;
+            setTimeout(() => toast.style.opacity = '0', 2000);
+        }
+    </script>
+</body>
+</html>
