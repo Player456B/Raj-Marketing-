@@ -3580,10 +3580,228 @@
             document.getElementById('totalBookings').innerHTML = '156';
             document.getElementById('statBookings').innerHTML = '08';
             
-            // Live Ticker
-            const demo = '<span><i class="fas fa-circle"></i> <span class="ticker-customer">Suresh</span> from <span class="ticker-area">Vijayanagar</span> booked <span class="ticker-service">Velcro</span> • 5 min ago</span>';
-            document.getElementById('liveTicker').innerHTML = demo.repeat(10);
+            // ===== UPGRADED LIVE TRACKER =====
+class LiveTracker {
+    constructor() {
+        this.activities = [];
+        this.onlineUsers = 247;
+        this.updateInterval = null;
+        this.init();
+    }
+
+    init() {
+        this.loadInitialData();
+        this.startLiveUpdates();
+        this.updateOnlineUsers();
+    }
+
+    loadInitialData() {
+        // Sample activity data
+        this.activities = [
+            {
+                id: 1,
+                type: 'booking',
+                customer: 'Suresh',
+                location: 'Vijayanagar',
+                service: 'Velcro System',
+                time: '2 min ago',
+                icon: 'fa-calendar-check',
+                color: '#28a745'
+            },
+            {
+                id: 2,
+                type: 'call',
+                customer: 'Priya',
+                location: 'Kuvempunagar',
+                service: 'Frame System',
+                time: '5 min ago',
+                icon: 'fa-phone-alt',
+                color: '#17a2b8'
+            },
+            {
+                id: 3,
+                type: 'visit',
+                customer: 'Ramesh',
+                location: 'Gokulam',
+                service: 'Site Visit',
+                time: '8 min ago',
+                icon: 'fa-tools',
+                color: '#fd7e14'
+            },
+            {
+                id: 4,
+                type: 'payment',
+                customer: 'Anita',
+                location: 'Hebbal',
+                service: 'Mesh Door',
+                time: '12 min ago',
+                icon: 'fa-credit-card',
+                color: '#6f42c1'
+            }
+        ];
+
+        this.renderActivityCards();
+        this.renderTicker();
+    }
+
+    renderTicker() {
+        const tickerContainer = document.getElementById('liveTicker');
+        if (!tickerContainer) return;
+
+        // Create duplicate items for seamless scrolling
+        const tickerItems = this.generateTickerItems();
+        tickerContainer.innerHTML = tickerItems + tickerItems; // Double for seamless loop
+    }
+
+    generateTickerItems() {
+        const activities = [
+            { name: 'Suresh', area: 'Vijayanagar', service: 'Velcro', time: '2 min' },
+            { name: 'Priya', area: 'Kuvempunagar', service: 'Frame', time: '5 min' },
+            { name: 'Ramesh', area: 'Gokulam', service: 'Site Visit', time: '8 min' },
+            { name: 'Anita', area: 'Hebbal', service: 'Mesh Door', time: '12 min' },
+            { name: 'Vikram', area: 'Jayalakshmipuram', service: 'Pleated', time: '15 min' },
+            { name: 'Deepa', area: 'Saraswathipuram', service: 'Sliding', time: '18 min' },
+            { name: 'Manoj', area: 'Bogadi', service: 'Frame', time: '22 min' },
+            { name: 'Kavitha', area: 'Lakshmipuram', service: 'Velcro', time: '25 min' }
+        ];
+
+        return activities.map(a => `
+            <span class="ticker-item">
+                <span class="ticker-icon"><i class="fas fa-circle"></i></span>
+                <span class="ticker-text">
+                    <span class="ticker-name">${a.name}</span> from 
+                    <span class="ticker-area">${a.area}</span> booked 
+                    <span class="ticker-service">${a.service}</span>
+                    <span class="ticker-time">• ${a.time} ago</span>
+                </span>
+            </span>
+        `).join('');
+    }
+
+    renderActivityCards() {
+        const container = document.getElementById('activityCards');
+        if (!container) return;
+
+        container.innerHTML = this.activities.map(activity => `
+            <div class="activity-item" data-id="${activity.id}">
+                <div class="activity-icon" style="background: ${activity.color}20; color: ${activity.color};">
+                    <i class="fas ${activity.icon}"></i>
+                </div>
+                <div class="activity-content">
+                    <div class="activity-title">New ${activity.type}</div>
+                    <div class="activity-desc">
+                        <span class="activity-customer">${activity.customer}</span>
+                        <span>from</span>
+                        <span class="activity-location">${activity.location}</span>
+                        <span>booked</span>
+                        <span class="activity-product">${activity.service}</span>
+                    </div>
+                </div>
+                <div class="activity-time">
+                    <i class="fas fa-clock"></i>
+                    <span>${activity.time}</span>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    addNewActivity(activity) {
+        // Add new activity to the beginning
+        this.activities.unshift({
+            id: Date.now(),
+            ...activity
+        });
+
+        // Keep only last 8 activities
+        if (this.activities.length > 8) {
+            this.activities.pop();
         }
+
+        // Re-render with animation
+        this.renderActivityCards();
+        
+        // Highlight new item
+        const firstItem = document.querySelector('.activity-item');
+        if (firstItem) {
+            firstItem.classList.add('new-activity');
+            setTimeout(() => {
+                firstItem.classList.remove('new-activity');
+            }, 2000);
+        }
+    }
+
+    startLiveUpdates() {
+        // Update every 30 seconds
+        this.updateInterval = setInterval(() => {
+            this.simulateNewActivity();
+            this.updateOnlineUsers();
+            this.updateTimestamp();
+        }, 30000);
+    }
+
+    simulateNewActivity() {
+        const types = [
+            { type: 'booking', icon: 'fa-calendar-check', color: '#28a745' },
+            { type: 'call', icon: 'fa-phone-alt', color: '#17a2b8' },
+            { type: 'visit', icon: 'fa-tools', color: '#fd7e14' },
+            { type: 'payment', icon: 'fa-credit-card', color: '#6f42c1' }
+        ];
+
+        const customers = ['Rajesh', 'Meena', 'Arjun', 'Latha', 'Sunil', 'Divya'];
+        const areas = ['Vijayanagar', 'Kuvempunagar', 'Gokulam', 'Hebbal', 'Bogadi', 'Lakshmipuram'];
+        const services = ['Velcro', 'Frame', 'Pleated', 'Mesh Door', 'Sliding'];
+
+        const randomType = types[Math.floor(Math.random() * types.length)];
+        const randomCustomer = customers[Math.floor(Math.random() * customers.length)];
+        const randomArea = areas[Math.floor(Math.random() * areas.length)];
+        const randomService = services[Math.floor(Math.random() * services.length)];
+
+        this.addNewActivity({
+            type: randomType.type,
+            customer: randomCustomer,
+            location: randomArea,
+            service: randomService,
+            time: 'just now',
+            icon: randomType.icon,
+            color: randomType.color
+        });
+
+        // Update ticker
+        this.renderTicker();
+    }
+
+    updateOnlineUsers() {
+        // Simulate changing online users
+        const change = Math.floor(Math.random() * 10) - 3; // -3 to +7
+        this.onlineUsers = Math.max(200, this.onlineUsers + change);
+        
+        const onlineElement = document.getElementById('onlineUsers');
+        if (onlineElement) {
+            onlineElement.textContent = this.onlineUsers;
+        }
+    }
+
+    updateTimestamp() {
+        const timeElement = document.getElementById('updateTime');
+        if (timeElement) {
+            timeElement.textContent = 'just now';
+            setTimeout(() => {
+                timeElement.textContent = '30s ago';
+            }, 30000);
+        }
+    }
+
+    stopUpdates() {
+        if (this.updateInterval) {
+            clearInterval(this.updateInterval);
+        }
+    }
+}
+
+// Initialize Live Tracker
+document.addEventListener('DOMContentLoaded', function() {
+    window.liveTracker = new LiveTracker();
+});
 
         // Load Analytics
         function loadAnalytics(period = 'day') {
