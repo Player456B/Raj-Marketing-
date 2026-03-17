@@ -1977,53 +1977,83 @@
             color: var(--secondary-gold); 
             margin-top: 5px;
         }
-/* ===== SOCIAL SECTION - UPDATED ===== */
+        
+/* ===== SOCIAL SECTION - SLIDER DESIGN ===== */
 .social-section {
-    background: white;
-    border-radius: var(--border-radius-xl);
-    padding: 25px;
-    margin: 0 16px 20px;
+    background: transparent;
+    padding: 10px 16px 20px;
+    margin: 0;
     text-align: center;
-    box-shadow: var(--shadow-lg);
 }
 
 .social-section h3 {
     color: var(--primary-blue);
-    margin-bottom: 20px;
-    font-size: 1.1rem;
+    margin-bottom: 15px;
+    font-size: 1rem;
+    font-weight: 600;
+    text-align: left;
+    padding-left: 5px;
 }
 
-.social-grid {
+/* Social Slider */
+.social-slider {
+    width: 100%;
+    overflow: hidden;
+}
+
+.social-slider .swiper-wrapper {
     display: flex;
-    justify-content: center;
-    gap: 12px;
-    flex-wrap: wrap;
+}
+
+.social-slider .swiper-slide {
+    width: auto;
+    flex-shrink: 0;
+}
+
+/* Social Icon Card */
+.social-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+    width: 60px;
 }
 
 .social-icon {
-    width: 40px;  /* Smaller size */
-    height: 40px; /* Smaller size */
-    border-radius: 50%; /* Circular shape */
-    background: #f0f0f0; /* Light grey background */
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: #f5f5f5;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.2rem; /* Smaller icon */
-    color: #555; /* Dark grey icon color */
-    cursor: pointer;
-    transition: var(--transition-fast);
-    box-shadow: var(--shadow-sm);
-    border: 1px solid #e0e0e0;
+    font-size: 1.3rem;
+    color: #555;
+    transition: all 0.2s ease;
+    border: 1px solid #eaeaea;
+    /* NO SHADOW */
 }
 
 .social-icon:hover {
-    background: #e0e0e0; /* Darker grey on hover */
-    transform: translateY(-3px);
-    box-shadow: var(--shadow-md);
-    color: #333; /* Darker icon on hover */
+    background: #e6b422;
+    color: white;
+    border-color: #e6b422;
+    transform: scale(1.05);
 }
 
-/* Remove individual brand colors - all grey */
+.social-card span {
+    font-size: 0.6rem;
+    font-weight: 500;
+    color: var(--gray-600);
+    white-space: nowrap;
+}
+
+.social-card:hover span {
+    color: var(--primary-blue);
+}
+
+/* Remove all shadows and brand colors */
 .social-icon.facebook,
 .social-icon.instagram,
 .social-icon.whatsapp,
@@ -2032,8 +2062,9 @@
 .social-icon.linkedin,
 .social-icon.telegram,
 .social-icon.pinterest {
-    background: #f0f0f0; /* All grey */
+    background: #f5f5f5;
     color: #555;
+    box-shadow: none !important;
 }
 
 .social-icon.facebook:hover,
@@ -2044,8 +2075,8 @@
 .social-icon.linkedin:hover,
 .social-icon.telegram:hover,
 .social-icon.pinterest:hover {
-    background: #e0e0e0;
-    color: #333;
+    background: #e6b422;
+    color: white;
 }
         /* ===== PWA INSTALL ===== */
         .install-pwa {
@@ -2758,10 +2789,12 @@
             <div class="swiper-wrapper" id="reviewsSlider"></div>
         </div>
 
-        <!-- Social Media Section - Grey Icons -->
+        <!-- Social Media Section - Slider Design -->
 <div class="social-section">
-    <h3>Connect With Us</h3>
-    <div class="social-grid" id="socialGrid"></div>
+    <h3><i class="fas fa-share-alt" style="color: #e6b422; margin-right: 8px;"></i> Connect With Us</h3>
+    <div class="swiper social-slider">
+        <div class="swiper-wrapper" id="socialSlider"></div>
+    </div>
 </div>
 
         <!-- Error Message Display -->
@@ -2966,6 +2999,17 @@
                     grabCursor: true,
                 });
             }
+            
+        }// Initialize social slider
+    if (document.querySelector('.social-slider')) {
+        new Swiper('.social-slider', {
+            slidesPerView: 'auto',
+            spaceBetween: 10,
+            freeMode: true,
+            grabCursor: true,
+            slidesOffsetAfter: 0,
+        });
+    }
         }
 
         // Load All Data
@@ -3223,28 +3267,33 @@
             }
         }
 
-        // Load Social Icons - GREY VERSION
+        // Load Social Icons - Slider Version
 function loadSocialIcons() {
     const socials = [
-        { icon: 'facebook-f', url: 'https://facebook.com/rajmarketing' },
-        { icon: 'instagram', url: 'https://instagram.com/rajmarketing' },
-        { icon: 'whatsapp', url: 'https://wa.me/919483037385' },
-        { icon: 'youtube', url: 'https://youtube.com/@rajmarketing' },
-        { icon: 'twitter', url: 'https://twitter.com/rajmarketing' },
-        { icon: 'linkedin-in', url: 'https://linkedin.com/company/rajmarketing' },
-        { icon: 'telegram-plane', url: 'https://t.me/rajmarketing' },
-        { icon: 'pinterest', url: 'https://pinterest.com/rajmarketing' }
+        { icon: 'facebook-f', name: 'Facebook', url: 'https://facebook.com/rajmarketing' },
+        { icon: 'instagram', name: 'Insta', url: 'https://instagram.com/rajmarketing' },
+        { icon: 'whatsapp', name: 'WhatsApp', url: 'https://wa.me/919483037385' },
+        { icon: 'youtube', name: 'YouTube', url: 'https://youtube.com/@rajmarketing' },
+        { icon: 'twitter', name: 'X', url: 'https://twitter.com/rajmarketing' },
+        { icon: 'linkedin-in', name: 'LinkedIn', url: 'https://linkedin.com/company/rajmarketing' },
+        { icon: 'telegram-plane', name: 'Telegram', url: 'https://t.me/rajmarketing' },
+        { icon: 'pinterest', name: 'Pinterest', url: 'https://pinterest.com/rajmarketing' }
     ];
 
-    const grid = document.getElementById('socialGrid');
-    if (grid) {
-        grid.innerHTML = socials.map(s => `
-            <div class="social-icon" onclick="window.open('${s.url}')">
-                <i class="fab fa-${s.icon}"></i>
+    const container = document.getElementById('socialSlider');
+    if (container) {
+        container.innerHTML = socials.map(s => `
+            <div class="swiper-slide">
+                <div class="social-card" onclick="window.open('${s.url}')">
+                    <div class="social-icon ${s.name.toLowerCase()}">
+                        <i class="fab fa-${s.icon}"></i>
+                    </div>
+                    <span>${s.name}</span>
+                </div>
             </div>
         `).join('');
     }
-}
+
         // Search Function
         function searchProducts() {
             const query = document.getElementById('searchInput').value.toLowerCase();
