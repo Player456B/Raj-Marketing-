@@ -3002,18 +3002,6 @@
             
         }
         
-        // Initialize social slider
-    if (document.querySelector('.social-slider')) {
-        new Swiper('.social-slider', {
-            slidesPerView: 'auto',
-            spaceBetween: 10,
-            freeMode: true,
-            grabCursor: true,
-            slidesOffsetAfter: 0,
-        });
-    }
-        }
-
         // Load All Data
         function loadAllData() {
             loadMainSlider();
@@ -3296,6 +3284,19 @@ function loadSocialIcons() {
         `).join('');
     }
 
+    
+        // Initialize social slider
+    if (document.querySelector('.social-slider')) {
+        new Swiper('.social-slider', {
+            slidesPerView: 'auto',
+            spaceBetween: 10,
+            freeMode: true,
+            grabCursor: true,
+            slidesOffsetAfter: 0,
+        });
+    }
+}
+        
         // Search Function
         function searchProducts() {
             const query = document.getElementById('searchInput').value.toLowerCase();
