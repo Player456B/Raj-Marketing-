@@ -2858,12 +2858,39 @@
             <div class="swiper-pagination"></div>
         </div>
 
-        <!-- Live Ticker -->
-        <div class="live-ticker">
-            <div class="ticker-container">
-                <div class="ticker-content" id="liveTicker"></div>
+        <!-- ===== UPGRADED LIVE TRACKER ===== -->
+<div class="live-tracker-container">
+    <div class="live-tracker-header">
+        <div class="live-tracker-title">
+            <span class="live-badge">🔴 LIVE</span>
+            <h3>Real-Time Activity</h3>
+        </div>
+        <div class="live-stats">
+            <div class="live-stat">
+                <i class="fas fa-users"></i>
+                <span id="onlineUsers">247</span>
+            </div>
+            <div class="live-stat">
+                <i class="fas fa-clock"></i>
+                <span id="updateTime">just now</span>
             </div>
         </div>
+    </div>
+
+    <!-- Main Ticker -->
+    <div class="live-ticker-wrapper">
+        <div class="ticker-marquee">
+            <div class="ticker-content" id="liveTicker">
+                <!-- Dynamic content will be inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Activity Cards -->
+    <div class="activity-cards" id="activityCards">
+        <!-- Dynamic activity cards will be inserted here -->
+    </div>
+</div>
 
         <!-- Quick Stats Grid -->
         <div class="stats-grid" id="statsGrid">
