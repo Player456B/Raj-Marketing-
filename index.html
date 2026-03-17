@@ -1993,6 +1993,14 @@
     font-weight: 600;
     text-align: left;
     padding-left: 5px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.social-section h3 i {
+    color: var(--secondary-gold);
+    font-size: 1.1rem;
 }
 
 /* Social Slider */
@@ -2017,67 +2025,83 @@
     align-items: center;
     gap: 5px;
     cursor: pointer;
-    width: 60px;
+    width: 65px;
+    transition: transform 0.2s ease;
+}
+
+.social-card:hover {
+    transform: translateY(-3px);
 }
 
 .social-icon {
-    width: 45px;
-    height: 45px;
+    width: 48px;
+    height: 48px;
     border-radius: 50%;
-    background: #f5f5f5;
+    background: #f0f0f0;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.3rem;
-    color: #555;
+    font-size: 1.4rem;
+    color: #444;
     transition: all 0.2s ease;
-    border: 1px solid #eaeaea;
-    /* NO SHADOW */
+    border: 1px solid #e0e0e0;
 }
 
-.social-icon:hover {
+.social-icon i {
+    display: inline-block;
+    line-height: 1;
+}
+
+.social-card:hover .social-icon {
     background: #e6b422;
     color: white;
     border-color: #e6b422;
-    transform: scale(1.05);
 }
 
 .social-card span {
     font-size: 0.6rem;
     font-weight: 500;
-    color: var(--gray-600);
+    color: #666;
     white-space: nowrap;
 }
 
 .social-card:hover span {
-    color: var(--primary-blue);
+    color: #1e4b8b;
 }
 
-/* Remove all shadows and brand colors */
-.social-icon.facebook,
-.social-icon.instagram,
-.social-icon.whatsapp,
-.social-icon.youtube,
-.social-icon.twitter,
-.social-icon.linkedin,
-.social-icon.telegram,
-.social-icon.pinterest {
-    background: #f5f5f5;
-    color: #555;
-    box-shadow: none !important;
+/* Individual icon adjustments for better visibility */
+.social-icon .fa-facebook-f {
+    font-size: 1.3rem;
 }
 
-.social-icon.facebook:hover,
-.social-icon.instagram:hover,
-.social-icon.whatsapp:hover,
-.social-icon.youtube:hover,
-.social-icon.twitter:hover,
-.social-icon.linkedin:hover,
-.social-icon.telegram:hover,
-.social-icon.pinterest:hover {
-    background: #e6b422;
-    color: white;
+.social-icon .fa-instagram {
+    font-size: 1.5rem;
 }
+
+.social-icon .fa-whatsapp {
+    font-size: 1.5rem;
+}
+
+.social-icon .fa-youtube {
+    font-size: 1.4rem;
+}
+
+.social-icon .fa-twitter {
+    font-size: 1.4rem;
+}
+
+.social-icon .fa-linkedin-in {
+    font-size: 1.4rem;
+}
+
+.social-icon .fa-telegram-plane {
+    font-size: 1.4rem;
+}
+
+.social-icon .fa-pinterest {
+    font-size: 1.4rem;
+}
+        
         /* ===== PWA INSTALL ===== */
         .install-pwa {
             background: var(--gradient-blue);
@@ -2789,11 +2813,84 @@
             <div class="swiper-wrapper" id="reviewsSlider"></div>
         </div>
 
-        <!-- Social Media Section - Slider Design -->
+        <!-- Social Media Section - Slider Design with Visible Icons -->
 <div class="social-section">
     <h3><i class="fas fa-share-alt" style="color: #e6b422; margin-right: 8px;"></i> Connect With Us</h3>
     <div class="swiper social-slider">
-        <div class="swiper-wrapper" id="socialSlider"></div>
+        <div class="swiper-wrapper" id="socialSlider">
+            <!-- Facebook -->
+            <div class="swiper-slide">
+                <div class="social-card" onclick="window.open('https://facebook.com/rajmarketing')">
+                    <div class="social-icon">
+                        <i class="fab fa-facebook-f"></i>
+                    </div>
+                    <span>Facebook</span>
+                </div>
+            </div>
+            <!-- Instagram -->
+            <div class="swiper-slide">
+                <div class="social-card" onclick="window.open('https://instagram.com/rajmarketing')">
+                    <div class="social-icon">
+                        <i class="fab fa-instagram"></i>
+                    </div>
+                    <span>Instagram</span>
+                </div>
+            </div>
+            <!-- WhatsApp -->
+            <div class="swiper-slide">
+                <div class="social-card" onclick="window.open('https://wa.me/919483037385')">
+                    <div class="social-icon">
+                        <i class="fab fa-whatsapp"></i>
+                    </div>
+                    <span>WhatsApp</span>
+                </div>
+            </div>
+            <!-- YouTube -->
+            <div class="swiper-slide">
+                <div class="social-card" onclick="window.open('https://youtube.com/@rajmarketing')">
+                    <div class="social-icon">
+                        <i class="fab fa-youtube"></i>
+                    </div>
+                    <span>YouTube</span>
+                </div>
+            </div>
+            <!-- Twitter -->
+            <div class="swiper-slide">
+                <div class="social-card" onclick="window.open('https://twitter.com/rajmarketing')">
+                    <div class="social-icon">
+                        <i class="fab fa-twitter"></i>
+                    </div>
+                    <span>Twitter</span>
+                </div>
+            </div>
+            <!-- LinkedIn -->
+            <div class="swiper-slide">
+                <div class="social-card" onclick="window.open('https://linkedin.com/company/rajmarketing')">
+                    <div class="social-icon">
+                        <i class="fab fa-linkedin-in"></i>
+                    </div>
+                    <span>LinkedIn</span>
+                </div>
+            </div>
+            <!-- Telegram -->
+            <div class="swiper-slide">
+                <div class="social-card" onclick="window.open('https://t.me/rajmarketing')">
+                    <div class="social-icon">
+                        <i class="fab fa-telegram-plane"></i>
+                    </div>
+                    <span>Telegram</span>
+                </div>
+            </div>
+            <!-- Pinterest -->
+            <div class="swiper-slide">
+                <div class="social-card" onclick="window.open('https://pinterest.com/rajmarketing')">
+                    <div class="social-icon">
+                        <i class="fab fa-pinterest"></i>
+                    </div>
+                    <span>Pinterest</span>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -3257,14 +3354,14 @@
             }
         }
 
-        // Load Social Icons - Slider Version
+        // Load Social Icons - FIXED VERSION
 function loadSocialIcons() {
     const socials = [
         { icon: 'facebook-f', name: 'Facebook', url: 'https://facebook.com/rajmarketing' },
-        { icon: 'instagram', name: 'Insta', url: 'https://instagram.com/rajmarketing' },
+        { icon: 'instagram', name: 'Instagram', url: 'https://instagram.com/rajmarketing' },
         { icon: 'whatsapp', name: 'WhatsApp', url: 'https://wa.me/919483037385' },
         { icon: 'youtube', name: 'YouTube', url: 'https://youtube.com/@rajmarketing' },
-        { icon: 'twitter', name: 'X', url: 'https://twitter.com/rajmarketing' },
+        { icon: 'twitter', name: 'Twitter', url: 'https://twitter.com/rajmarketing' },
         { icon: 'linkedin-in', name: 'LinkedIn', url: 'https://linkedin.com/company/rajmarketing' },
         { icon: 'telegram-plane', name: 'Telegram', url: 'https://t.me/rajmarketing' },
         { icon: 'pinterest', name: 'Pinterest', url: 'https://pinterest.com/rajmarketing' }
@@ -3275,7 +3372,7 @@ function loadSocialIcons() {
         container.innerHTML = socials.map(s => `
             <div class="swiper-slide">
                 <div class="social-card" onclick="window.open('${s.url}')">
-                    <div class="social-icon ${s.name.toLowerCase()}">
+                    <div class="social-icon">
                         <i class="fab fa-${s.icon}"></i>
                     </div>
                     <span>${s.name}</span>
@@ -3284,9 +3381,8 @@ function loadSocialIcons() {
         `).join('');
     }
 
-    
-        // Initialize social slider
-    if (document.querySelector('.social-slider')) {
+    // Initialize social slider
+    if (document.querySelector('.social-slider') && typeof Swiper !== 'undefined') {
         new Swiper('.social-slider', {
             slidesPerView: 'auto',
             spaceBetween: 10,
