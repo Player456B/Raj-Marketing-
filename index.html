@@ -1041,12 +1041,12 @@
         }
 
         .live-ticker::before {
-            content: '🔴 LIVE';
+            content: '🟢 LIVE';
             position: absolute;
             left: 15px;
             top: 50%;
             transform: translateY(-50%);
-            background: var(--danger-red);
+            background: var(--green);
             color: white;
             padding: 6px 15px;
             border-radius: var(--border-radius-xxl);
@@ -1977,57 +1977,76 @@
             color: var(--secondary-gold); 
             margin-top: 5px;
         }
+/* ===== SOCIAL SECTION - UPDATED ===== */
+.social-section {
+    background: white;
+    border-radius: var(--border-radius-xl);
+    padding: 25px;
+    margin: 0 16px 20px;
+    text-align: center;
+    box-shadow: var(--shadow-lg);
+}
 
-        /* ===== SOCIAL SECTION ===== */
-        .social-section {
-            background: white;
-            border-radius: var(--border-radius-xl);
-            padding: 25px;
-            margin: 0 16px 20px;
-            text-align: center;
-            box-shadow: var(--shadow-lg);
-        }
+.social-section h3 {
+    color: var(--primary-blue);
+    margin-bottom: 20px;
+    font-size: 1.1rem;
+}
 
-        .social-section h3 {
-            color: var(--primary-blue);
-            margin-bottom: 20px;
-        }
+.social-grid {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
 
-        .social-grid {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            flex-wrap: wrap;
-        }
+.social-icon {
+    width: 40px;  /* Smaller size */
+    height: 40px; /* Smaller size */
+    border-radius: 50%; /* Circular shape */
+    background: #f0f0f0; /* Light grey background */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem; /* Smaller icon */
+    color: #555; /* Dark grey icon color */
+    cursor: pointer;
+    transition: var(--transition-fast);
+    box-shadow: var(--shadow-sm);
+    border: 1px solid #e0e0e0;
+}
 
-        .social-icon {
-            width: 50px;
-            height: 50px;
-            border-radius: var(--border-radius-sm);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            color: white;
-            cursor: pointer;
-            transition: var(--transition-normal);
-            box-shadow: var(--shadow-md);
-        }
+.social-icon:hover {
+    background: #e0e0e0; /* Darker grey on hover */
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+    color: #333; /* Darker icon on hover */
+}
 
-        .social-icon:hover {
-            transform: translateY(-5px) scale(1.1);
-            box-shadow: var(--shadow-lg);
-        }
+/* Remove individual brand colors - all grey */
+.social-icon.facebook,
+.social-icon.instagram,
+.social-icon.whatsapp,
+.social-icon.youtube,
+.social-icon.twitter,
+.social-icon.linkedin,
+.social-icon.telegram,
+.social-icon.pinterest {
+    background: #f0f0f0; /* All grey */
+    color: #555;
+}
 
-        .social-icon.facebook { background: #1877f2; }
-        .social-icon.instagram { background: #e4405f; }
-        .social-icon.whatsapp { background: #25d366; }
-        .social-icon.youtube { background: #ff0000; }
-        .social-icon.twitter { background: #1da1f2; }
-        .social-icon.linkedin { background: #0077b5; }
-        .social-icon.telegram { background: #0088cc; }
-        .social-icon.pinterest { background: #bd081c; }
-
+.social-icon.facebook:hover,
+.social-icon.instagram:hover,
+.social-icon.whatsapp:hover,
+.social-icon.youtube:hover,
+.social-icon.twitter:hover,
+.social-icon.linkedin:hover,
+.social-icon.telegram:hover,
+.social-icon.pinterest:hover {
+    background: #e0e0e0;
+    color: #333;
+}
         /* ===== PWA INSTALL ===== */
         .install-pwa {
             background: var(--gradient-blue);
@@ -2739,11 +2758,11 @@
             <div class="swiper-wrapper" id="reviewsSlider"></div>
         </div>
 
-        <!-- Social Media Section - REAL ICONS -->
-        <div class="social-section">
-            <h3>Connect With Us</h3>
-            <div class="social-grid" id="socialGrid"></div>
-        </div>
+        <!-- Social Media Section - Grey Icons -->
+<div class="social-section">
+    <h3>Connect With Us</h3>
+    <div class="social-grid" id="socialGrid"></div>
+</div>
 
         <!-- Error Message Display -->
         <div class="error-message" id="errorMessage" style="display: none;">
@@ -3204,29 +3223,28 @@
             }
         }
 
-        // Load Social Icons - REAL ICONS
-        function loadSocialIcons() {
-            const socials = [
-                { icon: 'fa-facebook-f', url: 'https://facebook.com/rajmarketingmysore', color: '#0077b5', name: 'facebook' },
-                { icon: 'fa-instagram', url: 'https://instagram.com/rajmarketingmysore', color: '#e4405f', name: 'instagram' },
-                { icon: 'fa-whatsapp', url: 'https://wa.me/919483037385', color: '#25d366', name: 'whatsapp' },
-                { icon: 'fa-youtube', url: 'https://youtube.com/@rajmarketingmysore', color: '#ff0000', name: 'youtube' },
-                { icon: 'fa-twitter', url: 'https://twitter.com/rajmarketingmysore', color: '#1da1f2', name: 'twitter' },
-                { icon: 'fa-linkedin-in', url: 'https://linkedin.com/company/rajmarketingmysore', color: '#0077b5', name: 'linkedin' },
-                { icon: 'fa-telegram-plane', url: 'https://t.me/rajmarketingmysore', color: '#0088cc', name: 'telegram' },
-                { icon: 'fa-pinterest', url: 'https://pinterest.com/rajmarketingmysore', color: '#bd081c', name: 'pinterest' }
-            ];
+        // Load Social Icons - GREY VERSION
+function loadSocialIcons() {
+    const socials = [
+        { icon: 'facebook-f', url: 'https://facebook.com/rajmarketing' },
+        { icon: 'instagram', url: 'https://instagram.com/rajmarketing' },
+        { icon: 'whatsapp', url: 'https://wa.me/919483037385' },
+        { icon: 'youtube', url: 'https://youtube.com/@rajmarketing' },
+        { icon: 'twitter', url: 'https://twitter.com/rajmarketing' },
+        { icon: 'linkedin-in', url: 'https://linkedin.com/company/rajmarketing' },
+        { icon: 'telegram-plane', url: 'https://t.me/rajmarketing' },
+        { icon: 'pinterest', url: 'https://pinterest.com/rajmarketing' }
+    ];
 
-            const grid = document.getElementById('socialGrid');
-            if (grid) {
-                grid.innerHTML = socials.map(s => `
-                    <div class="social-icon ${s.name}" onclick="window.open('${s.url}')">
-                        <i class="fab fa-${s.icon}"></i>
-                    </div>
-                `).join('');
-            }
-        }
-
+    const grid = document.getElementById('socialGrid');
+    if (grid) {
+        grid.innerHTML = socials.map(s => `
+            <div class="social-icon" onclick="window.open('${s.url}')">
+                <i class="fab fa-${s.icon}"></i>
+            </div>
+        `).join('');
+    }
+}
         // Search Function
         function searchProducts() {
             const query = document.getElementById('searchInput').value.toLowerCase();
