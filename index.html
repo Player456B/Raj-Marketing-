@@ -1027,302 +1027,86 @@
             background: var(--secondary-gold);
             width: 25px;
             border-radius: 10px;
-                }
-            /* ===== UPGRADED LIVE TRACKER ===== */
-.live-tracker-container {
-    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
-    border-radius: 25px;
-    padding: 20px;
-    margin: 15px 16px 20px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-    border: 1px solid rgba(230,180,34,0.2);
-}
+        }
 
-.live-tracker-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 15px;
-}
+        /* ===== LIVE TICKER ===== */
+        .live-ticker {
+            background: white;
+            margin: 8px 16px 20px;
+            border-radius: var(--border-radius-xxl);
+            padding: 16px 0;
+            border: 3px solid var(--primary-blue);
+            overflow: hidden;
+            position: relative;
+            box-shadow: var(--shadow-lg);
+        }
 
-.live-tracker-title {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
+        .live-ticker::before {
+            content: '🔴 LIVE';
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--danger-red);
+            color: white;
+            padding: 6px 15px;
+            border-radius: var(--border-radius-xxl);
+            font-size: 12px;
+            font-weight: 800;
+            z-index: 10;
+            box-shadow: 0 5px 15px rgba(220,53,69,0.3);
+            animation: pulseLive 2s infinite;
+        }
 
-.live-badge {
-    background: #dc3545;
-    color: white;
-    padding: 4px 12px;
-    border-radius: 30px;
-    font-size: 0.7rem;
-    font-weight: 700;
-    letter-spacing: 0.5px;
-    animation: pulse-badge 2s infinite;
-}
+        @keyframes pulseLive {
+            0% { transform: translateY(-50%) scale(1); }
+            50% { transform: translateY(-50%) scale(1.05); }
+            100% { transform: translateY(-50%) scale(1); }
+        }
 
-@keyframes pulse-badge {
-    0% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.8; transform: scale(1.05); }
-    100% { opacity: 1; transform: scale(1); }
-}
+        .ticker-container {
+            width: 100%;
+            overflow: hidden;
+            white-space: nowrap;
+            padding: 0 20px 0 110px;
+        }
 
-.live-tracker-title h3 {
-    color: #1e4b8b;
-    font-size: 1rem;
-    font-weight: 600;
-}
+        .ticker-content {
+            display: inline-block;
+            animation: ticker 50s linear infinite;
+            color: var(--gray-900);
+            font-weight: 600;
+        }
 
-.live-stats {
-    display: flex;
-    gap: 15px;
-}
+        @keyframes ticker {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
 
-.live-stat {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    background: #f0f5f3;
-    padding: 5px 12px;
-    border-radius: 30px;
-    font-size: 0.7rem;
-}
+        .ticker-content span {
+            margin-right: 50px;
+            display: inline-block;
+            padding: 5px 15px;
+            background: rgba(30,75,139,0.03);
+            border-radius: var(--border-radius-xxl);
+        }
 
-.live-stat i {
-    color: #e6b422;
-    font-size: 0.8rem;
-}
+        .ticker-content i {
+            color: var(--success-green);
+            margin-right: 8px;
+            font-size: 0.8rem;
+            animation: blinkGreen 1.2s infinite;
+        }
 
-.live-stat span {
-    color: #1e4b8b;
-    font-weight: 600;
-}
+        @keyframes blinkGreen {
+            0% { opacity: 1; }
+            50% { opacity: 0.3; }
+            100% { opacity: 1; }
+        }
 
-/* Ticker Wrapper */
-.live-ticker-wrapper {
-    background: #f8f9fa;
-    border-radius: 50px;
-    padding: 12px 0;
-    margin-bottom: 20px;
-    border: 2px solid #1e4b8b;
-    overflow: hidden;
-    position: relative;
-}
-
-.live-ticker-wrapper::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    width: 40px;
-    background: linear-gradient(90deg, #f8f9fa, transparent);
-    z-index: 2;
-    pointer-events: none;
-}
-
-.live-ticker-wrapper::after {
-    content: '';
-    position: absolute;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    width: 40px;
-    background: linear-gradient(-90deg, #f8f9fa, transparent);
-    z-index: 2;
-    pointer-events: none;
-}
-
-.ticker-marquee {
-    width: 100%;
-    overflow: hidden;
-    white-space: nowrap;
-}
-
-.ticker-content {
-    display: inline-block;
-    animation: ticker-scroll 35s linear infinite;
-    padding-left: 20px;
-}
-
-@keyframes ticker-scroll {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
-}
-
-.ticker-item {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 0 20px;
-    position: relative;
-}
-
-.ticker-item:not(:last-child)::after {
-    content: '•';
-    position: absolute;
-    right: -5px;
-    color: #e6b422;
-    font-size: 1.2rem;
-}
-
-.ticker-icon {
-    width: 24px;
-    height: 24px;
-    background: rgba(30,75,139,0.1);
-    border-radius: 50%;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    color: #1e4b8b;
-    font-size: 0.7rem;
-}
-
-.ticker-text {
-    font-size: 0.85rem;
-    font-weight: 500;
-}
-
-.ticker-name {
-    color: #28a745;
-    font-weight: 700;
-    margin-right: 3px;
-}
-
-.ticker-area {
-    color: #e6b422;
-    font-weight: 700;
-    margin-right: 3px;
-}
-
-.ticker-service {
-    color: #1e4b8b;
-    font-weight: 700;
-    margin-right: 3px;
-}
-
-.ticker-time {
-    color: #6c757d;
-    font-size: 0.7rem;
-    margin-left: 5px;
-}
-
-/* Activity Cards */
-.activity-cards {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.activity-item {
-    background: white;
-    border-radius: 16px;
-    padding: 15px;
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    border: 1px solid #eaeef2;
-    transition: all 0.3s ease;
-    animation: slideIn 0.5s ease;
-}
-
-.activity-item:hover {
-    transform: translateX(5px);
-    border-color: #e6b422;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-}
-
-.activity-icon {
-    width: 45px;
-    height: 45px;
-    background: linear-gradient(135deg, #1e4b8b, #2a6bb3);
-    border-radius: 14px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-size: 1.3rem;
-    flex-shrink: 0;
-}
-
-.activity-content {
-    flex: 1;
-}
-
-.activity-title {
-    font-weight: 600;
-    color: #1e4b8b;
-    margin-bottom: 4px;
-    font-size: 0.9rem;
-}
-
-.activity-desc {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    flex-wrap: wrap;
-    font-size: 0.8rem;
-}
-
-.activity-customer {
-    color: #28a745;
-    font-weight: 600;
-}
-
-.activity-location {
-    color: #e6b422;
-    font-weight: 600;
-}
-
-.activity-product {
-    color: #1e4b8b;
-    font-weight: 600;
-}
-
-.activity-time {
-    color: #6c757d;
-    font-size: 0.7rem;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-}
-
-.activity-time i {
-    color: #e6b422;
-    font-size: 0.6rem;
-}
-
-/* Live Counter Badge */
-.counter-badge {
-    background: #1e4b8b;
-    color: white;
-    border-radius: 30px;
-    padding: 2px 8px;
-    font-size: 0.6rem;
-    margin-left: 8px;
-}
-
-/* Animation for new items */
-@keyframes slideIn {
-    from {
-        opacity: 0;
-        transform: translateX(-20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-
-.new-activity {
-    animation: highlight 2s ease;
-}
-
-@keyframes highlight {
-    0% { background-color: rgba(230,180,34,0.2); }
-    100% { background-color: white; }
-}
+        .ticker-customer { color: var(--success-green); font-weight: 800; }
+        .ticker-area { color: var(--secondary-gold); font-weight: 800; }
+        .ticker-service { color: var(--primary-blue); font-weight: 800; }
 
         /* ===== QUICK STATS ===== */
         .stats-grid {
@@ -1376,7 +1160,6 @@
             font-size: 0.6rem;
             color: var(--gray-600);
         }
-
         /* ===== SECTION TITLE ===== */
         .section-title {
             display: flex;
@@ -1642,8 +1425,8 @@
             background: var(--gradient-blue);
             color: white;
             transform: translateY(-2px);
-        }
-            /* ===== QUICK ACTIONS ===== */
+                            }
+         /* ===== QUICK ACTIONS ===== */
         .actions-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -1928,8 +1711,7 @@
         .analytics-label {
             color: var(--gray-600);
             font-size: 0.7rem;
-        }
-
+            }
         /* ===== OFFERS GRID ===== */
         .offers-grid {
             display: grid;
@@ -2066,8 +1848,9 @@
 
         .form-group.success .success-icon {
             display: block;
-            }
-          /* ===== GALLERY SLIDER ===== */
+        }
+
+        /* ===== GALLERY SLIDER ===== */
         .gallery-slider {
             padding: 0 16px 20px;
         }
@@ -2193,132 +1976,57 @@
         .rating { 
             color: var(--secondary-gold); 
             margin-top: 5px;
+            }
+        /* ===== SOCIAL SECTION ===== */
+        .social-section {
+            background: white;
+            border-radius: var(--border-radius-xl);
+            padding: 25px;
+            margin: 0 16px 20px;
+            text-align: center;
+            box-shadow: var(--shadow-lg);
         }
-        
-/* ===== SOCIAL SECTION - SLIDER DESIGN ===== */
-.social-section {
-    background: transparent;
-    padding: 10px 16px 20px;
-    margin: 0;
-    text-align: center;
-}
 
-.social-section h3 {
-    color: var(--primary-blue);
-    margin-bottom: 15px;
-    font-size: 1rem;
-    font-weight: 600;
-    text-align: left;
-    padding-left: 5px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
+        .social-section h3 {
+            color: var(--primary-blue);
+            margin-bottom: 20px;
+        }
 
-.social-section h3 i {
-    color: var(--secondary-gold);
-    font-size: 1.1rem;
-}
+        .social-grid {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
 
-/* Social Slider */
-.social-slider {
-    width: 100%;
-    overflow: hidden;
-}
+        .social-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: var(--border-radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+            cursor: pointer;
+            transition: var(--transition-normal);
+            box-shadow: var(--shadow-md);
+        }
 
-.social-slider .swiper-wrapper {
-    display: flex;
-}
+        .social-icon:hover {
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: var(--shadow-lg);
+        }
 
-.social-slider .swiper-slide {
-    width: auto;
-    flex-shrink: 0;
-}
+        .social-icon.facebook { background: #1877f2; }
+        .social-icon.instagram { background: #e4405f; }
+        .social-icon.whatsapp { background: #25d366; }
+        .social-icon.youtube { background: #ff0000; }
+        .social-icon.twitter { background: #1da1f2; }
+        .social-icon.linkedin { background: #0077b5; }
+        .social-icon.telegram { background: #0088cc; }
+        .social-icon.pinterest { background: #bd081c; }
 
-/* Social Icon Card */
-.social-card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 5px;
-    cursor: pointer;
-    width: 65px;
-    transition: transform 0.2s ease;
-}
-
-.social-card:hover {
-    transform: translateY(-3px);
-}
-
-.social-icon {
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    background: #f0f0f0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.4rem;
-    color: #444;
-    transition: all 0.2s ease;
-    border: 1px solid #e0e0e0;
-}
-
-.social-icon i {
-    display: inline-block;
-    line-height: 1;
-}
-
-.social-card:hover .social-icon {
-    background: #e6b422;
-    color: white;
-    border-color: #e6b422;
-}
-
-.social-card span {
-    font-size: 0.6rem;
-    font-weight: 500;
-    color: #666;
-    white-space: nowrap;
-}
-
-.social-card:hover span {
-    color: #1e4b8b;
-}
-
-/* Individual icon adjustments for better visibility */
-.social-icon .fa-facebook-f {
-    font-size: 1.3rem;
-}
-
-.social-icon .fa-instagram {
-    font-size: 1.5rem;
-}
-
-.social-icon .fa-whatsapp {
-    font-size: 1.5rem;
-}
-
-.social-icon .fa-youtube {
-    font-size: 1.4rem;
-}
-
-.social-icon .fa-twitter {
-    font-size: 1.4rem;
-}
-
-.social-icon .fa-linkedin-in {
-    font-size: 1.4rem;
-}
-
-.social-icon .fa-telegram-plane {
-    font-size: 1.4rem;
-}
-
-.social-icon .fa-pinterest {
-    font-size: 1.4rem;
-}
-        
         /* ===== PWA INSTALL ===== */
         .install-pwa {
             background: var(--gradient-blue);
@@ -2548,6 +2256,7 @@
         #adminToggle:hover {
             transform: scale(1.1) rotate(90deg);
         }
+
         /* ===== FLOATING ACTION BUTTON ===== */
         .fab {
             position: fixed;
@@ -2646,7 +2355,6 @@
         .footer-bottom p {
             margin: 5px 0;
         }
-
         /* ===== BOTTOM NAVIGATION ===== */
         .bottom-nav {
             position: fixed;
@@ -2858,39 +2566,12 @@
             <div class="swiper-pagination"></div>
         </div>
 
-        <!-- ===== UPGRADED LIVE TRACKER ===== -->
-<div class="live-tracker-container">
-    <div class="live-tracker-header">
-        <div class="live-tracker-title">
-            <span class="live-badge">🔴 LIVE</span>
-            <h3>Real-Time Activity</h3>
-        </div>
-        <div class="live-stats">
-            <div class="live-stat">
-                <i class="fas fa-users"></i>
-                <span id="onlineUsers">247</span>
-            </div>
-            <div class="live-stat">
-                <i class="fas fa-clock"></i>
-                <span id="updateTime">just now</span>
+        <!-- Live Ticker -->
+        <div class="live-ticker">
+            <div class="ticker-container">
+                <div class="ticker-content" id="liveTicker"></div>
             </div>
         </div>
-    </div>
-
-    <!-- Main Ticker -->
-    <div class="live-ticker-wrapper">
-        <div class="ticker-marquee">
-            <div class="ticker-content" id="liveTicker">
-                <!-- Dynamic content will be inserted here -->
-            </div>
-        </div>
-    </div>
-
-    <!-- Activity Cards -->
-    <div class="activity-cards" id="activityCards">
-        <!-- Dynamic activity cards will be inserted here -->
-    </div>
-</div>
 
         <!-- Quick Stats Grid -->
         <div class="stats-grid" id="statsGrid">
@@ -2927,8 +2608,7 @@
             </div>
             <div class="filtered-products" id="filteredProducts"></div>
         </div>
-
-        <!-- Category Image Slider -->
+            <!-- Category Image Slider -->
         <div class="section-title">
             <h2>Categories</h2>
             <a href="products.html" class="view-all">View All</a>
@@ -3018,7 +2698,8 @@
             </div>
             <div class="analytics-grid" id="analyticsGrid"></div>
         </div>
-     <!-- Offers Grid -->
+
+        <!-- Offers Grid -->
         <div class="section-title">
             <h2>Special Offers</h2>
             <a href="offers.html" class="view-all">View All</a>
@@ -3057,86 +2738,11 @@
             <div class="swiper-wrapper" id="reviewsSlider"></div>
         </div>
 
-        <!-- Social Media Section - Slider Design with Visible Icons -->
-<div class="social-section">
-    <h3><i class="fas fa-share-alt" style="color: #e6b422; margin-right: 8px;"></i> Connect With Us</h3>
-    <div class="swiper social-slider">
-        <div class="swiper-wrapper" id="socialSlider">
-            <!-- Facebook -->
-            <div class="swiper-slide">
-                <div class="social-card" onclick="window.open('https://facebook.com/rajmarketing')">
-                    <div class="social-icon">
-                        <i class="fab fa-facebook-f"></i>
-                    </div>
-                    <span>Facebook</span>
-                </div>
-            </div>
-            <!-- Instagram -->
-            <div class="swiper-slide">
-                <div class="social-card" onclick="window.open('https://instagram.com/rajmarketing')">
-                    <div class="social-icon">
-                        <i class="fab fa-instagram"></i>
-                    </div>
-                    <span>Instagram</span>
-                </div>
-            </div>
-            <!-- WhatsApp -->
-            <div class="swiper-slide">
-                <div class="social-card" onclick="window.open('https://wa.me/919483037385')">
-                    <div class="social-icon">
-                        <i class="fab fa-whatsapp"></i>
-                    </div>
-                    <span>WhatsApp</span>
-                </div>
-            </div>
-            <!-- YouTube -->
-            <div class="swiper-slide">
-                <div class="social-card" onclick="window.open('https://youtube.com/@rajmarketing')">
-                    <div class="social-icon">
-                        <i class="fab fa-youtube"></i>
-                    </div>
-                    <span>YouTube</span>
-                </div>
-            </div>
-            <!-- Twitter -->
-            <div class="swiper-slide">
-                <div class="social-card" onclick="window.open('https://twitter.com/rajmarketing')">
-                    <div class="social-icon">
-                        <i class="fab fa-twitter"></i>
-                    </div>
-                    <span>Twitter</span>
-                </div>
-            </div>
-            <!-- LinkedIn -->
-            <div class="swiper-slide">
-                <div class="social-card" onclick="window.open('https://linkedin.com/company/rajmarketing')">
-                    <div class="social-icon">
-                        <i class="fab fa-linkedin-in"></i>
-                    </div>
-                    <span>LinkedIn</span>
-                </div>
-            </div>
-            <!-- Telegram -->
-            <div class="swiper-slide">
-                <div class="social-card" onclick="window.open('https://t.me/rajmarketing')">
-                    <div class="social-icon">
-                        <i class="fab fa-telegram-plane"></i>
-                    </div>
-                    <span>Telegram</span>
-                </div>
-            </div>
-            <!-- Pinterest -->
-            <div class="swiper-slide">
-                <div class="social-card" onclick="window.open('https://pinterest.com/rajmarketing')">
-                    <div class="social-icon">
-                        <i class="fab fa-pinterest"></i>
-                    </div>
-                    <span>Pinterest</span>
-                </div>
-            </div>
+        <!-- Social Media Section - REAL ICONS -->
+        <div class="social-section">
+            <h3>Connect With Us</h3>
+            <div class="social-grid" id="socialGrid"></div>
         </div>
-    </div>
-</div>
 
         <!-- Error Message Display -->
         <div class="error-message" id="errorMessage" style="display: none;">
@@ -3300,8 +2906,7 @@
                     touchRatio: 1.5,
                 });
             }
-
-            // Category Slider
+     // Category Slider
             if (document.querySelector('.category-slider')) {
                 new Swiper('.category-slider', {
                     slidesPerView: 'auto',
@@ -3340,9 +2945,8 @@
                     grabCursor: true,
                 });
             }
-            
         }
-        
+
         // Load All Data
         function loadAllData() {
             loadMainSlider();
@@ -3458,6 +3062,7 @@
                 `).join('');
             }
         }
+
         // Quick Actions - 16 Tools
         function loadQuickActions() {
             const actions = [
@@ -3580,50 +3185,10 @@
             document.getElementById('totalBookings').innerHTML = '156';
             document.getElementById('statBookings').innerHTML = '08';
             
-            }
-
-    renderActivityCards() {
-        const container = document.getElementById('activityCards');
-        if (!container) return;
-
-        container.innerHTML = this.activities.map(activity => `
-            <div class="activity-item" data-id="${activity.id}">
-                <div class="activity-icon" style="background: ${activity.color}20; color: ${activity.color};">
-                    <i class="fas ${activity.icon}"></i>
-                </div>
-                <div class="activity-content">
-                    <div class="activity-title">New ${activity.type}</div>
-                    <div class="activity-desc">
-                        <span class="activity-customer">${activity.customer}</span>
-                        <span>from</span>
-                        <span class="activity-location">${activity.location}</span>
-                        <span>booked</span>
-                        <span class="activity-product">${activity.service}</span>
-                    </div>
-                </div>
-                <div class="activity-time">
-                    <i class="fas fa-clock"></i>
-                    <span>${activity.time}</span>
-                </div>
-            </div>
-        `).join('');
-    }
-
-    addNewActivity(activity) {
-        // Add new activity to the beginning
-        this.activities.unshift({
-            id: Date.now(),
-            ...activity
-        });
-
-        // Keep only last 8 activities
-        if (this.activities.length > 8) {
-            this.activities.pop();
+            // Live Ticker
+            const demo = '<span><i class="fas fa-circle"></i> <span class="ticker-customer">Suresh</span> from <span class="ticker-area">Vijayanagar</span> booked <span class="ticker-service">Velcro</span> • 5 min ago</span>';
+            document.getElementById('liveTicker').innerHTML = demo.repeat(10);
         }
-
-        // Re-render with animation
-        this.renderActivityCards();
-        
 
         // Load Analytics
         function loadAnalytics(period = 'day') {
@@ -3638,45 +3203,29 @@
             }
         }
 
-        // Load Social Icons - FIXED VERSION
-function loadSocialIcons() {
-    const socials = [
-        { icon: 'facebook-f', name: 'Facebook', url: 'https://facebook.com/rajmarketing' },
-        { icon: 'instagram', name: 'Instagram', url: 'https://instagram.com/rajmarketing' },
-        { icon: 'whatsapp', name: 'WhatsApp', url: 'https://wa.me/919483037385' },
-        { icon: 'youtube', name: 'YouTube', url: 'https://youtube.com/@rajmarketing' },
-        { icon: 'twitter', name: 'Twitter', url: 'https://twitter.com/rajmarketing' },
-        { icon: 'linkedin-in', name: 'LinkedIn', url: 'https://linkedin.com/company/rajmarketing' },
-        { icon: 'telegram-plane', name: 'Telegram', url: 'https://t.me/rajmarketing' },
-        { icon: 'pinterest', name: 'Pinterest', url: 'https://pinterest.com/rajmarketing' }
-    ];
+        // Load Social Icons - REAL ICONS
+        function loadSocialIcons() {
+            const socials = [
+                { icon: 'facebook-f', url: 'https://facebook.com/rajmarketing', color: '#1877f2', name: 'facebook' },
+                { icon: 'instagram', url: 'https://instagram.com/rajmarketing', color: '#e4405f', name: 'instagram' },
+                { icon: 'whatsapp', url: 'https://wa.me/919483037385', color: '#25d366', name: 'whatsapp' },
+                { icon: 'youtube', url: 'https://youtube.com/@rajmarketing', color: '#ff0000', name: 'youtube' },
+                { icon: 'twitter', url: 'https://twitter.com/rajmarketing', color: '#1da1f2', name: 'twitter' },
+                { icon: 'linkedin-in', url: 'https://linkedin.com/company/rajmarketing', color: '#0077b5', name: 'linkedin' },
+                { icon: 'telegram-plane', url: 'https://t.me/rajmarketing', color: '#0088cc', name: 'telegram' },
+                { icon: 'pinterest', url: 'https://pinterest.com/rajmarketing', color: '#bd081c', name: 'pinterest' }
+            ];
 
-    const container = document.getElementById('socialSlider');
-    if (container) {
-        container.innerHTML = socials.map(s => `
-            <div class="swiper-slide">
-                <div class="social-card" onclick="window.open('${s.url}')">
-                    <div class="social-icon">
+            const grid = document.getElementById('socialGrid');
+            if (grid) {
+                grid.innerHTML = socials.map(s => `
+                    <div class="social-icon ${s.name}" onclick="window.open('${s.url}')">
                         <i class="fab fa-${s.icon}"></i>
                     </div>
-                    <span>${s.name}</span>
-                </div>
-            </div>
-        `).join('');
-    }
+                `).join('');
+            }
+        }
 
-    // Initialize social slider
-    if (document.querySelector('.social-slider') && typeof Swiper !== 'undefined') {
-        new Swiper('.social-slider', {
-            slidesPerView: 'auto',
-            spaceBetween: 10,
-            freeMode: true,
-            grabCursor: true,
-            slidesOffsetAfter: 0,
-        });
-    }
-}
-        
         // Search Function
         function searchProducts() {
             const query = document.getElementById('searchInput').value.toLowerCase();
@@ -3711,9 +3260,8 @@ function loadSocialIcons() {
             }
             
             resultsContainer.classList.add('active');
-        }
-
-        // Filter Products
+    }
+         // Filter Products
         function filterProducts(category) {
             const tabs = document.querySelectorAll('.filter-tab');
             tabs.forEach(tab => tab.classList.remove('active'));
@@ -3741,7 +3289,8 @@ function loadSocialIcons() {
                 `).join('');
             }
         }
-            // User Functions
+
+        // User Functions
         function checkUserAuth() {
             if (currentUser) {
                 document.getElementById('userLoggedIn').style.display = 'block';
