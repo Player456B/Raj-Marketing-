@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Raj Marketing · Customer Hub</title>
+    <title>Raj Marketing · Smart OTP Login</title>
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,344 +19,300 @@
         }
 
         body {
-            background: #eef2f5;
+            background: linear-gradient(145deg, #eef2f5 0%, #e0e8ef 100%);
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
+            padding: 16px;
         }
 
         /* Mobile-first container */
-        .app-wrapper {
+        .app-container {
             max-width: 450px;
             width: 100%;
             background: #ffffff;
-            border-radius: 32px 32px 0 0;
-            margin: 16px 0 0 0;
+            border-radius: 48px 48px 32px 32px;
             overflow: hidden;
-            box-shadow: 0 25px 45px -12px rgba(0,0,0,0.2);
-            position: relative;
-            min-height: 85vh;
+            box-shadow: 0 30px 50px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease;
         }
 
         /* Header */
-        .app-header {
+        .brand-header {
             background: #0B2B26;
-            padding: 20px 20px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            color: white;
+            padding: 28px 24px;
+            text-align: center;
+            position: relative;
         }
-        .app-header i {
-            font-size: 1.8rem;
+        .brand-header h1 {
             color: #F4C542;
+            font-size: 1.8rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
         }
-        .app-header h1 {
-            font-size: 1.4rem;
-            font-weight: 700;
-            letter-spacing: -0.3px;
+        .brand-header p {
+            color: rgba(255,255,255,0.85);
+            font-size: 0.85rem;
+            margin-top: 6px;
         }
-        .app-header span {
-            font-size: 0.8rem;
-            opacity: 0.8;
-        }
-
-        /* Tabs (login/signup) */
-        .auth-tabs {
-            display: flex;
-            background: #F8FAFE;
-            margin: 16px 20px 20px;
-            border-radius: 60px;
-            padding: 6px;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-        }
-        .tab-btn {
-            flex: 1;
-            border: none;
-            background: transparent;
-            padding: 12px 0;
-            border-radius: 40px;
-            font-weight: 600;
-            font-size: 0.95rem;
-            color: #4a5b6e;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-        .tab-btn.active {
-            background: #0B2B26;
-            color: white;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
-        }
-        .tab-btn i {
-            margin-right: 8px;
-        }
-
-        /* Cards */
-        .form-card {
-            background: white;
-            margin: 0 16px 25px;
-            border-radius: 28px;
-            padding: 28px 20px;
-            box-shadow: 0 12px 30px rgba(0,0,0,0.08);
-            transition: 0.2s;
-        }
-        .form-icon {
-            background: #FEF5E7;
-            width: 70px;
-            height: 70px;
-            border-radius: 40px;
+        .brand-icon {
+            background: #F4C542;
+            width: 60px;
+            height: 60px;
+            border-radius: 30px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: -48px auto 16px;
-            box-shadow: 0 8px 16px rgba(0,0,0,0.05);
+            margin: -48px auto 0;
+            position: relative;
+            top: -24px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
         }
-        .form-icon i {
-            font-size: 2.5rem;
-            color: #F4C542;
-        }
-        h2 {
-            text-align: center;
+        .brand-icon i {
+            font-size: 2rem;
             color: #0B2B26;
-            font-size: 1.6rem;
-            font-weight: 700;
-        }
-        .sub {
-            text-align: center;
-            color: #5e6f8d;
-            font-size: 0.85rem;
-            margin-bottom: 24px;
         }
 
-        /* inputs */
-        .input-field {
-            margin-bottom: 20px;
+        /* Main content */
+        .main-content {
+            padding: 20px 24px 32px;
         }
-        .input-field label {
+
+        /* OTP Login Card */
+        .login-card {
+            background: white;
+            border-radius: 32px;
+            padding: 28px 20px;
+            margin-bottom: 16px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.05);
+        }
+
+        .step-indicator {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 28px;
+        }
+        .step {
+            flex: 1;
+            text-align: center;
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: #9aaebf;
+            position: relative;
+        }
+        .step.active {
+            color: #0B2B26;
+        }
+        .step.active .step-circle {
+            background: #0B2B26;
+            color: white;
+            border-color: #0B2B26;
+        }
+        .step-circle {
+            width: 32px;
+            height: 32px;
+            background: #f0f4fa;
+            border-radius: 30px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 6px;
+            font-weight: 700;
+            border: 2px solid #e2e8f0;
+        }
+
+        .input-group {
+            margin-bottom: 24px;
+        }
+        .input-group label {
             font-weight: 600;
             color: #1e2f3e;
-            font-size: 0.85rem;
             display: block;
-            margin-bottom: 6px;
+            margin-bottom: 8px;
+            font-size: 0.85rem;
         }
-        .input-field label i {
-            color: #F4C542;
-            margin-right: 6px;
+        .phone-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
         }
-        .input-field input, .input-field select {
+        .country-code {
+            position: absolute;
+            left: 16px;
+            background: #f0f4fa;
+            padding: 8px 12px;
+            border-radius: 40px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: #0B2B26;
+            pointer-events: none;
+        }
+        .phone-wrapper input {
             width: 100%;
-            padding: 14px 16px;
-            border: 1.5px solid #e2e8f0;
-            border-radius: 20px;
-            font-size: 0.95rem;
+            padding: 16px 16px 16px 80px;
+            border: 2px solid #e2e8f0;
+            border-radius: 60px;
+            font-size: 1rem;
+            font-weight: 500;
             transition: 0.2s;
-            background: #fff;
         }
-        .input-field input:focus, .input-field select:focus {
+        .phone-wrapper input:focus {
             border-color: #0B2B26;
             outline: none;
             box-shadow: 0 0 0 3px rgba(11,43,38,0.1);
         }
-        .phone-prefix {
-            position: relative;
-        }
-        .phone-prefix input {
-            padding-left: 48px;
-        }
-        .prefix-code {
-            position: absolute;
-            left: 16px;
-            top: 50%;
-            transform: translateY(-50%);
-            font-weight: 700;
-            color: #0B2B26;
-            background: #f0f3f8;
-            padding: 4px 8px;
-            border-radius: 30px;
-            font-size: 0.8rem;
-        }
 
-        /* OTP section */
-        .otp-group {
-            margin: 20px 0;
-        }
-        .otp-digits {
+        /* OTP Boxes */
+        .otp-boxes {
             display: flex;
             gap: 12px;
             justify-content: center;
-            margin: 15px 0;
+            margin: 20px 0 16px;
         }
-        .otp-digits input {
-            width: 60px;
-            height: 65px;
+        .otp-input {
+            width: 65px;
+            height: 70px;
             text-align: center;
-            font-size: 1.6rem;
-            font-weight: 700;
+            font-size: 1.8rem;
+            font-weight: 800;
             border: 2px solid #e2e8f0;
-            border-radius: 18px;
+            border-radius: 20px;
             background: #fff;
+            transition: 0.2s;
         }
-        .timer-text {
+        .otp-input:focus {
+            border-color: #F4C542;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(244,197,66,0.2);
+        }
+
+        .timer-section {
             text-align: center;
-            font-size: 0.8rem;
-            margin-top: 8px;
+            font-size: 0.85rem;
+            color: #5e6f8d;
+            margin: 12px 0;
         }
-        .resend-link {
+        .resend-btn {
             color: #0B2B26;
             font-weight: 700;
             cursor: pointer;
             text-decoration: underline;
+            background: none;
+            border: none;
+            font-size: 0.85rem;
         }
 
-        /* buttons */
         .btn-primary {
             width: 100%;
             background: #0B2B26;
             border: none;
             padding: 16px;
-            border-radius: 40px;
+            border-radius: 60px;
             font-weight: 700;
             font-size: 1rem;
             color: white;
-            margin: 15px 0 10px;
             cursor: pointer;
             transition: 0.2s;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
-        }
-        .btn-primary:hover {
-            background: #174e46;
-            transform: translateY(-2px);
-        }
-        .btn-secondary {
-            background: #F4C542;
-            color: #1e2f3e;
-        }
-        .social-row {
-            text-align: center;
-            margin-top: 20px;
-        }
-        .social-icons {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
+            gap: 10px;
             margin-top: 12px;
         }
-        .social-circle {
-            width: 48px;
-            height: 48px;
-            background: #f0f4fa;
-            border-radius: 60px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.4rem;
-            cursor: pointer;
-            transition: 0.2s;
+        .btn-primary:hover {
+            background: #1f5a4e;
+            transform: translateY(-2px);
         }
-        .hidden {
-            display: none !important;
+        .btn-outline {
+            background: #F4C542;
+            color: #0B2B26;
         }
 
-        /* DASHBOARD STYLES */
+        /* Dashboard Styles */
         .dashboard {
-            padding: 16px 20px 90px;
+            padding: 0 20px 30px;
         }
-        .hero-card {
+        .profile-hero {
             background: linear-gradient(125deg, #0B2B26 0%, #1F5A50 100%);
-            border-radius: 28px;
-            padding: 24px;
+            border-radius: 32px;
+            padding: 28px 24px;
             color: white;
             margin-bottom: 24px;
         }
-        .hero-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        .profile-name {
+            font-size: 1.6rem;
+            font-weight: 800;
+            margin-bottom: 12px;
         }
-        .hero-header h3 {
-            font-size: 1.3rem;
-            font-weight: 700;
-        }
-        .badge-icon {
-            background: #F4C542;
-            color: #0B2B26;
-            padding: 6px 12px;
-            border-radius: 50px;
-            font-size: 0.7rem;
-            font-weight: bold;
-        }
-        .info-row {
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-            margin-top: 18px;
-        }
-        .info-row p {
+        .detail-row {
             display: flex;
             align-items: center;
-            gap: 8px;
-            font-size: 0.9rem;
+            gap: 12px;
+            margin-top: 12px;
+            font-size: 0.85rem;
         }
-        .stats-grid {
+        .stats-row {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 14px;
             margin-bottom: 28px;
         }
-        .stat-tile {
+        .stat-box {
             background: #F9FBFD;
-            padding: 16px;
-            border-radius: 20px;
+            padding: 18px;
+            border-radius: 24px;
             text-align: center;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
-            border: 1px solid #edf2f7;
+            border: 1px solid #eef2f9;
         }
-        .stat-num {
-            font-size: 1.8rem;
+        .stat-number {
+            font-size: 1.9rem;
             font-weight: 800;
             color: #0B2B26;
         }
         .section-title {
             display: flex;
             justify-content: space-between;
-            margin: 18px 0 12px;
+            align-items: center;
+            margin: 20px 0 12px;
             font-weight: 700;
             color: #1e2f3e;
         }
-        .order-item {
-            background: white;
-            border-radius: 20px;
-            padding: 14px;
+        .order-card {
+            background: #ffffff;
+            border-radius: 24px;
+            padding: 16px;
             margin-bottom: 12px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border: 1px solid #eef2f9;
-            transition: 0.2s;
+            border: 1px solid #edf2f9;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.02);
         }
-        .order-status {
-            padding: 4px 12px;
-            border-radius: 40px;
+        .status-badge {
+            padding: 5px 12px;
+            border-radius: 30px;
             font-size: 0.7rem;
             font-weight: 700;
         }
+        .status-active { background: #fff0db; color: #c47d2e; }
         .status-delivered { background: #e0f2e9; color: #1e6f5c; }
-        .status-processing { background: #fff0db; color: #c47d2e; }
+
         .address-chip {
-            background: #f7f9fc;
-            padding: 12px;
+            background: #f8fafd;
+            padding: 14px;
             border-radius: 20px;
             margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
-        .menu-item-dash {
+        .menu-option {
             display: flex;
             align-items: center;
             gap: 14px;
-            padding: 14px 0;
+            padding: 16px 0;
             border-bottom: 1px solid #edf2f7;
             cursor: pointer;
         }
@@ -370,17 +326,17 @@
             border-top: 2px solid #F4C542;
             margin-top: 20px;
         }
-        .nav-link {
+        .nav-item {
             text-align: center;
             color: #7c8b9f;
             font-size: 0.7rem;
         }
-        .toast-msg {
+        .toast-message {
             position: fixed;
             bottom: 100px;
             left: 50%;
             transform: translateX(-50%);
-            background: #0B2B26;
+            background: #1e2f3e;
             color: white;
             padding: 12px 24px;
             border-radius: 50px;
@@ -389,472 +345,225 @@
             transition: opacity 0.2s;
             opacity: 0;
             pointer-events: none;
+            white-space: nowrap;
         }
-        @keyframes fadeSlide {
-            from { opacity: 0; transform: translateY(15px);}
-            to { opacity: 1; transform: translateY(0);}
+        .hidden {
+            display: none !important;
+        }
+        @keyframes fadeSlideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         .fade-in {
-            animation: fadeSlide 0.3s ease;
+            animation: fadeSlideUp 0.35s ease;
         }
     </style>
 </head>
 <body>
-<div class="app-wrapper" id="appRoot">
-    <div class="app-header">
-        <i class="fas fa-store"></i>
-        <div><h1>Raj Marketing</h1><span>Customer Portal</span></div>
+<div class="app-container" id="appRoot">
+    <div class="brand-header">
+        <h1>RAJ MARKETING</h1>
+        <p>Premium Window Solutions</p>
+    </div>
+    <div class="brand-icon">
+        <i class="fas fa-shield-alt"></i>
     </div>
 
-    <!-- AUTH SECTION (Login / Signup) -->
-    <div id="authSection">
-        <div class="auth-tabs">
-            <button class="tab-btn active" id="tabLoginBtn"><i class="fas fa-key"></i> Login</button>
-            <button class="tab-btn" id="tabSignupBtn"><i class="fas fa-user-plus"></i> Sign Up</button>
-        </div>
+    <!-- LOGIN SECTION (OTP Based) -->
+    <div id="loginSection" class="main-content">
+        <div class="login-card">
+            <div class="step-indicator">
+                <div class="step active" id="step1Label"><div class="step-circle">1</div><div>Mobile</div></div>
+                <div class="step" id="step2Label"><div class="step-circle">2</div><div>OTP</div></div>
+            </div>
 
-        <!-- LOGIN CARD -->
-        <div id="loginCard" class="form-card">
-            <div class="form-icon"><i class="fas fa-user-circle"></i></div>
-            <h2>Welcome back</h2>
-            <div class="sub">Login using mobile & OTP</div>
-            <div class="input-field">
-                <label><i class="fas fa-phone-alt"></i> Mobile Number</label>
-                <div class="phone-prefix">
-                    <span class="prefix-code">+91</span>
-                    <input type="tel" id="loginMobile" placeholder="9876543210" maxlength="10">
+            <!-- Step 1: Mobile Number -->
+            <div id="stepMobile">
+                <div class="input-group">
+                    <label><i class="fas fa-mobile-alt"></i> Registered Mobile Number</label>
+                    <div class="phone-wrapper">
+                        <span class="country-code">+91</span>
+                        <input type="tel" id="mobileInput" placeholder="9876543210" maxlength="10" autocomplete="off">
+                    </div>
                 </div>
+                <button class="btn-primary" id="sendOtpBtn"><i class="fas fa-paper-plane"></i> Send OTP</button>
+                <p style="font-size: 0.7rem; text-align: center; margin-top: 20px; color: #6c7a8e;">
+                    <i class="fas fa-lock"></i> Secure OTP login • New users auto-register
+                </p>
             </div>
-            <div id="otpSectionLogin" style="display: none;">
-                <div class="otp-digits">
-                    <input type="text" class="otp-digit" maxlength="1" data-idx="0">
-                    <input type="text" class="otp-digit" maxlength="1" data-idx="1">
-                    <input type="text" class="otp-digit" maxlength="1" data-idx="2">
-                    <input type="text" class="otp-digit" maxlength="1" data-idx="3">
+
+            <!-- Step 2: OTP Verification -->
+            <div id="stepOtp" style="display: none;">
+                <div class="otp-boxes" id="otpContainer">
+                    <input type="text" class="otp-input" maxlength="1" data-idx="0">
+                    <input type="text" class="otp-input" maxlength="1" data-idx="1">
+                    <input type="text" class="otp-input" maxlength="1" data-idx="2">
+                    <input type="text" class="otp-input" maxlength="1" data-idx="3">
                 </div>
-                <div class="timer-text" id="timerText">OTP expires in <span id="countdown">30</span>s</div>
-                <div class="timer-text"><span class="resend-link" id="resendOtpLink">Resend OTP</span></div>
-            </div>
-            <button class="btn-primary" id="requestOtpBtn"><i class="fas fa-paper-plane"></i> Send OTP / Login</button>
-            <button class="btn-primary" id="verifyOtpBtn" style="display: none;"><i class="fas fa-check-circle"></i> Verify & Login</button>
-            <div class="social-row">
-                <p style="font-size:0.75rem;">or continue with</p>
-                <div class="social-icons">
-                    <div class="social-circle" onclick="socialMock('Google')"><i class="fab fa-google"></i></div>
-                    <div class="social-circle" onclick="socialMock('Facebook')"><i class="fab fa-facebook-f"></i></div>
+                <div class="timer-section">
+                    <span id="timerText">OTP valid for 02:00</span>
                 </div>
+                <div class="timer-section">
+                    <button class="resend-btn" id="resendOtpBtn" style="display: none;">⟳ Resend OTP</button>
+                </div>
+                <button class="btn-primary" id="verifyOtpBtn"><i class="fas fa-check-circle"></i> Verify & Login</button>
+                <button class="btn-primary btn-outline" id="backToMobileBtn" style="background:#f0f2f5; color:#0B2B26; margin-top: 8px;"><i class="fas fa-arrow-left"></i> Back</button>
             </div>
         </div>
-
-        <!-- SIGNUP CARD -->
-        <div id="signupCard" class="form-card hidden">
-            <div class="form-icon"><i class="fas fa-id-card"></i></div>
-            <h2>Create account</h2>
-            <div class="sub">Join & get exclusive offers</div>
-            <div class="input-field"><label><i class="fas fa-user"></i> Full Name</label><input type="text" id="signupName" placeholder="Ramesh Kumar"></div>
-            <div class="input-field"><label><i class="fas fa-phone"></i> Mobile (+91)</label><input type="tel" id="signupMobile" placeholder="9876543210" maxlength="10"></div>
-            <div class="input-field"><label><i class="fas fa-envelope"></i> Email (optional)</label><input type="email" id="signupEmail" placeholder="customer@example.com"></div>
-            <div class="input-field"><label><i class="fas fa-location-dot"></i> Area / Location</label><input type="text" id="signupArea" placeholder="e.g., Vijayanagar, Mysore"></div>
-            <button class="btn-primary" id="createAccountBtn"><i class="fas fa-user-check"></i> Sign Up</button>
-            <p style="font-size:0.7rem; text-align:center; margin-top:12px;">By signing up, you agree to T&C and privacy</p>
+        
+        <!-- Help text -->
+        <div style="text-align: center; font-size: 0.7rem; color: #8b9ab0;">
+            <i class="fas fa-info-circle"></i> Demo: OTP will be <strong>1234</strong> for testing (random 4-digit in real)
         </div>
     </div>
 
-    <!-- DASHBOARD SECTION (Logged in) -->
+    <!-- DASHBOARD SECTION (After successful login) -->
     <div id="dashboardSection" class="dashboard hidden">
-        <div class="hero-card">
-            <div class="hero-header">
-                <h3 id="dashName">Hello, Customer!</h3>
-                <div class="badge-icon"><i class="fas fa-crown"></i> Member</div>
-            </div>
-            <div class="info-row">
-                <p><i class="fas fa-phone-alt"></i> <span id="dashMobile">+91 ********</span></p>
-                <p><i class="fas fa-envelope"></i> <span id="dashEmail">—</span></p>
-                <p><i class="fas fa-calendar-alt"></i> Joined: <span id="joinedDate">March 2025</span></p>
-                <p><i class="fas fa-map-pin"></i> Area: <span id="dashArea">Vijayanagar</span></p>
-            </div>
+        <div class="profile-hero">
+            <div class="profile-name" id="dashUserName">Welcome!</div>
+            <div class="detail-row"><i class="fas fa-phone-alt"></i> <span id="dashMobile"></span></div>
+            <div class="detail-row"><i class="fas fa-envelope"></i> <span id="dashEmail">—</span></div>
+            <div class="detail-row"><i class="fas fa-calendar-check"></i> Member since: <span id="dashSince"></span></div>
+            <div class="detail-row"><i class="fas fa-map-marker-alt"></i> <span id="dashArea">Vijayanagar, Mysore</span></div>
         </div>
-        <div class="stats-grid">
-            <div class="stat-tile"><div class="stat-num" id="totalOrdersStat">0</div><div>Total Orders</div></div>
-            <div class="stat-tile"><div class="stat-num" id="activeOrdersStat">0</div><div>Active / Pending</div></div>
-            <div class="stat-tile"><div class="stat-num" id="completedStat">0</div><div>Delivered</div></div>
-            <div class="stat-tile"><div class="stat-num" id="offerCount">2</div><div>Active offers</div></div>
+
+        <div class="stats-row">
+            <div class="stat-box"><div class="stat-number" id="totalOrdersStat">0</div><div>Total Orders</div></div>
+            <div class="stat-box"><div class="stat-number" id="activeOrdersStat">0</div><div>Active Orders</div></div>
+            <div class="stat-box"><div class="stat-number" id="completedOrdersStat">0</div><div>Completed</div></div>
+            <div class="stat-box"><div class="stat-number" id="offersCount">2</div><div>Offers</div></div>
         </div>
-        <div class="section-title"><span><i class="fas fa-truck-fast"></i> Recent Orders</span><span id="viewAllLink" style="color:#F4C542; cursor:pointer;">View all →</span></div>
+
+        <div class="section-title"><span><i class="fas fa-history"></i> Recent Orders</span><span id="viewAllLink" style="color:#F4C542; cursor:pointer;">View all →</span></div>
         <div id="recentOrdersList"></div>
-        <div class="section-title"><span><i class="fas fa-map-marker-alt"></i> Saved Addresses</span><span id="addAddressBtn" style="color:#F4C542; cursor:pointer;">+ Add</span></div>
+
+        <div class="section-title"><span><i class="fas fa-home"></i> Saved Addresses</span><span id="addAddressBtn" style="color:#F4C542; cursor:pointer;">+ Add New</span></div>
         <div id="addressList"></div>
+
         <div class="profile-actions" style="margin-top: 20px;">
-            <div class="menu-item-dash" id="editProfileBtn"><i class="fas fa-user-edit"></i> <span>Edit Profile</span> <i class="fas fa-chevron-right" style="margin-left:auto;"></i></div>
-            <div class="menu-item-dash" id="supportBtn"><i class="fas fa-headset"></i> <span>Support</span> <i class="fas fa-chevron-right"></i></div>
-            <div class="menu-item-dash" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> <span>Logout</span></div>
+            <div class="menu-option" id="editProfileBtn"><i class="fas fa-user-edit"></i> <span>Edit Profile</span> <i class="fas fa-chevron-right" style="margin-left:auto;"></i></div>
+            <div class="menu-option" id="supportBtn"><i class="fas fa-headset"></i> <span>Customer Support</span> <i class="fas fa-chevron-right"></i></div>
+            <div class="menu-option" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> <span>Logout</span></div>
         </div>
+
         <div class="bottom-nav">
-            <div class="nav-link"><i class="fas fa-home"></i><div>Home</div></div>
-            <div class="nav-link"><i class="fas fa-search"></i><div>Explore</div></div>
-            <div class="nav-link"><i class="fas fa-phone"></i><div>Contact</div></div>
-            <div class="nav-link active" style="color:#0B2B26;"><i class="fas fa-user"></i><div>Account</div></div>
+            <div class="nav-item"><i class="fas fa-home"></i><div>Home</div></div>
+            <div class="nav-item"><i class="fas fa-search"></i><div>Explore</div></div>
+            <div class="nav-item"><i class="fas fa-phone-alt"></i><div>Call</div></div>
+            <div class="nav-item" style="color:#0B2B26;"><i class="fas fa-user"></i><div>Account</div></div>
         </div>
     </div>
-    <div id="toastMsg" class="toast-msg"></div>
+
+    <div id="toastMsg" class="toast-message"></div>
 </div>
 
 <script>
-    // ------------------------- STORAGE KEYS -------------------------
-    const STORAGE_CUSTOMERS = "raj_customers";
-    const STORAGE_ORDERS = "raj_orders";
-    const STORAGE_ADDRESSES = "raj_addresses";
-    let currentCustomer = null;   // logged in user object
+    // ---------- STORAGE KEYS ----------
+    const STORAGE_CUSTOMERS = "raj_customers_v2";
+    const STORAGE_ORDERS = "raj_orders_v2";
+    const STORAGE_ADDRESSES = "raj_addresses_v2";
 
-    // Helper: load/store customers
+    // Helper functions
     function getCustomers() {
-        let customers = localStorage.getItem(STORAGE_CUSTOMERS);
-        return customers ? JSON.parse(customers) : [];
+        let data = localStorage.getItem(STORAGE_CUSTOMERS);
+        return data ? JSON.parse(data) : [];
     }
     function saveCustomers(customers) {
         localStorage.setItem(STORAGE_CUSTOMERS, JSON.stringify(customers));
     }
     function getOrders() {
-        let orders = localStorage.getItem(STORAGE_ORDERS);
-        return orders ? JSON.parse(orders) : [];
+        let data = localStorage.getItem(STORAGE_ORDERS);
+        return data ? JSON.parse(data) : [];
     }
     function saveOrders(orders) {
         localStorage.setItem(STORAGE_ORDERS, JSON.stringify(orders));
     }
     function getUserAddresses(userId) {
         let all = localStorage.getItem(STORAGE_ADDRESSES);
-        let addrMap = all ? JSON.parse(all) : {};
-        return addrMap[userId] || [];
+        let map = all ? JSON.parse(all) : {};
+        return map[userId] || [];
     }
     function saveUserAddresses(userId, addresses) {
         let all = localStorage.getItem(STORAGE_ADDRESSES);
-        let addrMap = all ? JSON.parse(all) : {};
-        addrMap[userId] = addresses;
-        localStorage.setItem(STORAGE_ADDRESSES, JSON.stringify(addrMap));
+        let map = all ? JSON.parse(all) : {};
+        map[userId] = addresses;
+        localStorage.setItem(STORAGE_ADDRESSES, JSON.stringify(map));
     }
 
-    // init demo customers & orders if empty
-    function initDemoData() {
+    // Generate random 4-digit OTP (1000-9999)
+    function generateRandomOTP() {
+        return Math.floor(1000 + Math.random() * 9000).toString();
+    }
+
+    // Initialize demo customers & orders if empty
+    function initDatabase() {
         let customers = getCustomers();
         if (customers.length === 0) {
             let demoCustomer = {
-                id: "cust_1001",
+                id: "CUST_1001",
                 name: "Ramesh Kumar",
                 mobile: "9876543210",
-                email: "ramesh@rajmart.in",
+                email: "ramesh@rajmarketing.com",
                 area: "Vijayanagar, Mysore",
-                signupDate: new Date("2025-01-15").toISOString().split('T')[0],
+                signupDate: new Date("2025-02-10").toISOString().split('T')[0],
                 createdAt: Date.now()
             };
             customers.push(demoCustomer);
             saveCustomers(customers);
+            
             // demo addresses
             let addrMap = {};
-            addrMap[demoCustomer.id] = ["#123, 2nd Main, Vijayanagar, Mysore - 570017", "Office: #45, Hebbal Ind Area"];
+            addrMap[demoCustomer.id] = ["#123, 2nd Main, Vijayanagar, Mysore - 570017", "Office: #45, Hebbal Industrial Area"];
             localStorage.setItem(STORAGE_ADDRESSES, JSON.stringify(addrMap));
         }
+        
         let orders = getOrders();
         if (orders.length === 0) {
             let sampleOrders = [
-                { id: "ORD-1001", customerId: "cust_1001", date: "2026-02-10", items: "Velcro System (3 Windows)", total: 4500, status: "delivered" },
-                { id: "ORD-1002", customerId: "cust_1001", date: "2026-03-05", items: "Frame System (2 Doors)", total: 7200, status: "processing" },
-                { id: "ORD-1003", customerId: "cust_1001", date: "2026-03-18", items: "Pleated Mesh (1 Balcony)", total: 3200, status: "processing" }
+                { id: "ORD-101", customerId: "CUST_1001", date: "2026-03-10", items: "Velcro System (3 Windows)", total: 4500, status: "delivered" },
+                { id: "ORD-102", customerId: "CUST_1001", date: "2026-03-18", items: "Frame System (2 Doors)", total: 7200, status: "active" },
+                { id: "ORD-103", customerId: "CUST_1001", date: "2026-03-22", items: "Pleated Mesh (Balcony)", total: 3800, status: "active" }
             ];
             saveOrders(sampleOrders);
         }
     }
-    initDemoData();
+    initDatabase();
 
-    // Show toast
-    function showToast(message, duration=2000) {
-        let toast = document.getElementById("toastMsg");
-        toast.innerText = message;
-        toast.style.opacity = "1";
-        setTimeout(() => { toast.style.opacity = "0"; }, duration);
-    }
+    // Global variables
+    let currentCustomer = null;
+    let currentOTP = null;
+    let otpTimerInterval = null;
+    let otpExpirySeconds = 120; // 2 minutes
+    let enteredMobile = "";
 
-    // Tabs: login / signup
-    const loginCard = document.getElementById("loginCard");
-    const signupCard = document.getElementById("signupCard");
-    const tabLogin = document.getElementById("tabLoginBtn");
-    const tabSignup = document.getElementById("tabSignupBtn");
-    function switchAuthTab(type) {
-        if (type === 'login') {
-            loginCard.classList.remove("hidden");
-            signupCard.classList.add("hidden");
-            tabLogin.classList.add("active");
-            tabSignup.classList.remove("active");
-        } else {
-            signupCard.classList.remove("hidden");
-            loginCard.classList.add("hidden");
-            tabSignup.classList.add("active");
-            tabLogin.classList.remove("active");
-        }
-    }
-    tabLogin.onclick = () => switchAuthTab('login');
-    tabSignup.onclick = () => switchAuthTab('signup');
-
-    // ---------- LOGIN FLOW (OTP mock) ----------
-    let loginMobileValue = "";
-    let generatedOtp = null;
-    let otpInterval = null;
-    let countdownSec = 0;
-
-    function stopTimer() {
-        if (otpInterval) clearInterval(otpInterval);
-    }
-    function startTimer(seconds, onExpire) {
-        stopTimer();
-        countdownSec = seconds;
-        const timerSpan = document.getElementById("countdown");
-        if(timerSpan) timerSpan.innerText = countdownSec;
-        otpInterval = setInterval(() => {
-            countdownSec--;
-            if(timerSpan) timerSpan.innerText = countdownSec;
-            if (countdownSec <= 0) {
-                stopTimer();
-                if(onExpire) onExpire();
-            }
-        }, 1000);
-    }
-
-    const requestOtpBtn = document.getElementById("requestOtpBtn");
+    // DOM Elements
+    const stepMobileDiv = document.getElementById("stepMobile");
+    const stepOtpDiv = document.getElementById("stepOtp");
+    const sendOtpBtn = document.getElementById("sendOtpBtn");
     const verifyOtpBtn = document.getElementById("verifyOtpBtn");
-    const otpSection = document.getElementById("otpSectionLogin");
-    const resendLink = document.getElementById("resendOtpLink");
-    const loginMobileInput = document.getElementById("loginMobile");
-    const otpDigits = document.querySelectorAll(".otp-digit");
+    const resendOtpBtn = document.getElementById("resendOtpBtn");
+    const backToMobileBtn = document.getElementById("backToMobileBtn");
+    const mobileInput = document.getElementById("mobileInput");
+    const timerSpan = document.getElementById("timerText");
+    const otpInputs = document.querySelectorAll(".otp-input");
 
-    function resetOtpUI() {
-        otpSection.style.display = "none";
-        requestOtpBtn.style.display = "flex";
-        verifyOtpBtn.style.display = "none";
-        generatedOtp = null;
-        stopTimer();
+    // Toast
+    function showToast(msg, duration = 2500) {
+        const toast = document.getElementById("toastMsg");
+        toast.innerText = msg;
+        toast.style.opacity = "1";
+        setTimeout(() => {
+            toast.style.opacity = "0";
+        }, duration);
     }
 
-    requestOtpBtn.onclick = () => {
-        let mobile = loginMobileInput.value.trim();
-        if (!mobile || mobile.length !== 10) {
-            showToast("Enter valid 10-digit mobile number");
-            return;
-        }
-        loginMobileValue = mobile;
-        // check if mobile exists in customers (optional)
-        let customers = getCustomers();
-        let existing = customers.find(c => c.mobile === mobile);
-        if (!existing) {
-            showToast("New number! Please sign up first ✨", 1800);
-            return;
-        }
-        // mock OTP = 1234
-        generatedOtp = "1234";
-        showToast(`OTP sent to +91 ${mobile} (demo: 1234)`);
-        otpSection.style.display = "block";
-        requestOtpBtn.style.display = "none";
-        verifyOtpBtn.style.display = "flex";
-        // clear otp fields
-        otpDigits.forEach(inp => inp.value = "");
-        otpDigits[0].focus();
-        startTimer(30, () => {
-            // timer expired
-            resendLink.style.display = "block";
-        });
-        resendLink.style.display = "none";
-    };
-    resendLink.onclick = () => {
-        generatedOtp = "1234";
-        showToast("New OTP: 1234");
-        startTimer(30, () => { resendLink.style.display = "block"; });
-        resendLink.style.display = "none";
-        otpDigits.forEach(inp => inp.value = "");
-    };
-    verifyOtpBtn.onclick = () => {
-        let entered = "";
-        otpDigits.forEach(inp => entered += inp.value);
-        if(entered.length !== 4) {
-            showToast("Enter 4-digit OTP");
-            return;
-        }
-        if (entered === generatedOtp) {
-            // login success: fetch customer
-            let customers = getCustomers();
-            let customer = customers.find(c => c.mobile === loginMobileValue);
-            if (customer) {
-                currentCustomer = customer;
-                localStorage.setItem("raj_current_user", JSON.stringify(currentCustomer));
-                showDashboardUI();
-                showToast(`Welcome back ${customer.name}!`);
-            } else {
-                showToast("Account error, please signup");
-            }
-        } else {
-            showToast("Wrong OTP, try 1234");
-        }
-    };
-    // OTP auto jump
-    otpDigits.forEach((input, idx) => {
-        input.addEventListener("input", (e) => {
-            if (input.value.length === 1 && idx < 3) otpDigits[idx+1].focus();
-        });
-    });
-
-    // ---------- SIGNUP ----------
-    const createAccountBtn = document.getElementById("createAccountBtn");
-    createAccountBtn.onclick = () => {
-        let name = document.getElementById("signupName").value.trim();
-        let mobile = document.getElementById("signupMobile").value.trim();
-        let email = document.getElementById("signupEmail").value.trim();
-        let area = document.getElementById("signupArea").value.trim();
-        if (!name || !mobile || mobile.length !== 10) {
-            showToast("Name & valid 10-digit mobile required");
-            return;
-        }
-        let customers = getCustomers();
-        let exists = customers.find(c => c.mobile === mobile);
-        if (exists) {
-            showToast("Mobile already registered! Please login.");
-            return;
-        }
-        let newId = "cust_" + Date.now();
-        let newCustomer = {
-            id: newId,
-            name: name,
-            mobile: mobile,
-            email: email || "",
-            area: area || "Not specified",
-            signupDate: new Date().toISOString().split('T')[0],
-            createdAt: Date.now()
-        };
-        customers.push(newCustomer);
-        saveCustomers(customers);
-        // initialize empty addresses
-        saveUserAddresses(newId, []);
-        currentCustomer = newCustomer;
-        localStorage.setItem("raj_current_user", JSON.stringify(currentCustomer));
-        showDashboardUI();
-        showToast(`Account created! Welcome ${name}`);
-    };
-
-    // Dashboard render
-    function showDashboardUI() {
-        document.getElementById("authSection").classList.add("hidden");
-        document.getElementById("dashboardSection").classList.remove("hidden");
-        if (!currentCustomer) {
-            let stored = localStorage.getItem("raj_current_user");
-            if(stored) currentCustomer = JSON.parse(stored);
-        }
-        if(!currentCustomer) return;
-        // populate hero
-        document.getElementById("dashName").innerHTML = `Hello, ${currentCustomer.name.split(' ')[0]}! 👋`;
-        document.getElementById("dashMobile").innerText = `+91 ${currentCustomer.mobile}`;
-        document.getElementById("dashEmail").innerText = currentCustomer.email || "Not added";
-        document.getElementById("dashArea").innerText = currentCustomer.area || "Update in profile";
-        let joined = currentCustomer.signupDate ? currentCustomer.signupDate : "March 2025";
-        document.getElementById("joinedDate").innerText = joined;
-        // Orders & stats
-        let allOrders = getOrders();
-        let myOrders = allOrders.filter(o => o.customerId === currentCustomer.id);
-        let totalOrders = myOrders.length;
-        let activeCount = myOrders.filter(o => o.status === "processing").length;
-        let deliveredCount = myOrders.filter(o => o.status === "delivered").length;
-        document.getElementById("totalOrdersStat").innerText = totalOrders;
-        document.getElementById("activeOrdersStat").innerText = activeCount;
-        document.getElementById("completedStat").innerText = deliveredCount;
-        document.getElementById("offerCount").innerText = "2"; // static
-        // recent orders (latest 2)
-        let recent = [...myOrders].sort((a,b)=> new Date(b.date) - new Date(a.date)).slice(0,2);
-        let ordersHtml = "";
-        if(recent.length===0) ordersHtml = "<div style='padding:20px;text-align:center'>No orders yet</div>";
-        else {
-            recent.forEach(o => {
-                let statusClass = o.status === "delivered" ? "status-delivered" : "status-processing";
-                let statusText = o.status === "delivered" ? "Delivered" : "Processing";
-                ordersHtml += `<div class="order-item"><div><strong>${o.items}</strong><div style="font-size:12px;">${o.date} · ₹${o.total}</div></div><span class="order-status ${statusClass}">${statusText}</span></div>`;
-            });
-        }
-        document.getElementById("recentOrdersList").innerHTML = ordersHtml;
-        // addresses
-        let addresses = getUserAddresses(currentCustomer.id);
-        let addrHtml = "";
-        if(addresses.length===0) addrHtml = "<div class='address-chip'>➕ Add your first address</div>";
-        else {
-            addresses.forEach(addr => {
-                addrHtml += `<div class="address-chip"><i class="fas fa-home"></i> ${addr} <span style="float:right;cursor:pointer;" class="delAddrIcon"><i class="fas fa-trash-alt" style="color:#c00;"></i></span></div>`;
-            });
-        }
-        document.getElementById("addressList").innerHTML = addrHtml;
-        // attach delete address events (simple)
-        document.querySelectorAll(".delAddrIcon").forEach((icon, idx) => {
-            icon.onclick = (e) => {
-                e.stopPropagation();
-                let newAddrs = [...addresses];
-                newAddrs.splice(idx,1);
-                saveUserAddresses(currentCustomer.id, newAddrs);
-                showDashboardUI();
-                showToast("Address removed");
-            };
-        });
-        // add address
-        document.getElementById("addAddressBtn").onclick = () => {
-            let newAddr = prompt("Enter new address:");
-            if(newAddr && newAddr.trim()){
-                let currentAddrs = getUserAddresses(currentCustomer.id);
-                currentAddrs.push(newAddr.trim());
-                saveUserAddresses(currentCustomer.id, currentAddrs);
-                showDashboardUI();
-                showToast("Address saved");
-            }
-        };
-        // edit profile
-        document.getElementById("editProfileBtn").onclick = () => {
-            let newName = prompt("Full name", currentCustomer.name);
-            let newEmail = prompt("Email", currentCustomer.email);
-            let newArea = prompt("Area / Location", currentCustomer.area);
-            if(newName) currentCustomer.name = newName;
-            if(newEmail !== null) currentCustomer.email = newEmail;
-            if(newArea !== null) currentCustomer.area = newArea;
-            let customers = getCustomers();
-            let idx = customers.findIndex(c => c.id === currentCustomer.id);
-            if(idx !== -1) customers[idx] = currentCustomer;
-            saveCustomers(customers);
-            localStorage.setItem("raj_current_user", JSON.stringify(currentCustomer));
-            showDashboardUI();
-            showToast("Profile updated");
-        };
-        document.getElementById("supportBtn").onclick = () => showToast("📞 Call +91 9483037385 or email support@rajmarketing.com");
-        document.getElementById("viewAllLink").onclick = () => showToast(`📋 Total ${totalOrders} orders. Full history coming soon.`);
-        document.getElementById("logoutBtn").onclick = () => {
-            localStorage.removeItem("raj_current_user");
-            currentCustomer = null;
-            document.getElementById("dashboardSection").classList.add("hidden");
-            document.getElementById("authSection").classList.remove("hidden");
-            resetOtpUI();
-            loginMobileInput.value = "";
-            switchAuthTab('login');
-            showToast("Logged out");
-        };
-        }
-    function socialMock(provider) {
-        showToast(`${provider} login coming soon!`);
-    }
-
-    // Auto login check
-    function autoLogin() {
-        let storedUser = localStorage.getItem("raj_current_user");
-        if (storedUser) {
-            currentCustomer = JSON.parse(storedUser);
-            showDashboardUI();
-        } else {
-            document.getElementById("authSection").classList.remove("hidden");
-            document.getElementById("dashboardSection").classList.add("hidden");
-            resetOtpUI();
+    // Stop timer
+    function stopOtpTimer() {
+        if (otpTimerInterval) {
+            clearInterval(otpTimerInterval);
+            otpTimerInterval = null;
         }
     }
-    autoLogin();
-    // attach minor helper for social
-    window.socialMock = socialMock;
-</script>
-</body>
-</html>
-```
+
+    // Start OTP countdown (seconds)
+    function startOtpTimer(secondsLe
