@@ -2307,32 +2307,71 @@
 
             // Category Slider
             new Swiper('.categorySwiper', {
-                slidesPerView: 'auto',
-                spaceBetween: 12,
-                freeMode: true,
+                loop: true,
+                autoplay: {
+                    delay: 3000,
+                    disableOnInteraction: false,
+                },
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true,
+                },
+                spaceBetween: 15,
+                slidesPerView: 1,
+                speed: 800,
             });
+
 
             // Featured Products Slider
             new Swiper('.featuredSwiper', {
-                slidesPerView: 'auto',
+                loop: true,
+                autoplay: {
+                    delay: 3000,
+                    disableOnInteraction: false,
+                },
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true,
+                },
                 spaceBetween: 15,
-                freeMode: true,
+                slidesPerView: 1,
+                speed: 800,
             });
+
 
             // Gallery Slider
             new Swiper('.gallerySwiper', {
-                slidesPerView: 'auto',
-                spaceBetween: 12,
-                freeMode: true,
+                loop: true,
+                autoplay: {
+                    delay: 3000,
+                    disableOnInteraction: false,
+                },
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true,
+                },
+                spaceBetween: 15,
+                slidesPerView: 1,
+                speed: 800,
             });
+
 
             // Reviews Slider
             new Swiper('.reviewsSwiper', {
-                slidesPerView: 'auto',
+                loop: true,
+                autoplay: {
+                    delay: 3000,
+                    disableOnInteraction: false,
+                },
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true,
+                },
                 spaceBetween: 15,
-                freeMode: true,
+                slidesPerView: 1,
+                speed: 800,
             });
-        }
+
 
         // ===== MENU FUNCTIONS =====
         document.getElementById('menuBtn').addEventListener('click', function() {
@@ -2395,9 +2434,9 @@
             const heightDeducted = height - 1.5;
             const totalInches = (widthDeducted * 4) + (heightDeducted * 2);
             const lengths = totalInches / 144;
-            const aluminiumCost = lengths * 230;
+            const aluminiumCost = lengths * 380;
             const meshArea = (width * height) / 144;
-            const meshCost = meshArea * 26;
+            const meshCost = meshArea * 46;
             const total = Math.round(aluminiumCost + meshCost + 66);
             
             document.getElementById('adminResult').textContent = `Material Cost: ₹${total}`;
@@ -2411,7 +2450,7 @@
             const height = parseFloat(document.getElementById('quickHeight').value) || 52.5;
             
             const meshArea = (width * height) / 144;
-            const meshCost = meshArea * 26;
+            const meshCost = meshArea * 46;
             const total = Math.round(meshCost * 2.5);
             
             document.getElementById('quickCost').textContent = `₹${total}`;
