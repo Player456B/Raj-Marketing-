@@ -566,4 +566,285 @@
     }
 
     // Start OTP countdown (seconds)
-    function startOtpTimer(secondsLe
+    function startOtpTimer(secondsLeft) {
+        stopOtpTimer();
+        let remaining = secondsLeft;
+        const updateTimerDisplay = () => {
+            const mins = Math.floor(remaining / 60);
+            const secs = remaining % 60;
+            timerSpan.innerText = `OTP valid for ${mins.toString().padStart(2,'0')}:${secs.toString().padStart(2,'0')}`;
+            if (remaining <= 0) {
+                stopOtpTimer();
+                timerSpan.innerText = "OTP expired";
+                resendOtpBtn.style.display = "inline-block";
+                verifyOtpBtn.disabled = true;
+                verifyOtpBtn.style.opacity = "0.5";
+            } else {
+                remaining--;
+                otpTimerInterval = setTimeout(() => updateTimerDisplay(), 1000);
+            }
+        };
+        updateTimerDisplay();
+    }
+
+    // Reset OTP UI
+    function resetOtpUI() {
+        stopOtpTimer();
+        currentOTP = null;
+        resendOtpBtn.style.display = "none";
+        if (verifyOtpBtn) verifyOtpBtn.disabled = false;
+        verifyOtpBtn.style.opacity = "1";
+        otpInputs.forEach(inp => inp.value = "");
+        timerSpan.innerText = "OTP valid for 02:00";
+    }
+
+    // Send OTP Logic
+    function sendOTP() {
+        let mobile = mobileInput.value.trim();
+        if (!mobile || mobile.length !== 10 || !/^\d{10}$/.test(mobile)) {
+            showToast("Please enter a valid 10-digit mobile number");
+            return false;
+        }
+        enteredMobile = mobile;
+        
+        // Check if customer exists, if not, auto-create new profile
+        let customers = getCustomers();
+        let existingCustomer = customers.find(c => c.mobile === mobile);
+        
+        if (!existingCustomer) {
+            // Auto signup: create new customer profile
+            const newId = "CUST_" + Date.now();
+            const newCustomer = {
+                id: newId,
+                name: "New Customer",
+                mobile: mobile,
+                email: "",
+                area: "Not specified",
+                signupDate: new Date().toISOString().split('T')[0],
+                createdAt: Date.now()
+            };
+            customers.push(newCustomer);
+            saveCustomers(customers);
+            existingCustomer = newCustomer;
+            showToast(`Welcome! New account created for ${mobile}`, 2000);
+        }
+        
+        // Generate random 4-digit OTP (each login fresh)
+        currentOTP = generateRandomOTP();
+        // For demo: Show OTP in toast (in real production, you'd use SMS gateway)
+        showToast(`🔐 OTP ${currentOTP} sent to +91 ${mobile}`, 4000);
+        console.log("Generated OTP:", currentOTP); // for debugging
+        
+        // Switch UI to OTP step
+        stepMobileDiv.style.display = "none";
+        stepOtpDiv.style.display = "block";
+        
+        // Update step indicators
+        document.getElementById("step1Label").classList.remove("active");
+        document.getElementById("step2Label").classList.add("active");
+        
+        resetOtpUI();
+        startOtpTimer(otpExpirySeconds);
+        // focus first OTP box
+        otpInputs[0].focus();
+        return true;
+    }
+
+    // Verify OTP and login
+    function verifyOTP() {
+        let enteredOtp = "";
+        otpInputs.forEach(inp => enteredOtp += inp.value);
+        if (enteredOtp.length !== 4) {
+            showToast("Enter 4-digit OTP");
+            return;
+        }
+        if (!currentOTP) {
+            showToast("OTP expired. Please resend.");
+            return;
+        }
+        if (enteredOtp === currentOTP) {
+            // OTP Matched -> Login
+            let customers = getCustomers();
+            let customer = customers.find(c => c.mobile === enteredMobile);
+            if (customer) {
+                currentCustomer = customer;
+                localStorage.setItem("raj_current_user_v2", JSON.stringify(currentCustomer));
+                showDashboard();
+                showToast(`Welcome back ${currentCustomer.name}!`, 2000);
+            } else {
+                showToast("Error: User not found");
+            }
+        } else {
+            showToast(`❌ Invalid OTP. Try ${currentOTP} (demo)`);
+        }
+    }
+
+    // Resend OTP
+    function resendOTP() {
+        if (!enteredMobile) {
+            showToast("Please go back and enter mobile");
+            return;
+        }
+        // Generate new OTP
+        currentOTP = generateRandomOTP();
+        showToast(`🔁 New OTP ${currentOTP} sent to ${enteredMobile}`, 3000);
+        console.log("New OTP:", currentOTP);
+        resetOtpUI();
+        startOtpTimer(otpExpirySeconds);
+        verifyOtpBtn.disabled = false;
+        verifyOtpBtn.style.opacity = "1";
+        resendOtpBtn.style.display = "none";
+        otpInputs.forEach(inp => inp.value = "");
+        otpInputs[0].focus();
+    }
+
+    // Back to mobile step
+    function backToMobile() {
+        stepMobileDiv.style.display = "block";
+        stepOtpDiv.style.display = "none";
+        document.getElementById("step1Label").classList.add("active");
+        document.getElementById("step2Label").classList.remove("active");
+        stopOtpTimer();
+        currentOTP = null;
+        mobileInput.focus();
+    }
+
+    // Dashboard rendering
+    function showDashboard() {
+        document.getElementById("loginSection").classList.add("hidden");
+        document.getElementById("dashboardSection").classList.remove("hidden");
+        if (!currentCustomer) {
+            let stored = localStorage.getItem("raj_current_user_v2");
+            if (stored) currentCustomer = JSON.parse(stored);
+        }
+        if (!currentCustomer) return;
+        
+        // Fill user details
+        document.getElementById("dashUserName").innerHTML = `Hello, ${currentCustomer.name.split(' ')[0]} 👋`;
+        document.getElementById("dashMobile").innerText = `+91 ${currentCustomer.mobile}`;
+        document.getElementById("dashEmail").innerText = currentCustomer.email || "Not provided";
+        document.getElementById("dashSince").innerText = currentCustomer.signupDate || "March 2025";
+        document.getElementById("dashArea").innerText = currentCustomer.area || "Update in profile";
+        
+        // Orders and stats
+        let allOrders = getOrders();
+        let myOrders = allOrders.filter(o => o.customerId === currentCustomer.id);
+        let totalOrders = myOrders.length;
+        let activeOrders = myOrders.filter(o => o.status === "active").length;
+        let completedOrders = myOrders.filter(o => o.status === "delivered").length;
+        document.getElementById("totalOrdersStat").innerText = totalOrders;
+        document.getElementById("activeOrdersStat").innerText = activeOrders;
+        document.getElementById("completedOrdersStat").innerText = completedOrders;
+        document.getElementById("offersCount").innerText = "2";
+        
+        // Recent orders (latest 2)
+        let recent = [...myOrders].sort((a,b)=> new Date(b.date) - new Date(a.date)).slice(0,2);
+        let ordersHtml = "";
+        if (recent.length === 0) ordersHtml = "<div style='padding:20px;text-align:center'>No orders yet</div>";
+        else {
+            recent.forEach(o => {
+                let statusClass = o.status === "delivered" ? "status-delivered" : "status-active";
+                let statusText = o.status === "delivered" ? "Delivered" : "Processing";
+                ordersHtml += `<div class="order-card"><div><strong>${o.items}</strong><div style="font-size:12px;">${o.date} · ₹${o.total}</div></div><span class="status-badge ${statusClass}">${statusText}</span></div>`;
+            });
+        }
+        document.getElementById("recentOrdersList").innerHTML = ordersHtml;
+        
+        // Addresses
+        let addresses = getUserAddresses(currentCustomer.id);
+        let addrHtml = "";
+        if (addresses.length === 0) addrHtml = "<div class='address-chip'>➕ No saved addresses, click + to add</div>";
+        else {
+            addresses.forEach((addr, idx) => {
+                addrHtml += `<div class="address-chip" data-addr-index="${idx}"><span><i class="fas fa-location-dot"></i> ${addr}</span><i class="fas fa-trash-alt" style="color:#c0392b; cursor:pointer;" onclick="deleteAddress(${idx})"></i></div>`;
+            });
+        }
+        document.getElementById("addressList").innerHTML = addrHtml;
+        
+        // Bind address delete function globally
+        window.deleteAddress = function(idx) {
+            let currentAddrs = getUserAddresses(currentCustomer.id);
+            currentAddrs.splice(idx, 1);
+            saveUserAddresses(currentCustomer.id, currentAddrs);
+            showDashboard(); // refresh
+            showToast("Address removed");
+        };
+        
+        // Add address
+        document.getElementById("addAddressBtn").onclick = () => {
+            let newAddr = prompt("Enter new address:");
+            if (newAddr && newAddr.trim()) {
+                let addrs = getUserAddresses(currentCustomer.id);
+                addrs.push(newAddr.trim());
+                saveUserAddresses(currentCustomer.id, addrs);
+                showDashboard();
+                showToast("Address added");
+            }
+        };
+        
+        // Edit profile
+        document.getElementById("editProfileBtn").onclick = () => {
+            let newName = prompt("Full Name", currentCustomer.name);
+            let newEmail = prompt("Email", currentCustomer.email);
+            let newArea = prompt("Area / Location", currentCustomer.area);
+            if (newName) currentCustomer.name = newName;
+            if (newEmail !== null) currentCustomer.email = newEmail;
+            if (newArea !== null) currentCustomer.area = newArea;
+            let customers = getCustomers();
+            let idx = customers.findIndex(c => c.id === currentCustomer.id);
+            if (idx !== -1) customers[idx] = currentCustomer;
+            saveCustomers(customers);
+            localStorage.setItem("raj_current_user_v2", JSON.stringify(currentCustomer));
+            showDashboard();
+            showToast("Profile updated");
+        };
+        
+        document.getElementById("supportBtn").onclick = () => showToast("📞 Call 9483037385 | support@rajmarketing.com");
+        document.getElementById("viewAllLink").onclick = () => showToast(`📋 Total ${totalOrders} orders. Full history coming soon.`);
+        document.getElementById("logoutBtn").onclick = () => {
+            localStorage.removeItem("raj_current_user_v2");
+            currentCustomer = null;
+            document.getElementById("dashboardSection").classList.add("hidden");
+            document.getElementById("loginSection").classList.remove("hidden");
+            stepMobileDiv.style.display = "block";
+            stepOtpDiv.style.display = "none";
+            document.getElementById("step1Label").classList.add("active");
+            document.getElementById("step2Label").classList.remove("active");
+            mobileInput.value = "";
+            resetOtpUI();
+            showToast("Logged out successfully");
+        };
+    }
+    
+    // OTP input navigation
+    otpInputs.forEach((input, idx) => {
+        input.addEventListener("input", (e) => {
+            if (input.value.length === 1 && idx < 3) {
+                otpInputs[idx+1].focus();
+            }
+        });
+        input.addEventListener("keydown", (e) => {
+            if (e.key === "Backspace" && !input.value && idx > 0) {
+                otpInputs[idx-1].focus();
+            }
+        });
+    });
+    
+    // Event bindings
+    sendOtpBtn.onclick = sendOTP;
+    verifyOtpBtn.onclick = verifyOTP;
+    resendOtpBtn.onclick = resendOTP;
+    backToMobileBtn.onclick = backToMobile;
+    
+    // Auto login check
+    function autoLoginCheck() {
+        let stored = localStorage.getItem("raj_current_user_v2");
+        if (stored) {
+            currentCustomer = JSON.parse(stored);
+            showDashboard();
+        }
+    }
+    autoLoginCheck();
+</script>
+</body>
+</html>
