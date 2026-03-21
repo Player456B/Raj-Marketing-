@@ -1,4 +1,4 @@
-q<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -10,7 +10,7 @@ q<!DOCTYPE html>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     
-    <!-- Font Awesome 6 Pro -->
+    <!-- Font Awesome 6 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     
     <!-- Swiper CSS -->
@@ -23,24 +23,14 @@ q<!DOCTYPE html>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     
     <style>
-        /* ===== RESET & VARIABLES ===== */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-        }
-
+        /* ===== ULTIMATE VARIABLES ===== */
         :root {
-            /* Primary Colors */
             --primary-blue: #1e4b8b;
             --primary-blue-light: #2a6bb3;
             --primary-blue-dark: #123a6b;
             --secondary-gold: #e6b422;
             --secondary-gold-light: #f5c542;
             --secondary-gold-dark: #d4a31e;
-            
-            /* Status Colors */
             --success-green: #28a745;
             --success-green-light: #5cb85c;
             --danger-red: #dc3545;
@@ -51,8 +41,6 @@ q<!DOCTYPE html>
             --pink: #e83e8c;
             --indigo: #6610f2;
             --teal: #20c997;
-            
-            /* Grayscale */
             --gray-100: #f8f9fa;
             --gray-200: #e9ecef;
             --gray-300: #dee2e6;
@@ -62,19 +50,13 @@ q<!DOCTYPE html>
             --gray-700: #495057;
             --gray-800: #343a40;
             --gray-900: #212529;
-            
-            /* Background */
             --body-bg: #1a2c2d;
             --card-bg: #ffffff;
-            
-            /* Shadows */
             --shadow-sm: 0 5px 15px rgba(0,0,0,0.05);
             --shadow-md: 0 10px 25px rgba(0,0,0,0.1);
             --shadow-lg: 0 20px 40px rgba(0,0,0,0.15);
             --shadow-xl: 0 30px 60px rgba(0,0,0,0.2);
             --shadow-2xl: 0 40px 80px rgba(0,0,0,0.25);
-            
-            /* Gradients */
             --gradient-blue: linear-gradient(135deg, var(--primary-blue), var(--primary-blue-light));
             --gradient-gold: linear-gradient(135deg, var(--secondary-gold), var(--secondary-gold-light));
             --gradient-green: linear-gradient(135deg, #28a745, #5cb85c);
@@ -83,8 +65,6 @@ q<!DOCTYPE html>
             --gradient-orange: linear-gradient(135deg, #fd7e14, #ff9f4b);
             --gradient-cyan: linear-gradient(135deg, #17a2b8, #5dc1d9);
             --gradient-red: linear-gradient(135deg, #dc3545, #ff6b6b);
-            
-            /* Border Radius */
             --radius-xs: 8px;
             --radius-sm: 12px;
             --radius-md: 18px;
@@ -92,12 +72,17 @@ q<!DOCTYPE html>
             --radius-xl: 35px;
             --radius-xxl: 50px;
             --radius-circle: 50%;
-            
-            /* Transitions */
             --transition-fast: 0.2s ease;
             --transition-normal: 0.3s ease;
             --transition-slow: 0.5s ease;
             --transition-bounce: 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
         }
 
         body {
@@ -133,17 +118,14 @@ q<!DOCTYPE html>
             width: 5px;
             height: 5px;
         }
-
         ::-webkit-scrollbar-track {
             background: rgba(255,255,255,0.1);
             border-radius: 10px;
         }
-
         ::-webkit-scrollbar-thumb {
             background: var(--gradient-gold);
             border-radius: 10px;
         }
-
         ::-webkit-scrollbar-thumb:hover {
             background: var(--gradient-blue);
         }
@@ -256,10 +238,9 @@ q<!DOCTYPE html>
             position: relative;
         }
 
-        .notification-icon {
-            color: var(--secondary-gold);
-            animation: ring 4s infinite;
-        }
+        .notification-icon { color: var(--secondary-gold); animation: ring 4s infinite; }
+        .cart-icon { color: var(--success-green); }
+        .admin-icon { color: var(--primary-blue); }
 
         @keyframes ring {
             0% { transform: rotate(0); }
@@ -271,9 +252,6 @@ q<!DOCTYPE html>
             12% { transform: rotate(0); }
             100% { transform: rotate(0); }
         }
-
-        .cart-icon { color: var(--success-green); }
-        .admin-icon { color: var(--primary-blue); }
 
         .notification-icon:hover, .cart-icon:hover, .admin-icon:hover {
             transform: scale(1.1);
@@ -316,9 +294,7 @@ q<!DOCTYPE html>
             border-right: 4px solid var(--secondary-gold);
         }
 
-        .dropdown-menu.active {
-            left: 0;
-        }
+        .dropdown-menu.active { left: 0; }
 
         .menu-header {
             padding: 25px;
@@ -611,7 +587,7 @@ q<!DOCTYPE html>
             opacity: 1;
         }
 
-        /* ===== LIVE TICKER - FIREBASE INTEGRATED ===== */
+        /* ===== LIVE TICKER ===== */
         .live-ticker {
             background: white;
             margin: 8px 16px 20px;
@@ -678,7 +654,7 @@ q<!DOCTYPE html>
             border-radius: var(--radius-xxl);
         }
 
-           .ticker-content i {
+        .ticker-content i {
             color: var(--success-green);
             margin-right: 8px;
             font-size: 0.8rem;
@@ -695,8 +671,8 @@ q<!DOCTYPE html>
         .ticker-area { color: var(--secondary-gold); font-weight: 800; }
         .ticker-service { color: var(--primary-blue); font-weight: 800; }
 
-        /* ===== QUICK STATS GRID - FIREBASE INTEGRATED ===== */
-        .stats-grid {
+        /* ===== QUICK STATS GRID ===== */
+           .stats-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 10px;
@@ -1153,8 +1129,7 @@ q<!DOCTYPE html>
         .calc-btn:hover {
             transform: translateY(-2px);
             box-shadow: var(--shadow-lg);
-        }
-
+            }
         /* ===== INVOICE PREVIEW ===== */
         .invoice-preview {
             background: var(--gradient-blue);
@@ -1346,7 +1321,7 @@ q<!DOCTYPE html>
 
         /* ===== REVIEWS SLIDER ===== */
         .reviews-slider {
-            padding: 0 16px 18px;
+            padding: 0 16px 20px;
         }
 
         .reviews-slider .swiper-slide {
@@ -1369,7 +1344,7 @@ q<!DOCTYPE html>
 
         .quote-icon {
             position: absolute;
-            top: 15px;
+            top: 20px;
             right: 25px;
             font-size: 4rem;
             color: rgba(230,180,34,0.1);
@@ -1385,7 +1360,7 @@ q<!DOCTYPE html>
         .review-author {
             display: flex;
             align-items: center;
-            gap: 25px;
+            gap: 15px;
         }
 
         .author-avatar {
@@ -1419,12 +1394,11 @@ q<!DOCTYPE html>
         }
 
         /* ===== SOCIAL MEDIA SECTION ===== */
-        
         .social-section {
             background: white;
             border-radius: var(--radius-lg);
-            padding: 20px;
-            margin: 0 20px 20px;
+            padding: 25px;
+            margin: 0 16px 20px;
             text-align: center;
             box-shadow: var(--shadow-lg);
         }
@@ -1439,13 +1413,13 @@ q<!DOCTYPE html>
         .social-grid {
             display: flex;
             justify-content: center;
-            gap: 10px;
+            gap: 15px;
             flex-wrap: wrap;
         }
 
         .social-icon {
-            width: 40px;
-            height: 40px;
+            width: 50px;
+            height: 50px;
             border-radius: 15px;
             display: flex;
             align-items: center;
@@ -1472,7 +1446,6 @@ q<!DOCTYPE html>
         .social-icon.pinterest { background: #bd081c; }
 
         /* ===== FOOTER ===== */
-        
         .footer {
             background: white;
             margin-top: 30px;
@@ -1684,10 +1657,9 @@ q<!DOCTYPE html>
             margin-left: auto;
         }
     </style>
-</head>
+    </head>
 <body>
     <div class="app-container">
-        
         <!-- ===== TOP HEADER ===== -->
         <div class="top-header">
             <div class="header-left">
@@ -1709,7 +1681,8 @@ q<!DOCTYPE html>
                 <i class="fas fa-shield-alt admin-icon" onclick="location.href='admin-panel.html'"></i>
             </div>
         </div>
-                     <!-- ===== DROPDOWN MENU ===== -->
+
+        <!-- ===== DROPDOWN MENU ===== -->
         <div class="dropdown-menu" id="dropdownMenu">
             <div class="menu-header">
                 <h3>Raj Marketing</h3>
@@ -1744,7 +1717,7 @@ q<!DOCTYPE html>
             <i class="fas fa-lock"></i>
         </div>
 
-        <!-- ===== LIVE COUNTER - FIREBASE INTEGRATED ===== -->
+        <!-- ===== LIVE COUNTER ===== -->
         <div class="live-counter">
             <div class="counter-left">
                 <i class="fas fa-circle"></i>
@@ -1764,14 +1737,14 @@ q<!DOCTYPE html>
             </div>
         </div>
 
-        <!-- ===== LIVE TICKER - FIREBASE INTEGRATED ===== -->
+        <!-- ===== LIVE TICKER ===== -->
         <div class="live-ticker">
             <div class="ticker-container">
                 <div class="ticker-content" id="liveTicker"></div>
             </div>
         </div>
 
-        <!-- ===== QUICK STATS GRID - FIREBASE INTEGRATED ===== -->
+        <!-- ===== QUICK STATS GRID ===== -->
         <div class="stats-grid">
             <div class="stat-item">
                 <div class="stat-icon visitor"><i class="fas fa-users"></i></div>
@@ -1955,11 +1928,10 @@ q<!DOCTYPE html>
             <div class="nav-item" onclick="location.href='customer-login.html'"><i class="fas fa-user"></i><span>Account</span></div>
         </div>
     </div>
-    
+
     <!-- ===== TOAST ===== -->
     <div id="toastMessage"></div>
-
-    <!-- ===== SCRIPTS ===== -->
+              <!-- ===== SCRIPTS ===== -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     
@@ -1968,9 +1940,9 @@ q<!DOCTYPE html>
         // Import Firebase functions
         import { initializeApp } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-app.js";
         import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-analytics.js";
-        import { getFirestore, collection, getDocs, addDoc, query, orderBy, limit, onSnapshot } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-firestore.js";
+        import { getFirestore, collection, getDocs, query, orderBy, limit, onSnapshot } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-firestore.js";
 
-        // Firebase configuration
+        // Firebase configuration - REPLACE WITH YOUR CONFIG FROM FIREBASE CONSOLE
         const firebaseConfig = {
             apiKey: "AIzaSyCigpl0JOpRCixcy-mslIj7E7QUW63fLSQ",
             authDomain: "raj-marketing-app.firebaseapp.com",
@@ -1998,8 +1970,8 @@ q<!DOCTYPE html>
 
         // ===== SLIDER DATA =====
         const mainSliderData = [
-            { image: 'https://images.unsplash.com/photo-1507089947368-19c1da9775ae?w=400', title: 'Premium Velcro Nets', desc: 'Easy Install · ₹60/sqft' },
-            { image: 'https://images.unsplash.com/photo-1507089947368-19c1da9775ae?w=400', title: 'Aluminum Frame System', desc: '5 Year Warranty · ₹180/sqft' },
+            { image: 'https://images.unsplash.com/photo-1584017911766-451b3d0e8434?w=400', title: 'Premium Velcro Nets', desc: 'Easy Install · ₹60/sqft' },
+            { image: 'https://images.unsplash.com/photo-1513694203232-719a280e022f?w=400', title: 'Aluminum Frame System', desc: '5 Year Warranty · ₹180/sqft' },
             { image: 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=400', title: 'Pleated Retractable', desc: 'Space Saving · ₹350/sqft' },
             { image: 'https://images.unsplash.com/photo-1507089947368-19c1da9775ae?w=400', title: 'Magnetic Mesh Door', desc: 'Easy Access · ₹380/sqft' },
             { image: 'https://images.unsplash.com/photo-1558036117-15d82a90b9b1?w=400', title: 'Free Site Visit', desc: 'Call to Schedule' },
@@ -2015,7 +1987,7 @@ q<!DOCTYPE html>
         ];
 
         const featuredData = [
-            { name: 'Premium Velcro', price: '₹60/sqft', image: 'https://github.com/Player456B/Raj-Marketing-/blob/7e5a3335fd0c98e677a3bae86a96f805b79a5061/26dac53666631abefc2e1828721928f1.jpg?w=400', badge: 'New', service: 'velcro' },
+            { name: 'Premium Velcro', price: '₹60/sqft', image: 'https://images.unsplash.com/photo-1584017911766-451b3d0e8434?w=400', badge: 'New', service: 'velcro' },
             { name: 'Aluminum Frame', price: '₹180/sqft', image: 'https://images.unsplash.com/photo-1513694203232-719a280e022f?w=400', badge: 'Best Seller', service: 'frame' },
             { name: 'Pleated Nets', price: '₹350/sqft', image: 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=400', badge: 'Premium', service: 'pleated' },
             { name: 'Mesh Door', price: '₹380/sqft', image: 'https://images.unsplash.com/photo-1507089947368-19c1da9775ae?w=400', badge: 'Popular', service: 'meshdoor' },
@@ -2206,10 +2178,11 @@ q<!DOCTYPE html>
                 `).join('');
             }
         }
-            // ===== FIREBASE REAL-TIME DATA LOADING =====
+
+        // ===== FIREBASE REAL-TIME DATA LOADING =====
         async function loadFirebaseData() {
             try {
-                // Load bookings count with real-time updates
+                // Load bookings count
                 const bookingsRef = collection(db, 'bookings');
                 const bookingsSnapshot = await getDocs(bookingsRef);
                 const totalBookings = bookingsSnapshot.size;
@@ -2243,7 +2216,6 @@ q<!DOCTYPE html>
                 // Set up real-time listener for live ticker
                 const recentBookingsQuery = query(collection(db, 'bookings'), orderBy('timestamp', 'desc'), limit(20));
                 
-                // Real-time updates
                 onSnapshot(recentBookingsQuery, (snapshot) => {
                     let tickerHtml = '';
                     snapshot.forEach(doc => {
@@ -2252,7 +2224,6 @@ q<!DOCTYPE html>
                         const area = data.area || 'Mysore';
                         const service = data.service || 'Velcro';
                         
-                        // Calculate minutes ago
                         let minsAgo = 5;
                         if (data.timestamp) {
                             const now = new Date();
@@ -2289,46 +2260,40 @@ q<!DOCTYPE html>
 
         // ===== INITIALIZE SWIPERS =====
         function initSwipers() {
-            // Main Slider
             new Swiper('.mainSwiper', {
                 loop: true,
-                autoplay: {
-                    delay: 3000,
-                    disableOnInteraction: false,
-                },
-                pagination: {
-                    el: '.swiper-pagination',
-                    clickable: true,
-                },
+                autoplay: { delay: 3000, disableOnInteraction: false },
+                pagination: { el: '.swiper-pagination', clickable: true },
                 spaceBetween: 15,
                 slidesPerView: 1,
                 speed: 800,
             });
-            // Category Slider
+
             new Swiper('.categorySwiper', {
                 slidesPerView: 'auto',
                 spaceBetween: 12,
                 freeMode: true,
             });
-            // Featured Products Slider
+
             new Swiper('.featuredSwiper', {
                 slidesPerView: 'auto',
                 spaceBetween: 15,
                 freeMode: true,
             });
-            // Gallery Slider
+
             new Swiper('.gallerySwiper', {
                 slidesPerView: 'auto',
                 spaceBetween: 12,
                 freeMode: true,
             });
-            // Reviews Slider
+
             new Swiper('.reviewsSwiper', {
                 slidesPerView: 'auto',
                 spaceBetween: 15,
                 freeMode: true,
             });
         }
+
         // ===== MENU FUNCTIONS =====
         document.getElementById('menuBtn').addEventListener('click', function() {
             document.getElementById('dropdownMenu').classList.toggle('active');
@@ -2390,9 +2355,9 @@ q<!DOCTYPE html>
             const heightDeducted = height - 1.5;
             const totalInches = (widthDeducted * 4) + (heightDeducted * 2);
             const lengths = totalInches / 144;
-            const aluminiumCost = lengths * 380;
+            const aluminiumCost = lengths * 230;
             const meshArea = (width * height) / 144;
-            const meshCost = meshArea * 46;
+            const meshCost = meshArea * 26;
             const total = Math.round(aluminiumCost + meshCost + 66);
             
             document.getElementById('adminResult').textContent = `Material Cost: ₹${total}`;
@@ -2406,7 +2371,7 @@ q<!DOCTYPE html>
             const height = parseFloat(document.getElementById('quickHeight').value) || 52.5;
             
             const meshArea = (width * height) / 144;
-            const meshCost = meshArea * 46;
+            const meshCost = meshArea * 26;
             const total = Math.round(meshCost * 2.5);
             
             document.getElementById('quickCost').textContent = `₹${total}`;
@@ -2448,15 +2413,12 @@ q<!DOCTYPE html>
             loadReviews();
             loadSocialIcons();
             
-            // Load Firebase data
             loadFirebaseData();
             
-            // Initialize Swipers after content is loaded
             setTimeout(() => {
                 initSwipers();
             }, 200);
             
-            // Check admin status
             checkAdminStatus();
             updateCartBadge();
             updateQuickCalculator();
