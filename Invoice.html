@@ -1,0 +1,180 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Raj Marketing Invoice</title><style>
+body{
+    font-family: Arial;
+    background:#f5f5f5;
+    padding:20px;
+}
+.container{
+    max-width:900px;
+    margin:auto;
+    background:white;
+    padding:20px;
+    border-radius:10px;
+    box-shadow:0 0 10px rgba(0,0,0,0.1);
+}
+.header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+.logo{
+    height:80px;
+}
+h2{
+    text-align:center;
+    margin-top:10px;
+}
+input, select{
+    padding:6px;
+    margin:3px;
+}
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:10px;
+}
+table, th, td{
+    border:1px solid #ddd;
+}
+th{
+    background:#222;
+    color:white;
+}
+td, th{
+    padding:8px;
+    text-align:center;
+}
+.total-box{
+    text-align:right;
+    margin-top:10px;
+    font-size:18px;
+}
+button{
+    padding:10px 15px;
+    margin:5px;
+    border:none;
+    background:#007bff;
+    color:white;
+    cursor:pointer;
+    border-radius:5px;
+}
+button:hover{
+    background:#0056b3;
+}
+</style></head><body><div class="container" id="invoice"><div class="header">
+    <img src="logo.png" class="logo">
+    <div>
+        <h3>RAJ MARKETING MYSORE</h3>
+        <p>Mosquito Net for Windows & Doors</p>
+        <p>GSTIN: 29XXXXXXXXXX</p>
+    </div>
+</div><h2>TAX INVOICE</h2><!-- Customer Details --><div>
+    <h3>Customer Details</h3>
+    Name: <input type="text" id="custName"><br>
+    Mobile: <input type="text" id="custMobile"><br>
+    Address: <input type="text" id="custAddress" style="width:60%">
+</div><!-- Product Table --><table id="productTable">
+<thead>
+<tr>
+<th>Product</th>
+<th>HSN</th>
+<th>Qty (Sqft)</th>
+<th>Rate</th>
+<th>Amount</th>
+<th>Action</th>
+</tr>
+</thead><tbody id="tbody">
+<tr>
+<td>
+<select class="product" onchange="setHSN(this)">
+<option>Aluminium Frame</option>
+<option>SS Bright 304 Mesh</option>
+<option>SS Black Mesh</option>
+<option>Fiberglass Mesh</option>
+<option>Installation</option>
+</select>
+</td><td class="hsn">7610</td><td><input type="number" class="qty" oninput="calculate()"></td>
+<td><input type="number" class="rate" oninput="calculate()"></td>
+<td class="amount">0</td><td><button onclick="removeRow(this)">X</button></td>
+</tr>
+</tbody>
+</table><button onclick="addRow()">+ Add Item</button>
+
+<!-- Totals --><div class="total-box">
+Sub Total: ₹ <span id="subtotal">0</span><br>
+CGST 9%: ₹ <span id="cgst">0</span><br>
+SGST 9%: ₹ <span id="sgst">0</span><br>
+Total: ₹ <span id="grandtotal">0</span>
+</div><!-- Buttons --><button onclick="window.print()">Print</button>
+<button onclick="downloadPDF()">Download PDF</button>
+
+</div><!-- JS --><script>
+
+// HSN mapping (corrected)
+function setHSN(el){
+    let row = el.parentElement.parentElement;
+    let hsnCell = row.querySelector(".hsn");
+
+    let product = el.value;
+
+    if(product === "Aluminium Frame") hsnCell.innerText = "7610";
+    else if(product.includes("SS")) hsnCell.innerText = "7314";
+    else if(product === "Fiberglass Mesh") hsnCell.innerText = "7019";
+    else if(product === "Installation") hsnCell.innerText = "9985";
+}
+
+// Add Row
+function addRow(){
+    let table = document.getElementById("tbody");
+    let newRow = table.rows[0].cloneNode(true);
+
+    newRow.querySelectorAll("input").forEach(i=>i.value="");
+    newRow.querySelector(".amount").innerText = "0";
+
+    table.appendChild(newRow);
+}
+
+// Remove Row
+function removeRow(btn){
+    let row = btn.parentElement.parentElement;
+    let table = document.getElementById("tbody");
+
+    if(table.rows.length > 1){
+        row.remove();
+    }
+}
+
+// Calculate
+function calculate(){
+    let rows = document.querySelectorAll("#tbody tr");
+    let subtotal = 0;
+
+    rows.forEach(row=>{
+        let qty = row.querySelector(".qty").value || 0;
+        let rate = row.querySelector(".rate").value || 0;
+        let amount = qty * rate;
+
+        row.querySelector(".amount").innerText = amount.toFixed(2);
+        subtotal += amount;
+    });
+
+    let cgst = subtotal * 0.09;
+    let sgst = subtotal * 0.09;
+    let total = subtotal + cgst + sgst;
+
+    document.getElementById("subtotal").innerText = subtotal.toFixed(2);
+    document.getElementById("cgst").innerText = cgst.toFixed(2);
+    document.getElementById("sgst").innerText = sgst.toFixed(2);
+    document.getElementById("grandtotal").innerText = total.toFixed(2);
+}
+
+// PDF
+function downloadPDF(){
+    window.print(); // simple way (can upgrade to jsPDF if needed)
+}
+
+</script></body>
+  </html>
