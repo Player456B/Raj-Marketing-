@@ -1,651 +1,661 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, viewport-fit=cover">
-    <title>Raj Marketing | Pro Billing Suite - Mosquito Nets</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        body {
-            background: #eef2f8;
-            font-family: 'Inter', sans-serif;
-            padding: 18px 14px 40px;
-            color: #1a2e3f;
-        }
-        .app-container {
-            max-width: 550px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 36px;
-            box-shadow: 0 20px 40px -14px rgba(0,0,0,0.2);
-            overflow: hidden;
-            padding: 20px 18px 30px;
-        }
-        /* brand header */
-        .brand {
-            text-align: center;
-            border-bottom: 3px solid #f5b042;
-            padding-bottom: 14px;
-            margin-bottom: 22px;
-        }
-        .brand h1 {
-            font-size: 1.95rem;
-            letter-spacing: -0.5px;
-            color: #1c6b2f;
-            font-weight: 800;
-        }
-        .tagline {
-            font-size: 0.75rem;
-            font-weight: 600;
-            background: #fef1df;
-            display: inline-block;
-            padding: 5px 14px;
-            border-radius: 50px;
-            color: #b45f1b;
-            margin-top: 6px;
-        }
-        .address-block {
-            font-size: 0.7rem;
-            line-height: 1.35;
-            background: #f6f9fc;
-            padding: 10px 14px;
-            border-radius: 24px;
-            margin: 12px 0;
-            color: #1f4d2e;
-            border: 1px solid #e2edf2;
-        }
-        .gst-row {
-            display: flex;
-            justify-content: space-between;
-            font-weight: 600;
-            margin-top: 5px;
-            font-size: 0.7rem;
-        }
-        /* tabs */
-        .tabs {
-            display: flex;
-            gap: 8px;
-            margin-bottom: 26px;
-            flex-wrap: wrap;
-        }
-        .tab-btn {
-            flex: 1;
-            background: #f0f4f9;
-            border: none;
-            padding: 10px 5px;
-            font-weight: 700;
-            border-radius: 60px;
-            font-size: 0.75rem;
-            cursor: pointer;
-            transition: 0.2s;
-            color: #2c4b35;
-        }
-        .tab-btn.active {
-            background: #2a7f3b;
-            color: white;
-            box-shadow: 0 6px 12px rgba(0,0,0,0.08);
-        }
-        .card-panel {
-            display: none;
-            animation: fadeSlide 0.2s ease;
-        }
-        .card-panel.active-panel {
-            display: block;
-        }
-        @keyframes fadeSlide {
-            from { opacity: 0; transform: translateY(6px);}
-            to { opacity: 1; transform: translateY(0);}
-        }
-        .form-group {
-            margin-bottom: 15px;
-        }
-        label {
-            font-size: 0.7rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            color: #4f6f8f;
-            display: block;
-            margin-bottom: 5px;
-        }
-        input, select {
-            width: 100%;
-            padding: 10px 14px;
-            border-radius: 28px;
-            border: 1.5px solid #dce5ec;
-            background: white;
-            font-size: 0.85rem;
-            font-family: 'Inter', monospace;
-        }
-        button {
-            background: #2a7f3b;
-            border: none;
-            padding: 10px 12px;
-            border-radius: 40px;
-            font-weight: 700;
-            color: white;
-            cursor: pointer;
-            font-size: 0.8rem;
-            width: 100%;
-            transition: 0.2s;
-        }
-        button.secondary {
-            background: #e68a2e;
-        }
-        button.outline {
-            background: white;
-            border: 1.5px solid #2a7f3b;
-            color: #2a7f3b;
-        }
-        .grid-2 {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-        }
-        table {
-            width: 100%;
-            font-size: 0.7rem;
-            border-collapse: collapse;
-            margin: 14px 0;
-        }
-        th, td {
-            border-bottom: 1px solid #e2edf2;
-            padding: 8px 4px;
-            text-align: left;
-        }
-        .totals-card {
-            background: #eafaf1;
-            padding: 12px;
-            border-radius: 24px;
-            margin: 12px 0;
-        }
-        .badge-profit {
-            color: #1f8a4c;
-            font-weight: 800;
-        }
-        .badge-loss {
-            color: #c2410c;
-        }
-        .flex-btns {
-            display: flex;
-            gap: 10px;
-            margin-top: 12px;
-        }
-        .hsn-tip {
-            background: #fff7e5;
-            font-size: 0.65rem;
-            padding: 6px 10px;
-            border-radius: 20px;
-            margin-top: 6px;
-        }
-        hr {
-            margin: 16px 0;
-        }
-        i {
-            margin-right: 6px;
-        }
-        .print-invoice-box {
-            background: white;
-            border-radius: 24px;
-            padding: 6px;
-            border: 1px solid #d4e2ec;
-        }
-        @media (max-width: 480px) {
-            .app-container { padding: 16px; }
-            .tab-btn { font-size: 0.68rem; }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>Raj Marketing | Professional Tax Invoice</title>
+  <!-- html2pdf library for clean PDF generation -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #eef2f5;
+      font-family: 'Poppins', 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      padding: 30px 20px;
+    }
+
+    /* modern container */
+    .invoice-wrapper {
+      max-width: 1280px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 28px;
+      box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.15);
+      overflow: hidden;
+      transition: all 0.2s;
+    }
+
+    /* inner padding */
+    .invoice-inner {
+      padding: 28px 32px 36px;
+    }
+
+    /* header section with brand & gst */
+    .brand-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      border-bottom: 3px solid #f0b429;
+      padding-bottom: 20px;
+      margin-bottom: 24px;
+    }
+
+    .logo-area h1 {
+      font-size: 28px;
+      font-weight: 700;
+      color: #1e2a3e;
+      letter-spacing: -0.5px;
+    }
+    .logo-area p {
+      font-size: 13px;
+      color: #4a627a;
+      margin-top: 6px;
+    }
+    .gst-badge {
+      text-align: right;
+      background: #f8fafc;
+      padding: 10px 18px;
+      border-radius: 40px;
+    }
+    .gst-badge span {
+      font-weight: 600;
+      color: #0f3b5c;
+      font-size: 14px;
+      display: block;
+    }
+    .invoice-title {
+      text-align: center;
+      margin: 16px 0 22px;
+    }
+    .invoice-title h2 {
+      background: #1e2a3e;
+      display: inline-block;
+      padding: 8px 28px;
+      border-radius: 40px;
+      color: white;
+      font-size: 22px;
+      font-weight: 500;
+      letter-spacing: 1px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    }
+
+    /* customer & invoice meta grid */
+    .info-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+      background: #f9fbfd;
+      border-radius: 24px;
+      padding: 20px 24px;
+      margin-bottom: 28px;
+      border: 1px solid #e9edf2;
+    }
+    .customer-box {
+      flex: 2;
+      min-width: 240px;
+    }
+    .invoice-meta {
+      flex: 1.2;
+      background: white;
+      border-radius: 20px;
+      padding: 10px 16px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+    }
+    .customer-box label, .invoice-meta label {
+      font-weight: 600;
+      color: #2c3e50;
+      display: block;
+      margin-top: 12px;
+      font-size: 13px;
+    }
+    .customer-box input, .invoice-meta input {
+      width: 100%;
+      padding: 10px 14px;
+      margin-top: 5px;
+      border: 1px solid #cfdfed;
+      border-radius: 16px;
+      font-size: 14px;
+      transition: 0.2s;
+      background: white;
+    }
+    .customer-box input:focus, .invoice-meta input:focus {
+      outline: none;
+      border-color: #f0b429;
+      box-shadow: 0 0 0 3px rgba(240,180,41,0.2);
+    }
+    .small-note {
+      font-size: 12px;
+      color: #6c86a3;
+      margin-top: 6px;
+    }
+
+    /* product table styles */
+    .items-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0 18px;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .items-table th {
+      background: #1e2f3f;
+      color: white;
+      font-weight: 600;
+      padding: 14px 8px;
+      font-size: 14px;
+      text-align: center;
+      border: none;
+    }
+    .items-table td {
+      border-bottom: 1px solid #e2e8f0;
+      padding: 12px 8px;
+      text-align: center;
+      vertical-align: middle;
+      background-color: white;
+    }
+    .items-table input, .items-table select {
+      width: 100%;
+      padding: 8px 6px;
+      border-radius: 14px;
+      border: 1px solid #cbd5e1;
+      font-size: 13px;
+      text-align: center;
+      background: #fff;
+    }
+    .items-table select {
+      cursor: pointer;
+    }
+    .amount-cell {
+      font-weight: 600;
+      color: #1f5e3a;
+      background: #fef9e6;
+    }
+    .action-btn {
+      background: #fee2e2;
+      border: none;
+      padding: 6px 10px;
+      border-radius: 30px;
+      color: #b91c1c;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    .action-btn:hover {
+      background: #fecaca;
+      transform: scale(1.02);
+    }
+    .add-row-btn {
+      background: #f0b429;
+      border: none;
+      padding: 10px 24px;
+      border-radius: 40px;
+      font-weight: 600;
+      color: #1e2a3e;
+      margin: 12px 0 20px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .add-row-btn:hover {
+      background: #e2a425;
+      transform: translateY(-2px);
+    }
+
+    /* totals panel */
+    .totals-panel {
+      background: #f8fafd;
+      border-radius: 24px;
+      padding: 18px 28px;
+      margin: 20px 0 24px;
+      display: flex;
+      justify-content: flex-end;
+      border: 1px solid #eef2f8;
+    }
+    .totals-details {
+      width: 320px;
+    }
+    .totals-details p {
+      display: flex;
+      justify-content: space-between;
+      font-size: 16px;
+      padding: 8px 0;
+      border-bottom: 1px dashed #dce5ec;
+    }
+    .totals-details .grand {
+      font-size: 22px;
+      font-weight: 800;
+      color: #b45309;
+      border-bottom: none;
+      margin-top: 8px;
+    }
+    .roundoff-info {
+      font-size: 13px;
+      color: #3b6e4b;
+      text-align: right;
+      margin-top: 4px;
+    }
+
+    /* bank & declaration */
+    .footer-info {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      margin-top: 32px;
+      gap: 24px;
+      padding-top: 16px;
+      border-top: 2px dashed #e2edf7;
+    }
+    .bank-details {
+      background: #fef9ef;
+      padding: 12px 20px;
+      border-radius: 24px;
+      font-size: 13px;
+      width: 48%;
+    }
+    .declaration {
+      font-size: 12px;
+      color: #2c5f2d;
+      background: #eef6ec;
+      padding: 12px 20px;
+      border-radius: 24px;
+      width: 48%;
+      font-style: italic;
+    }
+    .signature {
+      margin-top: 20px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+      font-weight: 500;
+      color: #2c3e50;
+    }
+
+    /* buttons */
+    .action-buttons {
+      display: flex;
+      justify-content: flex-end;
+      gap: 15px;
+      margin-top: 20px;
+    }
+    .btn-primary {
+      background: #1e2a3e;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 40px;
+      color: white;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .btn-primary i {
+      font-size: 16px;
+    }
+    .btn-primary:hover {
+      background: #2c3f54;
+    }
+    .btn-outline {
+      background: white;
+      border: 1.5px solid #1e2a3e;
+      color: #1e2a3e;
+      padding: 12px 24px;
+      border-radius: 40px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    @media (max-width: 760px) {
+      .invoice-inner { padding: 18px; }
+      .footer-info { flex-direction: column; }
+      .bank-details, .declaration { width: 100%; }
+      .totals-panel { justify-content: center; }
+    }
+  </style>
 </head>
 <body>
-<div class="app-container">
-    <div class="brand">
-        <h1>🦟 RAJ MARKETING</h1>
-        <div class="tagline">Mosquito Nets for Windows & Doors | Manufacturer & Dealers</div>
-        <div class="address-block">
-            📍 #65, Near Pragathi logistics, Hootghalli industries area, Hootghalli, Mysore.<br>
-            📞 +91 9483037385 &nbsp;|&nbsp; GST: 29GKYPM6953C1ZA
-        </div>
+<div class="invoice-wrapper" id="invoiceContainer">
+  <div class="invoice-inner" id="invoiceContent">
+    <!-- HEADER with Raj Marketing brand (as per xls) -->
+    <div class="brand-header">
+      <div class="logo-area">
+        <h1><i class="fas fa-shield-alt" style="color:#f0b429;"></i> RAJ MARKETING</h1>
+        <p>#65, Near Pragathi Logistics, Hootgalli Industrial Area, Mysore - 570017</p>
+        <p><i class="fas fa-phone-alt"></i> 9483037385 | <i class="fas fa-envelope"></i> rajmarketingmys@gmail.com</p>
+        <p><i class="fas fa-globe"></i> www.rajmarketingmysore.com</p>
+      </div>
+      <div class="gst-badge">
+        <span><i class="fas fa-certificate"></i> GSTIN: 29GKYPM6953C1ZA</span>
+        <span>State: Karnataka (Code 29)</span>
+      </div>
+    </div>
+    <div class="invoice-title">
+      <h2>TAX INVOICE</h2>
     </div>
 
-    <!-- TABS -->
-    <div class="tabs">
-        <button class="tab-btn active" data-tab="purchase-tab"><i class="fas fa-boxes"></i> Purchase</button>
-        <button class="tab-btn" data-tab="sales-tab"><i class="fas fa-file-invoice"></i> Customer Bill</button>
-        <button class="tab-btn" data-tab="insight-tab"><i class="fas fa-chart-line"></i> P&L / Stock</button>
-        <button class="tab-btn" data-tab="gst-tab"><i class="fas fa-print"></i> GST Invoice</button>
+    <!-- customer & invoice details editable -->
+    <div class="info-grid">
+      <div class="customer-box">
+        <label>Customer Name</label>
+        <input type="text" id="customerName" placeholder="VISHNU VARDHANA. N" value="VISHNU VARDHANA. N">
+        <label>Mobile Number</label>
+        <input type="text" id="customerMobile" placeholder="8124840844" value="8124840844">
+        <label>Shipping Address</label>
+        <input type="text" id="customerAddress" placeholder="#929, 1st Floor, Srirampura, Mysore-580023" value="#929, 1st Floor, 6th Cross, 2nd Stage, Srirampura, Mysore-580023">
+        <label>GSTIN (if any)</label>
+        <input type="text" id="customerGst" placeholder="Not registered" value="-">
+      </div>
+      <div class="invoice-meta">
+        <label>Invoice No.</label>
+        <input type="text" id="invoiceNo" value="0001/2025/26">
+        <label>Invoice Date</label>
+        <input type="date" id="invoiceDate" value="2026-04-04">
+        <label>Place of Supply</label>
+        <input type="text" id="placeSupply" value="Mysore, Karnataka">
+        <div class="small-note">E. & O.E</div>
+      </div>
     </div>
 
-    <!-- 1. PURCHASE BILL (Material with HSN auto) -->
-    <div id="purchase-tab" class="card-panel active-panel">
-        <h3><i class="fas fa-shopping-cart"></i> Material Purchase Entry</h3>
-        <div class="grid-2">
-            <div class="form-group"><label>Material Type</label>
-                <select id="materialType">
-                    <option value="Aluminium Qty (Profile)">Aluminium Qty (kg/m)</option>
-                    <option value="Stainless Steel Mesh">Stainless Steel Mesh (sqft)</option>
-                    <option value="Fiber Mesh">Fiber Mesh (sqft)</option>
-                    <option value="Accessories (Roller/Magnet)">Accessories (Roller/Magnet)</option>
-                </select>
-            </div>
-            <div class="form-group"><label>Quantity</label><input type="number" id="purQty" placeholder="Qty"></div>
-            <div class="form-group"><label>Rate (₹)</label><input type="number" id="purRate" placeholder="Rate per unit"></div>
-            <div class="form-group"><label>HSN Code (Auto)</label><input type="text" id="hsnCode" readonly style="background:#f4f7fb; font-weight:500;"></div>
-        </div>
-        <button id="addPurchaseBtn"><i class="fas fa-plus-circle"></i> Add Purchase Item</button>
-        <div style="overflow-x: auto;">
-            <table id="purchaseTable">
-                <thead><tr><th>Material</th><th>Qty</th><th>Rate</th><th>Total</th><th>HSN</th><th></th></tr></thead>
-                <tbody id="purchaseListBody"></tbody>
-            </table>
-        </div>
-        <div class="totals-card"><strong>💰 Total Purchase Cost: ₹<span id="totalPurchaseAmt">0.00</span></strong></div>
-        <button class="outline" id="savePurchaseData"><i class="fas fa-database"></i> Save Purchase (Local)</button>
+    <!-- Product Table with HSN as per sample and XLS reference (HSN codes for Fibreglass, SS, Aluminium) -->
+    <table class="items-table" id="itemsTable">
+      <thead>
+        <tr><th>SL No</th><th>Description of Goods/Services</th><th>HSN/SAC</th><th>Qty (Sqft)</th><th>Rate (₹/Sqft)</th><th>Amount (₹)</th><th>Action</th></tr>
+      </thead>
+      <tbody id="tableBody">
+        <tr data-rowid="0">
+          <td class="srNo">1</td>
+          <td><select class="productSelect" style="width:150px;">
+                <option value="Fiberglass Mesh">Fiberglass Mesh (Touflex)</option>
+                <option value="SS Bright 304 Mesh">SS Bright 304 Mesh</option>
+                <option value="SS Black Mesh">SS Black Mesh</option>
+                <option value="Aluminium Frame">Aluminium Frame</option>
+                <option value="Installation">Installation Charges</option>
+              </select></td>
+          <td class="hsnCell">7019</td>
+          <td><input type="number" class="qty" value="74" step="0.01" min="0"></td>
+          <td><input type="number" class="rate" value="40.55" step="0.01" min="0"></td>
+          <td class="amountCell">0.00</td>
+          <td><button class="action-btn removeBtn" type="button"><i class="fas fa-trash-alt"></i></button></td>
+        </tr>
+      </tbody>
+    </table>
+    <div style="text-align: left;">
+      <button class="add-row-btn" id="addRowBtn"><i class="fas fa-plus-circle"></i> Add Item</button>
     </div>
 
-    <!-- 2. CUSTOMER SALES BILL DATA (auto calc, GST) -->
-    <div id="sales-tab" class="card-panel">
-        <h3><i class="fas fa-user-check"></i> Customer Sales Invoice</h3>
-        <div class="form-group"><label>Customer Name *</label><input type="text" id="custName" placeholder="Full name / GST if any"></div>
-        <div class="grid-2">
-            <div class="form-group"><label>Product / Mesh Type</label><select id="salesProduct"><option value="Aluminium Frame + SS Mesh">Aluminium Frame + SS Mesh</option><option value="Fiber Mesh Sliding">Fiber Mesh Sliding</option><option value="Premium Pleated Net">Premium Pleated Net</option><option value="Magnetic Net">Magnetic Net</option></select></div>
-            <div class="form-group"><label>Quantity</label><input type="number" id="salesQty" value="1"></div>
-            <div class="form-group"><label>Unit Price (₹)</label><input type="number" id="salesPrice" placeholder="₹"></div>
-            <div class="form-group"><label>Discount %</label><input type="number" id="salesDisc" value="0"></div>
-        </div>
-        <button id="addSalesItemBtn"><i class="fas fa-cart-plus"></i> Add Product</button>
-        <table id="salesTable"><thead><tr><th>Item</th><th>Qty</th><th>Price</th><th>Disc%</th><th>Net</th><th></th></tr></thead><tbody id="salesListBody"></tbody></table>
-        <div class="totals-card">
-            Subtotal: ₹<span id="salesSubtotal">0</span> | GST (12%): ₹<span id="salesTax">0</span><br>
-            <strong>💰 Total Invoice: ₹<span id="salesGrand">0</span></strong>
-        </div>
-        <button id="saveSalesBillBtn" class="secondary"><i class="fas fa-save"></i> Save Customer Bill (Storage)</button>
+    <!-- Totals: Subtotal, CGST 9%, SGST 9%, Round off, Grand total -->
+    <div class="totals-panel">
+      <div class="totals-details">
+        <p><span>Sub Total :</span> <span id="subtotalVal">₹ 0.00</span></p>
+        <p><span>CGST (9%) :</span> <span id="cgstVal">₹ 0.00</span></p>
+        <p><span>SGST (9%) :</span> <span id="sgstVal">₹ 0.00</span></p>
+        <p><span>Round Off :</span> <span id="roundOffVal">₹ 0.00</span></p>
+        <p class="grand"><span>Grand Total :</span> <span id="grandTotalVal">₹ 0.00</span></p>
+        <div class="roundoff-info">*Amount rounded to nearest integer</div>
+      </div>
     </div>
 
-    <!-- 3. PROFIT, LOSS, INCOME & MATERIAL STOCK -->
-    <div id="insight-tab" class="card-panel">
-        <h3><i class="fas fa-chart-pie"></i> Financial Dashboard</h3>
-        <div class="totals-card" style="background:#eef3fc;">
-            <p>📦 Total Purchase Cost: ₹<span id="dashPurchase">0</span></p>
-            <p>🧾 Total Sales Revenue (incl. tax): ₹<span id="dashSales">0</span></p>
-            <p>📈 Gross Profit: ₹<span id="dashProfit">0</span> <span id="profitSign"></span></p>
-            <p>💵 Net Income (approx): ₹<span id="dashIncome">0</span></p>
-        </div>
-        <h4><i class="fas fa-chart-simple"></i> Material Stock Summary (Purchase Qty)</h4>
-        <table id="stockSummaryTable"><thead><tr><th>Material</th><th>Total Qty Purchased</th></tr></thead><tbody><tr><td colspan="2">— no data —</td></tr></tbody></table>
-        <button id="resetDataBtn" class="outline" style="background:#fbe9e7; color:#b91c1c; border-color:#e0b3b3;"><i class="fas fa-trash-alt"></i> Reset All Data</button>
+    <!-- HSN wise tax summary (as per sample invoice design) -->
+    <div style="background:#f4f9fe; border-radius: 20px; padding: 14px 18px; margin: 12px 0 20px;">
+      <h4 style="font-size: 14px; margin-bottom: 8px;"><i class="fas fa-chart-line"></i> Tax Summary (HSN wise)</h4>
+      <table style="width:100%; font-size:13px; border-collapse:collapse;" id="taxSummaryTable">
+        <thead><tr style="background:#e2eaf1;"><th>HSN/SAC</th><th>Taxable Value (₹)</th><th>CGST (9%)</th><th>SGST (9%)</th><th>Total Tax</th></tr></thead>
+        <tbody id="taxSummaryBody"><tr><td colspan="5" style="text-align:center;">-- Add items to see tax breakup --</td></tr></tbody>
+      </table>
+      <div style="margin-top: 8px; font-size:12px; color:#2c5282;" id="taxWords">Tax Amount in Words : </div>
     </div>
 
-    <!-- 4. PROFESSIONAL GST INVOICE (Printable bill, ultimate) -->
-    <div id="gst-tab" class="card-panel">
-        <h3><i class="fas fa-file-invoice-dollar"></i> Generate GST Invoice (Customer wise)</h3>
-        <div class="form-group"><label>Select Customer Invoice</label><select id="invoiceSelect"></select></div>
-        <button id="loadInvoiceBtn"><i class="fas fa-eye"></i> Load & Preview Invoice</button>
-        <div id="invoicePreview" class="print-invoice-box" style="margin-top: 18px; padding: 12px;"></div>
-        <div class="flex-btns">
-            <button id="printInvoiceBtn"><i class="fas fa-print"></i> Print Bill</button>
-            <button id="exportExcelBtn"><i class="fas fa-file-excel"></i> Export Excel (Full)</button>
-        </div>
-        <div class="hsn-tip"><i class="fas fa-info-circle"></i> HSN References: Aluminium(761699) | Steel Mesh(732620) | Fiber Mesh(560819) | Accessories(830249)</div>
+    <!-- Bank Details & Declaration from Raj Marketing XLS -->
+    <div class="footer-info">
+      <div class="bank-details">
+        <strong><i class="fas fa-university"></i> BANK ACCOUNT DETAILS</strong><br>
+        STATE BANK OF INDIA<br>
+        Account Name: Raj Marketing<br>
+        Account Number: 44812026859<br>
+        IFSC CODE: SBIN0040609<br>
+        Bank Branch: M BLOCK, NRUPATHUNGA ROAD, MYSURU - 570023
+      </div>
+      <div class="declaration">
+        <strong>Declaration:</strong> We declare that this invoice shows the actual price of the goods described and that all particulars are true and correct.
+      </div>
     </div>
+    <div class="signature">
+      <div>Customer's Signature</div>
+      <div>For Raj Marketing <br> Authorised Signatory</div>
+    </div>
+  </div>
+  <!-- Buttons outside printable area for better control -->
+  <div style="padding: 0 32px 32px 32px;">
+    <div class="action-buttons">
+      <button class="btn-outline" id="printBtn"><i class="fas fa-print"></i> Print Invoice</button>
+      <button class="btn-primary" id="downloadPdfBtn"><i class="fas fa-file-pdf"></i> Download PDF</button>
+    </div>
+  </div>
 </div>
 
 <script>
-    // ---------- GLOBAL STORAGE ----------
-    let purchases = [];          // { id, material, qty, rate, total, hsn }
-    let salesBills = [];         // array of invoices
+  // helper: update all calculations + HSN mapping + tax summary + word conversion
+  function updateHSNByProduct(selectEl) {
+    const product = selectEl.value;
+    const hsnCell = selectEl.closest('tr').querySelector('.hsnCell');
+    if(product === "Aluminium Frame") hsnCell.innerText = "7610";
+    else if(product === "SS Bright 304 Mesh" || product === "SS Black Mesh") hsnCell.innerText = "7314";
+    else if(product === "Fiberglass Mesh") hsnCell.innerText = "7019";
+    else if(product === "Installation") hsnCell.innerText = "9985";
+    else hsnCell.innerText = "----";
+  }
 
-    // Helper: HSN mapping according to online reference
-    function getHSNForMaterial(mat) {
-        if (mat.includes("Aluminium")) return "761699";
-        if (mat.includes("Stainless Steel")) return "732620";
-        if (mat.includes("Fiber Mesh")) return "560819";
-        if (mat.includes("Accessories")) return "830249";
-        return "761699";
+  // Recalculate full invoice: rows, subtotal, taxes, round off, grand total, tax summary & words
+  function recalcInvoice() {
+    const rows = document.querySelectorAll('#tableBody tr');
+    let subtotal = 0;
+    const hsnMap = new Map(); // Map HSN -> taxable value
+
+    rows.forEach((row, idx) => {
+      const qtyInput = row.querySelector('.qty');
+      const rateInput = row.querySelector('.rate');
+      const amountSpan = row.querySelector('.amountCell');
+      const selectProd = row.querySelector('.productSelect');
+      const hsnCode = row.querySelector('.hsnCell').innerText.trim();
+
+      let qty = parseFloat(qtyInput.value) || 0;
+      let rate = parseFloat(rateInput.value) || 0;
+      let amount = qty * rate;
+      amountSpan.innerText = amount.toFixed(2);
+      subtotal += amount;
+
+      // Accumulate by HSN code for summary
+      if (hsnCode && !isNaN(amount) && amount > 0) {
+        let prev = hsnMap.get(hsnCode) || 0;
+        hsnMap.set(hsnCode, prev + amount);
+      }
+      // update serial number
+      row.querySelector('.srNo').innerText = idx+1;
+    });
+
+    let cgst = subtotal * 0.09;
+    let sgst = subtotal * 0.09;
+    let totalBeforeRound = subtotal + cgst + sgst;
+    let roundedTotal = Math.round(totalBeforeRound);
+    let roundOff = roundedTotal - totalBeforeRound;
+
+    document.getElementById('subtotalVal').innerText = `₹ ${subtotal.toFixed(2)}`;
+    document.getElementById('cgstVal').innerText = `₹ ${cgst.toFixed(2)}`;
+    document.getElementById('sgstVal').innerText = `₹ ${sgst.toFixed(2)}`;
+    document.getElementById('roundOffVal').innerText = `₹ ${roundOff.toFixed(2)}`;
+    document.getElementById('grandTotalVal').innerText = `₹ ${roundedTotal.toFixed(2)}`;
+
+    // Build Tax Summary Table (HSN wise)
+    const taxBody = document.getElementById('taxSummaryBody');
+    taxBody.innerHTML = '';
+    if (hsnMap.size === 0) {
+      taxBody.innerHTML = '<tr><td colspan="5" style="text-align:center;">No taxable items</td></tr>';
+      document.getElementById('taxWords').innerHTML = 'Tax Amount in Words : NIL';
+      return;
     }
 
-    // RENDER PURCHASE TABLE
-    function renderPurchaseTable() {
-        const tbody = document.getElementById("purchaseListBody");
-        if (!tbody) return;
-        tbody.innerHTML = "";
-        let total = 0;
-        purchases.forEach((p, idx) => {
-            total += p.total;
-            const row = tbody.insertRow();
-            row.insertCell(0).innerText = p.material;
-            row.insertCell(1).innerText = p.qty;
-            row.insertCell(2).innerText = `₹${p.rate}`;
-            row.insertCell(3).innerText = `₹${p.total.toFixed(2)}`;
-            row.insertCell(4).innerText = p.hsn;
-            const delBtn = document.createElement("button");
-            delBtn.innerText = "🗑️";
-            delBtn.style.background = "transparent";
-            delBtn.style.color = "#c0392b";
-            delBtn.style.fontSize = "1rem";
-            delBtn.style.width = "auto";
-            delBtn.style.padding = "0px 6px";
-            delBtn.onclick = () => { purchases.splice(idx, 1); savePurchasesToLocal(); renderPurchaseTable(); updateDashboardAndStorage(); };
-            const cell = row.insertCell(5);
-            cell.appendChild(delBtn);
-        });
-        document.getElementById("totalPurchaseAmt").innerText = total.toFixed(2);
+    let totalTaxableAll = 0;
+    let totalCgstSum = 0, totalSgstSum = 0;
+    for (let [hsn, taxableVal] of hsnMap.entries()) {
+      let taxCgst = taxableVal * 0.09;
+      let taxSgst = taxableVal * 0.09;
+      totalTaxableAll += taxableVal;
+      totalCgstSum += taxCgst;
+      totalSgstSum += taxSgst;
+      let rowHtml = `<tr style="border-bottom:1px solid #cbd5e1;">
+        <td style="padding:6px;">${hsn}</td>
+        <td style="padding:6px;">₹ ${taxableVal.toFixed(2)}</td>
+        <td style="padding:6px;">₹ ${taxCgst.toFixed(2)}</td>
+        <td style="padding:6px;">₹ ${taxSgst.toFixed(2)}</td>
+        <td style="padding:6px;">₹ ${(taxCgst+taxSgst).toFixed(2)}</td>
+      </tr>`;
+      taxBody.insertAdjacentHTML('beforeend', rowHtml);
     }
+    // optional total row
+    let totalTaxAmount = totalCgstSum + totalSgstSum;
+    let totalRow = `<tr style="background:#e9ecef; font-weight:bold;"><td>Total</td><td>₹ ${totalTaxableAll.toFixed(2)}</td><td>₹ ${totalCgstSum.toFixed(2)}</td><td>₹ ${totalSgstSum.toFixed(2)}</td><td>₹ ${totalTaxAmount.toFixed(2)}</td></tr>`;
+    taxBody.insertAdjacentHTML('beforeend', totalRow);
+    
+    // Amount in words for tax (as per xls sample)
+    let taxWords = numberToWords(Math.round(totalTaxAmount)) + " Rupees Only";
+    if(totalTaxAmount % 1 !== 0) taxWords = numberToWords(Math.floor(totalTaxAmount)) + ` and ${Math.round((totalTaxAmount % 1)*100)} paise Only`;
+    document.getElementById('taxWords').innerHTML = `Tax Amount in Words : ${taxWords}`;
+  }
 
-    // temporary current sales items (before saving bill)
-    let currentSaleItems = [];
-
-    function renderSalesItems() {
-        const tbody = document.getElementById("salesListBody");
-        if (!tbody) return;
-        tbody.innerHTML = "";
-        let subtotal = 0;
-        currentSaleItems.forEach((item, idx) => {
-            subtotal += item.net;
-            const row = tbody.insertRow();
-            row.insertCell(0).innerText = item.product;
-            row.insertCell(1).innerText = item.qty;
-            row.insertCell(2).innerText = `₹${item.price}`;
-            row.insertCell(3).innerText = `${item.disc}%`;
-            row.insertCell(4).innerText = `₹${item.net.toFixed(2)}`;
-            const delBtn = document.createElement("button");
-            delBtn.innerText = "✖";
-            delBtn.style.background = "none";
-            delBtn.style.color = "#c00";
-            delBtn.style.width = "auto";
-            delBtn.style.fontWeight = "bold";
-            delBtn.onclick = () => { currentSaleItems.splice(idx, 1); renderSalesItems(); updateSalesTotals(); };
-            row.insertCell(5).appendChild(delBtn);
-        });
-        const tax = subtotal * 0.12;
-        const grand = subtotal + tax;
-        document.getElementById("salesSubtotal").innerText = subtotal.toFixed(2);
-        document.getElementById("salesTax").innerText = tax.toFixed(2);
-        document.getElementById("salesGrand").innerText = grand.toFixed(2);
-        window.currentBillSubtotal = subtotal;
-        window.currentBillTax = tax;
-        window.currentBillGrand = grand;
+  // Convert number to words for INR (simple version upto lakhs)
+  function numberToWords(num) {
+    if(num === 0) return "Zero";
+    const ones = ['','One','Two','Three','Four','Five','Six','Seven','Eight','Nine','Ten','Eleven','Twelve','Thirteen','Fourteen','Fifteen','Sixteen','Seventeen','Eighteen','Nineteen'];
+    const tens = ['','','Twenty','Thirty','Forty','Fifty','Sixty','Seventy','Eighty','Ninety'];
+    function convert(n) {
+      if(n < 20) return ones[n];
+      if(n < 100) return tens[Math.floor(n/10)] + (n%10 ? " " + ones[n%10] : "");
+      if(n < 1000) return ones[Math.floor(n/100)] + " Hundred" + (n%100 ? " " + convert(n%100) : "");
+      if(n < 100000) return convert(Math.floor(n/1000)) + " Thousand" + (n%1000 ? " " + convert(n%1000) : "");
+      return convert(Math.floor(n/100000)) + " Lakh" + (n%100000 ? " " + convert(n%100000) : "");
     }
+    return convert(num);
+  }
 
-    function updateSalesTotals() { renderSalesItems(); }
+  // add new row (clone first row, reset values)
+  function addNewRow() {
+    const tbody = document.getElementById('tableBody');
+    const originalRow = tbody.querySelector('tr');
+    const newRow = originalRow.cloneNode(true);
+    // reset inputs
+    newRow.querySelector('.qty').value = "0";
+    newRow.querySelector('.rate').value = "0";
+    newRow.querySelector('.amountCell').innerText = "0.00";
+    const selectProd = newRow.querySelector('.productSelect');
+    selectProd.value = "Fiberglass Mesh";
+    // update HSN based on default product
+    const hsnSpan = newRow.querySelector('.hsnCell');
+    hsnSpan.innerText = "7019";
+    // attach event listeners
+    attachRowEvents(newRow);
+    tbody.appendChild(newRow);
+    updateSerialNumbers();
+    recalcInvoice();
+  }
 
-    // Save Customer Bill (Sales)
-    function saveCurrentSalesBill() {
-        const custName = document.getElementById("custName").value.trim();
-        if (!custName) { alert("Please enter customer name"); return; }
-        if (currentSaleItems.length === 0) { alert("Add at least one product/service"); return; }
-        const subtotal = window.currentBillSubtotal || 0;
-        const tax = window.currentBillTax || 0;
-        const grand = window.currentBillGrand || 0;
-        const newBill = {
-            id: Date.now(),
-            customer: custName,
-            date: new Date().toLocaleString(),
-            items: JSON.parse(JSON.stringify(currentSaleItems)),
-            subtotal: subtotal,
-            tax: tax,
-            grandTotal: grand
-        };
-        salesBills.push(newBill);
-        localStorage.setItem("raj_salesBills", JSON.stringify(salesBills));
-        alert(`✅ Invoice saved for ${custName} | Total ₹${grand.toFixed(2)}`);
-        currentSaleItems = [];
-        renderSalesItems();
-        document.getElementById("custName").value = "";
-        updateDashboardAndStorage();
-        populateInvoiceSelect();
-    }
-
-    // Purchase functions
-    function addPurchase() {
-        const material = document.getElementById("materialType").value;
-        const qty = parseFloat(document.getElementById("purQty").value);
-        const rate = parseFloat(document.getElementById("purRate").value);
-        if (isNaN(qty) || isNaN(rate) || qty <= 0 || rate <= 0) { alert("Enter valid quantity and rate"); return; }
-        const total = qty * rate;
-        const hsn = getHSNForMaterial(material);
-        purchases.push({ id: Date.now() + Math.random(), material, qty, rate, total, hsn });
-        savePurchasesToLocal();
-        renderPurchaseTable();
-        updateDashboardAndStorage();
-        document.getElementById("purQty").value = "";
-        document.getElementById("purRate").value = "";
-    }
-
-    function savePurchasesToLocal() { localStorage.setItem("raj_purchases", JSON.stringify(purchases)); }
-
-    // Dashboard: Profit/Loss/Income & Stock summary
-    function updateDashboardAndStorage() {
-        let totalPurchaseCost = purchases.reduce((sum, p) => sum + p.total, 0);
-        let totalSalesRevenue = salesBills.reduce((sum, bill) => sum + bill.grandTotal, 0);
-        let grossProfit = totalSalesRevenue - totalPurchaseCost;
-        let netIncome = grossProfit;
-        document.getElementById("dashPurchase").innerText = totalPurchaseCost.toFixed(2);
-        document.getElementById("dashSales").innerText = totalSalesRevenue.toFixed(2);
-        document.getElementById("dashProfit").innerText = grossProfit.toFixed(2);
-        document.getElementById("dashIncome").innerText = netIncome.toFixed(2);
-        const profitSpan = document.getElementById("profitSign");
-        if (grossProfit >= 0) { profitSpan.innerHTML = " 🟢 PROFIT"; profitSpan.className = "badge-profit"; }
-        else { profitSpan.innerHTML = " 🔴 LOSS"; profitSpan.className = "badge-loss"; }
-
-        // stock summary (material wise total qty)
-        let matMap = new Map();
-        purchases.forEach(p => {
-            let key = p.material;
-            let existing = matMap.get(key) || 0;
-            matMap.set(key, existing + p.qty);
-        });
-        const stockBody = document.querySelector("#stockSummaryTable tbody");
-        if (stockBody) {
-            stockBody.innerHTML = "";
-            if (matMap.size === 0) stockBody.innerHTML = "<tr><td colspan='2' style='text-align:center'>No purchase records</td></tr>";
-            else {
-                for (let [mat, qtySum] of matMap.entries()) {
-                    let row = stockBody.insertRow();
-                    row.insertCell(0).innerText = mat;
-                    row.insertCell(1).innerText = qtySum;
-                }
-            }
+  function attachRowEvents(row) {
+    const prodSelect = row.querySelector('.productSelect');
+    const qtyInp = row.querySelector('.qty');
+    const rateInp = row.querySelector('.rate');
+    const removeBtn = row.querySelector('.removeBtn');
+    
+    prodSelect.addEventListener('change', function() {
+      updateHSNByProduct(prodSelect);
+      recalcInvoice();
+    });
+    qtyInp.addEventListener('input', recalcInvoice);
+    rateInp.addEventListener('input', recalcInvoice);
+    if(removeBtn) {
+      removeBtn.addEventListener('click', function(e) {
+        const rowsAll = document.querySelectorAll('#tableBody tr');
+        if(rowsAll.length > 1) {
+          row.remove();
+          updateSerialNumbers();
+          recalcInvoice();
+        } else {
+          alert("At least one product line required");
         }
-        localStorage.setItem("raj_purchases", JSON.stringify(purchases));
-        localStorage.setItem("raj_salesBills", JSON.stringify(salesBills));
+      });
     }
+  }
 
-    // Load data from localStorage
-    function loadAllData() {
-        const storedPurch = localStorage.getItem("raj_purchases");
-        if (storedPurch) purchases = JSON.parse(storedPurch);
-        else purchases = [];
-        const storedSales = localStorage.getItem("raj_salesBills");
-        if (storedSales) salesBills = JSON.parse(storedSales);
-        else salesBills = [];
-        renderPurchaseTable();
-        renderSalesItems();   // empty current bill items
-        updateDashboardAndStorage();
-        populateInvoiceSelect();
-    }
-
-    // populate dropdown for invoice selection
-    function populateInvoiceSelect() {
-        const select = document.getElementById("invoiceSelect");
-        if (!select) return;
-        select.innerHTML = "<option value=''>-- Select Customer Invoice --</option>";
-        salesBills.forEach(bill => {
-            const option = document.createElement("option");
-            option.value = bill.id;
-            option.textContent = `${bill.customer} | ${bill.date} | ₹${bill.grandTotal.toFixed(2)}`;
-            select.appendChild(option);
-        });
-    }
-
-    // PROFESSIONAL GST INVOICE PREVIEW (ultimate printable)
-    function loadInvoicePreview() {
-        const select = document.getElementById("invoiceSelect");
-        const selectedId = parseInt(select.value);
-        if (!selectedId) { alert("Please select a customer invoice"); return; }
-        const bill = salesBills.find(b => b.id === selectedId);
-        if (!bill) return;
-        const previewDiv = document.getElementById("invoicePreview");
-        let itemsRows = "";
-        bill.items.forEach(it => {
-            itemsRows += `<tr>
-                <td style="padding:6px; border-bottom:1px solid #e2e8f0;">${it.product}</td>
-                <td style="padding:6px; border-bottom:1px solid #e2e8f0; text-align:center;">${it.qty}</td>
-                <td style="padding:6px; border-bottom:1px solid #e2e8f0; text-align:right;">₹${it.price.toFixed(2)}</td>
-                <td style="padding:6px; border-bottom:1px solid #e2e8f0; text-align:center;">${it.disc}%</td>
-                <td style="padding:6px; border-bottom:1px solid #e2e8f0; text-align:right;">₹${it.net.toFixed(2)}</td>
-            </tr>`;
-        });
-        const invoiceHtml = `
-            <div id="printGstContent" style="font-family:'Inter',sans-serif; background:white; padding:14px; border-radius:20px;">
-                <div style="text-align:center; border-bottom:2px solid #f0b429; margin-bottom:14px;">
-                    <h2 style="color:#1c6b2f;">RAJ MARKETING</h2>
-                    <p style="font-size:0.7rem;">Mosquito Nets for Windows & Doors | Manufacturer & Dealers</p>
-                    <p style="font-size:0.65rem;">#65, Near Pragathi logistics, Hootghalli industrial area, Mysore.<br>📞 +91 9483037385 | GST: 29GKYPM6953C1ZA</p>
-                </div>
-                <div style="display:flex; justify-content:space-between; font-size:0.75rem; margin-bottom:10px;">
-                    <div><strong>Invoice To:</strong> ${bill.customer}</div>
-                    <div><strong>Date:</strong> ${bill.date}</div>
-                </div>
-                <div style="font-size:0.7rem; margin-bottom:12px;"><strong>Invoice No:</strong> RAJ-${bill.id}</div>
-                <table style="width:100%; border-collapse:collapse; font-size:0.7rem; margin-bottom:12px;">
-                    <thead><tr style="background:#eef2f5;"><th>Item</th><th>Qty</th><th>Unit Price</th><th>Disc%</th><th>Net Amt</th></tr></thead>
-                    <tbody>${itemsRows}</tbody>
-                </table>
-                <div style="text-align:right; border-top:1px dashed #aaa; padding-top:10px; font-size:0.75rem;">
-                    <p>Subtotal: ₹${bill.subtotal.toFixed(2)}</p>
-                    <p>GST (12%): ₹${bill.tax.toFixed(2)}</p>
-                    <h3 style="color:#1f4f2b;">Total Invoice: ₹${bill.grandTotal.toFixed(2)}</h3>
-                </div>
-                <div style="margin-top:18px; font-size:0.6rem; text-align:center; border-top:1px solid #eee; padding-top:8px;">
-                    <i class="fas fa-check-circle"></i> HSN codes: Aluminium(761699) | Steel mesh(732620) | Fiber mesh(560819)<br>
-                    ** This is a system generated GST invoice ** Thank you for choosing Raj Marketing
-                </div>
-            </div>
-        `;
-        previewDiv.innerHTML = invoiceHtml;
-    }
-
-    function printInvoice() {
-        const contentDiv = document.getElementById("invoicePreview");
-        if (!contentDiv || !contentDiv.innerText.trim()) { alert("Load invoice first (select & preview)"); return; }
-        const printContent = contentDiv.querySelector("#printGstContent") || contentDiv;
-        const printWindow = window.open('', '_blank');
-        printWindow.document.write(`
-            <html><head><title>Raj Marketing GST Invoice</title>
-            <link href='https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap' rel='stylesheet'>
-            <style>
-                body { font-family: 'Inter', sans-serif; padding: 20px; margin:0; }
-                table { width:100%; border-collapse:collapse; }
-                td, th { padding: 6px; text-align:left; }
-                @media print { body { margin:0; padding:12px; } .no-print { display:none; } }
-            </style>
-            </head><body>${printContent.outerHTML}</body></html>
-        `);
-        printWindow.document.close();
-        printWindow.print();
-    }
-
-    // EXCEL EXPORT (complete sheet data: purchase, sales, profit)
-    function exportExcelFull() {
-        let rows = [];
-        rows.push(["RAJ MARKETING - COMPLETE BILL DATA"]);
-        rows.push(["Business: +91 9483037385 | GST: 29GKYPM6953C1ZA | Hootghalli, Mysore"]);
-        rows.push([]);
-        rows.push(["PURCHASE RECORDS"]);
-        rows.push(["Material", "Quantity", "Rate (₹)", "Total (₹)", "HSN Code"]);
-        purchases.forEach(p => rows.push([p.material, p.qty, p.rate, p.total, p.hsn]));
-        rows.push([]);
-        rows.push(["CUSTOMER SALES INVOICES (with GST)"]);
-        salesBills.forEach(bill => {
-            rows.push([`Customer: ${bill.customer} | Date: ${bill.date} | Invoice Total: ₹${bill.grandTotal}`]);
-            rows.push(["Product", "Qty", "Unit Price", "Discount%", "Net Amount"]);
-            bill.items.forEach(it => rows.push([it.product, it.qty, it.price, it.disc, it.net]));
-            rows.push(["Subtotal", bill.subtotal, "GST 12%", bill.tax, "Grand Total", bill.grandTotal]);
-            rows.push([]);
-        });
-        rows.push([]);
-        rows.push(["PROFIT & LOSS SUMMARY"]);
-        let totalPur = purchases.reduce((s,p)=>s+p.total,0);
-        let totalSales = salesBills.reduce((s,b)=>s+b.grandTotal,0);
-        rows.push(["Total Purchase Cost (₹)", totalPur]);
-        rows.push(["Total Sales Revenue (₹)", totalSales]);
-        rows.push(["Net Profit / Loss (₹)", totalSales - totalPur]);
-        rows.push([]);
-        rows.push(["Generated on:", new Date().toLocaleString()]);
-        const csv = rows.map(row => row.map(cell => `"${String(cell).replace(/"/g, '""')}"`).join(",")).join("\n");
-        const blob = new Blob(["\uFEFF" + csv], {type: "text/csv;charset=utf-8;"});
-        const link = document.createElement("a");
-        const url = URL.createObjectURL(blob);
-        link.href = url;
-        link.setAttribute("download", "raj_marketing_full_data.csv");
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-        URL.revokeObjectURL(url);
-    }
-
-    function resetAllData() {
-        if (confirm("⚠️ PERMANENT DELETE: All purchases, sales bills & invoices will be lost. Continue?")) {
-            purchases = [];
-            salesBills = [];
-            currentSaleItems = [];
-            localStorage.removeItem("raj_purchases");
-            localStorage.removeItem("raj_salesBills");
-            renderPurchaseTable();
-            renderSalesItems();
-            updateDashboardAndStorage();
-            populateInvoiceSelect();
-            document.getElementById("invoicePreview").innerHTML = "";
-            alert("All data cleared successfully.");
-        }
-    }
-
-    // EVENT LISTENERS
-    document.getElementById("addPurchaseBtn")?.addEventListener("click", addPurchase);
-    document.getElementById("savePurchaseData")?.addEventListener("click", () => { savePurchasesToLocal(); alert("Purchase data saved."); updateDashboardAndStorage(); });
-    document.getElementById("addSalesItemBtn")?.addEventListener("click", () => {
-        const product = document.getElementById("salesProduct").value;
-        const qty = parseFloat(document.getElementById("salesQty").value);
-        const price = parseFloat(document.getElementById("salesPrice").value);
-        const disc = parseFloat(document.getElementById("salesDisc").value) || 0;
-        if (isNaN(qty) || isNaN(price) || qty <= 0 || price <= 0) { alert("Valid quantity & price"); return; }
-        const net = qty * price * (1 - disc / 100);
-        currentSaleItems.push({ product, qty, price, disc, net });
-        renderSalesItems();
-        document.getElementById("salesQty").value = 1;
-        document.getElementById("salesPrice").value = "";
-        document.getElementById("salesDisc").value = 0;
+  function updateSerialNumbers() {
+    const rows = document.querySelectorAll('#tableBody tr');
+    rows.forEach((row, idx) => {
+      row.querySelector('.srNo').innerText = idx+1;
     });
-    document.getElementById("saveSalesBillBtn")?.addEventListener("click", saveCurrentSalesBill);
-    document.getElementById("loadInvoiceBtn")?.addEventListener("click", loadInvoicePreview);
-    document.getElementById("printInvoiceBtn")?.addEventListener("click", printInvoice);
-    document.getElementById("exportExcelBtn")?.addEventListener("click", exportExcelFull);
-    document.getElementById("resetDataBtn")?.addEventListener("click", resetAllData);
+  }
 
-    // auto update HSN based on material selection
-    document.getElementById("materialType")?.addEventListener("change", (e) => {
-        const hsnVal = getHSNForMaterial(e.target.value);
-        document.getElementById("hsnCode").value = hsnVal;
+  // initialize event listeners for existing row
+  function initTableEvents() {
+    const existingRows = document.querySelectorAll('#tableBody tr');
+    existingRows.forEach(row => attachRowEvents(row));
+    // initial HSN mapping & calculation
+    document.querySelectorAll('.productSelect').forEach(sel => {
+      updateHSNByProduct(sel);
     });
-    // Tab switching
-    document.querySelectorAll(".tab-btn").forEach(btn => {
-        btn.addEventListener("click", () => {
-            document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
-            btn.classList.add("active");
-            const tabId = btn.getAttribute("data-tab");
-            document.querySelectorAll(".card-panel").forEach(panel => panel.classList.remove("active-panel"));
-            document.getElementById(tabId).classList.add("active-panel");
-        });
-    });
+    recalcInvoice();
+  }
 
-    loadAllData();
-    if (document.getElementById("hsnCode")) document.getElementById("hsnCode").value = getHSNForMaterial("Aluminium Qty (Profile)");
+  // Print functionality (window.print optimized)
+  function printInvoice() {
+    const originalTitle = document.title;
+    document.title = "Raj Marketing Invoice";
+    window.print();
+    document.title = originalTitle;
+  }
+
+  // PDF download using html2pdf with high quality
+  function downloadInvoicePDF() {
+    const element = document.getElementById('invoiceContainer');
+    const opt = {
+      margin:        [0.5, 0.5, 0.5, 0.5],
+      filename:     `RajMarketing_Invoice_${document.getElementById('invoiceNo').value || '0001'}.pdf`,
+      image:        { type: 'jpeg', quality: 0.98 },
+      html2canvas:  { scale: 2, letterRendering: true },
+      jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' }
+    };
+    html2pdf().set(opt).from(element).save();
+  }
+
+  // add row button event
+  document.getElementById('addRowBtn').addEventListener('click', addNewRow);
+  document.getElementById('printBtn').addEventListener('click', printInvoice);
+  document.getElementById('downloadPdfBtn').addEventListener('click', downloadInvoicePDF);
+  
+  // also recalc when customer details changed not needed for pricing, but triggers for any meta
+  const editableInputs = ['customerName','customerMobile','customerAddress','customerGst','invoiceNo','invoiceDate','placeSupply'];
+  editableInputs.forEach(id => {
+    const inp = document.getElementById(id);
+    if(inp) inp.addEventListener('change', () => { /* just ui change no price effect */ });
+  });
+  
+  initTableEvents();
+  // set default date if empty
+  if(!document.getElementById('invoiceDate').value) {
+    let today = new Date().toISOString().split('T')[0];
+    document.getElementById('invoiceDate').value = today;
+  }
 </script>
 </body>
 </html>
-       
+    
