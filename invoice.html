@@ -6,7 +6,7 @@
   <title>Raj Marketing | GST Tax Invoice | Professional</title>
   <!-- html2pdf + jsPDF for A4 perfect rendering -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <!-- Google Fonts: Inter & Playfair Display for elegance -->
+  <!-- Google Fonts: Inter & Playfair Display -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
   <!-- Font Awesome 6 -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -26,7 +26,6 @@
       align-items: center;
     }
 
-    /* A4 size container (optimized for print/pdf) */
     .invoice-wrapper {
       max-width: 1200px;
       width: 100%;
@@ -35,7 +34,6 @@
       border-radius: 24px;
       box-shadow: 0 25px 45px -12px rgba(0, 0, 0, 0.25);
       overflow: hidden;
-      transition: all 0.2s;
     }
 
     .invoice-inner {
@@ -43,7 +41,7 @@
       background: white;
     }
 
-    /* ========== HEADER with Logo & Business Name ========== */
+    /* Header */
     .brand-header {
       display: flex;
       justify-content: space-between;
@@ -75,17 +73,20 @@
       max-height: 100%;
       object-fit: contain;
     }
-    /* fallback icon if no logo.png */
     .logo-placeholder-icon {
       font-size: 42px;
       color: #b8860b;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
     }
     .business-text h1 {
       font-family: 'Playfair Display', serif;
       font-size: 32px;
       font-weight: 800;
       color: #1e3a5f;
-      letter-spacing: -0.3px;
     }
     .business-text p {
       font-size: 12px;
@@ -105,7 +106,6 @@
       font-size: 14px;
       display: block;
     }
-
     .invoice-title {
       text-align: center;
       margin: 8px 0 20px;
@@ -118,11 +118,9 @@
       color: white;
       font-size: 22px;
       font-weight: 600;
-      letter-spacing: 1px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     }
 
-    /* info grid */
+    /* Info Grid */
     .info-grid {
       display: flex;
       flex-wrap: wrap;
@@ -148,7 +146,6 @@
       border: 1.5px solid #e2edf7;
       border-radius: 18px;
       font-family: 'Inter', sans-serif;
-      transition: 0.2s;
     }
     .tax-switch {
       background: #f1f5f9;
@@ -174,7 +171,7 @@
       box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     }
 
-    /* elegant table */
+    /* Product Table */
     .items-table {
       width: 100%;
       border-collapse: collapse;
@@ -227,10 +224,9 @@
       display: inline-flex;
       align-items: center;
       gap: 10px;
-      transition: 0.2s;
     }
 
-    /* totals panel with words */
+    /* Totals Panel */
     .totals-panel {
       background: #fefcf5;
       border-radius: 28px;
@@ -263,7 +259,7 @@
       font-weight: 500;
     }
 
-    /* tax summary */
+    /* Tax Summary */
     .tax-summary-card {
       background: #f8fbfe;
       border-radius: 24px;
@@ -282,7 +278,7 @@
       text-align: center;
     }
 
-    /* bank + terms (one side consistent) */
+    /* Bank + Terms */
     .bank-terms-row {
       display: flex;
       flex-wrap: wrap;
@@ -346,7 +342,6 @@
     @media print {
       body { background: white; padding: 0; margin: 0; }
       .action-buttons { display: none; }
-      .invoice-wrapper { box-shadow: none; margin: 0; border-radius: 0; }
       .add-row-btn { display: none; }
       .action-btn { display: none; }
     }
@@ -355,13 +350,12 @@
 <body>
 <div class="invoice-wrapper" id="invoiceContainer">
   <div class="invoice-inner" id="invoiceContent">
-    <!-- header with business name & logo link -->
+    <!-- Header with Business Name & Logo -->
     <div class="brand-header">
       <div class="logo-area">
         <div class="logo-img" id="logoContainer">
-          <!-- logo.png will be loaded dynamically if exists -->
-          <img id="dynamicLogo" src="" alt="Logo" style="display:none;" onerror="this.style.display='none'; document.getElementById('fallbackIcon').style.display='flex';">
-          <div id="fallbackIcon" class="logo-placeholder-icon" style="display:flex; align-items:center; justify-content:center; width:100%; height:100%;"><i class="fas fa-building"></i></div>
+          <img id="dynamicLogo" src="logo.png" alt="Raj Marketing Logo" style="display:none;" onerror="this.style.display='none'; document.getElementById('fallbackIcon').style.display='flex';">
+          <div id="fallbackIcon" class="logo-placeholder-icon" style="display:flex;"><i class="fas fa-store"></i></div>
         </div>
         <div class="business-text">
           <h1>RAJ MARKETING</h1>
@@ -376,7 +370,7 @@
     </div>
     <div class="invoice-title"><h2>TAX INVOICE</h2></div>
 
-    <!-- customer + meta -->
+    <!-- Customer & Invoice Meta -->
     <div class="info-grid">
       <div class="customer-box">
         <label>Customer Name</label>
@@ -403,9 +397,11 @@
       </div>
     </div>
 
-    <!-- product table -->
+    <!-- Product Table -->
     <table class="items-table">
-      <thead><tr><th>#</th><th>Description of Goods/Services</th><th>HSN/SAC</th><th>Qty (Sqft)</th><th>Rate (₹)</th><th>Amount (₹)</th><th>Action</th></tr></thead>
+      <thead>
+        <tr><th>#</th><th>Description of Goods/Services</th><th>HSN/SAC</th><th>Qty (Sqft)</th><th>Rate (₹)</th><th>Amount (₹)</th><th>Action</th></tr>
+      </thead>
       <tbody id="tableBody">
         <tr>
           <td class="srNo">1</td>
@@ -420,7 +416,7 @@
     </table>
     <button class="add-row-btn" id="addRowBtn"><i class="fas fa-plus-circle"></i> Add Product / Service</button>
 
-    <!-- totals with words -->
+    <!-- Totals Panel with Tax Working -->
     <div class="totals-panel">
       <div class="totals-details">
         <p><span>Sub Total :</span> <span id="subtotalVal">₹ 0.00</span></p>
@@ -432,7 +428,7 @@
       </div>
     </div>
 
-    <!-- tax summary + tax amount in words -->
+    <!-- Tax Summary HSN wise + Tax Amount in Words -->
     <div class="tax-summary-card">
       <h4 style="display: flex; align-items:center; gap:8px;"><i class="fas fa-receipt"></i> Tax Summary (HSN wise)</h4>
       <table class="mini-table" id="taxSummaryTable">
@@ -442,7 +438,7 @@
       <div id="taxAmountWords" style="font-size:12px; margin-top:14px; font-weight:600; color:#2b5e3b;">Tax Amount in Words : </div>
     </div>
 
-    <!-- bank details + terms and conditions (one side alignment) -->
+    <!-- Bank Details + Terms & Conditions -->
     <div class="bank-terms-row">
       <div class="bank-box">
         <strong><i class="fas fa-university"></i> Bank Details</strong><br>
@@ -476,7 +472,7 @@
 </div>
 
 <script>
-  // load logo.png if exists (no error, using img src)
+  // Load logo.png if exists
   const logoImg = document.getElementById('dynamicLogo');
   const fallback = document.getElementById('fallbackIcon');
   logoImg.src = "logo.png";
@@ -489,9 +485,9 @@
     fallback.style.display = "flex";
   };
 
-  let currentTaxType = "cgst_sgst"; // cgst_sgst or igst
+  let currentTaxType = "cgst_sgst"; // "cgst_sgst" or "igst"
 
-  // accurate number to Indian words (rupees + paise)
+  // Accurate Indian Number to Words (Rupees + Paise)
   function numberToWordsIndian(num) {
     if (num === 0) return "Zero";
     const ones = ["","One","Two","Three","Four","Five","Six","Seven","Eight","Nine","Ten","Eleven","Twelve","Thirteen","Fourteen","Fifteen","Sixteen","Seventeen","Eighteen","Nineteen"];
@@ -525,8 +521,9 @@
   function recalcAll() {
     const rows = document.querySelectorAll('#tableBody tr');
     let subtotal = 0;
-    const hsnMap = new Map();
+    const hsnMap = new Map(); // HSN -> total taxable value
 
+    // Calculate each row amount and subtotal
     rows.forEach((row, idx) => {
       let qty = parseFloat(row.querySelector('.qty').value) || 0;
       let rate = parseFloat(row.querySelector('.rate').value) || 0;
@@ -534,24 +531,30 @@
       row.querySelector('.amountCell').innerText = amount.toFixed(2);
       subtotal += amount;
       let hsn = row.querySelector('.hsnCell').innerText.trim();
-      if (hsn && amount > 0) hsnMap.set(hsn, (hsnMap.get(hsn) || 0) + amount);
-      row.querySelector('.srNo').innerText = idx+1;
+      if (hsn && amount > 0) {
+        hsnMap.set(hsn, (hsnMap.get(hsn) || 0) + amount);
+      }
+      row.querySelector('.srNo').innerText = idx + 1;
     });
 
-    let taxAmount = 0, cgst=0, sgst=0, igst=0;
+    // Calculate taxes based on selected type
+    let cgst = 0, sgst = 0, igst = 0, totalTax = 0;
     if (currentTaxType === "cgst_sgst") {
       cgst = subtotal * 0.09;
       sgst = subtotal * 0.09;
-      taxAmount = cgst + sgst;
+      totalTax = cgst + sgst;
     } else {
       igst = subtotal * 0.18;
-      taxAmount = igst;
+      totalTax = igst;
     }
-    let totalBeforeRound = subtotal + taxAmount;
+
+    let totalBeforeRound = subtotal + totalTax;
     let roundedTotal = Math.round(totalBeforeRound);
     let roundOff = roundedTotal - totalBeforeRound;
 
+    // Update UI for totals
     document.getElementById('subtotalVal').innerHTML = `₹ ${subtotal.toFixed(2)}`;
+    
     if (currentTaxType === "cgst_sgst") {
       document.getElementById('cgstVal').innerHTML = `₹ ${cgst.toFixed(2)}`;
       document.getElementById('sgstVal').innerHTML = `₹ ${sgst.toFixed(2)}`;
@@ -563,23 +566,49 @@
       document.getElementById('taxLine1').innerHTML = `<span>IGST (18%) :</span> <span>₹ ${igst.toFixed(2)}</span>`;
       document.getElementById('taxLine2').innerHTML = `<span>SGST (9%) :</span> <span>₹ 0.00</span>`;
     }
+    
     document.getElementById('roundOffVal').innerHTML = `₹ ${roundOff.toFixed(2)}`;
     document.getElementById('grandTotalVal').innerHTML = `₹ ${roundedTotal.toFixed(2)}`;
     document.getElementById('grandTotalWords').innerHTML = `Amount in Words : ${numberToWordsIndian(roundedTotal)}`;
 
-    // Tax summary table
+    // Build HSN wise tax summary table
     const taxBody = document.getElementById('taxSummaryBody');
     taxBody.innerHTML = '';
-    let totalTaxable = 0, totalTaxSum = 0;
+    let totalTaxableValue = 0;
+    let totalTaxAmount = 0;
+    
     for (let [hsn, taxable] of hsnMap.entries()) {
-      let taxOnHsn = currentTaxType === "cgst_sgst" ? taxable * 0.18 : taxable * 0.18;
-      totalTaxable += taxable;
-      totalTaxSum += taxOnHsn;
-      taxBody.insertAdjacentHTML('beforeend', `<tr><td>${hsn}</td><td>₹ ${taxable.toFixed(2)}</td><td>${currentTaxType === "cgst_sgst" ? "CGST+SGST (18%)" : "IGST (18%)"}</td><td>₹ ${taxOnHsn.toFixed(2)}</td></tr>`);
+      let taxOnHsn = 0;
+      if (currentTaxType === "cgst_sgst") {
+        taxOnHsn = taxable * 0.18; // 9%+9% = 18%
+      } else {
+        taxOnHsn = taxable * 0.18; // IGST 18%
+      }
+      totalTaxableValue += taxable;
+      totalTaxAmount += taxOnHsn;
+      const taxTypeLabel = currentTaxType === "cgst_sgst" ? "CGST+SGST (18%)" : "IGST (18%)";
+      const rowHtml = `<tr>
+         <td>${hsn}</td>
+        <td>₹ ${taxable.toFixed(2)}</td>
+        <td>${taxTypeLabel}</td>
+        <td>₹ ${taxOnHsn.toFixed(2)}</td>
+      </tr>`;
+      taxBody.insertAdjacentHTML('beforeend', rowHtml);
     }
-    if (hsnMap.size === 0) taxBody.innerHTML = '<tr><td colspan="4">No taxable items</td></tr>';
-    else taxBody.insertAdjacentHTML('beforeend', `<tr style="background:#eef2fa; font-weight:bold;"><td>Total</td><td>₹ ${totalTaxable.toFixed(2)}</td><td>Total Tax</td><td>₹ ${totalTaxSum.toFixed(2)}</td></tr>`);
-    document.getElementById('taxAmountWords').innerHTML = `Tax Amount in Words : ${numberToWordsIndian(totalTaxSum)}`;
+    
+    if (hsnMap.size === 0) {
+      taxBody.innerHTML = '<tr><td colspan="4">No taxable items</td></tr>';
+      document.getElementById('taxAmountWords').innerHTML = 'Tax Amount in Words : Zero Rupees Only';
+    } else {
+      const totalRow = `<tr style="background:#eef2fa; font-weight:bold;">
+        <td><strong>Total</strong></td>
+        <td><strong>₹ ${totalTaxableValue.toFixed(2)}</strong></td>
+        <td><strong>Total Tax</strong></td>
+        <td><strong>₹ ${totalTaxAmount.toFixed(2)}</strong></td>
+      </tr>`;
+      taxBody.insertAdjacentHTML('beforeend', totalRow);
+      document.getElementById('taxAmountWords').innerHTML = `Tax Amount in Words : ${numberToWordsIndian(totalTaxAmount)}`;
+    }
   }
 
   function attachRowEvents(row) {
@@ -587,13 +616,25 @@
     const qtyInp = row.querySelector('.qty');
     const rateInp = row.querySelector('.rate');
     const removeBtn = row.querySelector('.removeBtn');
-    selectProd.addEventListener('change', () => { updateHSN(selectProd); recalcAll(); });
+    
+    selectProd.addEventListener('change', () => { 
+      updateHSN(selectProd); 
+      recalcAll(); 
+    });
     qtyInp.addEventListener('input', recalcAll);
     rateInp.addEventListener('input', recalcAll);
-    if (removeBtn) removeBtn.addEventListener('click', () => {
-      if (document.querySelectorAll('#tableBody tr').length > 1) { row.remove(); recalcAll(); }
-      else alert("At least one product required");
-    });
+    
+    if (removeBtn) {
+      removeBtn.addEventListener('click', () => {
+        const allRows = document.querySelectorAll('#tableBody tr');
+        if (allRows.length > 1) {
+          row.remove();
+          recalcAll();
+        } else {
+          alert("At least one product line is required.");
+        }
+      });
+    }
     updateHSN(selectProd);
   }
 
@@ -611,7 +652,6 @@
     recalcAll();
   }
 
-  // tax toggle
   function initTaxToggle() {
     const opts = document.querySelectorAll('.tax-option');
     opts.forEach(opt => {
@@ -619,32 +659,40 @@
         opts.forEach(o => o.classList.remove('active'));
         opt.classList.add('active');
         currentTaxType = opt.getAttribute('data-tax');
-        recalcAll();
+        recalcAll(); // Recalculate everything when tax type changes
       });
     });
   }
 
-  // print + pdf (A4 perfect)
-  function printInvoice() { window.print(); }
+  function printInvoice() { 
+    window.print(); 
+  }
+  
   function downloadPDF() {
     const element = document.getElementById('invoiceContainer');
     const opt = {
-      margin:        [0.5, 0.5, 0.5, 0.5],
-      filename:     `RajMarketing_Invoice_${document.getElementById('invoiceNo').value || '0001'}.pdf`,
-      image:        { type: 'jpeg', quality: 0.98 },
-      html2canvas:  { scale: 2, letterRendering: true },
-      jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' }
+      margin: [0.5, 0.5, 0.5, 0.5],
+      filename: `RajMarketing_Invoice_${document.getElementById('invoiceNo').value || '0001'}.pdf`,
+      image: { type: 'jpeg', quality: 0.98 },
+      html2canvas: { scale: 2, letterRendering: true },
+      jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
     };
     html2pdf().set(opt).from(element).save();
   }
-
+    // Event Listeners
   document.getElementById('addRowBtn').addEventListener('click', addNewRow);
   document.getElementById('printBtn').addEventListener('click', printInvoice);
   document.getElementById('downloadPdfBtn').addEventListener('click', downloadPDF);
+  
+  // Initialize existing rows
   document.querySelectorAll('#tableBody tr').forEach(row => attachRowEvents(row));
   initTaxToggle();
   recalcAll();
-  if (!document.getElementById('invoiceDate').value) document.getElementById('invoiceDate').valueAsDate = new Date();
+  
+  // Set default date if empty
+  if (!document.getElementById('invoiceDate').value) {
+    document.getElementById('invoiceDate').valueAsDate = new Date();
+  }
 </script>
 </body>
 </html>
