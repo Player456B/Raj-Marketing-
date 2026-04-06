@@ -1,660 +1,653 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-  <title>Raj Marketing | Professional Tax Invoice</title>
-  <!-- html2pdf library for clean PDF generation -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <!-- Font Awesome for icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Raj Marketing | Professional Tax Invoice</title>
+    <!-- html2pdf / jsPDF libraries for PDF generation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    body {
-      background: #eef2f5;
-      font-family: 'Poppins', 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
-      padding: 30px 20px;
-    }
+        body {
+            background: #eef2f5;
+            font-family: 'Segoe UI', 'Inter', 'Poppins', 'Roboto', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            padding: 30px 20px;
+        }
 
-    /* modern container */
-    .invoice-wrapper {
-      max-width: 1280px;
-      margin: 0 auto;
-      background: white;
-      border-radius: 28px;
-      box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.15);
-      overflow: hidden;
-      transition: all 0.2s;
-    }
+        /* invoice card container */
+        .invoice-wrapper {
+            max-width: 1280px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 28px;
+            box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            transition: all 0.2s;
+        }
 
-    /* inner padding */
-    .invoice-inner {
-      padding: 28px 32px 36px;
-    }
+        /* inner padding */
+        .invoice-container {
+            padding: 28px 32px 38px;
+            background: white;
+        }
 
-    /* header section with brand & gst */
-    .brand-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      border-bottom: 3px solid #f0b429;
-      padding-bottom: 20px;
-      margin-bottom: 24px;
-    }
+        /* header area with branding */
+        .brand-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            border-bottom: 3px solid #1e3a5f;
+            padding-bottom: 18px;
+            margin-bottom: 24px;
+        }
+        .brand-left h1 {
+            font-size: 28px;
+            font-weight: 800;
+            color: #1e3a5f;
+            letter-spacing: -0.3px;
+        }
+        .brand-left p {
+            font-size: 13px;
+            color: #4b5563;
+            margin-top: 5px;
+        }
+        .brand-left .gst-badge {
+            background: #f0f4f9;
+            padding: 4px 12px;
+            border-radius: 40px;
+            font-size: 12px;
+            font-weight: 500;
+            display: inline-block;
+            margin-top: 8px;
+            color: #1e3a5f;
+        }
+        .invoice-title-area {
+            text-align: right;
+        }
+        .invoice-title-area h2 {
+            font-size: 26px;
+            font-weight: 700;
+            color: #c2410c;
+            background: #fff4ed;
+            padding: 6px 18px;
+            border-radius: 60px;
+            display: inline-block;
+        }
+        .invoice-meta {
+            margin-top: 12px;
+            font-size: 13px;
+            color: #2c3e4e;
+            background: #f8fafc;
+            padding: 8px 16px;
+            border-radius: 20px;
+        }
 
-    .logo-area h1 {
-      font-size: 28px;
-      font-weight: 700;
-      color: #1e2a3e;
-      letter-spacing: -0.5px;
-    }
-    .logo-area p {
-      font-size: 13px;
-      color: #4a627a;
-      margin-top: 6px;
-    }
-    .gst-badge {
-      text-align: right;
-      background: #f8fafc;
-      padding: 10px 18px;
-      border-radius: 40px;
-    }
-    .gst-badge span {
-      font-weight: 600;
-      color: #0f3b5c;
-      font-size: 14px;
-      display: block;
-    }
-    .invoice-title {
-      text-align: center;
-      margin: 16px 0 22px;
-    }
-    .invoice-title h2 {
-      background: #1e2a3e;
-      display: inline-block;
-      padding: 8px 28px;
-      border-radius: 40px;
-      color: white;
-      font-size: 22px;
-      font-weight: 500;
-      letter-spacing: 1px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
-    }
+        /* two column customer & invoice info */
+        .info-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 24px;
+            background: #f9fbfd;
+            padding: 20px 20px;
+            border-radius: 24px;
+            margin-bottom: 28px;
+            border: 1px solid #e9edf2;
+        }
+        .customer-box {
+            flex: 2;
+        }
+        .invoice-details-box {
+            flex: 1.2;
+            background: white;
+            border-radius: 20px;
+            padding: 12px 16px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+            border: 1px solid #e2e8f0;
+        }
+        .field-group {
+            margin-bottom: 12px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: baseline;
+            gap: 8px;
+        }
+        .field-group label {
+            font-weight: 600;
+            width: 90px;
+            color: #2c3e4e;
+            font-size: 13px;
+        }
+        .field-group input, .field-group textarea {
+            flex: 1;
+            padding: 8px 12px;
+            border: 1px solid #cfdee9;
+            border-radius: 14px;
+            font-family: inherit;
+            font-size: 13px;
+            background: white;
+            transition: 0.2s;
+        }
+        .field-group input:focus, .field-group textarea:focus {
+            outline: none;
+            border-color: #1e3a5f;
+            box-shadow: 0 0 0 2px rgba(30,58,95,0.1);
+        }
+        .inv-detail-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            font-size: 13px;
+            border-bottom: 1px dashed #e2e8f0;
+            padding-bottom: 6px;
+        }
+        .inv-detail-item strong {
+            color: #1f2937;
+        }
 
-    /* customer & invoice meta grid */
-    .info-grid {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 24px;
-      background: #f9fbfd;
-      border-radius: 24px;
-      padding: 20px 24px;
-      margin-bottom: 28px;
-      border: 1px solid #e9edf2;
-    }
-    .customer-box {
-      flex: 2;
-      min-width: 240px;
-    }
-    .invoice-meta {
-      flex: 1.2;
-      background: white;
-      border-radius: 20px;
-      padding: 10px 16px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.02);
-    }
-    .customer-box label, .invoice-meta label {
-      font-weight: 600;
-      color: #2c3e50;
-      display: block;
-      margin-top: 12px;
-      font-size: 13px;
-    }
-    .customer-box input, .invoice-meta input {
-      width: 100%;
-      padding: 10px 14px;
-      margin-top: 5px;
-      border: 1px solid #cfdfed;
-      border-radius: 16px;
-      font-size: 14px;
-      transition: 0.2s;
-      background: white;
-    }
-    .customer-box input:focus, .invoice-meta input:focus {
-      outline: none;
-      border-color: #f0b429;
-      box-shadow: 0 0 0 3px rgba(240,180,41,0.2);
-    }
-    .small-note {
-      font-size: 12px;
-      color: #6c86a3;
-      margin-top: 6px;
-    }
+        /* table modern design */
+        .items-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0 16px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        }
+        .items-table th {
+            background: #1e3a5f;
+            color: white;
+            padding: 14px 8px;
+            font-weight: 600;
+            font-size: 14px;
+            text-align: center;
+            border: none;
+        }
+        .items-table td {
+            padding: 12px 8px;
+            text-align: center;
+            border-bottom: 1px solid #e2e8f0;
+            background-color: white;
+            font-size: 13px;
+            vertical-align: middle;
+        }
+        .items-table input, .items-table select {
+            width: 100%;
+            padding: 8px 6px;
+            border-radius: 12px;
+            border: 1px solid #cbd5e1;
+            font-size: 13px;
+            text-align: center;
+            background: #fff;
+        }
+        .items-table .amount-cell {
+            font-weight: 600;
+            color: #0f3b2c;
+        }
+        .action-btn {
+            background: #fee2e2;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 30px;
+            color: #b91c1c;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 12px;
+            transition: 0.2s;
+        }
+        .action-btn:hover {
+            background: #fecaca;
+        }
+        .add-row-btn {
+            background: #1e3a5f;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 40px;
+            font-weight: 600;
+            margin: 8px 0 20px;
+            cursor: pointer;
+            font-size: 13px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: 0.2s;
+        }
+        .add-row-btn:hover {
+            background: #0f2b46;
+            transform: scale(0.98);
+        }
 
-    /* product table styles */
-    .items-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 20px 0 18px;
-      border-radius: 20px;
-      overflow: hidden;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-    }
-    .items-table th {
-      background: #1e2f3f;
-      color: white;
-      font-weight: 600;
-      padding: 14px 8px;
-      font-size: 14px;
-      text-align: center;
-      border: none;
-    }
-    .items-table td {
-      border-bottom: 1px solid #e2e8f0;
-      padding: 12px 8px;
-      text-align: center;
-      vertical-align: middle;
-      background-color: white;
-    }
-    .items-table input, .items-table select {
-      width: 100%;
-      padding: 8px 6px;
-      border-radius: 14px;
-      border: 1px solid #cbd5e1;
-      font-size: 13px;
-      text-align: center;
-      background: #fff;
-    }
-    .items-table select {
-      cursor: pointer;
-    }
-    .amount-cell {
-      font-weight: 600;
-      color: #1f5e3a;
-      background: #fef9e6;
-    }
-    .action-btn {
-      background: #fee2e2;
-      border: none;
-      padding: 6px 10px;
-      border-radius: 30px;
-      color: #b91c1c;
-      font-weight: bold;
-      cursor: pointer;
-      transition: 0.2s;
-    }
-    .action-btn:hover {
-      background: #fecaca;
-      transform: scale(1.02);
-    }
-    .add-row-btn {
-      background: #f0b429;
-      border: none;
-      padding: 10px 24px;
-      border-radius: 40px;
-      font-weight: 600;
-      color: #1e2a3e;
-      margin: 12px 0 20px;
-      cursor: pointer;
-      font-size: 14px;
-      transition: 0.2s;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    }
-    .add-row-btn:hover {
-      background: #e2a425;
-      transform: translateY(-2px);
-    }
-
-    /* totals panel */
-    .totals-panel {
-      background: #f8fafd;
-      border-radius: 24px;
-      padding: 18px 28px;
-      margin: 20px 0 24px;
-      display: flex;
-      justify-content: flex-end;
-      border: 1px solid #eef2f8;
-    }
-    .totals-details {
-      width: 320px;
-    }
-    .totals-details p {
-      display: flex;
-      justify-content: space-between;
-      font-size: 16px;
-      padding: 8px 0;
-      border-bottom: 1px dashed #dce5ec;
-    }
-    .totals-details .grand {
-      font-size: 22px;
-      font-weight: 800;
-      color: #b45309;
-      border-bottom: none;
-      margin-top: 8px;
-    }
-    .roundoff-info {
-      font-size: 13px;
-      color: #3b6e4b;
-      text-align: right;
-      margin-top: 4px;
-    }
-
-    /* bank & declaration */
-    .footer-info {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      margin-top: 32px;
-      gap: 24px;
-      padding-top: 16px;
-      border-top: 2px dashed #e2edf7;
-    }
-    .bank-details {
-      background: #fef9ef;
-      padding: 12px 20px;
-      border-radius: 24px;
-      font-size: 13px;
-      width: 48%;
-    }
-    .declaration {
-      font-size: 12px;
-      color: #2c5f2d;
-      background: #eef6ec;
-      padding: 12px 20px;
-      border-radius: 24px;
-      width: 48%;
-      font-style: italic;
-    }
-    .signature {
-      margin-top: 20px;
-      display: flex;
-      justify-content: space-between;
-      font-size: 13px;
-      font-weight: 500;
-      color: #2c3e50;
-    }
-
-    /* buttons */
-    .action-buttons {
-      display: flex;
-      justify-content: flex-end;
-      gap: 15px;
-      margin-top: 20px;
-    }
-    .btn-primary {
-      background: #1e2a3e;
-      border: none;
-      padding: 12px 24px;
-      border-radius: 40px;
-      color: white;
-      font-weight: 600;
-      cursor: pointer;
-      transition: 0.2s;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .btn-primary i {
-      font-size: 16px;
-    }
-    .btn-primary:hover {
-      background: #2c3f54;
-    }
-    .btn-outline {
-      background: white;
-      border: 1.5px solid #1e2a3e;
-      color: #1e2a3e;
-      padding: 12px 24px;
-      border-radius: 40px;
-      font-weight: 600;
-      cursor: pointer;
-    }
-
-    @media (max-width: 760px) {
-      .invoice-inner { padding: 18px; }
-      .footer-info { flex-direction: column; }
-      .bank-details, .declaration { width: 100%; }
-      .totals-panel { justify-content: center; }
-    }
-  </style>
+        /* totals panel */
+        .totals-panel {
+            background: #f8fafc;
+            border-radius: 24px;
+            padding: 20px 24px;
+            margin: 20px 0 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            border: 1px solid #e2edf7;
+        }
+        .totals-row {
+            display: flex;
+            justify-content: flex-end;
+            width: 100%;
+            gap: 32px;
+            flex-wrap: wrap;
+        }
+        .totals-calc {
+            min-width: 260px;
+        }
+        .totals-calc div {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            font-size: 15px;
+            border-bottom: 1px dashed #cbd5e1;
+        }
+        .grand-total {
+            font-weight: 800;
+            font-size: 20px;
+            color: #1e3a5f;
+            border-top: 2px solid #1e3a5f;
+            margin-top: 6px;
+            padding-top: 10px;
+        }
+        .amount-words {
+            background: #f1f5f9;
+            padding: 14px 20px;
+            border-radius: 20px;
+            font-size: 13px;
+            color: #2d3e50;
+            margin-top: 16px;
+            font-style: italic;
+        }
+        .bank-declare {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin: 24px 0 16px;
+            gap: 20px;
+            background: #ffffff;
+            border-top: 1px solid #e2e8f0;
+            padding-top: 20px;
+        }
+        .bank-details {
+            background: #f1f6fe;
+            border-radius: 20px;
+            padding: 12px 18px;
+            font-size: 12px;
+            width: 48%;
+        }
+        .declaration {
+            width: 48%;
+            font-size: 12px;
+            background: #fff9ef;
+            padding: 12px 18px;
+            border-radius: 20px;
+        }
+        .sign-section {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            border-top: 1px dashed #b9c7d9;
+            padding-top: 20px;
+        }
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: flex-end;
+            margin-top: 20px;
+        }
+        .print-pdf {
+            background: #2c6e2f;
+            color: white;
+            border: none;
+            padding: 10px 26px;
+            border-radius: 40px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .print-pdf:hover { background: #1f4f21; }
+        .download-btn {
+            background: #0f5b7a;
+        }
+        @media (max-width: 760px) {
+            .invoice-container { padding: 16px; }
+            .bank-details, .declaration { width: 100%; }
+            .totals-row { justify-content: center; }
+        }
+        .hsn-cell {
+            font-size: 12px;
+            font-weight: 500;
+        }
+    </style>
 </head>
 <body>
-<div class="invoice-wrapper" id="invoiceContainer">
-  <div class="invoice-inner" id="invoiceContent">
-    <!-- HEADER with Raj Marketing brand (as per xls) -->
-    <div class="brand-header">
-      <div class="logo-area">
-        <h1><i class="fas fa-shield-alt" style="color:#f0b429;"></i> RAJ MARKETING</h1>
-        <p>#65, Near Pragathi Logistics, Hootgalli Industrial Area, Mysore - 570017</p>
-        <p><i class="fas fa-phone-alt"></i> 9483037385 | <i class="fas fa-envelope"></i> rajmarketingmys@gmail.com</p>
-        <p><i class="fas fa-globe"></i> www.rajmarketingmysore.com</p>
-      </div>
-      <div class="gst-badge">
-        <span><i class="fas fa-certificate"></i> GSTIN: 29GKYPM6953C1ZA</span>
-        <span>State: Karnataka (Code 29)</span>
-      </div>
-    </div>
-    <div class="invoice-title">
-      <h2>TAX INVOICE</h2>
-    </div>
+<div class="invoice-wrapper" id="invoiceCapture">
+    <div class="invoice-container">
+        <!-- HEADER with brand and invoice title (Raj Marketing) -->
+        <div class="brand-header">
+            <div class="brand-left">
+                <h1>RAJ MARKETING</h1>
+                <p>#65 , Near Pragathi Logistics, Hootgalli Industrial Area, Mysore - 570017</p>
+                <p>📞 9483037385 | ✉ rajmarketingmys@gmail.com</p>
+                <span class="gst-badge">GSTIN : 29GKYPM6953C1ZA (Karnataka - Code 29)</span>
+            </div>
+            <div class="invoice-title-area">
+                <h2>TAX INVOICE</h2>
+                <div class="invoice-meta">
+                    <div>Invoice No: <strong id="invNoDisplay">0001/2025/26</strong></div>
+                    <div>Date: <span id="invoiceDate">05/04/2026</span></div>
+                </div>
+            </div>
+        </div>
 
-    <!-- customer & invoice details editable -->
-    <div class="info-grid">
-      <div class="customer-box">
-        <label>Customer Name</label>
-        <input type="text" id="customerName" placeholder="VISHNU VARDHANA. N" value="VISHNU VARDHANA. N">
-        <label>Mobile Number</label>
-        <input type="text" id="customerMobile" placeholder="8124840844" value="8124840844">
-        <label>Shipping Address</label>
-        <input type="text" id="customerAddress" placeholder="#929, 1st Floor, Srirampura, Mysore-580023" value="#929, 1st Floor, 6th Cross, 2nd Stage, Srirampura, Mysore-580023">
-        <label>GSTIN (if any)</label>
-        <input type="text" id="customerGst" placeholder="Not registered" value="-">
-      </div>
-      <div class="invoice-meta">
-        <label>Invoice No.</label>
-        <input type="text" id="invoiceNo" value="0001/2025/26">
-        <label>Invoice Date</label>
-        <input type="date" id="invoiceDate" value="2026-04-04">
-        <label>Place of Supply</label>
-        <input type="text" id="placeSupply" value="Mysore, Karnataka">
-        <div class="small-note">E. & O.E</div>
-      </div>
-    </div>
+        <!-- Customer & Invoice dynamic fields -->
+        <div class="info-row">
+            <div class="customer-box">
+                <div class="field-group">
+                    <label>Customer Name:</label>
+                    <input type="text" id="custName" placeholder="VISHNU VARDHANA. N" value="VISHNU VARDHANA. N">
+                </div>
+                <div class="field-group">
+                    <label>Mobile No:</label>
+                    <input type="text" id="custMobile" placeholder="8124840844" value="8124840844">
+                </div>
+                <div class="field-group">
+                    <label>Email ID:</label>
+                    <input type="email" id="custEmail" placeholder="customer@example.com" value="-">
+                </div>
+                <div class="field-group">
+                    <label>Shipping Address:</label>
+                    <textarea id="custAddress" rows="2">#929, 1st Floor, 6th Cross, 2nd Stage, Srirampura, Mysore-580023</textarea>
+                </div>
+                <div class="field-group">
+                    <label>GSTIN (Buyer):</label>
+                    <input type="text" id="buyerGst" placeholder="Not registered" value="-">
+                </div>
+            </div>
+            <div class="invoice-details-box">
+                <div class="inv-detail-item"><strong>Invoice No:</strong> <span id="invNoEdit">0001/2025/26</span></div>
+                <div class="inv-detail-item"><strong>Invoice Date:</strong> <span id="invDateEdit">05/04/2026</span></div>
+                <div class="inv-detail-item"><strong>Place of Supply:</strong> <span>Karnataka (29)</span></div>
+                <div class="inv-detail-item"><strong>Order Ref:</strong> <span>Estimate / Proforma</span></div>
+            </div>
+        </div>
 
-    <!-- Product Table with HSN as per sample and XLS reference (HSN codes for Fibreglass, SS, Aluminium) -->
-    <table class="items-table" id="itemsTable">
-      <thead>
-        <tr><th>SL No</th><th>Description of Goods/Services</th><th>HSN/SAC</th><th>Qty (Sqft)</th><th>Rate (₹/Sqft)</th><th>Amount (₹)</th><th>Action</th></tr>
-      </thead>
-      <tbody id="tableBody">
-        <tr data-rowid="0">
-          <td class="srNo">1</td>
-          <td><select class="productSelect" style="width:150px;">
-                <option value="Fiberglass Mesh">Fiberglass Mesh (Touflex)</option>
-                <option value="SS Bright 304 Mesh">SS Bright 304 Mesh</option>
-                <option value="SS Black Mesh">SS Black Mesh</option>
-                <option value="Aluminium Frame">Aluminium Frame</option>
-                <option value="Installation">Installation Charges</option>
-              </select></td>
-          <td class="hsnCell">7019</td>
-          <td><input type="number" class="qty" value="74" step="0.01" min="0"></td>
-          <td><input type="number" class="rate" value="40.55" step="0.01" min="0"></td>
-          <td class="amountCell">0.00</td>
-          <td><button class="action-btn removeBtn" type="button"><i class="fas fa-trash-alt"></i></button></td>
-        </tr>
-      </tbody>
-    </table>
-    <div style="text-align: left;">
-      <button class="add-row-btn" id="addRowBtn"><i class="fas fa-plus-circle"></i> Add Item</button>
-    </div>
+        <!-- Items Table with HSN / Qty / Rate -->
+        <table class="items-table" id="invoiceItemsTable">
+            <thead>
+                <tr><th>SL No</th><th>Description of Goods/Services</th><th>HSN/SAC</th><th>Qty (Sqft)</th><th>Rate (₹ / Sqft)</th><th>Disc.%</th><th>Amount (₹)</th><th>Action</th></tr>
+            </thead>
+            <tbody id="invoiceTableBody">
+                <!-- dynamic rows will be here -->
+            </tbody>
+        </table>
+        <button type="button" class="add-row-btn" id="addRowBtn">+ Add New Item</button>
 
-    <!-- Totals: Subtotal, CGST 9%, SGST 9%, Round off, Grand total -->
-    <div class="totals-panel">
-      <div class="totals-details">
-        <p><span>Sub Total :</span> <span id="subtotalVal">₹ 0.00</span></p>
-        <p><span>CGST (9%) :</span> <span id="cgstVal">₹ 0.00</span></p>
-        <p><span>SGST (9%) :</span> <span id="sgstVal">₹ 0.00</span></p>
-        <p><span>Round Off :</span> <span id="roundOffVal">₹ 0.00</span></p>
-        <p class="grand"><span>Grand Total :</span> <span id="grandTotalVal">₹ 0.00</span></p>
-        <div class="roundoff-info">*Amount rounded to nearest integer</div>
-      </div>
-    </div>
+        <!-- Totals and Tax Section -->
+        <div class="totals-panel">
+            <div class="totals-row">
+                <div class="totals-calc">
+                    <div><span>Sub Total :</span> <strong id="subTotalVal">0.00</strong></div>
+                    <div><span>CGST (9%) :</span> <strong id="cgstVal">0.00</strong></div>
+                    <div><span>SGST (9%) :</span> <strong id="sgstVal">0.00</strong></div>
+                    <div class="grand-total"><span>Grand Total (₹) :</span> <span id="grandTotalVal">0.00</span></div>
+                </div>
+            </div>
+            <div class="amount-words" id="amountInWords">Amount Chargeable (in words): Zero Rupees Only</div>
+        </div>
 
-    <!-- HSN wise tax summary (as per sample invoice design) -->
-    <div style="background:#f4f9fe; border-radius: 20px; padding: 14px 18px; margin: 12px 0 20px;">
-      <h4 style="font-size: 14px; margin-bottom: 8px;"><i class="fas fa-chart-line"></i> Tax Summary (HSN wise)</h4>
-      <table style="width:100%; font-size:13px; border-collapse:collapse;" id="taxSummaryTable">
-        <thead><tr style="background:#e2eaf1;"><th>HSN/SAC</th><th>Taxable Value (₹)</th><th>CGST (9%)</th><th>SGST (9%)</th><th>Total Tax</th></tr></thead>
-        <tbody id="taxSummaryBody"><tr><td colspan="5" style="text-align:center;">-- Add items to see tax breakup --</td></tr></tbody>
-      </table>
-      <div style="margin-top: 8px; font-size:12px; color:#2c5282;" id="taxWords">Tax Amount in Words : </div>
-    </div>
+        <!-- HSN/SAC Tax summary table (as per XLS format) -->
+        <table class="items-table" style="margin-top: 8px; background:#fff;">
+            <thead><tr><th>HSN/SAC</th><th>Taxable Value (₹)</th><th>Central Tax (9%)</th><th>State Tax (9%)</th><th>Total Tax Amount</th></tr></thead>
+            <tbody id="taxSummaryBody"><tr><td colspan="5" style="text-align:center;">— Add items to view tax summary —</td></tr></tbody>
+        </table>
 
-    <!-- Bank Details & Declaration from Raj Marketing XLS -->
-    <div class="footer-info">
-      <div class="bank-details">
-        <strong><i class="fas fa-university"></i> BANK ACCOUNT DETAILS</strong><br>
-        STATE BANK OF INDIA<br>
-        Account Name: Raj Marketing<br>
-        Account Number: 44812026859<br>
-        IFSC CODE: SBIN0040609<br>
-        Bank Branch: M BLOCK, NRUPATHUNGA ROAD, MYSURU - 570023
-      </div>
-      <div class="declaration">
-        <strong>Declaration:</strong> We declare that this invoice shows the actual price of the goods described and that all particulars are true and correct.
-      </div>
+        <!-- Bank & Declaration (Raj Marketing details) -->
+        <div class="bank-declare">
+            <div class="bank-details">
+                <strong>🏦 Bank Account Details :</strong><br>
+                STATE BANK OF INDIA<br>
+                Account Name: Raj Marketing<br>
+                Account Number: 44812026859<br>
+                IFSC CODE: SBIN0040609<br>
+                Branch: M BLOCK, NRUPATHUNGA ROAD, MYSURU - 570023
+            </div>
+            <div class="declaration">
+                <strong>📜 Declaration:</strong><br>
+                "We declare that this invoice shows the actual price of the goods described and that all particulars are true and correct."<br>
+                <span style="display:block; margin-top:8px;">For Raj Marketing</span>
+                <span style="font-weight:600;">Authorised Signatory</span>
+            </div>
+        </div>
+        <div class="sign-section">
+            <span>Customer's Signature: ____________________</span>
+            <span>This is a Computer Generated Invoice</span>
+        </div>
+        <div class="action-buttons">
+            <button class="print-pdf" id="printBtn">🖨️ Print Invoice</button>
+            <button class="print-pdf download-btn" id="downloadPdfBtn">📎 Download as PDF</button>
+        </div>
     </div>
-    <div class="signature">
-      <div>Customer's Signature</div>
-      <div>For Raj Marketing <br> Authorised Signatory</div>
-    </div>
-  </div>
-  <!-- Buttons outside printable area for better control -->
-  <div style="padding: 0 32px 32px 32px;">
-    <div class="action-buttons">
-      <button class="btn-outline" id="printBtn"><i class="fas fa-print"></i> Print Invoice</button>
-      <button class="btn-primary" id="downloadPdfBtn"><i class="fas fa-file-pdf"></i> Download PDF</button>
-    </div>
-  </div>
 </div>
 
 <script>
-  // helper: update all calculations + HSN mapping + tax summary + word conversion
-  function updateHSNByProduct(selectEl) {
-    const product = selectEl.value;
-    const hsnCell = selectEl.closest('tr').querySelector('.hsnCell');
-    if(product === "Aluminium Frame") hsnCell.innerText = "7610";
-    else if(product === "SS Bright 304 Mesh" || product === "SS Black Mesh") hsnCell.innerText = "7314";
-    else if(product === "Fiberglass Mesh") hsnCell.innerText = "7019";
-    else if(product === "Installation") hsnCell.innerText = "9985";
-    else hsnCell.innerText = "----";
-  }
-
-  // Recalculate full invoice: rows, subtotal, taxes, round off, grand total, tax summary & words
-  function recalcInvoice() {
-    const rows = document.querySelectorAll('#tableBody tr');
-    let subtotal = 0;
-    const hsnMap = new Map(); // Map HSN -> taxable value
-
-    rows.forEach((row, idx) => {
-      const qtyInput = row.querySelector('.qty');
-      const rateInput = row.querySelector('.rate');
-      const amountSpan = row.querySelector('.amountCell');
-      const selectProd = row.querySelector('.productSelect');
-      const hsnCode = row.querySelector('.hsnCell').innerText.trim();
-
-      let qty = parseFloat(qtyInput.value) || 0;
-      let rate = parseFloat(rateInput.value) || 0;
-      let amount = qty * rate;
-      amountSpan.innerText = amount.toFixed(2);
-      subtotal += amount;
-
-      // Accumulate by HSN code for summary
-      if (hsnCode && !isNaN(amount) && amount > 0) {
-        let prev = hsnMap.get(hsnCode) || 0;
-        hsnMap.set(hsnCode, prev + amount);
-      }
-      // update serial number
-      row.querySelector('.srNo').innerText = idx+1;
-    });
-
-    let cgst = subtotal * 0.09;
-    let sgst = subtotal * 0.09;
-    let totalBeforeRound = subtotal + cgst + sgst;
-    let roundedTotal = Math.round(totalBeforeRound);
-    let roundOff = roundedTotal - totalBeforeRound;
-
-    document.getElementById('subtotalVal').innerText = `₹ ${subtotal.toFixed(2)}`;
-    document.getElementById('cgstVal').innerText = `₹ ${cgst.toFixed(2)}`;
-    document.getElementById('sgstVal').innerText = `₹ ${sgst.toFixed(2)}`;
-    document.getElementById('roundOffVal').innerText = `₹ ${roundOff.toFixed(2)}`;
-    document.getElementById('grandTotalVal').innerText = `₹ ${roundedTotal.toFixed(2)}`;
-
-    // Build Tax Summary Table (HSN wise)
-    const taxBody = document.getElementById('taxSummaryBody');
-    taxBody.innerHTML = '';
-    if (hsnMap.size === 0) {
-      taxBody.innerHTML = '<tr><td colspan="5" style="text-align:center;">No taxable items</td></tr>';
-      document.getElementById('taxWords').innerHTML = 'Tax Amount in Words : NIL';
-      return;
-    }
-
-    let totalTaxableAll = 0;
-    let totalCgstSum = 0, totalSgstSum = 0;
-    for (let [hsn, taxableVal] of hsnMap.entries()) {
-      let taxCgst = taxableVal * 0.09;
-      let taxSgst = taxableVal * 0.09;
-      totalTaxableAll += taxableVal;
-      totalCgstSum += taxCgst;
-      totalSgstSum += taxSgst;
-      let rowHtml = `<tr style="border-bottom:1px solid #cbd5e1;">
-        <td style="padding:6px;">${hsn}</td>
-        <td style="padding:6px;">₹ ${taxableVal.toFixed(2)}</td>
-        <td style="padding:6px;">₹ ${taxCgst.toFixed(2)}</td>
-        <td style="padding:6px;">₹ ${taxSgst.toFixed(2)}</td>
-        <td style="padding:6px;">₹ ${(taxCgst+taxSgst).toFixed(2)}</td>
-      </tr>`;
-      taxBody.insertAdjacentHTML('beforeend', rowHtml);
-    }
-    // optional total row
-    let totalTaxAmount = totalCgstSum + totalSgstSum;
-    let totalRow = `<tr style="background:#e9ecef; font-weight:bold;"><td>Total</td><td>₹ ${totalTaxableAll.toFixed(2)}</td><td>₹ ${totalCgstSum.toFixed(2)}</td><td>₹ ${totalSgstSum.toFixed(2)}</td><td>₹ ${totalTaxAmount.toFixed(2)}</td></tr>`;
-    taxBody.insertAdjacentHTML('beforeend', totalRow);
-    
-    // Amount in words for tax (as per xls sample)
-    let taxWords = numberToWords(Math.round(totalTaxAmount)) + " Rupees Only";
-    if(totalTaxAmount % 1 !== 0) taxWords = numberToWords(Math.floor(totalTaxAmount)) + ` and ${Math.round((totalTaxAmount % 1)*100)} paise Only`;
-    document.getElementById('taxWords').innerHTML = `Tax Amount in Words : ${taxWords}`;
-  }
-
-  // Convert number to words for INR (simple version upto lakhs)
-  function numberToWords(num) {
-    if(num === 0) return "Zero";
-    const ones = ['','One','Two','Three','Four','Five','Six','Seven','Eight','Nine','Ten','Eleven','Twelve','Thirteen','Fourteen','Fifteen','Sixteen','Seventeen','Eighteen','Nineteen'];
-    const tens = ['','','Twenty','Thirty','Forty','Fifty','Sixty','Seventy','Eighty','Ninety'];
-    function convert(n) {
-      if(n < 20) return ones[n];
-      if(n < 100) return tens[Math.floor(n/10)] + (n%10 ? " " + ones[n%10] : "");
-      if(n < 1000) return ones[Math.floor(n/100)] + " Hundred" + (n%100 ? " " + convert(n%100) : "");
-      if(n < 100000) return convert(Math.floor(n/1000)) + " Thousand" + (n%1000 ? " " + convert(n%1000) : "");
-      return convert(Math.floor(n/100000)) + " Lakh" + (n%100000 ? " " + convert(n%100000) : "");
-    }
-    return convert(num);
-  }
-
-  // add new row (clone first row, reset values)
-  function addNewRow() {
-    const tbody = document.getElementById('tableBody');
-    const originalRow = tbody.querySelector('tr');
-    const newRow = originalRow.cloneNode(true);
-    // reset inputs
-    newRow.querySelector('.qty').value = "0";
-    newRow.querySelector('.rate').value = "0";
-    newRow.querySelector('.amountCell').innerText = "0.00";
-    const selectProd = newRow.querySelector('.productSelect');
-    selectProd.value = "Fiberglass Mesh";
-    // update HSN based on default product
-    const hsnSpan = newRow.querySelector('.hsnCell');
-    hsnSpan.innerText = "7019";
-    // attach event listeners
-    attachRowEvents(newRow);
-    tbody.appendChild(newRow);
-    updateSerialNumbers();
-    recalcInvoice();
-  }
-
-  function attachRowEvents(row) {
-    const prodSelect = row.querySelector('.productSelect');
-    const qtyInp = row.querySelector('.qty');
-    const rateInp = row.querySelector('.rate');
-    const removeBtn = row.querySelector('.removeBtn');
-    
-    prodSelect.addEventListener('change', function() {
-      updateHSNByProduct(prodSelect);
-      recalcInvoice();
-    });
-    qtyInp.addEventListener('input', recalcInvoice);
-    rateInp.addEventListener('input', recalcInvoice);
-    if(removeBtn) {
-      removeBtn.addEventListener('click', function(e) {
-        const rowsAll = document.querySelectorAll('#tableBody tr');
-        if(rowsAll.length > 1) {
-          row.remove();
-          updateSerialNumbers();
-          recalcInvoice();
-        } else {
-          alert("At least one product line required");
-        }
-      });
-    }
-  }
-
-  function updateSerialNumbers() {
-    const rows = document.querySelectorAll('#tableBody tr');
-    rows.forEach((row, idx) => {
-      row.querySelector('.srNo').innerText = idx+1;
-    });
-  }
-
-  // initialize event listeners for existing row
-  function initTableEvents() {
-    const existingRows = document.querySelectorAll('#tableBody tr');
-    existingRows.forEach(row => attachRowEvents(row));
-    // initial HSN mapping & calculation
-    document.querySelectorAll('.productSelect').forEach(sel => {
-      updateHSNByProduct(sel);
-    });
-    recalcInvoice();
-  }
-
-  // Print functionality (window.print optimized)
-  function printInvoice() {
-    const originalTitle = document.title;
-    document.title = "Raj Marketing Invoice";
-    window.print();
-    document.title = originalTitle;
-  }
-
-  // PDF download using html2pdf with high quality
-  function downloadInvoicePDF() {
-    const element = document.getElementById('invoiceContainer');
-    const opt = {
-      margin:        [0.5, 0.5, 0.5, 0.5],
-      filename:     `RajMarketing_Invoice_${document.getElementById('invoiceNo').value || '0001'}.pdf`,
-      image:        { type: 'jpeg', quality: 0.98 },
-      html2canvas:  { scale: 2, letterRendering: true },
-      jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' }
+    // ===================== Product & HSN Mapping (updated as per sample)
+    const productHSNMap = {
+        "Fiberglass Mesh (Touflex)": "70199090",
+        "SS Bright 304 Mesh": "7314",
+        "SS Black Mesh": "7314",
+        "Aluminium Frame": "7610",
+        "Installation Charges": "9985",
+        "Fiberglass Mesh": "70199010"
     };
-    html2pdf().set(opt).from(element).save();
-  }
+    // default product list with rates
+    let defaultProducts = [
+        { desc: "Fiberglass Mesh (Touflex)", hsn: "70199090", qty: 74, rate: 40.55, disc: 0 },
+        { desc: "Aluminium Frame", hsn: "7610", qty: 0, rate: 0, disc: 0 },
+        { desc: "SS Bright 304 Mesh", hsn: "7314", qty: 0, rate: 0, disc: 0 }
+    ];
 
-  // add row button event
-  document.getElementById('addRowBtn').addEventListener('click', addNewRow);
-  document.getElementById('printBtn').addEventListener('click', printInvoice);
-  document.getElementById('downloadPdfBtn').addEventListener('click', downloadInvoicePDF);
-  
-  // also recalc when customer details changed not needed for pricing, but triggers for any meta
-  const editableInputs = ['customerName','customerMobile','customerAddress','customerGst','invoiceNo','invoiceDate','placeSupply'];
-  editableInputs.forEach(id => {
-    const inp = document.getElementById(id);
-    if(inp) inp.addEventListener('change', () => { /* just ui change no price effect */ });
-  });
-  
-  initTableEvents();
-  // set default date if empty
-  if(!document.getElementById('invoiceDate').value) {
-    let today = new Date().toISOString().split('T')[0];
-    document.getElementById('invoiceDate').value = today;
-  }
+    // Helper: number to words (Indian Rupees) - simplified version
+    function numberToWords(amount) {
+        if (amount === 0) return "Zero Rupees Only";
+        let rupees = Math.floor(amount);
+        let paise = Math.round((amount - rupees) * 100);
+        let rupeesWord = convertToWords(rupees);
+        let result = rupeesWord + " Rupees";
+        if (paise > 0) result += " and " + convertToWords(paise) + " Paise";
+        return result + " Only";
+    }
+    function convertToWords(n) {
+        if (n === 0) return "Zero";
+        const ones = ["", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen"];
+        const tens = ["", "", "Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety"];
+        if (n < 20) return ones[n];
+        if (n < 100) return tens[Math.floor(n/10)] + (n%10 !== 0 ? " " + ones[n%10] : "");
+        if (n < 1000) return ones[Math.floor(n/100)] + " Hundred" + (n%100 !== 0 ? " " + convertToWords(n%100) : "");
+        if (n < 100000) return convertToWords(Math.floor(n/1000)) + " Thousand" + (n%1000 !== 0 ? " " + convertToWords(n%1000) : "");
+        return convertToWords(Math.floor(n/100000)) + " Lakh" + (n%100000 !== 0 ? " " + convertToWords(n%100000) : "");
+    }
+
+    function updateAllCalculations() {
+        let rows = document.querySelectorAll("#invoiceTableBody tr");
+        let subtotal = 0;
+        let taxBreak = {}; // aggregate taxable per HSN
+        rows.forEach(row => {
+            let descSelect = row.querySelector(".prod-select");
+            let hsnSpan = row.querySelector(".hsn-cell");
+            let qtyInput = row.querySelector(".qty-input");
+            let rateInput = row.querySelector(".rate-input");
+            let discInput = row.querySelector(".disc-input");
+            let amountSpan = row.querySelector(".item-amount");
+            let qty = parseFloat(qtyInput?.value) || 0;
+            let rate = parseFloat(rateInput?.value) || 0;
+            let discPer = parseFloat(discInput?.value) || 0;
+            let gross = qty * rate;
+            let discountVal = gross * (discPer / 100);
+            let netAmount = gross - discountVal;
+            amountSpan.innerText = netAmount.toFixed(2);
+            subtotal += netAmount;
+            let hsn = hsnSpan?.innerText || "70199090";
+            if (!taxBreak[hsn]) taxBreak[hsn] = 0;
+            taxBreak[hsn] += netAmount;
+        });
+        let cgst = subtotal * 0.09;
+        let sgst = subtotal * 0.09;
+        let total = subtotal + cgst + sgst;
+        document.getElementById("subTotalVal").innerText = subtotal.toFixed(2);
+        document.getElementById("cgstVal").innerText = cgst.toFixed(2);
+        document.getElementById("sgstVal").innerText = sgst.toFixed(2);
+        document.getElementById("grandTotalVal").innerText = total.toFixed(2);
+        let words = numberToWords(total);
+        document.getElementById("amountInWords").innerHTML = `Amount Chargeable (in words): ${words}`;
+
+        // build tax summary table
+        let taxSummaryBody = document.getElementById("taxSummaryBody");
+        taxSummaryBody.innerHTML = "";
+        if (Object.keys(taxBreak).length === 0) {
+            taxSummaryBody.innerHTML = '<tr><td colspan="5" style="text-align:center;">— No items —</td></tr>';
+        } else {
+            let totalTaxable = 0;
+            let totalCgstSum = 0;
+            let totalSgstSum = 0;
+            for (let [hsn, taxable] of Object.entries(taxBreak)) {
+                let cgstAmt = taxable * 0.09;
+                let sgstAmt = taxable * 0.09;
+                totalTaxable += taxable;
+                totalCgstSum += cgstAmt;
+                totalSgstSum += sgstAmt;
+                let row = `<tr>
+                    <td>${hsn}</td>
+                    <td>${taxable.toFixed(2)}</td>
+                    <td>9% (${cgstAmt.toFixed(2)})</td>
+                    <td>9% (${sgstAmt.toFixed(2)})</td>
+                    <td>${(cgstAmt+sgstAmt).toFixed(2)}</td>
+                </tr>`;
+                taxSummaryBody.insertAdjacentHTML("beforeend", row);
+            }
+            let totalRow = `<tr style="background:#f1f5f9; font-weight:bold;"><td>Total</td><td>${totalTaxable.toFixed(2)}</td><td>${totalCgstSum.toFixed(2)}</td><td>${totalSgstSum.toFixed(2)}</td><td>${(totalCgstSum+totalSgstSum).toFixed(2)}</td></tr>`;
+            taxSummaryBody.insertAdjacentHTML("beforeend", totalRow);
+        }
+    }
+
+    // create new row with product selection
+    function createProductRow(prodDesc = "Fiberglass Mesh (Touflex)", qtyVal = "", rateVal = "", discVal = "0") {
+        let slNo = document.querySelectorAll("#invoiceTableBody tr").length + 1;
+        let hsnValue = productHSNMap[prodDesc] || "70199090";
+        let row = document.createElement("tr");
+        row.innerHTML = `
+            <td class="slno-cell">${slNo}</td>
+            <td>
+                <select class="prod-select" style="width:160px;">
+                    ${Object.keys(productHSNMap).map(p => `<option value="${p}" ${p===prodDesc ? 'selected' : ''}>${p}</option>`).join('')}
+                </select>
+            </td>
+            <td><span class="hsn-cell">${hsnValue}</span></td>
+            <td><input type="number" class="qty-input" step="any" value="${qtyVal}" style="width:80px;"></td>
+            <td><input type="number" class="rate-input" step="any" value="${rateVal}" style="width:100px;"></td>
+            <td><input type="number" class="disc-input" step="any" value="${discVal}" style="width:70px;" placeholder="0%"></td>
+            <td class="item-amount">0.00</td>
+            <td><button type="button" class="action-btn remove-row">✖ Remove</button></td>
+        `;
+        let selectElem = row.querySelector(".prod-select");
+        let hsnSpan = row.querySelector(".hsn-cell");
+        selectElem.addEventListener("change", function(e) {
+            let selectedProd = e.target.value;
+            let newHsn = productHSNMap[selectedProd] || "70199090";
+            hsnSpan.innerText = newHsn;
+            updateAllCalculations();
+        });
+        let inputs = row.querySelectorAll("input");
+        inputs.forEach(inp => inp.addEventListener("input", () => updateAllCalculations()));
+        row.querySelector(".remove-row").addEventListener("click", function() {
+            row.remove();
+            reorderSlNo();
+            updateAllCalculations();
+        });
+        return row;
+    }
+
+    function reorderSlNo() {
+        let rows = document.querySelectorAll("#invoiceTableBody tr");
+        rows.forEach((row, idx) => {
+            let slTd = row.querySelector(".slno-cell");
+            if (slTd) slTd.innerText = idx+1;
+        });
+    }
+
+    function loadSampleRows() {
+        let tbody = document.getElementById("invoiceTableBody");
+        tbody.innerHTML = "";
+        // add two rows from xls reference (fiberglass mesh and optional)
+        let row1 = createProductRow("Fiberglass Mesh (Touflex)", "74", "40.55", "0");
+        let row2 = createProductRow("Aluminium Frame", "", "", "0");
+        tbody.appendChild(row1);
+        tbody.appendChild(row2);
+        updateAllCalculations();
+    }
+
+    document.getElementById("addRowBtn").addEventListener("click", () => {
+        let tbody = document.getElementById("invoiceTableBody");
+        let newRow = createProductRow("Fiberglass Mesh (Touflex)", "", "", "0");
+        tbody.appendChild(newRow);
+        reorderSlNo();
+        updateAllCalculations();
+    });
+
+    // update inv number and date display
+    function setInvoiceMeta() {
+        let today = new Date();
+        let dateStr = today.toLocaleDateString('en-IN');
+        document.getElementById("invoiceDate").innerText = dateStr;
+        document.getElementById("invDateEdit").innerText = dateStr;
+        let invNoElem = document.getElementById("invNoDisplay");
+        let invNoEdit = document.getElementById("invNoEdit");
+        // you can also make editable, but keep fixed style
+    }
+    setInvoiceMeta();
+
+    // live recalculation when customer details edit? Not required for totals but fine.
+    // Attach listeners for fields that might change amount? not needed but call update after any product modification.
+    // Also update grand total if discount or rate or qty changes
+    document.addEventListener("input", function(e) {
+        if(e.target.classList && (e.target.classList.contains("qty-input") || e.target.classList.contains("rate-input") || e.target.classList.contains("disc-input"))) {
+            updateAllCalculations();
+        }
+    });
+
+    // print friendly and PDF
+    function exportToPDF() {
+        const element = document.getElementById("invoiceCapture");
+        const opt = {
+            margin:        [0.5, 0.5, 0.5, 0.5],
+            filename:     `RajMarketing_Invoice_${document.getElementById("invNoEdit").innerText}.pdf`,
+            image:        { type: 'jpeg', quality: 0.98 },
+            html2canvas:  { scale: 2, letterRendering: true },
+            jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' }
+        };
+        html2pdf().set(opt).from(element).save();
+    }
+
+    document.getElementById("printBtn").addEventListener("click", () => {
+        window.print();
+    });
+    document.getElementById("downloadPdfBtn").addEventListener("click", exportToPDF);
+    
+    // Initialize rows and re-calc
+    loadSampleRows();
+
+    // extra polish for discount changes and hsn mapping
+    window.updateAllCalculations = updateAllCalculations;
 </script>
 </body>
 </html>
+```
