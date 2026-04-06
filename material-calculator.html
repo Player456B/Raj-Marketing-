@@ -2,1326 +2,584 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Material Calculator · Raj Marketing</title>
-    
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    
-    <!-- Animate.css -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-    
-    <!-- Chart.js -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
-    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Raj Marketing Mysore | Pro Estimator + Material Inventory</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
         }
 
         body {
-            background-color: #1a2c2d;
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            min-height: 100vh;
-            padding: 10px 0;
+            background: linear-gradient(135deg, #e2e9f0 0%, #cfdbe8 100%);
+            padding: 32px 24px;
         }
 
-        .app-container {
-            max-width: 450px;
-            width: 100%;
-            background: linear-gradient(145deg, #f5faf8 0%, #e8f0ed 100%);
-            border-radius: 36px 36px 0 0;
-            margin: 8px 0 0 0;
+        .estimator-container {
+            max-width: 1600px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 48px;
+            box-shadow: 0 30px 50px -20px rgba(0, 0, 0, 0.3);
             overflow: hidden;
-            position: relative;
-            padding-bottom: 70px;
+            backdrop-filter: blur(0px);
+            transition: all 0.2s;
         }
 
-        /* Header */
-        .page-header {
-            height: 60px;
-            background: white;
-            display: flex;
-            align-items: center;
-            padding: 0 20px;
-            gap: 15px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        .back-btn {
-            width: 40px;
-            height: 40px;
-            background: #f0f5f3;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #1e4b8b;
-            text-decoration: none;
-            font-size: 1.2rem;
-            transition: 0.3s;
-        }
-
-        .back-btn:hover {
-            background: #1e4b8b;
+        .pro-header {
+            background: linear-gradient(98deg, #0a2b3e 0%, #1c4e6e 100%);
+            padding: 28px 36px;
             color: white;
+            border-bottom: 5px solid #f5b042;
         }
 
-        .page-header h1 {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: #1e4b8b;
-        }
-
-        .page-header h1 i {
-            color: #e6b422;
-            margin-right: 8px;
-        }
-
-        .calculator-badge {
-            margin-left: auto;
-            background: #e6b422;
-            color: #1e4b8b;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.65rem;
-            font-weight: 700;
-        }
-
-        /* Main Content */
-        .main-content {
-            padding: 20px 16px;
-        }
-
-        /* Input Card */
-        .input-card {
-            background: white;
-            border-radius: 25px;
-            padding: 25px;
-            margin-bottom: 20px;
-            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
-            border: 2px solid #f0f0f0;
-        }
-
-        .card-title {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 2px solid #e6b422;
-        }
-
-        .card-title i {
-            font-size: 1.8rem;
-            color: #e6b422;
-        }
-
-        .card-title h2 {
-            color: #1e4b8b;
-            font-size: 1.2rem;
-            font-weight: 700;
-        }
-
-        .card-title .unit-badge {
-            margin-left: auto;
-            background: #1e4b8b;
-            color: white;
-            padding: 5px 15px;
-            border-radius: 30px;
-            font-size: 0.7rem;
-        }
-
-        /* Measurement Inputs */
-        .measurement-row {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-
-        .measurement-col {
-            flex: 1;
-        }
-
-        .measurement-label {
-            display: block;
-            margin-bottom: 8px;
-            color: #1e4b8b;
-            font-weight: 600;
-            font-size: 0.85rem;
-        }
-
-        .measurement-label i {
-            color: #e6b422;
-            margin-right: 5px;
-        }
-
-        .measurement-input {
-            position: relative;
-        }
-
-        .measurement-input input {
-            width: 100%;
-            padding: 15px 15px 15px 40px;
-            border: 2px solid #e9ecef;
-            border-radius: 15px;
-            font-size: 1rem;
-            font-weight: 600;
-            color: #1e4b8b;
-        }
-
-        .measurement-input i {
-            position: absolute;
-            left: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #e6b422;
-        }
-
-        .measurement-unit {
-            position: absolute;
-            right: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #6c757d;
-            font-size: 0.8rem;
-        }
-
-        .fraction-hint {
-            font-size: 0.65rem;
-            color: #6c757d;
-            margin-top: 5px;
-            text-align: right;
-        }
-
-        .fraction-hint i {
-            color: #28a745;
-        }
-
-        /* Quick Fractions */
-        .quick-fractions {
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-            margin: 15px 0;
-        }
-
-        .fraction-btn {
-            padding: 8px 15px;
-            background: #f8f9fa;
-            border: 2px solid #e9ecef;
-            border-radius: 25px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            color: #1e4b8b;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        .fraction-btn:hover {
-            background: #e6b422;
-            border-color: #e6b422;
-        }
-
-        /* Toggle Switch */
-        .toggle-container {
-            background: #f8f9fa;
-            border-radius: 20px;
-            padding: 15px;
-            margin: 20px 0;
-        }
-
-        .toggle-label {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 10px;
-        }
-
-        .toggle-label i {
-            color: #e6b422;
-        }
-
-        .toggle-label span {
-            color: #1e4b8b;
-            font-weight: 600;
-        }
-
-        .toggle-options {
-            display: flex;
-            gap: 15px;
-        }
-
-        .toggle-option {
-            flex: 1;
-            text-align: center;
-            padding: 12px;
-            background: white;
-            border: 2px solid #e9ecef;
-            border-radius: 15px;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        .toggle-option.active {
-            border-color: #e6b422;
-            background: #fff9e6;
-        }
-
-        .toggle-option i {
-            font-size: 1.3rem;
-            color: #1e4b8b;
-            margin-bottom: 5px;
-        }
-
-        .toggle-option span {
-            display: block;
-            font-weight: 600;
-            color: #1e4b8b;
-        }
-
-        .toggle-option small {
-            color: #6c757d;
-            font-size: 0.65rem;
-        }
-
-        /* Results Grid */
-        .results-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-            margin: 20px 0;
-        }
-
-        .result-card {
-            background: white;
-            border-radius: 20px;
-            padding: 18px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
-            border: 2px solid #f0f0f0;
-            transition: 0.3s;
-        }
-
-        .result-card:hover {
-            transform: translateY(-3px);
-            border-color: #e6b422;
-        }
-
-        .result-header {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-bottom: 12px;
-        }
-
-        .result-header i {
-            font-size: 1.2rem;
-            color: #e6b422;
-        }
-
-        .result-header h3 {
-            color: #1e4b8b;
-            font-size: 0.9rem;
-            font-weight: 600;
-        }
-
-        .result-value {
-            font-size: 1.5rem;
+        .pro-header h1 {
+            font-size: 2.1rem;
+            letter-spacing: -0.5px;
             font-weight: 800;
-            color: #1e4b8b;
-            margin-bottom: 5px;
-        }
-
-        .result-detail {
-            color: #6c757d;
-            font-size: 0.7rem;
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .result-detail span {
-            font-weight: 600;
-            color: #e6b422;
-        }
-
-        /* Calculation Table */
-        .calc-table {
-            background: white;
-            border-radius: 20px;
-            padding: 20px;
-            margin: 20px 0;
-            border: 2px solid #f0f0f0;
-        }
-
-        .calc-title {
             display: flex;
             align-items: center;
-            gap: 10px;
-            margin-bottom: 15px;
+            gap: 16px;
+            flex-wrap: wrap;
         }
 
-        .calc-title i {
-            color: #e6b422;
+        .pro-header h1 small {
+            font-size: 0.8rem;
+            font-weight: 500;
+            background: #f5b04230;
+            padding: 6px 16px;
+            border-radius: 60px;
+            color: #ffe2b5;
         }
 
-        .calc-title h3 {
-            color: #1e4b8b;
-            font-size: 1rem;
-        }
-
-        .calculation-row {
+        .dashboard-grid {
             display: flex;
-            justify-content: space-between;
-            padding: 10px 0;
-            border-bottom: 1px dashed #f0f0f0;
+            flex-wrap: wrap;
+            gap: 28px;
+            padding: 36px;
         }
 
-        .calculation-row:last-child {
-            border-bottom: none;
+        .input-panel {
+            flex: 1.3;
+            min-width: 340px;
+            background: #ffffff;
+            border-radius: 32px;
+            padding: 24px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
+            border: 1px solid #eef2fa;
         }
 
-        .calc-label {
-            color: #6c757d;
-            font-size: 0.85rem;
+        .preview-panel {
+            flex: 2.2;
+            min-width: 500px;
+            background: #fefcf5;
+            border-radius: 32px;
+            padding: 24px;
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.06);
+            border: 1px solid #edece2;
         }
 
-        .calc-value {
-            font-weight: 700;
-            color: #1e4b8b;
+        .customer-section {
+            background: #f9fbfe;
+            border-radius: 28px;
+            padding: 20px 24px;
+            margin-bottom: 28px;
+            border: 1px solid #e6edf6;
         }
 
-        .calc-note {
-            color: #e6b422;
+        .form-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-top: 12px;
+        }
+
+        .input-group {
+            flex: 1;
+            min-width: 150px;
+        }
+
+        .input-group label {
             font-size: 0.7rem;
-            margin-top: 5px;
+            text-transform: uppercase;
+            font-weight: 800;
+            color: #2c5a74;
+            letter-spacing: 0.6px;
+            display: block;
+            margin-bottom: 6px;
         }
 
-        /* Material Table */
-        .material-table {
+        .input-group input, .input-group select {
+            width: 100%;
+            padding: 12px 16px;
+            border-radius: 24px;
+            border: 1.5px solid #e2eaf1;
+            background: white;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .input-group input:focus, .input-group select:focus {
+            outline: none;
+            border-color: #f5b042;
+            box-shadow: 0 0 0 4px #f5b04230;
+        }
+
+        .table-wrapper {
+            overflow-x: auto;
+            margin: 24px 0 20px;
+            border-radius: 24px;
+            border: 1px solid #ecf3f9;
+            background: white;
+        }
+
+        .modern-table {
             width: 100%;
             border-collapse: collapse;
-            margin: 15px 0;
-        }
-
-        .material-table th {
-            background: #1e4b8b;
-            color: white;
-            padding: 12px;
-            font-size: 0.75rem;
-            text-align: left;
-        }
-
-        .material-table td {
-            padding: 12px;
-            border-bottom: 1px solid #f0f0f0;
-            color: #6c757d;
             font-size: 0.8rem;
         }
 
-        .material-table tr:last-child td {
-            border-bottom: none;
-        }
-
-        .material-table .highlight td {
-            background: #fff9e6;
+        .modern-table th {
+            background: #f1f6fd;
+            padding: 14px 8px;
             font-weight: 700;
+            color: #1a3a4e;
+            text-align: center;
         }
 
-        /* Price Breakdown */
-        .price-breakdown {
-            background: linear-gradient(135deg, #1e4b8b, #2a6bb3);
-            border-radius: 20px;
-            padding: 25px;
-            margin: 20px 0;
-            color: white;
+        .modern-table td {
+            padding: 12px 6px;
+            text-align: center;
+            border-bottom: 1px solid #eef2f8;
         }
 
-        .price-row {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 12px;
-            padding-bottom: 8px;
-            border-bottom: 1px dashed rgba(255,255,255,0.2);
+        .modern-table input, .modern-table select {
+            width: 100%;
+            padding: 8px 8px;
+            border-radius: 32px;
+            border: 1px solid #d0dde8;
+            text-align: center;
+            font-size: 0.8rem;
         }
 
-        .price-row.total {
-            border-bottom: none;
-            margin-top: 15px;
-            padding-top: 15px;
-            border-top: 2px solid #e6b422;
-            font-size: 1.2rem;
-        }
-
-        .price-row.total .price-amount {
-            color: #e6b422;
-            font-size: 1.5rem;
-            font-weight: 800;
-        }
-
-        /* Action Buttons */
         .action-buttons {
             display: flex;
-            gap: 15px;
-            margin: 25px 0;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin: 18px 0 12px;
         }
 
-        .calculate-btn {
-            flex: 2;
-            background: linear-gradient(135deg, #e6b422, #f5c542);
+        .btn {
             border: none;
-            padding: 18px;
-            border-radius: 40px;
-            font-weight: 800;
-            font-size: 1.1rem;
-            color: #1e4b8b;
+            padding: 12px 24px;
+            border-radius: 44px;
+            font-weight: 700;
             cursor: pointer;
-            transition: 0.3s;
-            display: flex;
+            transition: 0.2s;
+            background: #eef2f9;
+            color: #1f3b4c;
+            display: inline-flex;
             align-items: center;
-            justify-content: center;
-            gap: 10px;
+            gap: 8px;
+            font-size: 0.85rem;
         }
 
-        .calculate-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 30px rgba(230,180,34,0.4);
-        }
-
-        .reset-btn {
-            flex: 1;
-            background: white;
-            border: 2px solid #1e4b8b;
-            padding: 18px;
-            border-radius: 40px;
-            font-weight: 700;
-            color: #1e4b8b;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        .reset-btn:hover {
-            background: #1e4b8b;
+        .btn-primary {
+            background: #0a2b3e;
             color: white;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
         }
 
-        /* Summary Card */
-        .summary-card {
-            background: white;
-            border-radius: 25px;
-            padding: 25px;
-            margin: 20px 0;
-            border: 3px solid #e6b422;
-            position: relative;
-            overflow: hidden;
+        .btn-primary:hover {
+            background: #f5b042;
+            color: #0a2b3e;
+            transform: translateY(-2px);
         }
 
-        .summary-card::before {
-            content: '';
-            position: absolute;
-            top: -50px;
-            right: -50px;
-            width: 150px;
-            height: 150px;
-            background: rgba(230,180,34,0.1);
-            border-radius: 50%;
-        }
-
-        .summary-title {
+        .remove-row-btn {
+            background: none;
+            border: none;
             font-size: 1.3rem;
-            font-weight: 800;
-            color: #1e4b8b;
-            margin-bottom: 15px;
+            cursor: pointer;
+            color: #c7362b;
+            font-weight: bold;
         }
 
-        .summary-item {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 12px;
-            padding: 8px 0;
-            border-bottom: 1px dashed #f0f0f0;
+        .price-config {
+            background: #fef8eb;
+            border-radius: 24px;
+            padding: 16px;
+            margin-top: 20px;
+            border: 1px solid #faeecf;
         }
 
-        .summary-item:last-child {
-            border-bottom: none;
-        }
-
-        .summary-label {
-            color: #6c757d;
-        }
-
-        .summary-value {
-            font-weight: 700;
-            color: #1e4b8b;
-        }
-
-        .summary-total {
-            font-size: 1.3rem;
-            font-weight: 800;
-            color: #e6b422;
-            margin-top: 15px;
-            text-align: right;
-        }
-
-        /* Chart Container */
-        .chart-container {
+        .estimate-card {
             background: white;
-            border-radius: 20px;
+            border-radius: 28px;
             padding: 20px;
-            margin: 20px 0;
-            height: 200px;
+            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.02);
+            border: 1px solid #f0ede3;
         }
 
-        /* Bottom Navigation */
-        .bottom-nav {
-            position: fixed;
-            bottom: 0;
-            max-width: 450px;
-            width: 100%;
-            background: white;
-            display: flex;
-            justify-content: space-around;
-            padding: 12px 10px 20px;
-            border-top: 3px solid #e6b422;
-            border-radius: 30px 30px 0 0;
-            z-index: 100;
+        .material-card {
+            background: #f0f6fa;
+            border-radius: 24px;
+            padding: 18px;
+            margin: 18px 0;
+            border-left: 6px solid #f5b042;
         }
 
-        .nav-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            color: #6c757d;
+        .badge {
+            background: #eef2f0;
+            border-radius: 40px;
+            padding: 5px 14px;
             font-size: 0.7rem;
-            cursor: pointer;
+            font-weight: 700;
         }
 
-        .nav-item.active {
-            color: #1e4b8b;
+        .grand-total {
+            font-size: 1.9rem;
+            font-weight: 800;
+            color: #1a5f3a;
         }
 
-        .nav-item i {
-            font-size: 1.4rem;
-            margin-bottom: 3px;
+        .print-area {
+            background: white;
         }
 
-        /* Toast */
-        #toastMessage {
-            position: fixed;
-            bottom: 180px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: #1e4b8b;
-            color: white;
-            padding: 15px 30px;
-            border-radius: 50px;
-            z-index: 5000;
-            opacity: 0;
-            transition: opacity 0.3s;
-            pointer-events: none;
-        }
-
-        /* Tooltip */
-        .tooltip {
-            position: relative;
-            display: inline-block;
-        }
-
-        .tooltip .tooltip-text {
-            visibility: hidden;
-            width: 200px;
-            background: #1e4b8b;
-            color: white;
-            text-align: center;
-            padding: 8px;
-            border-radius: 10px;
-            position: absolute;
-            z-index: 1;
-            bottom: 125%;
-            left: 50%;
-            margin-left: -100px;
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-
-        .tooltip:hover .tooltip-text {
-            visibility: visible;
-            opacity: 1;
-        }
-
-        /* Responsive */
-        @media (max-width: 450px) {
-            .results-grid {
-                grid-template-columns: 1fr;
+        @media print {
+            body {
+                background: white;
+                padding: 0;
             }
-            
-            .action-buttons {
-                flex-direction: column;
+            .input-panel, .action-buttons, .price-config, .remove-row-btn, .btn, .print-hide {
+                display: none !important;
+            }
+            .preview-panel {
+                width: 100%;
+                min-width: 100%;
+                box-shadow: none;
+                padding: 0;
+                background: white;
+            }
+            .estimator-container {
+                box-shadow: none;
+            }
+            .estimate-card {
+                border: none;
             }
         }
     </style>
 </head>
 <body>
-    <div class="app-container">
-        <!-- Header -->
-        <div class="page-header">
-            <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i></a>
-            <h1><i class="fas fa-calculator"></i> Material Calculator</h1>
-            <span class="calculator-badge">v2.0</span>
-        </div>
+<div class="estimator-container">
+    <div class="pro-header">
+        <h1>🪟 RAJ MARKETING MYSORE <small>Precision Net + Aluminium Estimator</small></h1>
+        <p>Smart material inventory | Mesh roll optimizer | Accessories tracker | Pro invoice ready</p>
+    </div>
 
-        <!-- Main Content -->
-        <div class="main-content">
-            <!-- Input Card -->
-            <div class="input-card animate__animated animate__fadeIn">
-                <div class="card-title">
-                    <i class="fas fa-ruler-combined"></i>
-                    <h2>Window Measurements</h2>
-                    <span class="unit-badge">Inches</span>
+    <div class="dashboard-grid">
+        <!-- LEFT PANEL: Inputs -->
+        <div class="input-panel">
+            <div class="customer-section">
+                <h3>👤 Customer & Project</h3>
+                <div class="form-row">
+                    <div class="input-group"><label>Full Name *</label><input type="text" id="customerName" placeholder="e.g. Vikram S"></div>
+                    <div class="input-group"><label>Phone / Email</label><input type="text" id="customerContact" placeholder="+91 9988776655"></div>
                 </div>
-
-                <!-- Measurement Inputs -->
-                <div class="measurement-row">
-                    <div class="measurement-col">
-                        <label class="measurement-label"><i class="fas fa-arrows-left-right"></i> Width</label>
-                        <div class="measurement-input">
-                            <i class="fas fa-arrows-h"></i>
-                            <input type="number" id="width" value="20.25" step="0.125" min="0" onchange="updateFractions('width')">
-                            <span class="measurement-unit">in</span>
-                        </div>
-                        <div class="fraction-hint">
-                            <i class="fas fa-info-circle"></i> 20¼" = 20.25"
-                        </div>
-                    </div>
-                    <div class="measurement-col">
-                        <label class="measurement-label"><i class="fas fa-arrows-up-down"></i> Height</label>
-                        <div class="measurement-input">
-                            <i class="fas fa-arrows-v"></i>
-                            <input type="number" id="height" value="52.5" step="0.125" min="0" onchange="updateFractions('height')">
-                            <span class="measurement-unit">in</span>
-                        </div>
-                        <div class="fraction-hint">
-                            <i class="fas fa-info-circle"></i> 52½" = 52.5"
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Quick Fractions -->
-                <div class="quick-fractions">
-                    <span class="fraction-btn" onclick="setFraction('width', 0.25)">¼"</span>
-                    <span class="fraction-btn" onclick="setFraction('width', 0.5)">½"</span>
-                    <span class="fraction-btn" onclick="setFraction('width', 0.75)">¾"</span>
-                    <span class="fraction-btn" onclick="setFraction('height', 0.25)">H+¼"</span>
-                    <span class="fraction-btn" onclick="setFraction('height', 0.5)">H+½"</span>
-                    <span class="fraction-btn" onclick="setFraction('height', 0.75)">H+¾"</span>
-                </div>
-
-                <!-- Mesh Color Selection -->
-                <div class="toggle-container">
-                    <div class="toggle-label">
-                        <i class="fas fa-palette"></i>
-                        <span>Select Mesh Color</span>
-                    </div>
-                    <div class="toggle-options">
-                        <div class="toggle-option active" onclick="selectMeshColor('black')" id="meshBlack">
-                            <i class="fas fa-circle" style="color: #000;"></i>
-                            <span>Black Mesh</span>
-                            <small>₹26/sqft</small>
-                        </div>
-                        <div class="toggle-option" onclick="selectMeshColor('white')" id="meshWhite">
-                          <i class="fas fa-circle" style="color: #f8f9fa; text-shadow: 0 0 1px #000;"></i>
-                            <span>White Mesh</span>
-                            <small>₹36/sqft</small>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Roll Size Indicator -->
-                <div class="toggle-container" style="background: #e7f3ff;">
-                    <div class="toggle-label">
-                        <i class="fas fa-roll-forward"></i>
-                        <span>Roll Size Required</span>
-                    </div>
-                    <div id="rollSize" style="font-size: 1.2rem; font-weight: 700; color: #1e4b8b; text-align: center; padding: 10px;">
-                        Select 3 Feet Roll
-                    </div>
+                <div class="form-row">
+                    <div class="input-group"><label>Address / Site</label><input type="text" id="customerAddress" placeholder="Location / Project"></div>
+                    <div class="input-group"><label>Estimate Date</label><input type="date" id="estimateDate"></div>
                 </div>
             </div>
 
-            <!-- Results Grid -->
-            <div class="results-grid" id="resultsGrid">
-                <!-- Aluminium Length -->
-                <div class="result-card">
-                    <div class="result-header">
-                        <i class="fas fa-ruler"></i>
-                        <h3>Aluminium Length</h3>
-                    </div>
-                    <div class="result-value" id="aluminiumLength">1.23</div>
-                    <div class="result-detail">
-                        <span>12 ft lengths</span>
-                        <span id="aluminiumCost">₹283</span>
-                    </div>
+            <!-- material price override panel -->
+            <div class="price-config">
+                <h4>⚙️ Price Override (₹)</h4>
+                <div class="form-row">
+                    <div class="input-group"><label>Alu Type-1 (12ft)</label><input type="number" id="aluType1Price" value="260"></div>
+                    <div class="input-group"><label>Alu Type-2 (12ft)</label><input type="number" id="aluType2Price" value="230"></div>
                 </div>
-
-                <!-- 90° Corners -->
-                <div class="result-card">
-                    <div class="result-header">
-                        <i class="fas fa-cube"></i>
-                        <h3>90° Corners</h3>
-                    </div>
-                    <div class="result-value" id="corners">4</div>
-                    <div class="result-detail">
-                        <span>₹6/piece</span>
-                        <span id="cornersCost">₹24</span>
-                    </div>
+                <div class="form-row">
+                    <div class="input-group"><label>Fiberglass Reg (sqft)</label><input type="number" id="meshFiberReg" value="9"></div>
+                    <div class="input-group"><label>Fiberglass SG (sqft)</label><input type="number" id="meshFiberSG" value="18"></div>
                 </div>
-
-                <!-- Stopper Locks -->
-                <div class="result-card">
-                    <div class="result-header">
-                        <i class="fas fa-lock"></i>
-                        <h3>Stopper Locks</h3>
-                    </div>
-                    <div class="result-value" id="stoppers">3</div>
-                    <div class="result-detail">
-                        <span>₹4/piece</span>
-                        <span id="stoppersCost">₹12</span>
-                    </div>
+                <div class="form-row">
+                    <div class="input-group"><label>SS Black 304 (sqft)</label><input type="number" id="meshSSBlack" value="28"></div>
+                    <div class="input-group"><label>SS Bright 304 (sqft)</label><input type="number" id="meshSSBright" value="32"></div>
                 </div>
-
-                <!-- Injex -->
-                <div class="result-card">
-                    <div class="result-header">
-                        <i class="fas fa-bolt"></i>
-                        <h3>Injex</h3>
-                    </div>
-                    <div class="result-value" id="injex">3</div>
-                    <div class="result-detail">
-                        <span>₹6/piece</span>
-                        <span id="injexCost">₹18</span>
-                    </div>
-                </div>
-
-                <!-- Middle Clips -->
-                <div class="result-card">
-                    <div class="result-header">
-                        <i class="fas fa-paperclip"></i>
-                        <h3>Middle Clips</h3>
-                    </div>
-                    <div class="result-value" id="clips">4</div>
-                    <div class="result-detail">
-                        <span>₹3/piece</span>
-                        <span id="clipsCost">₹12</span>
-                    </div>
-                </div>
-
-                <!-- Rubber -->
-                <div class="result-card">
-                    <div class="result-header">
-                        <i class="fas fa-ring"></i>
-                        <h3>Rubber</h3>
-                    </div>
-                    <div class="result-value" id="rubber">22.5</div>
-                    <div class="result-detail">
-                        <span>₹6/sqft</span>
-                        <span id="rubberCost">₹135</span>
-                    </div>
-                </div>
-
-                <!-- SS Mesh -->
-                <div class="result-card">
-                    <div class="result-header">
-                        <i class="fas fa-network-wired"></i>
-                        <h3>SS Mesh</h3>
-                    </div>
-                    <div class="result-value" id="mesh">7.38</div>
-                    <div class="result-detail">
-                        <span id="meshRate">₹26/sqft</span>
-                        <span id="meshCost">₹192</span>
-                    </div>
-                </div>
-
-                <!-- Total Cost -->
-                <div class="result-card" style="background: linear-gradient(135deg, #1e4b8b, #2a6bb3);">
-                    <div class="result-header">
-                        <i class="fas fa-rupee-sign" style="color: #e6b422;"></i>
-                        <h3 style="color: white;">Total Cost</h3>
-                    </div>
-                    <div class="result-value" style="color: #e6b422;" id="totalCost">₹676</div>
-                    <div class="result-detail" style="color: rgba(255,255,255,0.8);">
-                        <span>Material Only</span>
-                        <span>+18% GST</span>
-                    </div>
-                </div>
+                <div class="input-group"><label>Accessories Multiplier (%)</label><input type="number" id="accessoryMultiplier" value="100"></div>
             </div>
 
-            <!-- Calculation Details -->
-            <div class="calc-table">
-                <div class="calc-title">
-                    <i class="fas fa-calculator"></i>
-                    <h3>Aluminium Calculation</h3>
-                </div>
-                
-                <div class="calculation-row">
-                    <span class="calc-label">Width after deduction (20.25" - 1.5")</span>
-                    <span class="calc-value" id="widthDeduction">18.75"</span>
-                </div>
-                <div class="calculation-row">
-                    <span class="calc-label">Height after deduction (52.5" - 1.5")</span>
-                    <span class="calc-value" id="heightDeduction">51"</span>
-                </div>
-                <div class="calculation-row">
-                    <span class="calc-label">Width pieces (2 × 18.75")</span>
-                    <span class="calc-value" id="widthPieces">37.5"</span>
-                </div>
-                <div class="calculation-row">
-                    <span class="calc-label">Height pieces (2 × 51")</span>
-                    <span class="calc-value" id="heightPieces">102"</span>
-                </div>
-                <div class="calculation-row">
-                    <span class="calc-label">Middle pieces (2 × 18.75")</span>
-                    <span class="calc-value" id="middlePieces">37.5"</span>
-                </div>
-                <div class="calculation-row">
-                    <span class="calc-label">Total inches</span>
-                    <span class="calc-value" id="totalInches">177"</span>
-                </div>
-                <div class="calculation-row">
-                    <span class="calc-label">Lengths (177" ÷ 144")</span>
-                    <span class="calc-value" id="lengths">1.23</span>
-                </div>
-                <div class="calc-note">
-                    <i class="fas fa-info-circle"></i> Each length: 12 feet (144 inches) @ ₹230/length
-                </div>
-            </div>
-
-            <!-- Material Table -->
-            <div class="calc-table">
-                <div class="calc-title">
-                    <i class="fas fa-clipboard-list"></i>
-                    <h3>Bill of Materials</h3>
-                </div>
-
-                <table class="material-table">
-                    <thead>
+            <h3>📐 Window Matrix (inches)</h3>
+            <div class="table-wrapper">
+                <table class="modern-table" id="windowMatrix">
+                    <thead><tr><th>Width</th><th>Height</th><th>Qty</th><th>Alu Type</th><th>Mesh Type</th><th>✖️</th></tr></thead>
+                    <tbody id="windowRows">
                         <tr>
-                            <th>Material</th>
-                            <th>Qty</th>
-                            <th>Unit</th>
-                            <th>Rate</th>
-                            <th>Amount</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Aluminium Length</td>
-                            <td id="matAluQty">1.23</td>
-                            <td>12 ft</td>
-                            <td>₹230</td>
-                            <td id="matAluAmt">₹283</td>
-                        </tr>
-                        <tr>
-                            <td>90° Corners</td>
-                            <td id="matCornerQty">4</td>
-                            <td>pcs</td>
-                            <td>₹6</td>
-                            <td id="matCornerAmt">₹24</td>
-                        </tr>
-                        <tr>
-                            <td>Stopper Locks</td>
-                            <td id="matStopperQty">3</td>
-                            <td>pcs</td>
-                            <td>₹4</td>
-                            <td id="matStopperAmt">₹12</td>
-                        </tr>
-                        <tr>
-                            <td>Injex</td>
-                            <td id="matInjexQty">3</td>
-                            <td>pcs</td>
-                            <td>₹6</td>
-                            <td id="matInjexAmt">₹18</td>
-                        </tr>
-                        <tr>
-                            <td>Middle Clips</td>
-                            <td id="matClipQty">4</td>
-                            <td>pcs</td>
-                            <td>₹3</td>
-                            <td id="matClipAmt">₹12</td>
-                        </tr>
-                        <tr>
-                            <td>Rubber</td>
-                            <td id="matRubberQty">22.5</td>
-                            <td>sqft</td>
-                            <td>₹6</td>
-                            <td id="matRubberAmt">₹135</td>
-                        </tr>
-                        <tr>
-                            <td>SS Mesh</td>
-                            <td id="matMeshQty">7.38</td>
-                            <td>sqft</td>
-                            <td id="matMeshRate">₹26</td>
-                            <td id="matMeshAmt">₹192</td>
-                        </tr>
-                        <tr class="highlight">
-                            <td colspan="4"><strong>Subtotal</strong></td>
-                            <td id="subtotalAmt"><strong>₹676</strong></td>
+                            <td><input type="number" step="0.01" class="win-width" value="24.00"></td>
+                            <td><input type="number" step="0.01" class="win-height" value="48.00"></td>
+                            <td><input type="number" class="win-qty" value="1"></td>
+                            <td><select class="alu-select"><option value="type1">Type-1 (₹ premium)</option><option value="type2" selected>Type-2 (Std)</option></select></td>
+                            <td><select class="mesh-select"><option value="fiber_reg">Fiberglass Regular</option><option value="fiber_sg">Fiberglass SG</option><option value="ss_black">SS Black 304</option><option value="ss_bright">SS Bright 304</option></select></td>
+                            <td><button class="remove-row-btn" onclick="removeWindowRow(this)">🗑️</button></td>
                         </tr>
                     </tbody>
                 </table>
             </div>
-
-            <!-- Price Breakdown -->
-            <div class="price-breakdown">
-                <div class="price-row">
-                    <span>Material Cost:</span>
-                    <span class="price-amount" id="priceMaterial">₹676</span>
-                </div>
-                <div class="price-row">
-                    <span>GST (18%):</span>
-                    <span class="price-amount" id="priceGST">₹121.68</span>
-                </div>
-                <div class="price-row total">
-                    <span>Total Amount:</span>
-                    <span class="price-amount" id="priceTotal">₹797.68</span>
-                </div>
-            </div>
-
-            <!-- Action Buttons -->
             <div class="action-buttons">
-                <button class="calculate-btn" onclick="calculateAll()">
-                    <i class="fas fa-calculator"></i> Calculate
-                </button>
-                <button class="reset-btn" onclick="resetCalculator()">
-                    <i class="fas fa-redo-alt"></i> Reset
-                </button>
+                <button class="btn" onclick="addWindowRow()">➕ Add Window</button>
+                <button class="btn btn-primary" onclick="generateEstimate()">✨ Calculate & Preview</button>
+                <button class="btn btn-secondary" onclick="resetInputs()">⟳ Reset</button>
+                <button class="btn btn-secondary" onclick="downloadEstimatePDF()">📄 Download / Print</button>
             </div>
-
-            <!-- Summary Card -->
-            <div class="summary-card" id="summaryCard">
-                <div class="summary-title">Material Summary</div>
-                <div class="summary-item">
-                    <span class="summary-label">Window Size:</span>
-                    <span class="summary-value" id="summarySize">20.25" × 52.5"</span>
-                </div>
-                <div class="summary-item">
-                    <span class="summary-label">Mesh Area:</span>
-                    <span class="summary-value" id="summaryArea">7.38 sqft</span>
-                </div>
-                <div class="summary-item">
-                    <span class="summary-label">Aluminium Lengths:</span>
-                    <span class="summary-value" id="summaryAlu">1.23 (12ft)</span>
-                </div>
-                <div class="summary-item">
-                    <span class="summary-label">Hardware Kit:</span>
-                    <span class="summary-value" id="summaryHardware">14 pieces</span>
-                </div>
-                <div class="summary-total" id="summaryTotal">₹797.68 incl. GST</div>
-            </div>
-
-            <!-- Chart -->
-            <div class="chart-container">
-                <canvas id="materialChart"></canvas>
-            </div>
+            <div class="badge" style="display: inline-block;">Installation: ≤10 windows ₹500 | >10 → ₹45/window</div>
         </div>
 
-        <!-- Bottom Navigation -->
-        <div class="bottom-nav">
-            <div class="nav-item" onclick="location.href='index.html'"><i class="fas fa-home"></i><span>Home</span></div>
-            <div class="nav-item" onclick="location.href='products.html'"><i class="fas fa-search"></i><span>Search</span></div>
-            <div class="nav-item active" onclick="location.href='material-calculator.html'"><i class="fas fa-calculator"></i><span>Calculator</span></div>
-            <div class="nav-item" onclick="location.href='tel:9483037385'"><i class="fas fa-phone"></i><span>Call</span></div>
-            <div class="nav-item" onclick="location.href='customer-login.html'"><i class="fas fa-user"></i><span>Account</span></div>
+        <!-- RIGHT PANEL: DETAILED PREVIEW with MATERIAL CARD -->
+        <div class="preview-panel" id="previewPanel">
+            <div style="display: flex; justify-content: space-between; align-items: center;"><h3>📋 Professional Estimate + Material Summary</h3><span style="font-size:12px;">incl. GST & wastage</span></div>
+            <div id="estimateDynamicPreview" class="estimate-card">
+                <div style="text-align:center; padding:50px;">⚡ Configure windows & materials → Click "Calculate & Preview"</div>
+            </div>
         </div>
     </div>
+</div>
 
-    <!-- Toast -->
-    <div id="toastMessage"></div>
+<script>
+    // Helper: add row
+    function addWindowRow() {
+        const tbody = document.getElementById("windowRows");
+        const newRow = document.createElement("tr");
+        newRow.innerHTML = `
+            <td><input type="number" step="0.01" class="win-width" value="30.00"></td>
+            <td><input type="number" step="0.01" class="win-height" value="36.00"></td>
+            <td><input type="number" class="win-qty" value="1"></td>
+            <td><select class="alu-select"><option value="type1">Type-1 (₹ premium)</option><option value="type2" selected>Type-2 (Std)</option></select></td>
+            <td><select class="mesh-select"><option value="fiber_reg">Fiberglass Regular</option><option value="fiber_sg">Fiberglass SG</option><option value="ss_black">SS Black 304</option><option value="ss_bright">SS Bright 304</option></select></td>
+            <td><button class="remove-row-btn" onclick="removeWindowRow(this)">🗑️</button></td>
+        `;
+        tbody.appendChild(newRow);
+        generateEstimate();
+    }
 
-    <script>
-        // State
-        let meshColor = 'black';
-        let meshRate = 26;
-        let chart = null;
+    window.removeWindowRow = function(btn) {
+        const row = btn.closest('tr');
+        if (document.querySelectorAll("#windowRows tr").length > 1) row.remove();
+        else alert("At least one window required");
+        generateEstimate();
+    };
 
-        // Initialize on load
-        document.addEventListener('DOMContentLoaded', function() {
-            calculateAll();
-            initChart();
+    window.resetInputs = function() {
+        document.getElementById("customerName").value = "";
+        document.getElementById("customerContact").value = "";
+        document.getElementById("customerAddress").value = "";
+        document.getElementById("estimateDate").value = new Date().toISOString().split('T')[0];
+        document.getElementById("aluType1Price").value = 260;
+        document.getElementById("aluType2Price").value = 230;
+        document.getElementById("meshFiberReg").value = 9;
+        document.getElementById("meshFiberSG").value = 18;
+        document.getElementById("meshSSBlack").value = 28;
+        document.getElementById("meshSSBright").value = 32;
+        document.getElementById("accessoryMultiplier").value = 100;
+        const tbody = document.getElementById("windowRows");
+        tbody.innerHTML = '';
+        const defRow = document.createElement('tr');
+        defRow.innerHTML = `<td><input type="number" step="0.01" class="win-width" value="24.00"></td><td><input type="number" step="0.01" class="win-height" value="48.00"></td><td><input type="number" class="win-qty" value="1"></td><td><select class="alu-select"><option value="type1">Type-1</option><option value="type2" selected>Type-2</option></select></td><td><select class="mesh-select"><option value="fiber_reg">Fiberglass Regular</option><option value="fiber_sg">Fiberglass SG</option><option value="ss_black">SS Black 304</option><option value="ss_bright">SS Bright 304</option></select></td><td><button class="remove-row-btn" onclick="removeWindowRow(this)">🗑️</button></td>`;
+        tbody.appendChild(defRow);
+        generateEstimate();
+    };
+
+    function getMaterialPrices() {
+        return {
+            aluType1: parseFloat(document.getElementById("aluType1Price").value) || 260,
+            aluType2: parseFloat(document.getElementById("aluType2Price").value) || 230,
+            meshFiberReg: parseFloat(document.getElementById("meshFiberReg").value) || 9,
+            meshFiberSG: parseFloat(document.getElementById("meshFiberSG").value) || 18,
+            meshSSBlack: parseFloat(document.getElementById("meshSSBlack").value) || 28,
+            meshSSBright: parseFloat(document.getElementById("meshSSBright").value) || 32,
+            accessoryFactor: (parseFloat(document.getElementById("accessoryMultiplier").value) || 100) / 100
+        };
+    }
+
+    function getMeshPrice(meshType, prices) {
+        const map = { 'fiber_reg': prices.meshFiberReg, 'fiber_sg': prices.meshFiberSG, 'ss_black': prices.meshSSBlack, 'ss_bright': prices.meshSSBright };
+        return map[meshType] || 9;
+    }
+
+    function getAluPrice(aluType, prices) {
+        return aluType === 'type1' ? prices.aluType1 : prices.aluType2;
+    }
+
+    function calcInstallation(totalQty) {
+        return totalQty <= 10 ? 500 : totalQty * 45;
+    }
+
+    // Optimized mesh roll selector (100ft length, width 3ft,4ft,5ft) minimal wastage
+    function getMeshRollAdvice(maxWidthInch, totalSqft) {
+        let rollWidthFeet = 3;
+        if (maxWidthInch > 18 && maxWidthInch <= 24) rollWidthFeet = 4;
+        else if (maxWidthInch > 24 && maxWidthInch <= 30) rollWidthFeet = 5;
+        else if (maxWidthInch > 30) rollWidthFeet = 6;
+        else rollWidthFeet = 3;
+        const rollLengthFeet = 100;
+        const sqftPerRoll = rollWidthFeet * rollLengthFeet;
+        const rollsNeeded = Math.ceil(totalSqft / sqftPerRoll);
+        return { rollWidth: rollWidthFeet, rollsNeeded, sqftPerRoll, totalSqft };
+    }
+
+    function computeDetailedEstimate() {
+        const rows = document.querySelectorAll("#windowRows tr");
+        const prices = getMaterialPrices();
+        let totalWindows = 0, totalSqft = 0;
+        let totalAluminiumInches = 0;
+        let totalAluminiumCost = 0, totalMeshCost = 0;
+        let cornerQty = 0, middleClipQty = 0, hingeQty = 0, stopperQty = 0;
+        let rubberMeters = 0;
+        let maxWidth = 0;
+        let meshTypeSummary = {};
+
+        for (let row of rows) {
+            const width = parseFloat(row.querySelector(".win-width")?.value);
+            const height = parseFloat(row.querySelector(".win-height")?.value);
+            const qty = parseInt(row.querySelector(".win-qty")?.value);
+            const aluType = row.querySelector(".alu-select")?.value;
+            const meshType = row.querySelector(".mesh-select")?.value;
+            if (isNaN(width) || isNaN(height) || isNaN(qty) || width<=0 || height<=0 || qty<=0) continue;
+            totalWindows += qty;
+            maxWidth = Math.max(maxWidth, width);
+            const cutW = width - 1.5;
+            const cutH = height - 1.5;
+            const isTall = cutH > 42;
+            const middlePieces = isTall ? 2 : 1;
+            const aluInchesPerWin = (cutH * 2) + (cutW * 2) + (cutW * middlePieces);
+            totalAluminiumInches += aluInchesPerWin * qty;
+            const aluSections = aluInchesPerWin / 144;
+            const aluPriceSec = getAluPrice(aluType, prices);
+            totalAluminiumCost += aluSections * aluPriceSec * qty;
+
+            const sqftWin = (width * height) / 144;
+            totalSqft += sqftWin * qty;
+            const meshPriceSqft = getMeshPrice(meshType, prices);
+            totalMeshCost += (sqftWin * qty) * meshPriceSqft;
+            meshTypeSummary[meshType] = (meshTypeSummary[meshType] || 0) + (sqftWin * qty);
+
+            cornerQty += 4 * qty;
+            middleClipQty += middlePieces * 2 * qty;
+            hingeQty += (isTall ? 3 : 2) * qty;
+            stopperQty += (isTall ? 3 : 2) * qty;
+            const perimeter = (cutW + cutH) * 2;
+            rubberMeters += (perimeter / 39.37) * qty;
+        }
+        if (totalWindows === 0) return null;
+
+        const aluminium12ftQty = totalAluminiumInches / 144;
+        let accessoriesBase = (cornerQty * 6) + (middleClipQty * 4) + (hingeQty * 6) + (stopperQty * 3) + (rubberMeters * 12);
+        accessoriesBase = accessoriesBase * prices.accessoryFactor;
+        const installationCharge = calcInstallation(totalWindows);
+        const subtotal = totalAluminiumCost + totalMeshCost + accessoriesBase + installationCharge;
+        const gstAmount = subtotal * 0.18;
+        const grandTotal = subtotal + gstAmount;
+        const perSqftRate = totalSqft > 0 ? grandTotal / totalSqft : 0;
+
+        const meshRollData = getMeshRollAdvice(maxWidth, totalSqft);
+        // Aluminium wastage: add 5% extra sections
+        const aluminiumWithWastage = aluminium12ftQty * 1.05;
+        const aluminium12ftFinal = Math.ceil(aluminiumWithWastage);
+
+        return {
+            totalWindows, totalSqft, totalAluminiumCost, totalMeshCost, accessoriesBase,
+            installationCharge, subtotal, gstAmount, grandTotal, perSqftRate,
+            cornerQty, middleClipQty, hingeQty, stopperQty, rubberMeters,
+            aluminium12ftQty: aluminium12ftFinal, totalAluminiumInches,
+            meshRollData, maxWidth, meshTypeSummary
+        };
+    }
+
+    function generateEstimateId() {
+        const now = new Date();
+        return `RM-${now.getFullYear().toString().slice(-2)}${(now.getMonth()+1).toString().padStart(2,'0')}${now.getDate().toString().padStart(2,'0')}-${Math.floor(Math.random()*900+100)}`;
+    }
+
+    window.generateEstimate = function() {
+        const name = document.getElementById("customerName").value.trim() || "Walk-in Client";
+        const contact = document.getElementById("customerContact").value.trim() || "—";
+        const address = document.getElementById("customerAddress").value.trim() || "Not Specified";
+        let dateVal = document.getElementById("estimateDate").value;
+        if (!dateVal) dateVal = new Date().toISOString().split('T')[0];
+        const estimateId = generateEstimateId();
+        const calc = computeDetailedEstimate();
+        if (!calc) {
+            document.getElementById("estimateDynamicPreview").innerHTML = `<div style="padding:30px;text-align:center;">❌ Invalid window data. Please check dimensions.</div>`;
+            return;
+        }
+        const { totalWindows, totalSqft, totalAluminiumCost, totalMeshCost, accessoriesBase, installationCharge, subtotal, gstAmount, grandTotal, perSqftRate, cornerQty, middleClipQty, hingeQty, stopperQty, rubberMeters, aluminium12ftQty, meshRollData, maxWidth } = calc;
+        const formatINR = (v) => `₹${v.toFixed(2)}`;
+
+        const rollDesc = `Roll Width: ${meshRollData.rollWidth} feet | Roll Length: 100ft | Rolls Required: ${meshRollData.rollsNeeded} roll(s) | Total Mesh Needed: ${totalSqft.toFixed(2)} sqft`;
+        
+        const html = `
+            <div class="estimate-header" style="display:flex; justify-content:space-between; border-bottom:2px dashed #e0d6c2; padding-bottom:12px;">
+                <div><strong style="font-size:1.4rem;">📄 QUOTATION</strong><div class="estimate-id">${estimateId}</div></div>
+                <div>Date: ${dateVal}</div>
+            </div>
+            <div style="display:flex; justify-content:space-between; flex-wrap:wrap; margin:12px 0;">
+                <div><strong>🏠 ${name}</strong><br>📞 ${contact}<br>📍 ${address}</div>
+                <div><span class="badge">✅ Valid for 30 days</span></div>
+            </div>
+            
+            <!-- MATERIAL REQUIREMENT CARD (Aluminium, Mesh Roll, Accessories) -->
+            <div class="material-card">
+                <h4 style="display: flex; gap: 8px;">📦 Material & Inventory Summary</h4>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit,minmax(200px,1fr)); gap: 12px; margin-top: 12px;">
+                    <div><span class="badge">🔩 Aluminium 12ft sections</span><br><strong>${aluminium12ftQty} pcs</strong> (incl. 5% wastage)<br><small>Total req inches: ${calc.totalAluminiumInches.toFixed(1)}"</small></div>
+                    <div><span class="badge">🕸️ Mesh Roll Planning</span><br><strong>${rollDesc}</strong><br>Max Width: ${maxWidth}" → optimal roll width ${meshRollData.rollWidth}ft</div>
+                    <div><span class="badge">🧩 Accessories Count</span><br>Corners: ${cornerQty} | Mid Clips: ${middleClipQty}<br>Hinges: ${hingeQty} | Stoppers: ${stopperQty}<br>Rubber Seal: ${rubberMeters.toFixed(1)} meters</div>
+                </div>
+            </div>
+            
+            <div class="cost-breakdown" style="background:#faf8f2; border-radius:24px; padding:16px;">
+                <h4>💰 Financial Breakdown</h4>
+                <div style="display:flex; justify-content:space-between;"><span>🛠️ Aluminium Frame (custom rate)</span><span>${formatINR(totalAluminiumCost)}</span></div>
+                <div style="display:flex; justify-content:space-between;"><span>🕸️ Mesh (selected types)</span><span>${formatINR(totalMeshCost)}</span></div>
+                <div style="display:flex; justify-content:space-between;"><span>🔧 Accessories (with multiplier)</span><span>${formatINR(accessoriesBase)}</span></div>
+                <div style="display:flex; justify-content:space-between;"><span>🚚 Installation (${totalWindows <=10 ? "Flat" : "₹45/window"})</span><span>${formatINR(installationCharge)}</span></div>
+                <hr style="margin:12px 0">
+                <div style="display:flex; justify-content:space-between;"><strong>Subtotal</strong><span>${formatINR(subtotal)}</span></div>
+                <div style="display:flex; justify-content:space-between;">GST 18%<span>${formatINR(gstAmount)}</span></div>
+                <div style="display:flex; justify-content:space-between; margin-top:10px;"><span class="grand-total">TOTAL (incl. tax)</span><span class="grand-total">${formatINR(grandTotal)}</span></div>
+                <div><span class="badge">💰 Per Sq.ft Rate: ₹${perSqftRate.toFixed(2)}</span></div>
+            </div>
+            <div style="margin-top:16px; background:#eef4ea; border-radius:20px; padding:12px; font-size:0.75rem;">
+                ⚡ Margin Advisory: For 20-30% profit, charge between ₹${(subtotal*1.2/totalSqft).toFixed(2)} - ₹${(subtotal*1.3/totalSqft).toFixed(2)} per sqft | Current cost per sqft: ₹${(subtotal/totalSqft).toFixed(2)}
+            </div>
+            <div style="margin-top:14px; font-size:11px; text-align:center; color:#6a5c3a;">* Raj Marketing Mysore – Premium Net Solutions | Print & share this estimate</div>
+        `;
+        document.getElementById("estimateDynamicPreview").innerHTML = html;
+    };
+
+    window.downloadEstimatePDF = function() {
+        window.print();
+    };
+
+    // auto bind events
+    function bindAutoUpdate() {
+        const ids = ['customerName','customerContact','customerAddress','estimateDate','aluType1Price','aluType2Price','meshFiberReg','meshFiberSG','meshSSBlack','meshSSBright','accessoryMultiplier'];
+        ids.forEach(id => { const el = document.getElementById(id); if(el) el.addEventListener('input', () => generateEstimate()); });
+        document.addEventListener('input', (e) => {
+            if(e.target.classList && (e.target.classList.contains('win-width') || e.target.classList.contains('win-height') || e.target.classList.contains('win-qty') || e.target.classList.contains('alu-select') || e.target.classList.contains('mesh-select'))) generateEstimate();
         });
+    }
 
-        // Set Fraction
-        function setFraction(dimension, value) {
-            const input = document.getElementById(dimension);
-            input.value = (parseFloat(input.value) + value).toFixed(2);
-            updateFractions(dimension);
-            calculateAll();
-        }
-
-        // Update Fractions Display
-        function updateFractions(dimension) {
-            const value = parseFloat(document.getElementById(dimension).value);
-            const whole = Math.floor(value);
-            const fraction = value - whole;
-            
-            let fractionStr = '';
-            if (Math.abs(fraction - 0.25) < 0.001) fractionStr = '¼';
-            else if (Math.abs(fraction - 0.5) < 0.001) fractionStr = '½';
-            else if (Math.abs(fraction - 0.75) < 0.001) fractionStr = '¾';
-            else if (fraction > 0) fractionStr = fraction.toFixed(2);
-            
-            const hint = document.querySelector(`#${dimension}`).parentElement.nextElementSibling;
-            if (hint) {
-                hint.innerHTML = `<i class="fas fa-info-circle"></i> ${whole}" ${fractionStr ? fractionStr : ''}`;
-            }
-        }
-
-        // Select Mesh Color
-        function selectMeshColor(color) {
-            meshColor = color;
-            meshRate = color === 'black' ? 26 : 36;
-            
-            document.getElementById('meshBlack').classList.remove('active');
-            document.getElementById('meshWhite').classList.remove('active');
-            document.getElementById(`mesh${color.charAt(0).toUpperCase() + color.slice(1)}`).classList.add('active');
-            
-            calculateAll();
-        }
-
-        // Calculate All
-        function calculateAll() {
-            // Get inputs
-            const width = parseFloat(document.getElementById('width').value) || 0;
-            const height = parseFloat(document.getElementById('height').value) || 0;
-            
-            // Deductions (1.5 inches each)
-            const widthDeducted = width - 1.5;
-            const heightDeducted = height - 1.5;
-            
-            // Calculate pieces
-            const widthPieces = widthDeducted * 2; // 2 pieces for width
-            const heightPieces = heightDeducted * 2; // 2 pieces for height
-            const middlePieces = widthDeducted * 2; // 2 middle pieces (same as width)
-            
-            // Total inches
-            const totalInches = widthPieces + heightPieces + middlePieces;
-            
-            // Lengths (144 inches per length)
-            const lengths = totalInches / 144;
-            
-            // Determine stopper locks, injex, clips based on height
-            const isAbove35 = height > 42; // 3.5 feet = 42 inches
-            const stoppers = isAbove35 ? 3 : 2;
-            const injex = isAbove35 ? 3 : 2;
-            const clips = isAbove35 ? 4 : 2;
-            const corners = 4; // Always 4 corners
-            
-            // Rubber calculation (perimeter in feet, 1 sqft = ₹6)
-            const perimeterInches = 2 * (width + height);
-            const perimeterFeet = perimeterInches / 12;
-            const rubber = perimeterFeet * 1.5; // 1.5 sqft per foot of perimeter (approximate)
-            
-            // Mesh calculation
-            const meshArea = (width * height) / 144; // Convert to sqft
-            
-            // Determine roll size
-            const rollSize = width > 19 ? 4 : 3;
-            document.getElementById('rollSize').innerHTML = `Select ${rollSize} Feet Roll (Height: ${height.toFixed(1)}")`;
-            
-            // Costs
-            const aluminiumCost = lengths * 230;
-            const cornersCost = corners * 6;
-            const stoppersCost = stoppers * 4;
-            const injexCost = injex * 6;
-            const clipsCost = clips * 3;
-            const rubberCost = rubber * 6;
-            const meshCost = meshArea * meshRate;
-            
-            const subtotal = aluminiumCost + cornersCost + stoppersCost + injexCost + clipsCost + rubberCost + meshCost;
-            const gst = subtotal * 0.18;
-            const total = subtotal + gst;
-            
-            // Update Results
-            updateResults({
-                width, height,
-                widthDeducted, heightDeducted,
-                widthPieces, heightPieces, middlePieces,
-                totalInches, lengths,
-                stoppers, injex, clips, corners,
-                rubber, meshArea,
-                aluminiumCost, cornersCost, stoppersCost, injexCost, clipsCost, rubberCost, meshCost,
-                subtotal, gst, total,
-                meshRate, rollSize
-            });
-            
-            // Update Chart
-            updateChart({
-                aluminium: aluminiumCost,
-                hardware: cornersCost + stoppersCost + injexCost + clipsCost,
-                rubber: rubberCost,
-                mesh: meshCost,
-                gst: gst
-            });
-        }
-
-        // Update Results Display
-        function updateResults(data) {
-            // Main values
-            document.getElementById('aluminiumLength').textContent = data.lengths.toFixed(2);
-            document.getElementById('aluminiumCost').textContent = `₹${Math.round(data.aluminiumCost)}`;
-            
-            document.getElementById('corners').textContent = data.corners;
-            document.getElementById('cornersCost').textContent = `₹${data.cornersCost}`;
-            
-            document.getElementById('stoppers').textContent = data.stoppers;
-            document.getElementById('stoppersCost').textContent = `₹${data.stoppersCost}`;
-            
-            document.getElementById('injex').textContent = data.injex;
-            document.getElementById('injexCost').textContent = `₹${data.injexCost}`;
-            
-            document.getElementById('clips').textContent = data.clips;
-            document.getElementById('clipsCost').textContent = `₹${data.clipsCost}`;
-            
-            document.getElementById('rubber').textContent = data.rubber.toFixed(1);
-            document.getElementById('rubberCost').textContent = `₹${Math.round(data.rubberCost)}`;
-
-                        
-            document.getElementById('mesh').textContent = data.meshArea.toFixed(2);
-            document.getElementById('meshRate').textContent = `₹${data.meshRate}/sqft`;
-            document.getElementById('meshCost').textContent = `₹${Math.round(data.meshCost)}`;
-            
-            document.getElementById('totalCost').textContent = `₹${Math.round(data.subtotal)}`;
-            
-            // Calculation details
-            document.getElementById('widthDeduction').textContent = data.widthDeducted.toFixed(2) + '"';
-            document.getElementById('heightDeduction').textContent = data.heightDeducted.toFixed(2) + '"';
-            document.getElementById('widthPieces').textContent = data.widthPieces.toFixed(2) + '"';
-            document.getElementById('heightPieces').textContent = data.heightPieces.toFixed(2) + '"';
-            document.getElementById('middlePieces').textContent = data.middlePieces.toFixed(2) + '"';
-            document.getElementById('totalInches').textContent = Math.round(data.totalInches) + '"';
-            document.getElementById('lengths').textContent = data.lengths.toFixed(2);
-            
-            // Material table
-            document.getElementById('matAluQty').textContent = data.lengths.toFixed(2);
-            document.getElementById('matAluAmt').textContent = `₹${Math.round(data.aluminiumCost)}`;
-            document.getElementById('matCornerQty').textContent = data.corners;
-            document.getElementById('matCornerAmt').textContent = `₹${data.cornersCost}`;
-            document.getElementById('matStopperQty').textContent = data.stoppers;
-            document.getElementById('matStopperAmt').textContent = `₹${data.stoppersCost}`;
-            document.getElementById('matInjexQty').textContent = data.injex;
-            document.getElementById('matInjexAmt').textContent = `₹${data.injexCost}`;
-            document.getElementById('matClipQty').textContent = data.clips;
-            document.getElementById('matClipAmt').textContent = `₹${data.clipsCost}`;
-            document.getElementById('matRubberQty').textContent = data.rubber.toFixed(1);
-            document.getElementById('matRubberAmt').textContent = `₹${Math.round(data.rubberCost)}`;
-            document.getElementById('matMeshQty').textContent = data.meshArea.toFixed(2);
-            document.getElementById('matMeshRate').textContent = `₹${data.meshRate}`;
-            document.getElementById('matMeshAmt').textContent = `₹${Math.round(data.meshCost)}`;
-            document.getElementById('subtotalAmt').innerHTML = `<strong>₹${Math.round(data.subtotal)}</strong>`;
-            
-            // Price breakdown
-            document.getElementById('priceMaterial').textContent = `₹${Math.round(data.subtotal)}`;
-            document.getElementById('priceGST').textContent = `₹${data.gst.toFixed(2)}`;
-            document.getElementById('priceTotal').textContent = `₹${data.total.toFixed(2)}`;
-            
-            // Summary
-            document.getElementById('summarySize').textContent = `${data.width}" × ${data.height}"`;
-            document.getElementById('summaryArea').textContent = `${data.meshArea.toFixed(2)} sqft`;
-            document.getElementById('summaryAlu').textContent = `${data.lengths.toFixed(2)} (12ft)`;
-            document.getElementById('summaryHardware').textContent = `${data.corners + data.stoppers + data.injex + data.clips} pieces`;
-            document.getElementById('summaryTotal').textContent = `₹${data.total.toFixed(2)} incl. GST`;
-            
-            // Roll size indicator color
-            const rollElement = document.getElementById('rollSize');
-            if (data.width > 19) {
-                rollElement.style.color = '#1e4b8b';
-                rollElement.innerHTML = `📏 4 Feet Roll Required (Width: ${data.width}")`;
-            } else {
-                rollElement.style.color = '#e6b422';
-                rollElement.innerHTML = `📏 3 Feet Roll Required (Width: ${data.width}")`;
-            }
-        }
-
-        // Initialize Chart
-        function initChart() {
-            const ctx = document.getElementById('materialChart').getContext('2d');
-            
-            chart = new Chart(ctx, {
-                type: 'doughnut',
-                data: {
-                    labels: ['Aluminium', 'Hardware', 'Rubber', 'Mesh', 'GST'],
-                    datasets: [{
-                        data: [283, 66, 135, 192, 122],
-                        backgroundColor: [
-                            '#1e4b8b',
-                            '#e6b422',
-                            '#28a745',
-                            '#17a2b8',
-                            '#dc3545'
-                        ],
-                        borderWidth: 0
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: {
-                            position: 'bottom',
-                            labels: {
-                                font: {
-                                    size: 10
-                                }
-                            }
-                        }
-                    }
-                }
-            });
-        }
-
-        // Update Chart
-        function updateChart(data) {
-            if (chart) {
-                chart.data.datasets[0].data = [
-                    Math.round(data.aluminium),
-                    Math.round(data.hardware),
-                    Math.round(data.rubber),
-                    Math.round(data.mesh),
-                    Math.round(data.gst)
-                ];
-                chart.update();
-            }
-        }
-
-        // Reset Calculator
-        function resetCalculator() {
-            document.getElementById('width').value = 20.25;
-            document.getElementById('height').value = 52.5;
-            selectMeshColor('black');
-            calculateAll();
-            showToast('Calculator reset to defaults');
-        }
-
-        // Toast
-        function showToast(text) {
-            const toast = document.getElementById('toastMessage');
-            toast.style.opacity = '1';
-            toast.innerText = text;
-            setTimeout(() => toast.style.opacity = '0', 2000);
-        }
-    </script>
+    (function init() {
+        document.getElementById("estimateDate").value = new Date().toISOString().split('T')[0];
+        generateEstimate();
+        bindAutoUpdate();
+    })();
+</script>
 </body>
 </html>
 ```
-   
+    
